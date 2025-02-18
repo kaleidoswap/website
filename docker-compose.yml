@@ -1,0 +1,140 @@
+version: '3.8'
+
+services:
+  traefik:
+    image: traefik:v2.10
+    container_name: kaleidoswap-traefik
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      # Enable access logs
+      - "--accesslog=true"
+      - "--accesslog.filepath=/var/log/traefik/access.log"
+      # Enable metrics
+      - "--metrics.prometheus=true"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-certificates:/letsencrypt
+      - traefik-logs:/var/log/traefik
+    networks:
+      - traefik-public
+      - kaleidoswap-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+    healthcheck:
+      test: ["CMD", "traefik", "healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+
+  landing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=production
+    container_name: kaleidoswap-landing
+    restart: unless-stopped
+    networks:
+      - kaleidoswap-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    labels:
+      - "traefik.enable=true"
+      # HTTP to HTTPS redirect
+      - "traefik.http.routers.landing-http.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.landing-http.entrypoints=web"
+      - "traefik.http.routers.landing-http.middlewares=https-redirect"
+      - "traefik.http.middlewares.https-redirect.redirectscheme.scheme=https"
+      # HTTPS configuration
+      - "traefik.http.routers.landing-https.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.landing-https.entrypoints=websecure"
+      - "traefik.http.routers.landing-https.tls=true"
+      - "traefik.http.routers.landing-https.tls.certresolver=letsencrypt"
+      # Security headers middleware
+      - "traefik.http.middlewares.security-headers.headers.customResponseHeaders.X-Robots-Tag=none"
+      - "traefik.http.middlewares.security-headers.headers.sslRedirect=true"
+      - "traefik.http.middlewares.security-headers.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.security-headers.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.security-headers.headers.stsPreload=true"
+      - "traefik.http.middlewares.security-headers.headers.forceSTSHeader=true"
+      # Rate limiting
+      - "traefik.http.middlewares.rate-limit.ratelimit.average=100"
+      - "traefik.http.middlewares.rate-limit.ratelimit.burst=50"
+      # Compression
+      - "traefik.http.middlewares.compress.compress=true"
+      # Apply middlewares
+      - "traefik.http.routers.landing-https.middlewares=security-headers,rate-limit,compress"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional development service
+  landing-dev:
+    image: node:18-alpine
+    container_name: kaleidoswap-landing-dev
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - kaleidoswap-network
+    profiles:
+      - dev
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5173"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  traefik-certificates:
+  traefik-logs:
+  node_modules:
+
+networks:
+  traefik-public:
+    name: traefik-public
+    driver: overlay
+    attachable: true
+    internal: false
+  kaleidoswap-network:
+    name: kaleidoswap-network
+    driver: overlay
+    internal: true 

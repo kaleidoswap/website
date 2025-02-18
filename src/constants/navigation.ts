@@ -6,13 +6,17 @@ export const mainNavItems: NavItem[] = [
     href: '/',
   },
   {
+    label: 'Downloads',
+    href: '/downloads',
+  },
+  {
     label: 'Documentation',
     href: 'https://docs.kaleidoswap.com',
     external: true,
   },
   {
     label: 'GitHub',
-    href: 'https://github.com/kaleidoswap/desktop-app/releases',
+    href: 'https://github.com/kaleidoswap',
     external: true,
   },
 ];
