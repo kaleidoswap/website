@@ -1,22 +1,37 @@
 // src/constants/features.ts
-import { Zap, Repeat, Database } from 'lucide-react';
+import { Zap, Repeat, Shield, Wallet, History, Network } from 'lucide-react';
 import type { Feature, SupportedNetwork } from '@/types/features';
 
 export const features: Feature[] = [
   {
     icon: Repeat,
-    title: "Asset Trading & Swapping",
-    description: "Trade assets trustlessly using the RGB Lightning DEX API with integrated market makers"
+    title: "Multi-Asset Trading",
+    description: "Connect to market makers over Lightning Network to trade BTC and RGB assets with complete control over your funds"
+  },
+  {
+    icon: Network,
+    title: "Lightning Service Providers",
+    description: "Request channels with custom capacity and RGB assets from trusted LSPs to kickstart your trading journey"
   },
   {
     icon: Zap,
-    title: "Lightning Channel Management",
-    description: "Easily open, close, and manage channels with optional RGB assets"
+    title: "Advanced Channel Management",
+    description: "Open, close, and manage Lightning channels with optional RGB assets"
   },
   {
-    icon: Database,
-    title: "Complete Asset Control",
-    description: "Handle both on-chain and Lightning Network transactions"
+    icon: Wallet,
+    title: "Seamless Asset Operations",
+    description: "Handle deposits and withdrawals for both Bitcoin and RGB assets, on-chain and via Lightning Network"
+  },
+  {
+    icon: History,
+    title: "Complete Transaction History",
+    description: "Track all your deposits, withdrawals, and swap history in one place"
+  },
+  {
+    icon: Shield,
+    title: "Security-First Design",
+    description: "Built with robust security features including secure node data backups and comprehensive security considerations"
   }
 ];
 

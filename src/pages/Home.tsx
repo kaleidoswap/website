@@ -32,8 +32,8 @@ export const Home = () => {
           }}
         />
         <Features 
-          title="Built for Bitcoin"
-          description="Experience secure and scalable trading with the power of Bitcoin's Lightning Network"
+          title="Built for the Future of Bitcoin"
+          description="Experience secure, scalable, and sovereign trading with the combined power of Bitcoin, Lightning Network and RGB protocol"
           features={features}
         />
         <SecurityNotice 

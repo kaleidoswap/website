@@ -19,12 +19,12 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="fixed w-full bg-gray-900/80 backdrop-blur-sm z-50">
+    <nav className="fixed w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-gray-800/50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
           <div className="flex items-center gap-2">
-            <img src={kaleidoLogo} alt="KaleidoSwap" className="h-10" />
+            <img src={kaleidoLogo} alt="KaleidoSwap" className="h-8" />
           </div>
 
           {/* Desktop Navigation */}
@@ -69,7 +69,7 @@ export const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white"
+              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -78,14 +78,14 @@ export const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4">
+          <div className="md:hidden py-4 px-2 space-y-1 border-t border-gray-800/50">
             {mainNavItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "block py-2 text-gray-300 hover:text-white transition-colors",
-                  isActive(item.href) && "text-white font-medium bg-gray-800/50 px-4 rounded"
+                  "block py-2.5 px-4 text-base rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors",
+                  isActive(item.href) && "text-white font-medium bg-gray-800/50"
                 )}
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
@@ -94,14 +94,16 @@ export const Navbar = () => {
                 {item.label}
               </a>
             ))}
-            <Button
-              variant="default"
-              size="default"
-              className="w-full mt-4"
-              onClick={() => window.location.href = 'https://github.com/kaleidoswap/desktop-app/releases'}
-            >
-              Download
-            </Button>
+            <div className="pt-2">
+              <Button
+                variant="default"
+                size="default"
+                className="w-full"
+                onClick={() => window.location.href = 'https://github.com/kaleidoswap/desktop-app/releases'}
+              >
+                Download
+              </Button>
+            </div>
           </div>
         )}
       </div>

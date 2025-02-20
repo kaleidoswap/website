@@ -10,7 +10,7 @@ export const Hero = ({
   secondaryCTA
 }: HeroProps) => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center pt-16">
+    <div className="relative min-h-[90vh] flex items-center justify-center pt-16">
       {/* Background gradient */}
       <div 
         className="absolute inset-0 bg-gradient-to-b from-primary-500/10 to-transparent"
@@ -18,18 +18,18 @@ export const Hero = ({
       />
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 py-32 text-center">
+      <div className="relative container mx-auto px-4 py-16 md:py-32 text-center">
         <h1 
-          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-purple-500"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-purple-500 leading-tight"
         >
           {title}
         </h1>
         
-        <p className="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed">
           {description}
         </p>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-3">
           <Button
             variant="default"
             size="lg"

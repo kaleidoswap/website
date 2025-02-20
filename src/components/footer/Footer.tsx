@@ -1,7 +1,7 @@
 // src/components/footer/Footer.tsx
 import { ExternalLink } from 'lucide-react'
-import { Logo } from '@/components/common/Logo'
 import type { FooterProps } from '@/types/footer'
+import kaleidoLogo from '@/assets/kaleidoswap-logo.svg'
 
 const currentYear = new Date().getFullYear()
 
@@ -13,9 +13,9 @@ export const Footer = ({ sections, socials }: FooterProps) => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Logo className="w-8 h-8" />
-              <span className="text-xl font-bold">KaleidoSwap</span>
+              <img src={kaleidoLogo} alt="KaleidoSwap" className="h-10" />
             </div>
+
             <p className="text-gray-400">
               Decentralized trading on Bitcoin using RGB protocol and Lightning Network
             </p>

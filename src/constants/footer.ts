@@ -1,6 +1,5 @@
-// src/constants/footer.ts
-import { Github, Twitter } from 'lucide-react'
 import type { FooterProps } from '@/types/footer'
+import { GitHubIcon, TelegramIcon, XIcon } from '@/components/icons/SocialIcons'
 
 export const footerConfig: FooterProps = {
   sections: [
@@ -32,12 +31,17 @@ export const footerConfig: FooterProps = {
     {
       platform: "GitHub",
       href: "https://github.com/kaleidoswap",
-      icon: Github
+      icon: GitHubIcon
     },
     {
-      platform: "Twitter",
-      href: "https://twitter.com/kaleidoswap",
-      icon: Twitter
+      platform: "Telegram",
+      href: "https://t.me/kaleidoswap",
+      icon: TelegramIcon
+    },
+    {
+      platform: "X",
+      href: "https://x.com/kaleidoswap",
+      icon: XIcon
     }
   ]
-}
+} 
