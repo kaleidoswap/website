@@ -1,5 +1,5 @@
 // src/components/nav/Navbar.tsx
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
@@ -9,7 +9,18 @@ import kaleidoLogo from '@/assets/kaleidoswap-logo.svg'
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const isActive = (href: string) => {
     if (href === '/') {
@@ -19,12 +30,30 @@ export const Navbar = () => {
   }
 
   return (
-    <nav className="fixed w-full bg-gray-900/90 backdrop-blur-sm z-50 border-b border-gray-800/50">
+    <nav 
+      className={cn(
+        "fixed w-full z-50 transition-all duration-300",
+        scrolled 
+          ? "bg-gray-900/90 backdrop-blur-md shadow-md" 
+          : "bg-transparent"
+      )}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo and Brand */}
           <div className="flex items-center gap-2">
-            <img src={kaleidoLogo} alt="KaleidoSwap" className="h-8" />
+            <a href="/" className="flex items-center gap-2 group">
+              <div className="relative">
+                <img 
+                  src={kaleidoLogo} 
+                  alt="KaleidoSwap" 
+                  className="h-8 md:h-10 transition-transform duration-300 group-hover:scale-110" 
+                />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-full"></div>
+                </div>
+              </div>
+            </a>
           </div>
 
           {/* Desktop Navigation */}
@@ -59,9 +88,11 @@ export const Navbar = () => {
             <Button
               variant="default"
               size="default"
-              onClick={() => window.location.href = 'https://github.com/kaleidoswap/desktop-app/releases'}
+              onClick={() => window.location.href = '/downloads'}
+              className="group relative overflow-hidden"
             >
-              Download
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
+              <span className="relative">Download</span>
             </Button>
           </div>
 
@@ -69,7 +100,8 @@ export const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50"
+              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all"
+              aria-label={isOpen ? "Close menu" : "Open menu"}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -78,8 +110,8 @@ export const Navbar = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden py-4 px-2 space-y-1 border-t border-gray-800/50">
-            {mainNavItems.map((item) => (
+          <div className="md:hidden py-4 px-2 space-y-1 border-t border-gray-800/50 animate-fadeIn">
+            {mainNavItems.map((item, index) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -90,6 +122,7 @@ export const Navbar = () => {
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
                 onClick={() => setIsOpen(false)}
+                style={{ animationDelay: `${index * 50}ms` }}
               >
                 {item.label}
               </a>
@@ -98,10 +131,14 @@ export const Navbar = () => {
               <Button
                 variant="default"
                 size="default"
-                className="w-full"
-                onClick={() => window.location.href = 'https://github.com/kaleidoswap/desktop-app/releases'}
+                className="w-full group relative overflow-hidden"
+                onClick={() => {
+                  window.location.href = '/downloads'
+                  setIsOpen(false)
+                }}
               >
-                Download
+                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
+                <span className="relative">Download</span>
               </Button>
             </div>
           </div>

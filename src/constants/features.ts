@@ -5,33 +5,33 @@ import type { Feature, SupportedNetwork } from '@/types/features';
 export const features: Feature[] = [
   {
     icon: Repeat,
-    title: "Multi-Asset Trading",
-    description: "Connect to market makers over Lightning Network to trade BTC and RGB assets with complete control over your funds"
+    title: "Trustless Multi-Asset Trading",
+    description: "Trade BTC and RGB assets directly over Lightning Network with no intermediaries. Your keys, your coins, your trades—always."
   },
   {
     icon: Network,
-    title: "Lightning Service Providers",
-    description: "Request channels with custom capacity and RGB assets from trusted LSPs to kickstart your trading journey"
+    title: "Seamless Lightning Integration",
+    description: "Request custom channels with RGB assets from trusted LSPs to kickstart your trading journey with optimal liquidity."
   },
   {
     icon: Zap,
-    title: "Advanced Channel Management",
-    description: "Open, close, and manage Lightning channels with optional RGB assets"
+    title: "Complete Channel Control",
+    description: "Manage your Lightning channels with precision—open, close, and configure with RGB assets for maximum flexibility."
   },
   {
     icon: Wallet,
-    title: "Seamless Asset Operations",
-    description: "Handle deposits and withdrawals for both Bitcoin and RGB assets, on-chain and via Lightning Network"
+    title: "Unified Asset Management",
+    description: "Deposit and withdraw both Bitcoin and RGB assets seamlessly, whether on-chain or via Lightning Network, all from one interface."
   },
   {
     icon: History,
-    title: "Complete Transaction History",
-    description: "Track all your deposits, withdrawals, and swap history in one place"
+    title: "Transparent Transaction History",
+    description: "Track every movement with a comprehensive history of all your deposits, withdrawals, and swaps in a clean, intuitive dashboard."
   },
   {
     icon: Shield,
-    title: "Security-First Design",
-    description: "Built with robust security features including secure node data backups and comprehensive security considerations"
+    title: "True Self-Custody Security",
+    description: "Rest easy with robust security features including encrypted backups, open-source code, and complete control over your private keys."
   }
 ];
 

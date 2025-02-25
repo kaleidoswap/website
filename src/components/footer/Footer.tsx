@@ -13,7 +13,7 @@ export const Footer = ({ sections, socials }: FooterProps) => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <img src={kaleidoLogo} alt="KaleidoSwap" className="h-10" />
+              <img src={kaleidoLogo} alt="Kaleidoswap" className="h-10" />
             </div>
 
             <p className="text-gray-400">
