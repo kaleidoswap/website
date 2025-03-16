@@ -15,7 +15,7 @@ export const footerConfig: FooterProps = {
       title: "Resources",
       links: [
         { label: "GitHub", href: "https://github.com/kaleidoswap", external: true },
-        { label: "RGB Protocol", href: "https://rgb.tech", external: true },
+        { label: "RGB Protocol", href: "https://rgb.info", external: true },
         { label: "Lightning Network", href: "https://lightning.network", external: true }
       ]
     },

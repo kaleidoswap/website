@@ -13,16 +13,21 @@ export const Downloads = () => {
     const Icon = platform.icon
 
     return (
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-primary-500/50 transition-all">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="p-3 rounded-lg bg-primary-500/10">
-            <Icon className="w-8 h-8 text-primary-400" />
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold">{platform.title}</h3>
-            <p className="text-gray-400">
-              {platform.architecture.join(' / ')}
-            </p>
+      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-primary-500/50 transition-all h-full flex flex-col">
+        <div className="flex-1">
+          <div className="flex items-start gap-4 mb-6">
+            <div className="p-3 rounded-lg bg-primary-500/10 shrink-0">
+              <Icon className="w-8 h-8 text-primary-400" />
+            </div>
+            <div className="min-h-[80px] flex flex-col">
+              <h3 className="text-xl font-semibold">{platform.title}</h3>
+              <p className="text-gray-400">
+                {platform.architecture.join(' / ')}
+              </p>
+              {platform.note && (
+                <p className="text-sm text-yellow-400 mt-auto">{platform.note}</p>
+              )}
+            </div>
           </div>
         </div>
 
@@ -31,6 +36,7 @@ export const Downloads = () => {
             variant="default"
             className="w-full justify-center"
             onClick={() => downloadFile(platform.downloadUrl)}
+            disabled={platform.disabled}
           >
             <Download className="w-5 h-5 mr-2" />
             Download
@@ -39,6 +45,7 @@ export const Downloads = () => {
             variant="outline"
             className="w-full justify-center"
             onClick={() => downloadFile(platform.signatureUrl)}
+            disabled={platform.disabled}
           >
             <FileKey className="w-5 h-5 mr-2" />
             Signature

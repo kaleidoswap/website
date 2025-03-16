@@ -21,7 +21,7 @@ export const platforms: PlatformDownload[] = [
     platform: 'windows',
     icon: AlertCircleIcon,
     title: 'Windows',
-    architecture: ['Coming Soon'],
+    architecture: [],
     downloadUrl: '#',
     signatureUrl: '#',
     disabled: true,
