@@ -6,6 +6,7 @@ import type { HeroProps } from '@/types/hero'
 export const Hero = ({
   title,
   description,
+  primaryCTA,
   secondaryCTA
 }: HeroProps) => {
   return (
@@ -37,25 +38,27 @@ export const Hero = ({
           className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed animate-fadeIn"
           style={{ animationDelay: '0.3s' }}
         >
-          {description} <span className="text-primary-400 font-semibold">Bitcoin's security</span>, <span className="text-secondary-400 font-semibold">Lightning Network's speed</span>, and <span className="text-bitcoin-400 font-semibold">RGB Protocol's programmability</span> in a single <span className="font-semibold">open-source desktop application</span> that gives you complete control over your assets.
+          {description} <span className="text-primary-400 font-semibold">Bitcoin's security</span>, <span className="text-secondary-400 font-semibold">Lightning Network's speed</span>, and <span className="text-bitcoin-400 font-semibold">RGB Protocol programmability</span> in a single <span className="font-semibold">open-source desktop application</span> that gives you complete control over your assets.
         </p>
 
         <div 
           className="flex flex-col sm:flex-row justify-center gap-3 animate-fadeIn"
           style={{ animationDelay: '0.5s' }}
         >
-          <Button
-            variant="default"
-            size="lg"
-            onClick={() => window.location.href = "/downloads"}
-            className="group relative overflow-hidden"
-          >
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
-            <span className="relative flex items-center justify-center">
-              <Download className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-              Download App
-            </span>
-          </Button>
+          {primaryCTA && (
+            <Button
+              variant="default"
+              size="lg"
+              onClick={() => window.location.href = primaryCTA.href}
+              className="group relative overflow-hidden"
+            >
+              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
+              <span className="relative flex items-center justify-center">
+                <Download className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
+                {primaryCTA.label}
+              </span>
+            </Button>
+          )}
 
           {secondaryCTA && (
             <Button

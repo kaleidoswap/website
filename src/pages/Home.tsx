@@ -20,7 +20,7 @@ export const Home = () => {
       <div className="relative">
         <Navbar />
         <Hero 
-          title="Trustless trading on Lightning Network"
+          title="Trustless Trading on Lightning Network"
           description="Kaleidoswap is the first decentralized trading platform that combines"
           primaryCTA={{
             label: "Download App",
@@ -37,16 +37,20 @@ export const Home = () => {
           features={features}
         />
         <SecurityNotice 
-          title="Transparency & Security"
-          description="As an open-source project in alpha testing, we prioritize transparency about the current state of development."
+          title="Alpha Development Status"
+          description="KaleidoSwap is in alpha stage with active development. Mainnet support will be available after RGB and RGB Lightning Node are stable in production."
           warnings={[
             {
               title: "Test Networks Only",
-              description: "Currently recommended for use on regtest, signet, and testnet3 networks only. Mainnet support coming soon."
+              description: "Currently designed for regtest, signet, and testnet3 environments. We're working toward mainnet compatibility as RGB technology matures."
             },
             {
               title: "Alpha Software",
-              description: "This is alpha software under active development. Please do not use with real funds on mainnet at this stage."
+              description: "This is alpha software undergoing rapid development. Please do not use with real funds at this stage."
+            },
+            {
+              title: "Community Feedback",
+              description: "Found a bug or have a suggestion? Open an issue on our GitHub repository to help improve KaleidoSwap for everyone."
             },
             {
               title: "Node Requirements",
@@ -54,8 +58,8 @@ export const Home = () => {
             }
           ]}
           cta={{
-            label: "Learn more about security",
-            href: "https://docs.kaleidoswap.com/security"
+            label: "Report an issue on GitHub",
+            href: "https://github.com/kaleidoswap/kaleidoswap/issues/new"
           }}
         />
         <Footer {...footerConfig} />

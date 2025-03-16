@@ -1,41 +1,49 @@
-import { 
-  Monitor, 
-  Monitor as AppleLogo,
-  MonitorDown 
-} from 'lucide-react'
-import type { DownloadVersion, PlatformDownload } from '@/types/downloads'
+// src/constants/downloads.ts
+import type { PlatformDownload } from '@/types/downloads'
+import {
+  AppleIcon,
+  LinuxIcon,
+  AlertCircleIcon
+} from '@/components/icons/PlatformIcons'
+import {
+  getVersionInfo,
+  getDownloadUrl,
+  getSignatureUrl,
+  githubUrls
+} from '@/constants/versions'
 
-export const currentVersion: DownloadVersion = {
-  version: '0.1.0',
-  date: '2024-03-20',
-  notes: 'https://github.com/kaleidoswap/desktop-app/releases/tag/v0.1.0'
-}
+// Get current version info
+export const currentVersion = getVersionInfo()
 
+// Platform configuration
 export const platforms: PlatformDownload[] = [
   {
     platform: 'windows',
-    icon: Monitor,
+    icon: AlertCircleIcon,
     title: 'Windows',
-    architecture: ['x64', 'arm64'],
-    downloadUrl: 'https://github.com/kaleidoswap/desktop-app/releases/download/v0.1.0/KaleidoSwap-0.1.0-win',
-    signatureUrl: 'https://github.com/kaleidoswap/desktop-app/releases/download/v0.1.0/KaleidoSwap-0.1.0-win.sig'
+    architecture: ['Coming Soon'],
+    downloadUrl: '#',
+    signatureUrl: '#',
+    disabled: true,
+    note: 'Windows support is coming in a future release'
   },
   {
-    platform: 'macos',
-    icon: AppleLogo,
+    platform: 'mac',
+    icon: AppleIcon,
     title: 'macOS',
     architecture: ['x64', 'arm64'],
-    downloadUrl: 'https://github.com/kaleidoswap/desktop-app/releases/download/v0.1.0/KaleidoSwap-0.1.0-mac',
-    signatureUrl: 'https://github.com/kaleidoswap/desktop-app/releases/download/v0.1.0/KaleidoSwap-0.1.0-mac.sig'
+    downloadUrl: getDownloadUrl('mac'),
+    signatureUrl: getSignatureUrl('mac')
   },
   {
     platform: 'linux',
-    icon: MonitorDown,
+    icon: LinuxIcon,
     title: 'Linux',
     architecture: ['x64', 'arm64'],
-    downloadUrl: 'https://github.com/kaleidoswap/desktop-app/releases/download/v0.1.0/KaleidoSwap-0.1.0-linux',
-    signatureUrl: 'https://github.com/kaleidoswap/desktop-app/releases/download/v0.1.0/KaleidoSwap-0.1.0-linux.sig'
+    downloadUrl: getDownloadUrl('linux'),
+    signatureUrl: getSignatureUrl('linux')
   }
 ]
 
-export const verificationGuideUrl = 'https://github.com/kaleidoswap/desktop-app/blob/main/docs/VERIFICATION.md' 
+// URL for verification guide
+export const verificationGuideUrl = githubUrls.verification

@@ -62,6 +62,8 @@ export default {
           900: '#111827',
           950: '#0d1117',
         },
+        navbar: '#1f2937',
+        background: '#1f2937',
       },
       container: {
         center: true,

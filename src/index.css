@@ -159,3 +159,72 @@
 ::selection {
   @apply bg-primary-500/30 text-white;
 }
+
+/* Ensure content has proper padding for fixed navbar */
+main, 
+.hero-section,
+section:first-of-type {
+  padding-top: 5rem; /* Adjust based on your navbar height */
+}
+
+@media (min-width: 768px) {
+  main,
+  .hero-section,
+  section:first-of-type {
+    padding-top: 6rem; /* Larger padding for desktop */
+  }
+}
+
+/* Add smooth scrolling to the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add this class to the Hero component */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Add these styles to fix mobile menu issues */
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .fixed {
+    position: fixed;
+  }
+  
+  /* Ensure the mobile menu is visible on iOS */
+  body.menu-open {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+}
+
+/* Ensure mobile menu takes full height */
+@media (max-width: 767px) {
+  .mobile-menu {
+    height: calc(100vh - 4rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Add styles for the mobile navbar */
+.fixed-navbar {
+  @apply fixed top-0 left-0 w-full z-50 bg-navbar; /* Use the new navbar background color */
+  background-color: #1f2937; /* Fallback solid background color */
+  background-color: rgba(31, 41, 55, 0.9); /* Updated to a semi-transparent background color */
+}
+
+/* Ensure the navbar items are spaced out properly */
+.fixed-navbar .nav-item {
+  @apply px-4 py-2 text-white; /* Add padding and text color */
+}
+
+.glass-card {
+  @apply bg-gray-900/60 backdrop-blur-md border border-gray-800/50 rounded-xl;
+}
