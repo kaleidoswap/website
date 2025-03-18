@@ -14,7 +14,9 @@ export interface PlatformDownload {
   title: string
   architecture: string[]
   downloadUrl: string
-  signatureUrl: string
+  signatureUrl: string // Deprecated, kept for backward compatibility
+  manifestUrl?: string
+  manifestSignatureUrl?: string
   disabled?: boolean
   note?: string
 }
@@ -23,4 +25,6 @@ export interface DownloadsPageProps {
   currentVersion: DownloadVersion
   platforms: PlatformDownload[]
   verificationGuideUrl: string
+  manifestUrl: string
+  manifestSignatureUrl: string
 } 

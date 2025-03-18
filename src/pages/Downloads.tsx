@@ -1,7 +1,7 @@
-import { Download, FileKey, ExternalLink } from 'lucide-react'
+import { Download, ExternalLink, FileText, Shield } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
-import { currentVersion, platforms, verificationGuideUrl } from '@/constants/downloads'
+import { currentVersion, platforms, verificationGuideUrl, manifestUrl, manifestSignatureUrl } from '@/constants/downloads'
 import type { PlatformDownload } from '@/types/downloads'
 
 export const Downloads = () => {
@@ -40,15 +40,6 @@ export const Downloads = () => {
           >
             <Download className="w-5 h-5 mr-2" />
             Download
-          </Button>
-          <Button
-            variant="outline"
-            className="w-full justify-center"
-            onClick={() => downloadFile(platform.signatureUrl)}
-            disabled={platform.disabled}
-          >
-            <FileKey className="w-5 h-5 mr-2" />
-            Signature
           </Button>
         </div>
       </div>
@@ -92,11 +83,41 @@ export const Downloads = () => {
             ))}
           </div>
 
+          {/* Verification Files */}
+          <div className="max-w-2xl mx-auto bg-gray-800/30 border border-gray-700/50 rounded-xl p-6 mb-12">
+            <div className="text-center mb-6">
+              <h2 className="text-xl font-semibold mb-3">Verification Files</h2>
+              <p className="text-gray-400">
+                Download these files to verify the authenticity of your download
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                variant="outline"
+                className="justify-center"
+                onClick={() => downloadFile(manifestUrl)}
+              >
+                <FileText className="w-5 h-5 mr-2" />
+                Download Manifest
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="justify-center"
+                onClick={() => downloadFile(manifestSignatureUrl)}
+              >
+                <Shield className="w-5 h-5 mr-2" />
+                Download Signature
+              </Button>
+            </div>
+          </div>
+
           {/* Verification Notice */}
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-xl font-semibold mb-3">Verify Your Download</h2>
             <p className="text-gray-400 mb-4">
-              For security, please verify the signature of your download using our public key.
+              For security, please verify the authenticity of your download using our manifest and public key.
             </p>
             <a
               href={verificationGuideUrl}
