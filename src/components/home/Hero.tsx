@@ -2,6 +2,8 @@
 import { Download, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import type { HeroProps } from '@/types/hero'
+import { openExternalLink } from '@/lib/utils'
+import { useNavigate } from 'react-router-dom'
 
 export const Hero = ({
   title,
@@ -9,6 +11,16 @@ export const Hero = ({
   primaryCTA,
   secondaryCTA
 }: HeroProps) => {
+  const navigate = useNavigate()
+
+  const handleNavigation = (href: string, external = false) => {
+    if (external) {
+      openExternalLink(href)
+    } else {
+      navigate(href)
+    }
+  }
+
   return (
     <div className="relative min-h-[90vh] flex items-center justify-center pt-16 overflow-hidden">
       {/* Background elements */}
@@ -49,7 +61,7 @@ export const Hero = ({
             <Button
               variant="default"
               size="lg"
-              onClick={() => window.location.href = primaryCTA.href}
+              onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
               className="group relative overflow-hidden"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
@@ -64,7 +76,7 @@ export const Hero = ({
             <Button
               variant="secondary"
               size="lg"
-              onClick={() => window.location.href = secondaryCTA.href}
+              onClick={() => handleNavigation(secondaryCTA.href, secondaryCTA.external)}
               className="group relative overflow-hidden"
             >
               <span className="absolute inset-0 w-full h-full bg-gray-800 group-hover:bg-gray-700 transition-all duration-300"></span>
