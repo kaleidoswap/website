@@ -5,9 +5,11 @@ export interface HeroProps {
     primaryCTA: {
       label: string;
       href: string;
+      external?: boolean;
     };
     secondaryCTA?: {
       label: string;
       href: string;
+      external?: boolean;
     };
   }

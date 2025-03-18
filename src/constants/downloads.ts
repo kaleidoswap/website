@@ -9,11 +9,17 @@ import {
   getVersionInfo,
   getDownloadUrl,
   getSignatureUrl,
+  getManifestUrl,
+  getManifestSignatureUrl,
   githubUrls
 } from '@/constants/versions'
 
 // Get current version info
 export const currentVersion = getVersionInfo()
+
+// Manifest URLs
+export const manifestUrl = getManifestUrl()
+export const manifestSignatureUrl = getManifestSignatureUrl()
 
 // Platform configuration
 export const platforms: PlatformDownload[] = [

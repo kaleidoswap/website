@@ -24,11 +24,13 @@ export const Home = () => {
           description="Kaleidoswap is the first decentralized trading platform that combines"
           primaryCTA={{
             label: "Download App",
-            href: "/downloads"
+            href: "/downloads",
+            external: false
           }}
           secondaryCTA={{
             label: "Explore Docs",
-            href: "https://docs.kaleidoswap.com"
+            href: "https://docs.kaleidoswap.com",
+            external: true
           }}
         />
         <Features 
@@ -37,24 +39,20 @@ export const Home = () => {
           features={features}
         />
         <SecurityNotice 
-          title="Alpha Development Status"
-          description="KaleidoSwap is in alpha stage with active development. Mainnet support will be available after RGB and RGB Lightning Node are stable in production."
+          title="Security & Development Status"
+          description="We're committed to building a secure, reliable platform and value your participation in this development journey. KaleidoSwap is currently in alpha with active development toward mainnet readiness."
           warnings={[
             {
               title: "Test Networks Only",
-              description: "Currently designed for regtest, signet, and testnet3 environments. We're working toward mainnet compatibility as RGB technology matures."
+              description: "Currently designed for regtest, signet, and testnet environments. Mainnet compatibility will be added as RGB technology matures."
             },
             {
               title: "Alpha Software",
-              description: "This is alpha software undergoing rapid development. Please do not use with real funds at this stage."
+              description: "This is experimental software undergoing rapid development. Do not use with real funds at this stage."
             },
             {
               title: "Community Feedback",
-              description: "Found a bug or have a suggestion? Open an issue on our GitHub repository to help improve KaleidoSwap for everyone."
-            },
-            {
-              title: "Node Requirements",
-              description: "For optimal security, maintain an always-online node to ensure the full Lightning Network security model."
+              description: "Found a bug or have a suggestion? Report issues on GitHub to help improve KaleidoSwap."
             }
           ]}
           cta={{

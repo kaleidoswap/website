@@ -8,7 +8,6 @@ export const footerConfig: FooterProps = {
       links: [
         { label: "Download", href: "https://github.com/kaleidoswap/desktop-app/releases", external: true },
         { label: "Documentation", href: "https://docs.kaleidoswap.com", external: true },
-        { label: "Security", href: "https://docs.kaleidoswap.com/security", external: true }
       ]
     },
     {
@@ -16,7 +15,7 @@ export const footerConfig: FooterProps = {
       links: [
         { label: "GitHub", href: "https://github.com/kaleidoswap", external: true },
         { label: "RGB Protocol", href: "https://rgb.info", external: true },
-        { label: "Lightning Network", href: "https://lightning.network", external: true }
+        { label: "RGB Lightning Node", href: "https://github.com/RGB-Tools/rgb-lightning-node", external: true }
       ]
     },
     {

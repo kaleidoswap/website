@@ -5,6 +5,7 @@ import { Downloads } from '@/pages/Downloads'
 import { Privacy } from '@/pages/Privacy'
 import { Terms } from '@/pages/Terms'
 import { MarketMakers } from '@/pages/MarketMakers'
+import { NotFound } from '@/pages/NotFound'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/market-makers" element={<MarketMakers />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   )

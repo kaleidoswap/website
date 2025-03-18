@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
 import { mainNavItems } from '@/constants/navigation'
-import { cn } from '@/lib/utils'
+import { cn, openExternalLink } from '@/lib/utils'
 import kaleidoLogo from '@/assets/kaleidoswap-logo.svg'
 
 export const Navbar = () => {
@@ -68,11 +68,15 @@ export const Navbar = () => {
   // Handle navigation with proper state updates
   const handleNavigation = (href: string, external = false) => {
     if (external) {
-      window.open(href, '_blank', 'noopener,noreferrer')
+      // Open external links in a new tab
+      openExternalLink(href)
     } else {
-      setIsOpen(false) // Close mobile menu
-      navigate(href) // Use navigate for client-side routing
+      // Use React Router for internal navigation
+      navigate(href)
     }
+    
+    // Still close the mobile menu
+    setIsOpen(false)
   }
 
   return (
