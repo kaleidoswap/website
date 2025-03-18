@@ -47,7 +47,7 @@ export const NotFound = () => {
                   </Button>
                   
                   <Button
-                    variant="solid"
+                    variant="secondary"
                     onClick={() => navigate('/')}
                     className="group relative overflow-hidden bg-gradient-to-r from-bitcoin-500 to-bitcoin-600 hover:from-bitcoin-400 hover:to-bitcoin-500"
                   >
