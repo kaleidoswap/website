@@ -7,7 +7,8 @@ import {
 } from '@/components/icons/PlatformIcons'
 import {
   getVersionInfo,
-  getDownloadUrl,
+  getMacDownload,
+  getLinuxDownload,
   getSignatureUrl,
   getManifestUrl,
   getManifestSignatureUrl,
@@ -38,7 +39,7 @@ export const platforms: PlatformDownload[] = [
     icon: AppleIcon,
     title: 'macOS',
     architecture: ['x64', 'arm64'],
-    downloadUrl: getDownloadUrl('mac'),
+    downloadUrl: getMacDownload(),
     signatureUrl: getSignatureUrl('mac')
   },
   {
@@ -46,7 +47,7 @@ export const platforms: PlatformDownload[] = [
     icon: LinuxIcon,
     title: 'Linux',
     architecture: ['x64', 'arm64'],
-    downloadUrl: getDownloadUrl('linux'),
+    downloadUrl: getLinuxDownload(),
     signatureUrl: getSignatureUrl('linux')
   }
 ]
