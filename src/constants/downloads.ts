@@ -3,12 +3,13 @@ import type { PlatformDownload } from '@/types/downloads'
 import {
   AppleIcon,
   LinuxIcon,
-  AlertCircleIcon
+  WindowsIcon,
 } from '@/components/icons/PlatformIcons'
 import {
   getVersionInfo,
   getMacDownload,
   getLinuxDownload,
+  getWindowsDownload,
   getSignatureUrl,
   getManifestUrl,
   getManifestSignatureUrl,
@@ -26,13 +27,11 @@ export const manifestSignatureUrl = getManifestSignatureUrl()
 export const platforms: PlatformDownload[] = [
   {
     platform: 'windows',
-    icon: AlertCircleIcon,
+    icon: WindowsIcon,
     title: 'Windows',
-    architecture: [],
-    downloadUrl: '#',
-    signatureUrl: '#',
-    disabled: true,
-    note: 'Windows support is coming in a future release'
+    architecture: ['x64'],
+    downloadUrl: getWindowsDownload(),
+    signatureUrl: getSignatureUrl('win-installer')
   },
   {
     platform: 'mac',
