@@ -9,7 +9,8 @@ export const Hero = ({
   title,
   description,
   primaryCTA,
-  secondaryCTA
+  secondaryCTA,
+  tertiaryCTA
 }: HeroProps) => {
   const navigate = useNavigate()
 
@@ -66,7 +67,7 @@ export const Hero = ({
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
               <span className="relative flex items-center justify-center">
-                <Download className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
+                <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
                 {primaryCTA.label}
               </span>
             </Button>
@@ -81,7 +82,21 @@ export const Hero = ({
             >
               <span className="absolute inset-0 w-full h-full bg-gray-800 group-hover:bg-gray-700 transition-all duration-300"></span>
               <span className="relative flex items-center justify-center">
+                <Download className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
                 {secondaryCTA.label}
+              </span>
+            </Button>
+          )}
+
+          {tertiaryCTA && (
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => handleNavigation(tertiaryCTA.href, tertiaryCTA.external)}
+              className="group relative overflow-hidden border-gray-600 text-gray-300 hover:text-white hover:border-gray-500"
+            >
+              <span className="relative flex items-center justify-center">
+                {tertiaryCTA.label}
                 <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Button>

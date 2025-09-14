@@ -12,4 +12,9 @@ export interface HeroProps {
       href: string;
       external?: boolean;
     };
+    tertiaryCTA?: {
+      label: string;
+      href: string;
+      external?: boolean;
+    };
   }

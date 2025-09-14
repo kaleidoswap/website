@@ -1,7 +1,7 @@
 // src/components/footer/Footer.tsx
 import { ExternalLink } from 'lucide-react'
 import type { FooterProps } from '@/types/footer'
-import kaleidoLogo from '@/assets/kaleidoswap-logo.svg'
+import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
 
 const currentYear = new Date().getFullYear()
 
@@ -13,7 +13,7 @@ export const Footer = ({ sections, socials }: FooterProps) => {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <img src={kaleidoLogo} alt="Kaleidoswap" className="h-10" />
+              <img src={kaleidoFullLogo} alt="Kaleidoswap" className="h-10" />
             </div>
 
             <p className="text-gray-400">

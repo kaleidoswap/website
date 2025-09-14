@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
 import { mainNavItems } from '@/constants/navigation'
 import { cn, openExternalLink } from '@/lib/utils'
-import kaleidoLogo from '@/assets/kaleidoswap-logo.svg'
+import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -102,12 +102,12 @@ export const Navbar = () => {
             >
               <div className="relative">
                 <img 
-                  src={kaleidoLogo} 
+                  src={kaleidoFullLogo} 
                   alt="KaleidoSwap" 
-                  className="h-8 md:h-10 transition-transform duration-300 group-hover:scale-110" 
+                  className="h-8 md:h-10 transition-transform duration-300 group-hover:scale-105" 
                 />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-full"></div>
+                  <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-lg"></div>
                 </div>
               </div>
             </a>
@@ -145,13 +145,21 @@ export const Navbar = () => {
               </a>
             ))}
             <Button
-              variant="default"
+              variant="outline"
               size="default"
               onClick={() => handleNavigation('/downloads')}
+              className="group relative overflow-hidden border-gray-600 text-gray-300 hover:text-white hover:border-gray-500 mr-3"
+            >
+              <span className="relative">Download</span>
+            </Button>
+            <Button
+              variant="default"
+              size="default"
+              onClick={() => handleNavigation('https://app.kaleidoswap.com', true)}
               className="group relative overflow-hidden"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
-              <span className="relative">Download</span>
+              <span className="relative">Launch App</span>
             </Button>
           </div>
 
@@ -188,14 +196,22 @@ export const Navbar = () => {
                   {item.label}
                 </a>
               ))}
-              <div className="mt-6 px-4">
+              <div className="mt-6 px-4 space-y-3">
                 <Button
                   variant="default"
                   size="lg"
                   className="w-full justify-center text-lg py-4"
+                  onClick={() => handleNavigation('https://app.kaleidoswap.com', true)}
+                >
+                  <span className="relative">Launch App</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full justify-center text-lg py-4 border-gray-600 text-gray-300"
                   onClick={() => handleNavigation('/downloads')}
                 >
-                  <span className="relative">Download</span>
+                  <span className="relative">Download Desktop</span>
                 </Button>
               </div>
               
@@ -207,23 +223,33 @@ export const Navbar = () => {
                 <p className="text-gray-300 mb-6">
                   KaleidoSwap is the first decentralized trading platform that combines Bitcoin's security, Lightning Network speed, and RGB programmability in a single open-source desktop application.
                 </p>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <Button
                     variant="default"
                     size="lg"
                     className="w-full justify-center"
                     onClick={() => {
-                      handleNavigation('/downloads')
+                      handleNavigation('https://app.kaleidoswap.com', true)
                     }}
                   >
-                    Download App
+                    Launch Web App
                   </Button>
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full justify-center"
+                    className="w-full justify-center border-gray-600 text-gray-300"
                     onClick={() => {
-                      handleNavigation('/docs', true)
+                      handleNavigation('/downloads')
+                    }}
+                  >
+                    Download Desktop
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full justify-center border-gray-600 text-gray-300"
+                    onClick={() => {
+                      handleNavigation('https://docs.kaleidoswap.com', true)
                     }}
                   >
                     Explore Docs

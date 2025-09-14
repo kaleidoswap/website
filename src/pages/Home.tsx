@@ -2,9 +2,11 @@
 import { Navbar } from '@/components/nav/Navbar'
 import { Hero } from '@/components/home/Hero'
 import { Features } from '@/components/home/Features'
+import { Partnerships } from '@/components/partnerships/Partnerships'
 import { SecurityNotice } from '@/components/home/SecurityNotice'
 import { Footer } from '@/components/footer/Footer'
 import { features } from '@/constants/features'
+import { partners } from '@/constants/partnerships'
 import { footerConfig } from '@/constants/footer'
 
 export const Home = () => {
@@ -23,11 +25,16 @@ export const Home = () => {
           title="Trustless Trading on Lightning Network"
           description="Kaleidoswap is the first decentralized trading platform that combines"
           primaryCTA={{
-            label: "Download App",
+            label: "Launch Web App",
+            href: "https://app.kaleidoswap.com",
+            external: true
+          }}
+          secondaryCTA={{
+            label: "Download Desktop",
             href: "/downloads",
             external: false
           }}
-          secondaryCTA={{
+          tertiaryCTA={{
             label: "Explore Docs",
             href: "https://docs.kaleidoswap.com",
             external: true
@@ -37,6 +44,11 @@ export const Home = () => {
           title="The Future of Bitcoin Trading Is Here"
           description="Kaleidoswap gives you unprecedented control over your digital assets with a powerful, secure, and user-friendly desktop application"
           features={features}
+        />
+        <Partnerships 
+          title="Trusted by Industry Leaders"
+          description="KaleidoSwap is backed by leading investors and strategic partners who share our vision of a decentralized Bitcoin trading future"
+          partners={partners}
         />
         <SecurityNotice 
           title="Security & Development Status"
