@@ -1,13 +1,24 @@
 // src/components/home/Hero.tsx
-import { Download, ExternalLink } from 'lucide-react'
+import { Download, ExternalLink, Zap } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import type { HeroProps } from '@/types/hero'
 import { openExternalLink } from '@/lib/utils'
 import { useNavigate } from 'react-router-dom'
+import {
+  SplitText,
+  ButtonGlow,
+  Gradient,
+  Magnetic,
+  Reveal,
+  Aurora,
+  FloatingDots,
+  Ripple
+} from '@/components/animations/ReactBitsFallbacks'
+import bitcoinLogo from '@/assets/bitcoin-logo.svg'
+import rgbSymbol from '@/assets/rgb-symbol.svg'
+import textureBg from '@/assets/backgrounds/texture-bg-1.png'
 
 export const Hero = ({
-  title,
-  description,
   primaryCTA,
   secondaryCTA,
   tertiaryCTA
@@ -23,108 +34,165 @@ export const Hero = ({
   }
 
   return (
-    <div className="relative min-h-[90vh] flex items-center justify-center pt-16 overflow-hidden">
-      {/* Background elements */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-b from-primary-500/10 to-transparent"
-        aria-hidden="true"
-      />
-      
-      {/* Grid background */}
-      <div className="absolute inset-0 grid-background opacity-20" aria-hidden="true" />
-      
-      {/* Animated circles */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-radial from-primary-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" aria-hidden="true" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-secondary-500/20 to-transparent rounded-full blur-3xl animate-pulse-slow" aria-hidden="true" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-gradient-radial from-bitcoin-500/10 to-transparent rounded-full blur-3xl animate-pulse-slow" aria-hidden="true" />
+    <div className="relative min-h-[100vh] flex items-center justify-center pt-16 overflow-hidden">
+      {/* Enhanced Background with Texture and Animations */}
+      <div className="absolute inset-0 z-0">
+        {/* Texture Background */}
+        <div
+          className="absolute inset-0 opacity-[0.03] bg-repeat"
+          style={{
+            backgroundImage: `url(${textureBg})`,
+            backgroundSize: '400px 400px'
+          }}
+        />
+
+        {/* Aurora Effect */}
+        <Aurora
+          className="absolute inset-0 opacity-20"
+          colors={['#F7931A', '#00D4AA', '#0e9dff']}
+          speed={1.5}
+        />
+
+        {/* Gradient Overlay */}
+        <Gradient
+          colors={['#F7931A', '#0e9dff', '#8a5cf6']}
+          className="absolute inset-0 opacity-10"
+          speed={2}
+        />
+
+        {/* Ripple Effect */}
+        <Ripple className="absolute inset-0 opacity-20" />
+
+        {/* Floating Dots Animation */}
+        <FloatingDots className="absolute inset-0 opacity-40" />
+
+        {/* Additional floating elements for depth */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-2 h-2 bg-primary-400/40 rounded-full animate-float" />
+          <div className="absolute top-40 right-20 w-3 h-3 bg-secondary-400/30 rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
+          <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-bitcoin-400/40 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-20 right-1/3 w-3 h-3 bg-green-400/30 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute top-1/3 right-10 w-2 h-2 bg-primary-400/40 rounded-full animate-float" style={{ animationDelay: '2s' }} />
+        </div>
+      </div>
 
       {/* Content */}
       <div className="relative container mx-auto px-4 py-16 md:py-32 text-center z-10">
-        <h1 
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-gradient leading-[1.2] md:leading-[1.2] lg:leading-[1.2] animate-fadeIn max-w-5xl mx-auto"
-          style={{ animationDelay: '0.1s' }}
-        >
-          {title}
-        </h1>
-        
-        <p 
-          className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed animate-fadeIn"
-          style={{ animationDelay: '0.3s' }}
-        >
-          {description} <span className="text-primary-400 font-semibold">Bitcoin's security</span>, <span className="text-secondary-400 font-semibold">Lightning Network's speed</span>, and <span className="text-bitcoin-400 font-semibold">RGB Protocol programmability</span> in a single <span className="font-semibold">open-source desktop application</span> that gives you complete control over your assets.
-        </p>
+        <Reveal>
+          <SplitText
+            text="The First DEX Native to Bitcoin"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-bitcoin-400 to-primary-400 bg-clip-text text-transparent leading-[1.1] max-w-6xl mx-auto"
+            delay={100}
+          />
+        </Reveal>
 
-        <div 
-          className="flex flex-col sm:flex-row justify-center gap-3 animate-fadeIn"
-          style={{ animationDelay: '0.5s' }}
-        >
-          {primaryCTA && (
-            <Button
-              variant="default"
-              size="lg"
-              onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
-              className="group relative overflow-hidden"
-            >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
-              <span className="relative flex items-center justify-center">
-                <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                {primaryCTA.label}
-              </span>
-            </Button>
-          )}
+        <Reveal delay={300}>
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 max-w-4xl mx-auto leading-relaxed">
+            Trade RGB assets trustlessly on Lightning Network with atomic swaps, self-custody, and near-instant settlement.
+          </p>
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+            <span className="inline-flex items-center gap-1.5">
+              <img src={bitcoinLogo} alt="Bitcoin" className="w-5 h-5 inline" />
+              <span className="text-bitcoin-400 font-semibold">Bitcoin's security</span>
+            </span>
+            <span className="text-gray-400">+</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Zap className="w-5 h-5 text-primary-400 inline" />
+              <span className="text-primary-400 font-semibold">Lightning Network's speed</span>
+            </span>
+            <span className="text-gray-400">+</span>
+            <span className="inline-flex items-center gap-1.5">
+              <img src={rgbSymbol} alt="RGB" className="w-5 h-5 inline" />
+              <span className="text-secondary-400 font-semibold">RGB Protocol's programmability</span>
+            </span>
+          </p>
+        </Reveal>
 
-          {secondaryCTA && (
-            <Button
-              variant="secondary"
-              size="lg"
-              onClick={() => handleNavigation(secondaryCTA.href, secondaryCTA.external)}
-              className="group relative overflow-hidden"
-            >
-              <span className="absolute inset-0 w-full h-full bg-gray-800 group-hover:bg-gray-700 transition-all duration-300"></span>
-              <span className="relative flex items-center justify-center">
-                <Download className="mr-2 h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                {secondaryCTA.label}
-              </span>
-            </Button>
-          )}
+        <Reveal delay={600}>
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
+            {primaryCTA && (
+              <Magnetic>
+                <ButtonGlow
+                  glowColor="#F7931A"
+                  className="relative"
+                >
+                  <Button
+                    variant="default"
+                    size="lg"
+                    onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
+                    className="group relative overflow-hidden bg-gradient-to-r from-bitcoin-500 via-bitcoin-600 to-bitcoin-500 hover:from-bitcoin-400 hover:via-bitcoin-500 hover:to-bitcoin-400 border-0 text-black font-bold shadow-2xl shadow-bitcoin-500/30 hover:shadow-bitcoin-500/50 bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500"
+                  >
+                    <Download className="mr-2 h-5 w-5 transition-transform group-hover:scale-110 group-hover:rotate-6" />
+                    {primaryCTA.label}
+                  </Button>
+                </ButtonGlow>
+              </Magnetic>
+            )}
 
-          {tertiaryCTA && (
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => handleNavigation(tertiaryCTA.href, tertiaryCTA.external)}
-              className="group relative overflow-hidden border-gray-600 text-gray-300 hover:text-white hover:border-gray-500"
-            >
-              <span className="relative flex items-center justify-center">
-                {tertiaryCTA.label}
-                <ExternalLink className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Button>
-          )}
-        </div>
-        
+            {secondaryCTA && (
+              <Magnetic>
+                <ButtonGlow
+                  glowColor="#0e9dff"
+                  className="relative"
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => handleNavigation(secondaryCTA.href, secondaryCTA.external)}
+                    className="group relative overflow-hidden border-2 border-primary-500/60 text-primary-400 hover:text-white hover:bg-primary-500/20 hover:border-primary-400 backdrop-blur-sm shadow-lg shadow-primary-500/10 hover:shadow-xl hover:shadow-primary-500/20"
+                  >
+                    <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
+                    {secondaryCTA.label}
+                  </Button>
+                </ButtonGlow>
+              </Magnetic>
+            )}
+
+            {tertiaryCTA && (
+              <Magnetic>
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  onClick={() => handleNavigation(tertiaryCTA.href, tertiaryCTA.external)}
+                  className="group relative text-gray-300 hover:text-white"
+                >
+                  View GitHub
+                  <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </Button>
+              </Magnetic>
+            )}
+          </div>
+        </Reveal>
+
         {/* Tech badges */}
-        <div 
-          className="mt-12 flex flex-wrap justify-center gap-4 animate-fadeIn"
-          style={{ animationDelay: '0.7s' }}
-        >
-          <div className="glass-card px-4 py-2 text-sm text-gray-300 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-bitcoin-500"></span>
-            Bitcoin
+        <Reveal delay={700}>
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <Magnetic>
+              <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
+                <img src={bitcoinLogo} alt="Bitcoin" className="w-5 h-5" />
+                Bitcoin
+              </div>
+            </Magnetic>
+            <Magnetic>
+              <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
+                <Zap className="w-5 h-5 text-primary-400" />
+                Lightning Network
+              </div>
+            </Magnetic>
+            <Magnetic>
+              <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
+                <img src={rgbSymbol} alt="RGB" className="w-5 h-5" />
+                RGB Protocol
+              </div>
+            </Magnetic>
+            <Magnetic>
+              <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
+                <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
+                Open Source
+              </div>
+            </Magnetic>
           </div>
-          <div className="glass-card px-4 py-2 text-sm text-gray-300 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-primary-500"></span>
-            Lightning Network
-          </div>
-          <div className="glass-card px-4 py-2 text-sm text-gray-300 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-secondary-500"></span>
-            RGB Protocol
-          </div>
-          <div className="glass-card px-4 py-2 text-sm text-gray-300 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-green-500"></span>
-            Open Source
-          </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   )

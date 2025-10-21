@@ -6,23 +6,36 @@ export const footerConfig: FooterProps = {
     {
       title: "Product",
       links: [
-        { label: "Download", href: "https://github.com/kaleidoswap/desktop-app/releases", external: true },
+        { label: "Download Alpha", href: "/downloads" },
         { label: "Documentation", href: "https://docs.kaleidoswap.com", external: true },
+        { label: "Developer Tools", href: "https://developers.kaleidoswap.com", external: true },
+        { label: "Market Makers", href: "/market-makers" },
       ]
     },
     {
       title: "Resources",
       links: [
-        { label: "GitHub", href: "https://github.com/kaleidoswap", external: true },
+        { label: "GitHub Repository", href: "https://github.com/kaleidoswap/kaleidoswap", external: true },
         { label: "RGB Protocol", href: "https://rgb.info", external: true },
-        { label: "RGB Lightning Node", href: "https://github.com/RGB-Tools/rgb-lightning-node", external: true }
+        { label: "Lightning Network", href: "https://lightning.network", external: true },
+        { label: "Bitcoin Whitepaper", href: "https://bitcoin.org/bitcoin.pdf", external: true }
+      ]
+    },
+    {
+      title: "Community",
+      links: [
+        { label: "Discord", href: "https://discord.gg/kaleidoswap", external: true },
+        { label: "Telegram", href: "https://t.me/kaleidoswap", external: true },
+        { label: "Twitter/X", href: "https://x.com/kaleidoswap", external: true },
+        { label: "Blog", href: "https://blog.kaleidoswap.com", external: true }
       ]
     },
     {
       title: "Legal",
       links: [
         { label: "Privacy Policy", href: "/privacy" },
-        { label: "Terms of Service", href: "/terms" }
+        { label: "Terms of Service", href: "/terms" },
+        { label: "Security", href: "https://github.com/kaleidoswap/kaleidoswap/security", external: true }
       ]
     }
   ],

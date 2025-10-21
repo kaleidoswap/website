@@ -4,8 +4,8 @@
  * Update this file for new releases
  */
 
-export const APP_VERSION = '0.2.0'
-export const RELEASE_DATE = '2025-07-23'
+export const APP_VERSION = '0.3.0'
+export const RELEASE_DATE = '2025-10-15'
 export const GITHUB_REPO = 'kaleidoswap/desktop-app'
 
 // Platform definitions
@@ -39,7 +39,7 @@ export const getDownloadUrl = (platform: string) => {
     case PLATFORMS.WINDOWS_PORTABLE:
       return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_x64-portable.exe`;
     case PLATFORMS.LINUX_RPM:
-      return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_x64.rpm`;
+      return `${githubUrls.downloadBase}/KaleidoSwap-${APP_VERSION}-1.x86_64.rpm`;
     case PLATFORMS.LINUX_DEB:
       return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_amd64.deb`;
     case PLATFORMS.LINUX_APPIMAGE:
@@ -47,11 +47,11 @@ export const getDownloadUrl = (platform: string) => {
     case PLATFORMS.MAC_DMG:
       return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_x64.dmg`;
     case PLATFORMS.MAC_ARM:
-      return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_arm64.dmg`;
+      return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_aarch64.dmg`;
     case PLATFORMS.MAC_X64_TAR:
-      return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_x64.app.tar.gz`;
+      return `${githubUrls.downloadBase}/KaleidoSwap_x64.app.tar.gz`;
     case PLATFORMS.MAC_ARM_TAR:
-      return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_aarch64.app.tar.gz`;
+      return `${githubUrls.downloadBase}/KaleidoSwap_aarch64.app.tar.gz`;
     default:
       return `${githubUrls.downloadBase}/KaleidoSwap_${APP_VERSION}_${platform}`;
   }

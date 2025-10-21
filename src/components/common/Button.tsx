@@ -4,18 +4,19 @@ import { type VariantProps, cva } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
+  'inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-400/50 focus:ring-offset-2 focus:ring-offset-gray-950 disabled:opacity-50 disabled:pointer-events-none active:scale-95',
   {
     variants: {
       variant: {
-        default: 'bg-primary-500 text-white hover:bg-primary-600',
-        secondary: 'bg-gray-800 text-white hover:bg-gray-700',
-        outline: 'border border-gray-700 hover:bg-gray-800',
+        default: 'bg-primary-500 text-white hover:bg-primary-600 shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30',
+        secondary: 'bg-gray-800 text-white hover:bg-gray-700 shadow-lg shadow-gray-800/50 hover:shadow-xl hover:shadow-gray-700/60',
+        outline: 'border-2 border-gray-600/80 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50 backdrop-blur-sm hover:text-white',
+        ghost: 'text-gray-300 hover:bg-gray-800/50 hover:text-white',
       },
       size: {
-        default: 'h-10 py-2 px-4',
-        sm: 'h-9 px-3',
-        lg: 'h-11 px-8',
+        default: 'h-11 py-2.5 px-5 text-sm',
+        sm: 'h-9 px-4 text-xs',
+        lg: 'h-14 px-10 text-base',
       },
     },
     defaultVariants: {

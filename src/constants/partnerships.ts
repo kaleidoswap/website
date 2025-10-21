@@ -10,10 +10,10 @@ export const partners: Partner[] = [
     type: 'investor'
   },
   {
-    name: 'Bitfinex',
-    description: 'Premier cryptocurrency exchange supporting Bitcoin ecosystem innovation',
-    logo: '/partners/bitfinex-logo.svg', 
+    name: 'Bitfinex Ventures',
+    description: 'Investment arm of Bitfinex supporting Bitcoin ecosystem innovation and early-stage projects',
+    logo: '/partners/bitfinex-ventures-logo.svg',
     website: 'https://bitfinex.com',
-    type: 'strategic'
+    type: 'investor'
   }
 ]

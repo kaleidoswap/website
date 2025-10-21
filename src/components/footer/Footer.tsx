@@ -58,7 +58,7 @@ export const Footer = ({ sections, socials }: FooterProps) => {
               <a
                 key={platform}
                 href={href}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-200 hover:text-white transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={platform}

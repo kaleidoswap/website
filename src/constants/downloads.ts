@@ -26,14 +26,6 @@ export const manifestSignatureUrl = getManifestSignatureUrl()
 // Platform configuration
 export const platforms: PlatformDownload[] = [
   {
-    platform: 'windows',
-    icon: WindowsIcon,
-    title: 'Windows',
-    architecture: ['x64'],
-    downloadUrl: getWindowsDownload(),
-    signatureUrl: getSignatureUrl('win-installer')
-  },
-  {
     platform: 'mac',
     icon: AppleIcon,
     title: 'macOS',
@@ -48,6 +40,14 @@ export const platforms: PlatformDownload[] = [
     architecture: ['x64', 'arm64'],
     downloadUrl: getLinuxDownload(),
     signatureUrl: getSignatureUrl('linux')
+  },
+  {
+    platform: 'windows',
+    icon: WindowsIcon,
+    title: 'Windows',
+    architecture: ['x64'],
+    downloadUrl: getWindowsDownload(),
+    signatureUrl: getSignatureUrl('win-installer')
   }
 ]
 

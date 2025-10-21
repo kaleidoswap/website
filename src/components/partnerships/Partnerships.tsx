@@ -1,6 +1,14 @@
 // src/components/partnerships/Partnerships.tsx
-import { PartnerCard } from './PartnerCard'
 import type { PartnershipsProps } from '@/types/partnerships'
+import { Reveal, Gradient, Aurora } from '@/components/animations/ReactBitsFallbacks'
+import bitfinexLogo from '@/assets/BrandLogo.org-Bitfinex-Logo.png'
+import fulgurLogo from '@/assets/fulgur-logo.svg'
+
+const getPartnerLogo = (partnerName: string) => {
+  if (partnerName === 'Bitfinex Ventures') return bitfinexLogo
+  if (partnerName === 'Fulgur Ventures') return fulgurLogo
+  return ''
+}
 
 export const Partnerships = ({
   title,
@@ -8,39 +16,56 @@ export const Partnerships = ({
   partners
 }: PartnershipsProps) => {
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden">
-      {/* Background elements */}
-      <div 
-        className="absolute inset-0 bg-gradient-to-b from-green-500/5 via-blue-500/5 to-transparent"
-        aria-hidden="true"
+    <section className="py-12 md:py-16 relative overflow-hidden bg-gray-950/30">
+      {/* Aurora Background */}
+      <Aurora
+        className="absolute inset-0 opacity-20"
+        colors={['#F7931A', '#00D4AA', '#0e9dff']}
+        speed={1.2}
       />
-      
-      {/* Grid background */}
-      <div className="absolute inset-0 grid-background opacity-10" aria-hidden="true" />
-      
-      {/* Animated circles */}
-      <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-gradient-radial from-green-500/10 to-transparent rounded-full blur-3xl animate-pulse-slow" aria-hidden="true" />
-      <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-radial from-blue-500/10 to-transparent rounded-full blur-3xl animate-pulse-slow" aria-hidden="true" />
-      
-      <div className="container relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16 animate-fadeIn">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-gradient">
-            {title}
-          </h2>
-          <p className="text-base md:text-lg text-gray-300">
-            {description}
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {partners.map((partner, index) => (
-            <PartnerCard 
-              key={partner.name}
-              {...partner}
-              index={index}
-            />
-          ))}
-        </div>
+      {/* Dynamic Gradient */}
+      <Gradient
+        colors={['#00D4AA', '#F7931A', '#0e9dff']}
+        className="absolute inset-0 opacity-10"
+        speed={2.5}
+      />
+
+      <div className="container relative z-10">
+        <Reveal>
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-300">
+              {title}
+            </h2>
+            {description && (
+              <p className="text-lg text-gray-400 mb-6">
+                {description}
+              </p>
+            )}
+
+            {/* Logo Carousel */}
+            <div className="relative overflow-hidden py-4">
+              <div className="flex items-center justify-center gap-12 md:gap-16 animate-fadeIn">
+                {partners.map((partner) => (
+                  <a
+                    key={partner.name}
+                    href={partner.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-shrink-0 transition-all duration-300 hover:scale-110 opacity-100"
+                  >
+                    <img
+                      src={getPartnerLogo(partner.name)}
+                      alt={partner.name}
+                      className="h-12 md:h-16 w-auto transition-all duration-300"
+                      style={{ filter: 'brightness(0) invert(1)' }}
+                    />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   )

@@ -228,3 +228,121 @@ html {
 .glass-card {
   @apply bg-gray-900/60 backdrop-blur-md border border-gray-800/50 rounded-xl;
 }
+
+/* Kaleidoscope Animations */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes orbit-1 {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes orbit-2 {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 20s linear infinite;
+}
+
+.animate-orbit-1 {
+  animation: orbit-1 25s ease-in-out infinite;
+}
+
+.animate-orbit-2 {
+  animation: orbit-2 20s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Hexagon shape */
+.hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+@layer utilities {
+  /* Animated gradient background utilities */
+  .bg-size-200 {
+    background-size: 200% 200%;
+  }
+
+  .bg-pos-0 {
+    background-position: 0% 50%;
+  }
+
+  .bg-pos-100 {
+    background-position: 100% 50%;
+  }
+
+  /* Better shadow utilities */
+  .shadow-glow-sm {
+    box-shadow: 0 0 10px currentColor;
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 20px currentColor;
+  }
+
+  .shadow-glow-lg {
+    box-shadow: 0 0 30px currentColor;
+  }
+
+  .hover\:scale-102:hover {
+    transform: scale(1.02);
+  }
+}

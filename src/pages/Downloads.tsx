@@ -1,136 +1,327 @@
-import { Download, ExternalLink, FileText, Shield } from 'lucide-react'
+import { Download, ExternalLink, FileText, Shield, CheckCircle2, Terminal, Zap, Lock } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
+import { Footer } from '@/components/footer/Footer'
 import { currentVersion, platforms, verificationGuideUrl, manifestUrl, manifestSignatureUrl } from '@/constants/downloads'
+import { footerConfig } from '@/constants/footer'
 import type { PlatformDownload } from '@/types/downloads'
+import { Reveal, Stagger, Tilt, Magnetic, ButtonGlow, Gradient, Particles } from '@/components/animations/ReactBitsFallbacks'
+import bitcoinLogo from '@/assets/bitcoin-logo.svg'
+import rgbSymbol from '@/assets/rgb-symbol.svg'
 
 export const Downloads = () => {
   const downloadFile = (url: string) => {
     window.location.href = url
   }
 
-  const renderPlatformCard = (platform: PlatformDownload) => {
+  const platformFeatures: Record<string, string[]> = {
+    windows: ['Windows 10/11', 'Native performance', 'Auto-updates', 'System tray support'],
+    mac: ['macOS 11+', 'Apple Silicon & Intel', 'Native M1/M2 support', 'Keychain integration'],
+    linux: ['AppImage format', 'All major distros', 'No dependencies', 'Portable']
+  }
+
+  const renderPlatformCard = (platform: PlatformDownload, index: number) => {
     const Icon = platform.icon
+    const features = platformFeatures[platform.platform] || []
+    const isDisabled = platform.disabled || false
 
     return (
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 hover:border-primary-500/50 transition-all h-full flex flex-col">
-        <div className="flex-1">
-          <div className="flex items-start gap-4 mb-6">
-            <div className="p-3 rounded-lg bg-primary-500/10 shrink-0">
-              <Icon className="w-8 h-8 text-primary-400" />
-            </div>
-            <div className="min-h-[80px] flex flex-col">
-              <h3 className="text-xl font-semibold">{platform.title}</h3>
-              <p className="text-gray-400">
-                {platform.architecture.join(' / ')}
-              </p>
-              {platform.note && (
-                <p className="text-sm text-yellow-400 mt-auto">{platform.note}</p>
-              )}
-            </div>
-          </div>
-        </div>
+      <Reveal delay={index * 150}>
+        <Tilt>
+          <Magnetic>
+            <div className={`glass-card p-8 h-full flex flex-col group relative overflow-hidden transition-all duration-500 ${
+              !isDisabled ? 'hover:scale-102 hover:border-primary-500/50' : 'opacity-60'
+            }`}>
+              {/* Background Glow Effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-        <div className="space-y-3">
-          <Button
-            variant="default"
-            className="w-full justify-center"
-            onClick={() => downloadFile(platform.downloadUrl)}
-            disabled={platform.disabled}
-          >
-            <Download className="w-5 h-5 mr-2" />
-            Download
-          </Button>
-        </div>
-      </div>
+              {/* Badge for Coming Soon */}
+              {isDisabled && (
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-gray-500/20 text-gray-400 border border-gray-500/30">
+                  Coming Soon
+                </div>
+              )}
+
+              {/* Header */}
+              <div className="relative z-10 flex items-start gap-4 mb-6">
+                <div className={`p-4 rounded-xl ${
+                  !isDisabled ? 'bg-primary-500/10 text-primary-400' : 'bg-gray-500/10 text-gray-500'
+                } group-hover:scale-110 transition-transform duration-300`}>
+                  <Icon className="w-10 h-10" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold mb-2">{platform.title}</h3>
+                  <p className="text-sm text-gray-400">
+                    {platform.architecture.join(' • ')}
+                  </p>
+                  {platform.note && (
+                    <p className="text-sm text-yellow-400 mt-2">{platform.note}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="relative z-10 mb-6 flex-1">
+                <ul className="space-y-2">
+                  {features.map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-400">
+                      <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Download Button */}
+              <div className="relative z-10">
+                <Magnetic>
+                  <ButtonGlow glowColor={!isDisabled ? '#0e9dff' : undefined}>
+                    <Button
+                      variant={!isDisabled ? 'default' : 'outline'}
+                      size="lg"
+                      className={
+                        !isDisabled
+                          ? 'w-full bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 border-0 text-white font-bold group/btn'
+                          : 'w-full border-gray-600 text-gray-400 cursor-not-allowed'
+                      }
+                      onClick={() => !isDisabled && downloadFile(platform.downloadUrl)}
+                      disabled={isDisabled}
+                    >
+                      <Download className="mr-2 h-5 w-5 transition-transform group-hover/btn:scale-110" />
+                      {!isDisabled ? 'Download for ' + platform.title : 'Coming Soon'}
+                    </Button>
+                  </ButtonGlow>
+                </Magnetic>
+              </div>
+
+              {/* Animated Border */}
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-700" />
+            </div>
+          </Magnetic>
+        </Tilt>
+      </Reveal>
     )
   }
 
   return (
-    <>
-      <Navbar />
-      <div className="min-h-screen pt-24 pb-16">
-        <div className="container">
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h1 className="text-4xl font-bold mb-4">Download KaleidoSwap</h1>
-            <p className="text-gray-400 text-lg mb-4">
-              Download the latest version of KaleidoSwap for your platform
-            </p>
-            <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-              <span>Version {currentVersion.version}</span>
-              <span>•</span>
-              <span>{currentVersion.date}</span>
-              <span>•</span>
-              <a
-                href={currentVersion.notes}
-                className="text-primary-400 hover:text-primary-300 flex items-center gap-1"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Release Notes
-                <ExternalLink className="w-3 h-3" />
-              </a>
-            </div>
+    <div className="min-h-screen bg-gray-900">
+      {/* Fixed background gradient */}
+      <div
+        className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none"
+        aria-hidden="true"
+      />
+
+      {/* Content */}
+      <div className="relative">
+        <Navbar />
+
+        {/* Hero Section */}
+        <section className="pt-32 pb-16 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 z-0">
+            <Gradient
+              colors={['#F7931A', '#0e9dff', '#8a5cf6']}
+              className="absolute inset-0 opacity-10"
+              speed={1}
+            />
+            <Particles
+              count={40}
+              className="absolute inset-0"
+              particleColor="rgba(14, 157, 255, 0.3)"
+              speed={0.5}
+            />
           </div>
 
-          {/* Download Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {platforms.map((platform) => (
-              <div key={platform.platform}>
-                {renderPlatformCard(platform)}
+          <div className="container relative z-10">
+            {/* Header */}
+            <Reveal>
+              <div className="text-center max-w-4xl mx-auto mb-16">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-primary-400 to-secondary-400 bg-clip-text text-transparent">
+                  Download KaleidoSwap
+                </h1>
+                <p className="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
+                  Get started with the first Bitcoin-native DEX. Available for macOS, Linux, and Windows (coming soon).
+                </p>
+
+                {/* Version Info */}
+                <div className="inline-flex items-center gap-3 px-6 py-3 glass-card text-sm">
+                  <span className="flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-green-400" />
+                    <span className="text-gray-300">Version</span>
+                    <span className="font-bold text-green-400">{currentVersion.version}</span>
+                  </span>
+                  <span className="text-gray-600">•</span>
+                  <span className="text-gray-400">{currentVersion.date}</span>
+                  <span className="text-gray-600">•</span>
+                  <a
+                    href={currentVersion.notes}
+                    className="text-primary-400 hover:text-primary-300 flex items-center gap-1 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Release Notes
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
-            ))}
-          </div>
+            </Reveal>
 
-          {/* Verification Files */}
-          <div className="max-w-2xl mx-auto bg-gray-800/30 border border-gray-700/50 rounded-xl p-6 mb-12">
-            <div className="text-center mb-6">
-              <h2 className="text-xl font-semibold mb-3">Verification Files</h2>
-              <p className="text-gray-400">
-                Download these files to verify the authenticity of your download
-              </p>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="outline"
-                className="justify-center"
-                onClick={() => downloadFile(manifestUrl)}
-              >
-                <FileText className="w-5 h-5 mr-2" />
-                Download Manifest
-              </Button>
-              
-              <Button
-                variant="outline"
-                className="justify-center"
-                onClick={() => downloadFile(manifestSignatureUrl)}
-              >
-                <Shield className="w-5 h-5 mr-2" />
-                Download Signature
-              </Button>
-            </div>
-          </div>
+            {/* Download Cards */}
+            <Stagger>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
+                {platforms.map((platform, index) => (
+                  <div key={platform.platform}>
+                    {renderPlatformCard(platform, index)}
+                  </div>
+                ))}
+              </div>
+            </Stagger>
 
-          {/* Verification Notice */}
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-xl font-semibold mb-3">Verify Your Download</h2>
-            <p className="text-gray-400 mb-4">
-              For security, please verify the authenticity of your download using our manifest and public key.
-            </p>
-            <a
-              href={verificationGuideUrl}
-              className="text-primary-400 hover:text-primary-300 inline-flex items-center gap-2"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Verification Guide
-              <ExternalLink className="w-4 h-4" />
-            </a>
+            {/* Feature Highlights */}
+            <Reveal delay={500}>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
+                <Tilt className="glass-card p-6 text-center">
+                  <div className="inline-flex p-3 rounded-full bg-bitcoin-500/10 text-bitcoin-400 mb-4">
+                    <Lock className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-2">Self-Custody</h3>
+                  <p className="text-sm text-gray-400">Full control of your private keys</p>
+                </Tilt>
+
+                <Tilt className="glass-card p-6 text-center">
+                  <div className="inline-flex p-3 rounded-full bg-primary-500/10 text-primary-400 mb-4">
+                    <Zap className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-2">Lightning Fast</h3>
+                  <p className="text-sm text-gray-400">Near-instant settlement</p>
+                </Tilt>
+
+                <Tilt className="glass-card p-6 text-center">
+                  <div className="inline-flex p-3 rounded-full bg-green-500/10 text-green-400 mb-4">
+                    <Shield className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-2">Open Source</h3>
+                  <p className="text-sm text-gray-400">Fully auditable code</p>
+                </Tilt>
+
+                <Tilt className="glass-card p-6 text-center">
+                  <div className="inline-flex p-3 rounded-full bg-secondary-500/10 text-secondary-400 mb-4">
+                    <img src={rgbSymbol} alt="RGB" className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-semibold text-white mb-2">RGB Assets</h3>
+                  <p className="text-sm text-gray-400">Trade any RGB token</p>
+                </Tilt>
+              </div>
+            </Reveal>
           </div>
-        </div>
+        </section>
+
+        {/* Verification Section */}
+        <section className="py-16 relative overflow-hidden bg-gray-950/50">
+          <div className="container relative z-10">
+            <Reveal>
+              <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-green-400 to-primary-400 bg-clip-text text-transparent">
+                    Verify Your Download
+                  </h2>
+                  <p className="text-gray-300 text-lg leading-relaxed">
+                    For security, always verify the authenticity of your download using our cryptographic signatures
+                  </p>
+                </div>
+
+                {/* Verification Steps */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                  <Tilt>
+                    <div className="glass-card p-6 text-center group hover:border-primary-500/50 transition-all">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-500/10 text-primary-400 font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
+                        1
+                      </div>
+                      <h3 className="font-semibold text-white mb-2">Download Files</h3>
+                      <p className="text-sm text-gray-400">Get manifest and signature files</p>
+                    </div>
+                  </Tilt>
+
+                  <Tilt>
+                    <div className="glass-card p-6 text-center group hover:border-primary-500/50 transition-all">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary-500/10 text-secondary-400 font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
+                        2
+                      </div>
+                      <h3 className="font-semibold text-white mb-2">Verify Signature</h3>
+                      <p className="text-sm text-gray-400">Check cryptographic signatures</p>
+                    </div>
+                  </Tilt>
+
+                  <Tilt>
+                    <div className="glass-card p-6 text-center group hover:border-primary-500/50 transition-all">
+                      <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/10 text-green-400 font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
+                        3
+                      </div>
+                      <h3 className="font-semibold text-white mb-2">Install Safely</h3>
+                      <p className="text-sm text-gray-400">Run verified application</p>
+                    </div>
+                  </Tilt>
+                </div>
+
+                {/* Verification Files Download */}
+                <Tilt>
+                  <div className="glass-card p-8 border border-green-500/20 bg-gradient-to-br from-green-500/5 to-transparent">
+                    <div className="text-center mb-6">
+                      <div className="inline-flex p-4 rounded-full bg-green-500/10 text-green-400 mb-4">
+                        <Shield className="w-8 h-8" />
+                      </div>
+                      <h3 className="text-xl font-bold mb-2 text-green-400">Verification Files</h3>
+                      <p className="text-gray-400">
+                        Download these files to verify the authenticity of your download
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+                      <Magnetic>
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="border-green-500/50 text-green-400 hover:text-white hover:bg-green-500/10"
+                          onClick={() => downloadFile(manifestUrl)}
+                        >
+                          <FileText className="w-5 h-5 mr-2" />
+                          Download Manifest
+                        </Button>
+                      </Magnetic>
+
+                      <Magnetic>
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="border-green-500/50 text-green-400 hover:text-white hover:bg-green-500/10"
+                          onClick={() => downloadFile(manifestSignatureUrl)}
+                        >
+                          <Shield className="w-5 h-5 mr-2" />
+                          Download Signature
+                        </Button>
+                      </Magnetic>
+                    </div>
+
+                    <div className="text-center">
+                      <a
+                        href={verificationGuideUrl}
+                        className="text-green-400 hover:text-green-300 inline-flex items-center gap-2 transition-colors group"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>View Full Verification Guide</span>
+                        <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </a>
+                    </div>
+                  </div>
+                </Tilt>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <Footer {...footerConfig} />
       </div>
-    </>
+    </div>
   )
 } 

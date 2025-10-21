@@ -1,6 +1,7 @@
 // src/components/partnerships/PartnerCard.tsx
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Star, CheckCircle } from 'lucide-react'
 import type { Partner } from '@/types/partnerships'
+import { Tilt, Magnetic, ButtonGlow, Reveal } from '@/components/animations/ReactBitsFallbacks'
 
 interface PartnerCardProps extends Partner {
   index: number
@@ -44,45 +45,89 @@ export const PartnerCard = ({
   }
 
   return (
-    <div 
-      className={`glass-card p-6 hover:shadow-glow transition-all duration-300 group ${getTypeColor(type)} animate-fadeIn`}
-      style={{ animationDelay: `${index * 150}ms` }}
-    >
-      <div className="flex flex-col items-center text-center space-y-4">
-        {/* Partner Type Badge */}
-        <div className="text-xs text-gray-400 font-medium uppercase tracking-wider">
-          {getTypeLabel(type)}
-        </div>
+    <Reveal delay={index * 150}>
+      <Magnetic>
+        <Tilt>
+          <div className={`glass-card p-8 hover:shadow-glow-lg transition-all duration-500 group ${getTypeColor(type)} relative overflow-hidden hover:scale-105`}>
+            {/* Premium badge for investors */}
+            {type === 'investor' && (
+              <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-medium">
+                <Star className="w-3 h-3 fill-current" />
+                Investor
+              </div>
+            )}
 
-        {/* Logo */}
-        <div className="w-24 h-24 flex items-center justify-center bg-white/10 rounded-lg p-4 group-hover:bg-white/20 transition-colors">
-          {/* Placeholder for logo - in production you'd use the actual logo */}
-          <div className="w-full h-full bg-gray-300/20 rounded flex items-center justify-center text-2xl font-bold text-gray-300">
-            {name.split(' ').map(word => word[0]).join('')}
+            {/* Verified badge for strategic partners */}
+            {type === 'strategic' && (
+              <div className="absolute top-4 right-4 flex items-center gap-1 px-2 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-medium">
+                <CheckCircle className="w-3 h-3 fill-current" />
+                Strategic
+              </div>
+            )}
+
+            <div className="flex flex-col items-center text-center space-y-6">
+              {/* Partner Type Badge */}
+              <div className="text-sm text-gray-400 font-medium uppercase tracking-wider bg-gray-800/50 px-3 py-1 rounded-full">
+                {getTypeLabel(type)}
+              </div>
+
+              {/* Enhanced Logo Area */}
+              <div className="relative">
+                <div className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5 rounded-2xl p-6 group-hover:scale-110 transition-transform duration-500 border border-white/10">
+                  {/* Enhanced logo placeholder with gradient */}
+                  <div className="w-full h-full bg-gradient-to-br from-primary-400/20 to-secondary-400/20 rounded-xl flex items-center justify-center text-3xl font-bold text-white border border-white/20">
+                    {name.split(' ').map(word => word[0]).join('')}
+                  </div>
+                </div>
+
+                {/* Glow effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary-500/20 to-secondary-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+              </div>
+
+              {/* Content */}
+              <div className="space-y-4">
+                <h3 className="text-2xl font-bold group-hover:text-primary-400 transition-colors duration-300">
+                  {name}
+                </h3>
+                <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
+                  {description}
+                </p>
+
+                {/* Special recognition for key partners */}
+                {name === 'Fulgur Ventures' && (
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium">
+                    <CheckCircle className="w-4 h-4" />
+                    Lightning Network Specialist
+                  </div>
+                )}
+
+                {name === 'Bitfinex' && (
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-bitcoin-500/10 text-bitcoin-400 text-sm font-medium">
+                    <CheckCircle className="w-4 h-4" />
+                    Bitcoin Exchange Leader
+                  </div>
+                )}
+              </div>
+
+              {/* Enhanced Visit Link */}
+              <ButtonGlow glowColor={type === 'investor' ? '#10B981' : '#3B82F6'}>
+                <a
+                  href={website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-500 hover:to-secondary-500 text-white font-medium transition-all duration-300 transform hover:scale-105"
+                >
+                  Visit Website
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              </ButtonGlow>
+            </div>
+
+            {/* Animated bottom border */}
+            <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-700" />
           </div>
-        </div>
-
-        {/* Content */}
-        <div>
-          <h3 className="text-xl font-semibold mb-2 group-hover:text-primary-400 transition-colors">
-            {name}
-          </h3>
-          <p className="text-gray-400 text-sm leading-relaxed mb-4">
-            {description}
-          </p>
-        </div>
-
-        {/* Visit Link */}
-        <a
-          href={website}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-primary-400 hover:text-primary-300 text-sm font-medium transition-colors group-hover:translate-y-[-2px] transform duration-300"
-        >
-          Visit Website
-          <ExternalLink className="w-4 h-4" />
-        </a>
-      </div>
-    </div>
+        </Tilt>
+      </Magnetic>
+    </Reveal>
   )
 }
