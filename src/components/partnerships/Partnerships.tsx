@@ -44,8 +44,31 @@ export const Partnerships = ({
             )}
 
             {/* Logo Carousel */}
-            <div className="relative overflow-hidden py-4">
-              <div className="flex items-center justify-center gap-12 md:gap-16 animate-fadeIn">
+            <div className="relative py-4">
+              {/* Mobile: User-scrollable horizontal carousel */}
+              <div className="md:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+                <div className="flex gap-12 px-4 min-w-max">
+                  {partners.map((partner) => (
+                    <a
+                      key={partner.name}
+                      href={partner.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-shrink-0 transition-all duration-300 active:scale-95 snap-center"
+                    >
+                      <img
+                        src={getPartnerLogo(partner.name)}
+                        alt={partner.name}
+                        className="h-12 w-auto max-w-[200px] object-contain"
+                        style={{ filter: 'brightness(0) invert(1)' }}
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop: Static centered layout */}
+              <div className="hidden md:flex items-center justify-center gap-12 md:gap-16 animate-fadeIn">
                 {partners.map((partner) => (
                   <a
                     key={partner.name}
@@ -57,7 +80,7 @@ export const Partnerships = ({
                     <img
                       src={getPartnerLogo(partner.name)}
                       alt={partner.name}
-                      className="h-12 md:h-16 w-auto transition-all duration-300"
+                      className="h-12 md:h-14 w-auto max-w-[200px] object-contain transition-all duration-300"
                       style={{ filter: 'brightness(0) invert(1)' }}
                     />
                   </a>

@@ -108,6 +108,7 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'gradient': 'gradient 8s ease-in-out infinite',
         'shimmer': 'shimmer 2.5s ease-in-out infinite',
+        'scroll-logos': 'scroll-logos 20s linear infinite',
       },
       keyframes: {
         float: {
@@ -115,21 +116,29 @@ export default {
           '50%': { transform: 'translateY(-10px)' },
         },
         gradient: {
-          '0%, 100%': { 
+          '0%, 100%': {
             'background-size': '200% 200%',
             'background-position': 'left center'
           },
-          '50%': { 
+          '50%': {
             'background-size': '200% 200%',
             'background-position': 'right center'
           },
         },
         shimmer: {
-          '0%': { 
+          '0%': {
             transform: 'translateX(-100%)'
           },
-          '100%': { 
+          '100%': {
             transform: 'translateX(100%)'
+          },
+        },
+        'scroll-logos': {
+          '0%': {
+            transform: 'translateX(0)'
+          },
+          '100%': {
+            transform: 'translateX(-33.333%)'
           },
         }
       },
