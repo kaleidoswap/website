@@ -6,7 +6,6 @@ import { currentVersion, platforms, verificationGuideUrl, manifestUrl, manifestS
 import { footerConfig } from '@/constants/footer'
 import type { PlatformDownload } from '@/types/downloads'
 import { Reveal, Stagger, Tilt, Magnetic, ButtonGlow, Gradient, Particles } from '@/components/animations/ReactBitsFallbacks'
-import bitcoinLogo from '@/assets/bitcoin-logo.svg'
 import rgbSymbol from '@/assets/rgb-symbol.svg'
 
 export const Downloads = () => {
