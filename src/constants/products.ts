@@ -71,11 +71,6 @@ export const products: Product[] = [
     ],
     icon: Smartphone,
     platforms: ['iOS', 'Android'],
-    primaryCTA: {
-      label: 'Join Waitlist',
-      href: '#waitlist',
-      external: false
-    },
     color: 'secondary'
   },
   {
@@ -92,11 +87,6 @@ export const products: Product[] = [
     ],
     icon: Globe,
     platforms: ['Web'],
-    primaryCTA: {
-      label: 'Get Notified',
-      href: '#waitlist',
-      external: false
-    },
     color: 'bitcoin'
   }
 ]

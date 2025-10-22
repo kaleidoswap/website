@@ -20,7 +20,7 @@ export interface Product {
   features: string[]
   icon: LucideIcon
   platforms: string[]
-  primaryCTA: ProductCTA
+  primaryCTA?: ProductCTA
   secondaryCTA?: ProductCTA
   color: ProductColor
 }

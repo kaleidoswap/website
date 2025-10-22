@@ -150,9 +150,12 @@ export const SplitText: React.FC<SplitTextProps> = ({ text, className = '', dela
   </h1>
 )
 
-export const ButtonGlow: React.FC<ButtonGlowProps> = ({ children, className = '' }) => (
+export const ButtonGlow: React.FC<ButtonGlowProps> = ({ children, className = '', glowColor }) => (
   <div className={`relative group ${className}`}>
-    <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-300" />
+    <div
+      className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 rounded-lg blur-sm opacity-0 md:opacity-60 md:group-hover:opacity-100 transition duration-300"
+      style={glowColor ? { background: glowColor } : undefined}
+    />
     <div className="relative">
       {children}
     </div>

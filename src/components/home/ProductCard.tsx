@@ -124,50 +124,54 @@ export const ProductCard = ({
           </div>
 
           {/* CTAs */}
-          <div className="relative z-10 space-y-3">
-            <Magnetic>
-              <ButtonGlow glowColor={colors.glow}>
-                <Button
-                  variant={isAvailable ? 'default' : 'outline'}
-                  size="lg"
-                  onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
-                  className={
-                    isAvailable
-                      ? `w-full group/btn bg-gradient-to-r ${colors.button} border-0 text-black font-bold shadow-2xl ${colors.icon.replace('bg-', 'shadow-').replace('/10', '/30')} hover:${colors.icon.replace('bg-', 'shadow-').replace('/10', '/50')} bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500`
-                      : `w-full border-2 border-gray-600/80 text-gray-400 hover:text-white hover:border-gray-500 hover:bg-gray-800/50 backdrop-blur-sm group/btn`
-                  }
-                  disabled={!isAvailable && primaryCTA.href === '#waitlist'}
-                >
-                  <span className="flex items-center justify-center">
-                    {primaryCTA.label}
-                    {primaryCTA.external ? (
-                      <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:scale-110" />
-                    ) : (
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:scale-110" />
-                    )}
-                  </span>
-                </Button>
-              </ButtonGlow>
-            </Magnetic>
+          {(primaryCTA || secondaryCTA) && (
+            <div className="relative z-10 space-y-3">
+              {primaryCTA && (
+                <Magnetic>
+                  <ButtonGlow glowColor={colors.glow}>
+                    <Button
+                      variant={isAvailable ? 'default' : 'outline'}
+                      size="lg"
+                      onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
+                      className={
+                        isAvailable
+                          ? `w-full group/btn bg-gradient-to-r ${colors.button} border-0 text-black font-bold shadow-2xl ${colors.icon.replace('bg-', 'shadow-').replace('/10', '/30')} hover:${colors.icon.replace('bg-', 'shadow-').replace('/10', '/50')} bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500`
+                          : `w-full border-2 border-gray-600/80 text-gray-400 hover:text-white hover:border-gray-500 hover:bg-gray-800/50 backdrop-blur-sm group/btn`
+                      }
+                      disabled={!isAvailable && primaryCTA.href === '#waitlist'}
+                    >
+                      <span className="flex items-center justify-center">
+                        {primaryCTA.label}
+                        {primaryCTA.external ? (
+                          <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:scale-110" />
+                        ) : (
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:scale-110" />
+                        )}
+                      </span>
+                    </Button>
+                  </ButtonGlow>
+                </Magnetic>
+              )}
 
-            {secondaryCTA && (
-              <Magnetic>
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  onClick={() => handleNavigation(secondaryCTA.href, secondaryCTA.external)}
-                  className="w-full text-gray-400 hover:text-white hover:bg-gray-800/50 group/btn"
-                >
-                  <span className="flex items-center justify-center text-sm">
-                    {secondaryCTA.label}
-                    {secondaryCTA.external && (
-                      <ExternalLink className="ml-2 h-3 w-3 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
-                    )}
-                  </span>
-                </Button>
-              </Magnetic>
-            )}
-          </div>
+              {secondaryCTA && (
+                <Magnetic>
+                  <Button
+                    variant="ghost"
+                    size="lg"
+                    onClick={() => handleNavigation(secondaryCTA.href, secondaryCTA.external)}
+                    className="w-full text-gray-400 hover:text-white hover:bg-gray-800/50 group/btn"
+                  >
+                    <span className="flex items-center justify-center text-sm">
+                      {secondaryCTA.label}
+                      {secondaryCTA.external && (
+                        <ExternalLink className="ml-2 h-3 w-3 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
+                      )}
+                    </span>
+                  </Button>
+                </Magnetic>
+              )}
+            </div>
+          )}
 
           {/* Animated Border on Hover */}
           <div className={`absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r ${colors.icon.replace('bg-', 'from-').replace('/10', '')} to-transparent group-hover:w-full transition-all duration-700`} />
