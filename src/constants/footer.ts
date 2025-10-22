@@ -8,8 +8,6 @@ export const footerConfig: FooterProps = {
       links: [
         { label: "Download Alpha", href: "/downloads" },
         { label: "Documentation", href: "https://docs.kaleidoswap.com", external: true },
-        { label: "Developer Tools", href: "https://developers.kaleidoswap.com", external: true },
-        { label: "Market Makers", href: "/market-makers" },
       ]
     },
     {
@@ -27,7 +25,7 @@ export const footerConfig: FooterProps = {
         { label: "Discord", href: "https://discord.gg/kaleidoswap", external: true },
         { label: "Telegram", href: "https://t.me/kaleidoswap", external: true },
         { label: "Twitter/X", href: "https://x.com/kaleidoswap", external: true },
-        { label: "Blog", href: "https://blog.kaleidoswap.com", external: true }
+        { label: "Blog", href: "https://medium.kaleidoswap.com", external: true }
       ]
     },
     {

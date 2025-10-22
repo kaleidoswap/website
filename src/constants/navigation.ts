@@ -9,10 +9,6 @@ export const mainNavItems: NavItem[] = [
     label: 'Downloads',
     href: '/downloads',
   },
-  // {
-  //   label: 'Market Makers',
-  //   href: '/market-makers',
-  // },
   {
     label: 'Documentation',
     href: 'https://docs.kaleidoswap.com',
