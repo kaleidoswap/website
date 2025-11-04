@@ -120,7 +120,7 @@ export const Hero = ({
                     variant="default"
                     size="lg"
                     onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
-                    className="group relative overflow-hidden bg-gradient-to-r from-bitcoin-500 via-bitcoin-600 to-bitcoin-500 hover:from-bitcoin-400 hover:via-bitcoin-500 hover:to-bitcoin-400 border-0 text-black font-bold shadow-2xl shadow-bitcoin-500/30 hover:shadow-bitcoin-500/50 bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500"
+                    className="group relative overflow-hidden bg-gradient-to-r from-bitcoin-400 via-bitcoin-500 to-primary-500 hover:from-bitcoin-300 hover:via-bitcoin-400 hover:to-primary-400 text-white font-bold shadow-[0_12px_35px_rgba(247,147,26,0.35)] hover:shadow-[0_16px_40px_rgba(247,147,26,0.45)] ring-2 ring-bitcoin-400/60 hover:ring-bitcoin-300/70 bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-300"
                   >
                     <Download className="mr-2 h-5 w-5 transition-transform group-hover:scale-110 group-hover:rotate-6" />
                     {primaryCTA.label}
@@ -139,7 +139,7 @@ export const Hero = ({
                     variant="outline"
                     size="lg"
                     onClick={() => handleNavigation(secondaryCTA.href, secondaryCTA.external)}
-                    className="group relative overflow-hidden border-2 border-primary-500/60 text-primary-400 hover:text-white hover:bg-primary-500/20 hover:border-primary-400 backdrop-blur-sm shadow-lg shadow-primary-500/10 hover:shadow-xl hover:shadow-primary-500/20"
+                    className="group relative overflow-hidden border border-primary-400/60 bg-primary-500/15 text-white hover:bg-primary-500/30 hover:border-primary-300 backdrop-blur-md shadow-[0_10px_30px_rgba(14,157,255,0.25)] hover:shadow-[0_12px_36px_rgba(14,157,255,0.35)] transition-all duration-300"
                   >
                     <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
                     {secondaryCTA.label}
@@ -154,7 +154,7 @@ export const Hero = ({
                   variant="ghost"
                   size="lg"
                   onClick={() => handleNavigation(tertiaryCTA.href, tertiaryCTA.external)}
-                  className="group relative text-gray-300 hover:text-white"
+                  className="group relative text-gray-200 hover:text-white border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-300"
                 >
                   View GitHub
                   <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />

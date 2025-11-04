@@ -15,28 +15,40 @@ const colorMap = {
     badge: 'bg-primary-500/20 text-primary-400 border-primary-500/30',
     icon: 'bg-primary-500/10 text-primary-400',
     glow: '#0e9dff',
-    button: 'from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400',
+    buttonGradient: 'from-primary-500 via-primary-600 to-secondary-500 hover:from-primary-400 hover:via-primary-500 hover:to-secondary-400',
+    ring: 'ring-primary-400/60 hover:ring-primary-300/70',
+    shadow: 'shadow-[0_12px_32px_rgba(14,157,255,0.35)]',
+    shadowHover: 'hover:shadow-[0_16px_36px_rgba(14,157,255,0.4)]',
     text: 'text-primary-400'
   },
   secondary: {
     badge: 'bg-secondary-500/20 text-secondary-400 border-secondary-500/30',
     icon: 'bg-secondary-500/10 text-secondary-400',
     glow: '#8a5cf6',
-    button: 'from-secondary-600 to-secondary-500 hover:from-secondary-500 hover:to-secondary-400',
+    buttonGradient: 'from-secondary-500 via-secondary-600 to-primary-500 hover:from-secondary-400 hover:via-secondary-500 hover:to-primary-400',
+    ring: 'ring-secondary-400/60 hover:ring-secondary-300/70',
+    shadow: 'shadow-[0_12px_32px_rgba(138,92,246,0.35)]',
+    shadowHover: 'hover:shadow-[0_16px_36px_rgba(138,92,246,0.45)]',
     text: 'text-secondary-400'
   },
   bitcoin: {
     badge: 'bg-bitcoin-500/20 text-bitcoin-400 border-bitcoin-500/30',
     icon: 'bg-bitcoin-500/10 text-bitcoin-400',
     glow: '#F7931A',
-    button: 'from-bitcoin-600 to-bitcoin-500 hover:from-bitcoin-500 hover:to-bitcoin-400',
+    buttonGradient: 'from-bitcoin-500 via-bitcoin-600 to-primary-500 hover:from-bitcoin-400 hover:via-bitcoin-500 hover:to-primary-400',
+    ring: 'ring-bitcoin-400/60 hover:ring-bitcoin-300/70',
+    shadow: 'shadow-[0_12px_32px_rgba(247,147,26,0.35)]',
+    shadowHover: 'hover:shadow-[0_16px_36px_rgba(247,147,26,0.45)]',
     text: 'text-bitcoin-400'
   },
   green: {
     badge: 'bg-green-500/20 text-green-400 border-green-500/30',
     icon: 'bg-green-500/10 text-green-400',
     glow: '#10B981',
-    button: 'from-green-600 to-green-500 hover:from-green-500 hover:to-green-400',
+    buttonGradient: 'from-green-500 via-green-600 to-primary-500 hover:from-green-400 hover:via-green-500 hover:to-primary-400',
+    ring: 'ring-green-400/60 hover:ring-green-300/70',
+    shadow: 'shadow-[0_12px_32px_rgba(16,185,129,0.35)]',
+    shadowHover: 'hover:shadow-[0_16px_36px_rgba(16,185,129,0.45)]',
     text: 'text-green-400'
   }
 }
@@ -135,8 +147,8 @@ export const ProductCard = ({
                       onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
                       className={
                         isAvailable
-                          ? `w-full group/btn bg-gradient-to-r ${colors.button} border-0 text-black font-bold shadow-2xl ${colors.icon.replace('bg-', 'shadow-').replace('/10', '/30')} hover:${colors.icon.replace('bg-', 'shadow-').replace('/10', '/50')} bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500`
-                          : `w-full border-2 border-gray-600/80 text-gray-400 hover:text-white hover:border-gray-500 hover:bg-gray-800/50 backdrop-blur-sm group/btn`
+                          ? `w-full group/btn bg-gradient-to-r ${colors.buttonGradient} text-white font-semibold ${colors.shadow} ${colors.shadowHover} ring-2 ${colors.ring} bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-300`
+                          : `w-full border-2 border-gray-600/80 text-gray-200 hover:text-white hover:border-gray-500 hover:bg-gray-800/50 backdrop-blur-sm group/btn`
                       }
                       disabled={!isAvailable && primaryCTA.href === '#waitlist'}
                     >
