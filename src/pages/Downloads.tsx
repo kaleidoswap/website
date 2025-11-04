@@ -1,17 +1,111 @@
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Download, ExternalLink, FileText, Shield, CheckCircle2, Terminal, Zap, Lock } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
-import { currentVersion, platforms, verificationGuideUrl, manifestUrl, manifestSignatureUrl } from '@/constants/downloads'
+import {
+  createDownloadConfig,
+  defaultDownloadConfig,
+  verificationGuideUrl,
+  type GithubReleaseAsset
+} from '@/constants/downloads'
+import { stripVersionTag } from '@/constants/versions'
 import { footerConfig } from '@/constants/footer'
 import type { PlatformDownload } from '@/types/downloads'
 import { Reveal, Stagger, Tilt, Magnetic, ButtonGlow, Gradient, Particles } from '@/components/animations/ReactBitsFallbacks'
 import rgbSymbol from '@/assets/rgb-symbol.svg'
 
+type GithubRelease = {
+  tag_name?: string
+  published_at?: string
+  html_url?: string
+  assets?: GithubReleaseAsset[]
+}
+
 export const Downloads = () => {
-  const downloadFile = (url: string) => {
+  const [downloadConfig, setDownloadConfig] = useState(defaultDownloadConfig)
+  const {
+    currentVersion,
+    platforms,
+    manifestUrl,
+    manifestSignatureUrl
+  } = downloadConfig
+
+  const downloadFile = (url?: string) => {
+    if (!url) return
     window.location.href = url
   }
+
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+  }, [])
+
+  useEffect(() => {
+    let isMounted = true
+    const controller = new AbortController()
+
+    const fetchLatestRelease = async () => {
+      try {
+        const response = await fetch(
+          'https://api.github.com/repos/kaleidoswap/desktop-app/releases/latest',
+          {
+            headers: {
+              Accept: 'application/vnd.github+json'
+            },
+            signal: controller.signal
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error(`GitHub API responded with status ${response.status}`)
+        }
+
+        const data: GithubRelease = await response.json()
+        const tagName = data.tag_name ?? ''
+        if (!tagName) {
+          return
+        }
+
+        const version = stripVersionTag(tagName)
+        if (!version) {
+          return
+        }
+        const publishedAt = data.published_at
+          ? new Date(data.published_at).toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric'
+            })
+          : undefined
+
+        const updatedConfig = createDownloadConfig({
+          version,
+          date: publishedAt,
+          notesUrl: data.html_url,
+          assets: data.assets ?? []
+        })
+
+        if (isMounted) {
+          setDownloadConfig(updatedConfig)
+        }
+      } catch (error) {
+        if ((error as Error).name === 'AbortError') {
+          return
+        }
+
+        console.error('Failed to fetch latest KaleidoSwap release', error)
+      }
+    }
+
+    fetchLatestRelease()
+
+    return () => {
+      isMounted = false
+      controller.abort()
+    }
+  }, [])
 
   const platformFeatures: Record<string, string[]> = {
     windows: ['Windows 10/11', 'Native performance', 'Auto-updates', 'System tray support'],
@@ -280,8 +374,9 @@ export const Downloads = () => {
                         <Button
                           variant="outline"
                           size="lg"
-                          className="border-green-500/50 text-green-400 hover:text-white hover:bg-green-500/10"
+                          className="border-green-500/50 text-green-400 hover:text-white hover:bg-green-500/10 disabled:opacity-60 disabled:cursor-not-allowed"
                           onClick={() => downloadFile(manifestUrl)}
+                          disabled={!manifestUrl}
                         >
                           <FileText className="w-5 h-5 mr-2" />
                           Download Manifest
@@ -292,8 +387,9 @@ export const Downloads = () => {
                         <Button
                           variant="outline"
                           size="lg"
-                          className="border-green-500/50 text-green-400 hover:text-white hover:bg-green-500/10"
+                          className="border-green-500/50 text-green-400 hover:text-white hover:bg-green-500/10 disabled:opacity-60 disabled:cursor-not-allowed"
                           onClick={() => downloadFile(manifestSignatureUrl)}
+                          disabled={!manifestSignatureUrl}
                         >
                           <Shield className="w-5 h-5 mr-2" />
                           Download Signature

@@ -6,7 +6,7 @@ export const products: Product[] = [
   {
     id: 'desktop-app',
     name: 'Desktop App',
-    version: '0.3.0',
+    version: '0.3.1',
     status: 'latest-release',
     badge: 'Latest Release',
     description: 'Open-source desktop application for Linux and macOS. Trade RGB assets with complete self-custody and privacy.',
