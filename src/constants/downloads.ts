@@ -98,7 +98,7 @@ const buildPlatforms = (
   }
 
   const windowsInstallerAsset = findAsset(assets, (name) =>
-    name.includes('windows') && name.endsWith('.exe') && !isSignature(name)
+    name.includes('windows') && name.endsWith('.msi') && !isSignature(name)
   )
 
   const windowsSignatureAsset = windowsInstallerAsset

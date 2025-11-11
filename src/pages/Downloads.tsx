@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { Download, ExternalLink, FileText, Shield, CheckCircle2, Terminal, Zap, Lock } from 'lucide-react'
+import { Download, ExternalLink, FileText, Shield, Terminal, Zap, Lock, Loader2 } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -24,6 +24,7 @@ type GithubRelease = {
 
 export const Downloads = () => {
   const [downloadConfig, setDownloadConfig] = useState(defaultDownloadConfig)
+  const [isLoading, setIsLoading] = useState(true)
   const {
     currentVersion,
     platforms,
@@ -48,6 +49,7 @@ export const Downloads = () => {
 
     const fetchLatestRelease = async () => {
       try {
+        setIsLoading(true)
         const response = await fetch(
           'https://api.github.com/repos/kaleidoswap/desktop-app/releases/latest',
           {
@@ -65,11 +67,13 @@ export const Downloads = () => {
         const data: GithubRelease = await response.json()
         const tagName = data.tag_name ?? ''
         if (!tagName) {
+          setIsLoading(false)
           return
         }
 
         const version = stripVersionTag(tagName)
         if (!version) {
+          setIsLoading(false)
           return
         }
         const publishedAt = data.published_at
@@ -89,6 +93,7 @@ export const Downloads = () => {
 
         if (isMounted) {
           setDownloadConfig(updatedConfig)
+          setIsLoading(false)
         }
       } catch (error) {
         if ((error as Error).name === 'AbortError') {
@@ -96,6 +101,9 @@ export const Downloads = () => {
         }
 
         console.error('Failed to fetch latest KaleidoSwap release', error)
+        if (isMounted) {
+          setIsLoading(false)
+        }
       }
     }
 
@@ -107,21 +115,14 @@ export const Downloads = () => {
     }
   }, [])
 
-  const platformFeatures: Record<string, string[]> = {
-    windows: ['Windows 10/11', 'Native performance', 'Auto-updates', 'System tray support'],
-    mac: ['macOS 11+', 'Apple Silicon & Intel', 'Native M1/M2 support', 'Keychain integration'],
-    linux: ['AppImage format', 'All major distros', 'No dependencies', 'Portable']
-  }
-
   const renderPlatformCard = (platform: PlatformDownload, index: number) => {
     const Icon = platform.icon
-    const features = platformFeatures[platform.platform] || []
     const isDisabled = platform.disabled || false
 
     return (
-      <Reveal delay={index * 150}>
-        <Tilt>
-          <Magnetic>
+      <Reveal delay={index * 150} className="h-full flex flex-col">
+        <Tilt className="h-full flex flex-col">
+          <Magnetic className="h-full flex flex-col">
             <div className={`glass-card p-8 h-full flex flex-col group relative overflow-hidden transition-all duration-500 ${
               !isDisabled ? 'hover:scale-102 hover:border-primary-500/50' : 'opacity-60'
             }`}>
@@ -136,7 +137,7 @@ export const Downloads = () => {
               )}
 
               {/* Header */}
-              <div className="relative z-10 flex items-start gap-4 mb-6">
+              <div className="relative z-10 flex items-start gap-4 mb-6 min-h-[7rem]">
                 <div className={`p-4 rounded-xl ${
                   !isDisabled ? 'bg-primary-500/10 text-primary-400' : 'bg-gray-500/10 text-gray-500'
                 } group-hover:scale-110 transition-transform duration-300`}>
@@ -147,28 +148,21 @@ export const Downloads = () => {
                   <p className="text-sm text-gray-400">
                     {platform.architecture.join(' • ')}
                   </p>
-                  {platform.note && (
-                    <p className="text-sm text-yellow-400 mt-2">{platform.note}</p>
-                  )}
+                  <div className="min-h-[1.5rem] mt-2">
+                    {platform.note && (
+                      <p className="text-sm text-yellow-400">{platform.note}</p>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              {/* Features */}
-              <div className="relative z-10 mb-6 flex-1">
-                <ul className="space-y-2">
-                  {features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-sm text-gray-400">
-                      <CheckCircle2 className="w-4 h-4 text-green-400 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {/* Spacer to push button to bottom */}
+              <div className="flex-1" />
 
               {/* Download Button */}
               <div className="relative z-10">
                 <Magnetic>
-                  <ButtonGlow glowColor={!isDisabled ? '#0e9dff' : undefined}>
+                  <ButtonGlow glowColor={!isDisabled && !isLoading ? '#22c55e' : undefined}>
                     <Button
                       variant={!isDisabled ? 'default' : 'outline'}
                       size="lg"
@@ -177,18 +171,27 @@ export const Downloads = () => {
                           ? 'w-full bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 border-0 text-white font-bold group/btn'
                           : 'w-full border-gray-600 text-gray-400 cursor-not-allowed'
                       }
-                      onClick={() => !isDisabled && downloadFile(platform.downloadUrl)}
-                      disabled={isDisabled}
+                      onClick={() => !isDisabled && !isLoading && downloadFile(platform.downloadUrl)}
+                      disabled={isDisabled || isLoading}
                     >
-                      <Download className="mr-2 h-5 w-5 transition-transform group-hover/btn:scale-110" />
-                      {!isDisabled ? 'Download for ' + platform.title : 'Coming Soon'}
+                      {isLoading ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Loading...
+                        </>
+                      ) : (
+                        <>
+                          <Download className="mr-2 h-5 w-5 transition-transform group-hover/btn:scale-110" />
+                          {!isDisabled ? 'Download for ' + platform.title : 'Coming Soon'}
+                        </>
+                      )}
                     </Button>
                   </ButtonGlow>
                 </Magnetic>
               </div>
 
               {/* Animated Border */}
-              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-700" />
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-primary-500 to-purple-500 group-hover:w-full transition-all duration-700" />
             </div>
           </Magnetic>
         </Tilt>
@@ -238,32 +241,41 @@ export const Downloads = () => {
 
                 {/* Version Info */}
                 <div className="inline-flex items-center gap-3 px-6 py-3 glass-card text-sm">
-                  <span className="flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-green-400" />
-                    <span className="text-gray-300">Version</span>
-                    <span className="font-bold text-green-400">{currentVersion.version}</span>
-                  </span>
-                  <span className="text-gray-600">•</span>
-                  <span className="text-gray-400">{currentVersion.date}</span>
-                  <span className="text-gray-600">•</span>
-                  <a
-                    href={currentVersion.notes}
-                    className="text-primary-400 hover:text-primary-300 flex items-center gap-1 transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Release Notes
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
+                  {isLoading ? (
+                    <span className="flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 text-primary-400 animate-spin" />
+                      <span className="text-gray-300">Loading version...</span>
+                    </span>
+                  ) : (
+                    <>
+                      <span className="flex items-center gap-2">
+                        <Terminal className="w-4 h-4 text-primary-400" />
+                        <span className="text-gray-300">Version</span>
+                        <span className="font-bold text-primary-400">{currentVersion.version}</span>
+                      </span>
+                      <span className="text-gray-600">•</span>
+                      <span className="text-gray-400">{currentVersion.date}</span>
+                      <span className="text-gray-600">•</span>
+                      <a
+                        href={currentVersion.notes}
+                        className="text-primary-400 hover:text-primary-300 flex items-center gap-1 transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Release Notes
+                        <ExternalLink className="w-3 h-3" />
+                      </a>
+                    </>
+                  )}
                 </div>
               </div>
             </Reveal>
 
             {/* Download Cards */}
             <Stagger>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 max-w-6xl mx-auto items-stretch">
                 {platforms.map((platform, index) => (
-                  <div key={platform.platform}>
+                  <div key={platform.platform} className="h-full flex flex-col">
                     {renderPlatformCard(platform, index)}
                   </div>
                 ))}

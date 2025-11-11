@@ -49,13 +49,13 @@ export const Hero = ({
         {/* Aurora Effect */}
         <Aurora
           className="absolute inset-0 opacity-20"
-          colors={['#F7931A', '#00D4AA', '#0e9dff']}
+          colors={['#22c55e', '#8a5cf6', '#22c55e']}
           speed={1.5}
         />
 
         {/* Gradient Overlay */}
         <Gradient
-          colors={['#F7931A', '#0e9dff', '#8a5cf6']}
+          colors={['#22c55e', '#8a5cf6', '#22c55e']}
           className="absolute inset-0 opacity-10"
           speed={2}
         />
@@ -69,9 +69,9 @@ export const Hero = ({
         {/* Additional floating elements for depth */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-10 w-2 h-2 bg-primary-400/40 rounded-full animate-float" />
-          <div className="absolute top-40 right-20 w-3 h-3 bg-secondary-400/30 rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
-          <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-bitcoin-400/40 rounded-full animate-float" style={{ animationDelay: '1s' }} />
-          <div className="absolute bottom-20 right-1/3 w-3 h-3 bg-green-400/30 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute top-40 right-20 w-3 h-3 bg-purple-400/30 rounded-full animate-float" style={{ animationDelay: '0.5s' }} />
+          <div className="absolute bottom-40 left-1/4 w-2 h-2 bg-primary-400/40 rounded-full animate-float" style={{ animationDelay: '1s' }} />
+          <div className="absolute bottom-20 right-1/3 w-3 h-3 bg-purple-400/30 rounded-full animate-float" style={{ animationDelay: '1.5s' }} />
           <div className="absolute top-1/3 right-10 w-2 h-2 bg-primary-400/40 rounded-full animate-float" style={{ animationDelay: '2s' }} />
         </div>
       </div>
@@ -80,8 +80,8 @@ export const Hero = ({
       <div className="relative container mx-auto px-4 py-16 md:py-32 text-center z-10">
         <Reveal>
           <SplitText
-            text="The First DEX Native to Bitcoin"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-bitcoin-400 to-primary-400 bg-clip-text text-transparent leading-[1.1] max-w-6xl mx-auto"
+            text="Trustless Trading on Lightning Network"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-primary-400 to-purple-400 bg-clip-text text-transparent leading-[1.2] pb-2 max-w-6xl mx-auto"
             delay={100}
           />
         </Reveal>
@@ -103,7 +103,7 @@ export const Hero = ({
             <span className="text-gray-400">+</span>
             <span className="inline-flex items-center gap-1.5">
               <img src={rgbSymbol} alt="RGB" className="w-5 h-5 inline" />
-              <span className="text-secondary-400 font-semibold">RGB Protocol's programmability</span>
+              <span className="text-purple-400 font-semibold">RGB Protocol's programmability</span>
             </span>
           </p>
         </Reveal>
@@ -113,14 +113,14 @@ export const Hero = ({
             {primaryCTA && (
               <Magnetic>
                 <ButtonGlow
-                  glowColor="#F7931A"
+                  glowColor="#22c55e"
                   className="relative"
                 >
                   <Button
                     variant="default"
                     size="lg"
                     onClick={() => handleNavigation(primaryCTA.href, primaryCTA.external)}
-                    className="group relative overflow-hidden bg-gradient-to-r from-bitcoin-400 via-bitcoin-500 to-primary-500 hover:from-bitcoin-300 hover:via-bitcoin-400 hover:to-primary-400 text-white font-bold shadow-[0_12px_35px_rgba(247,147,26,0.35)] hover:shadow-[0_16px_40px_rgba(247,147,26,0.45)] ring-2 ring-bitcoin-400/60 hover:ring-bitcoin-300/70 bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-300"
+                    className="group relative overflow-hidden bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 hover:from-primary-400 hover:via-primary-300 hover:to-primary-400 text-white font-bold shadow-[0_12px_35px_rgba(34,197,94,0.35)] hover:shadow-[0_16px_40px_rgba(34,197,94,0.45)] ring-2 ring-primary-400/60 hover:ring-primary-300/70 bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-300"
                   >
                     <Download className="mr-2 h-5 w-5 transition-transform group-hover:scale-110 group-hover:rotate-6" />
                     {primaryCTA.label}
@@ -132,14 +132,14 @@ export const Hero = ({
             {secondaryCTA && (
               <Magnetic>
                 <ButtonGlow
-                  glowColor="#0e9dff"
+                  glowColor="#8a5cf6"
                   className="relative"
                 >
                   <Button
                     variant="outline"
                     size="lg"
                     onClick={() => handleNavigation(secondaryCTA.href, secondaryCTA.external)}
-                    className="group relative overflow-hidden border border-primary-400/60 bg-primary-500/15 text-white hover:bg-primary-500/30 hover:border-primary-300 backdrop-blur-md shadow-[0_10px_30px_rgba(14,157,255,0.25)] hover:shadow-[0_12px_36px_rgba(14,157,255,0.35)] transition-all duration-300"
+                    className="group relative overflow-hidden border border-purple-400/60 bg-purple-500/15 text-white hover:bg-purple-500/30 hover:border-purple-300 backdrop-blur-md shadow-[0_10px_30px_rgba(138,92,246,0.25)] hover:shadow-[0_12px_36px_rgba(138,92,246,0.35)] transition-all duration-300"
                   >
                     <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
                     {secondaryCTA.label}
@@ -154,7 +154,7 @@ export const Hero = ({
                   variant="ghost"
                   size="lg"
                   onClick={() => handleNavigation(tertiaryCTA.href, tertiaryCTA.external)}
-                  className="group relative text-gray-200 hover:text-white border border-white/10 hover:border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-300"
+                  className="group relative text-gray-200 hover:text-white border border-purple-500/20 hover:border-purple-400/40 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
                 >
                   View GitHub
                   <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
