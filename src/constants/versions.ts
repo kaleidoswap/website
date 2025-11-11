@@ -54,7 +54,7 @@ export const getDownloadUrl = (platform: string, version: string = APP_VERSION) 
 
   switch(platform) {
     case PLATFORMS.WINDOWS_INSTALLER:
-      return `${downloadBase}/KaleidoSwap_${version}_x64-setup.exe`;
+      return `${downloadBase}/KaleidoSwap_${version}_x64-setup.msi`;
     case PLATFORMS.WINDOWS_PORTABLE:
       return `${downloadBase}/KaleidoSwap_${version}_x64-portable.exe`;
     case PLATFORMS.LINUX_RPM:

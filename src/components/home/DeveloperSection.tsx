@@ -1,7 +1,9 @@
 // src/components/home/DeveloperSection.tsx
+import { useEffect, useState } from 'react'
 import { Download, ExternalLink, Github, FileText, Users, Code, Terminal } from 'lucide-react'
 import { Reveal, Tilt, Magnetic, ButtonGlow, Matrix, Typewriter } from '@/components/animations/ReactBitsFallbacks'
 import { Button } from '@/components/common/Button'
+import { stripVersionTag } from '@/constants/versions'
 
 interface DownloadOption {
   platform: string
@@ -11,25 +13,22 @@ interface DownloadOption {
   icon: React.ComponentType<{ className?: string }>
 }
 
-const downloadOptions: DownloadOption[] = [
+const baseDownloadOptions: Omit<DownloadOption, 'version'>[] = [
   {
     platform: 'Linux',
     status: 'available',
-    version: 'v0.3.0',
     downloadUrl: '/downloads',
     icon: Terminal
   },
   {
     platform: 'macOS',
     status: 'available',
-    version: 'v0.3.0',
     downloadUrl: '/downloads',
     icon: Terminal
   },
   {
     platform: 'Windows',
     status: 'available',
-    version: 'v0.3.0',
     downloadUrl: '/downloads',
     icon: Terminal
   }
@@ -40,7 +39,7 @@ const developerResources = [
     title: 'GitHub Repository',
     description: 'Open source codebase with full transparency',
     icon: Github,
-    link: 'https://github.com/kaleidoswap/kaleidoswap',
+    link: 'https://github.com/kaleidoswap',
     color: 'text-gray-100'
   },
   {
@@ -67,6 +66,59 @@ const developerResources = [
 ]
 
 export const DeveloperSection = () => {
+  const [version, setVersion] = useState<string>('')
+
+  useEffect(() => {
+    let isMounted = true
+    const controller = new AbortController()
+
+    const fetchLatestVersion = async () => {
+      try {
+        const response = await fetch(
+          'https://api.github.com/repos/kaleidoswap/desktop-app/releases/latest',
+          {
+            headers: {
+              Accept: 'application/vnd.github+json'
+            },
+            signal: controller.signal
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error(`GitHub API responded with status ${response.status}`)
+        }
+
+        const data = await response.json()
+        const tagName = data.tag_name ?? ''
+        if (!tagName) {
+          return
+        }
+
+        const versionNumber = stripVersionTag(tagName)
+        if (versionNumber && isMounted) {
+          setVersion(`v${versionNumber}`)
+        }
+      } catch (error) {
+        if ((error as Error).name === 'AbortError') {
+          return
+        }
+        console.error('Failed to fetch latest version', error)
+      }
+    }
+
+    fetchLatestVersion()
+
+    return () => {
+      isMounted = false
+      controller.abort()
+    }
+  }, [])
+
+  const downloadOptions: DownloadOption[] = baseDownloadOptions.map(option => ({
+    ...option,
+    version: version || undefined
+  }))
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden bg-gray-950">
       {/* Matrix Background */}

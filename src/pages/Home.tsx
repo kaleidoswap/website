@@ -30,7 +30,7 @@ export const Home = () => {
       <div className="relative">
         <Navbar />
         <Hero
-          title="The First DEX Native to Bitcoin"
+          title="Trustless Trading on Lightning Network"
           description="Trade RGB assets trustlessly on Lightning Network with atomic swaps, self-custody, and near-instant settlement."
           primaryCTA={{
             label: "Download App",
@@ -44,7 +44,7 @@ export const Home = () => {
           }}
           tertiaryCTA={{
             label: "View GitHub",
-            href: "https://github.com/kaleidoswap/kaleidoswap",
+            href: "https://github.com/kaleidoswap/desktop-app",
             external: true
           }}
         />
@@ -94,7 +94,7 @@ export const Home = () => {
           ]}
           cta={{
             label: "Report an issue on GitHub",
-            href: "https://github.com/kaleidoswap/kaleidoswap/issues/new"
+            href: "https://github.com/kaleidoswap/desktop-app/issues/new"
           }}
         />
         <Footer {...footerConfig} />

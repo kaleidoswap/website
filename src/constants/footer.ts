@@ -13,7 +13,7 @@ export const footerConfig: FooterProps = {
     {
       title: "Resources",
       links: [
-        { label: "GitHub Repository", href: "https://github.com/kaleidoswap/kaleidoswap", external: true },
+        { label: "GitHub Repository", href: "https://github.com/kaleidoswap", external: true },
         { label: "RGB Protocol", href: "https://rgb.info", external: true },
         { label: "Lightning Network", href: "https://lightning.network", external: true },
         { label: "Bitcoin Whitepaper", href: "https://bitcoin.org/bitcoin.pdf", external: true }
@@ -33,7 +33,7 @@ export const footerConfig: FooterProps = {
       links: [
         { label: "Privacy Policy", href: "/privacy" },
         { label: "Terms of Service", href: "/terms" },
-        { label: "Security", href: "https://github.com/kaleidoswap/kaleidoswap/security", external: true }
+        { label: "Security", href: "https://github.com/kaleidoswap/desktop-app/security", external: true }
       ]
     }
   ],
