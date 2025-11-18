@@ -3,6 +3,7 @@ import type { PartnershipsProps } from '@/types/partnerships'
 import { Reveal, Gradient, Aurora } from '@/components/animations/ReactBitsFallbacks'
 import bitfinexLogo from '@/assets/BrandLogo.org-Bitfinex-Logo.png'
 import fulgurLogo from '@/assets/fulgur-logo.svg'
+import { useTranslation } from 'react-i18next'
 
 const getPartnerLogo = (partnerName: string) => {
   if (partnerName === 'Bitfinex Ventures') return bitfinexLogo
@@ -15,6 +16,8 @@ export const Partnerships = ({
   description,
   partners
 }: PartnershipsProps) => {
+  const { t } = useTranslation()
+
   return (
     <section className="py-12 md:py-16 relative overflow-hidden bg-gray-950/30">
       {/* Aurora Background */}
@@ -35,11 +38,11 @@ export const Partnerships = ({
         <Reveal>
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-bold mb-8 text-gray-300">
-              {title}
+              {t(title)}
             </h2>
             {description && (
               <p className="text-lg text-gray-400 mb-6">
-                {description}
+                {t(description)}
               </p>
             )}
 

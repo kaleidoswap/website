@@ -2,10 +2,13 @@
 import { ExternalLink } from 'lucide-react'
 import type { FooterProps } from '@/types/footer'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
+import { useTranslation } from 'react-i18next'
 
 const currentYear = new Date().getFullYear()
 
 export const Footer = ({ sections, socials }: FooterProps) => {
+  const { t } = useTranslation()
+
   return (
     <footer className="bg-gray-800/50 border-t border-gray-700/50">
       <div className="container py-12 md:py-16">
@@ -17,14 +20,14 @@ export const Footer = ({ sections, socials }: FooterProps) => {
             </div>
 
             <p className="text-gray-400">
-              Decentralized trading on Bitcoin using RGB protocol and Lightning Network
+              {t('Decentralized trading on Bitcoin using RGB protocol and Lightning Network')}
             </p>
           </div>
 
           {/* Sections */}
           {sections.map((section) => (
             <div key={section.title}>
-              <h3 className="font-semibold mb-4">{section.title}</h3>
+              <h3 className="font-semibold mb-4">{t(section.title)}</h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.href}>
@@ -34,7 +37,7 @@ export const Footer = ({ sections, socials }: FooterProps) => {
                       target={link.external ? "_blank" : undefined}
                       rel={link.external ? "noopener noreferrer" : undefined}
                     >
-                      {link.label}
+                      {t(link.label)}
                       {link.external && (
                         <ExternalLink className="w-3 h-3" />
                       )}
@@ -49,7 +52,7 @@ export const Footer = ({ sections, socials }: FooterProps) => {
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-12 pt-8 border-t border-gray-700/50">
           <div className="text-gray-400">
-            © {currentYear} KaleidoSwap. All rights reserved.
+            {t('© {{year}} KaleidoSwap. All rights reserved.', { year: currentYear })}
           </div>
 
           {/* Social Links */}

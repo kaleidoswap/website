@@ -2,12 +2,14 @@
 import { Check, Clock, Calendar } from 'lucide-react'
 import type { RoadmapProps } from '@/types/roadmap'
 import { Reveal, Stagger, Tilt, Magnetic, Wave } from '@/components/animations/ReactBitsFallbacks'
+import { useTranslation } from 'react-i18next'
 
 export const Roadmap = ({
   title = 'Product Roadmap',
   description = 'Our journey to becoming the leading Bitcoin-native DeFi platform',
   milestones
 }: RoadmapProps) => {
+  const { t } = useTranslation()
   const statusConfig = {
     completed: {
       icon: Check,
@@ -48,10 +50,10 @@ export const Roadmap = ({
         <Reveal>
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-secondary-400 via-primary-400 to-green-400 bg-clip-text text-transparent">
-              {title}
+              {t(title)}
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              {description}
+              {t(description)}
             </p>
           </div>
         </Reveal>
@@ -86,22 +88,22 @@ export const Roadmap = ({
                                   <div className="flex-1">
                                     <div className="flex items-center justify-between mb-2">
                                       <h3 className={`text-xl font-bold ${config.color}`}>
-                                        {milestone.title}
+                                        {t(milestone.title)}
                                       </h3>
                                       <StatusIcon className={`w-5 h-5 ${config.color}`} />
                                     </div>
                                     <p className="text-sm text-gray-400 mb-3">
-                                      {milestone.date}
+                                      {t(milestone.date)}
                                     </p>
                                     <p className="text-gray-300 mb-4">
-                                      {milestone.description}
+                                      {t(milestone.description)}
                                     </p>
                                     {milestone.highlights && (
                                       <ul className="space-y-1">
                                         {milestone.highlights.map((highlight, idx) => (
                                           <li key={idx} className="text-sm text-gray-400 flex items-center gap-2">
                                             <div className={`w-1.5 h-1.5 rounded-full ${config.dotColor}`} />
-                                            {highlight}
+                                            {t(highlight)}
                                           </li>
                                         ))}
                                       </ul>
@@ -160,22 +162,22 @@ export const Roadmap = ({
                                 </div>
                                 <div className="flex-1">
                                   <h3 className={`text-lg font-bold ${config.color}`}>
-                                    {milestone.title}
+                                    {t(milestone.title)}
                                   </h3>
                                   <p className="text-sm text-gray-400">
-                                    {milestone.date}
+                                    {t(milestone.date)}
                                   </p>
                                 </div>
                               </div>
                               <p className="text-gray-300 mb-4">
-                                {milestone.description}
+                                {t(milestone.description)}
                               </p>
                               {milestone.highlights && (
                                 <ul className="space-y-1">
                                   {milestone.highlights.map((highlight, idx) => (
                                     <li key={idx} className="text-sm text-gray-400 flex items-center gap-2">
                                       <div className={`w-1.5 h-1.5 rounded-full ${config.dotColor}`} />
-                                      {highlight}
+                                      {t(highlight)}
                                     </li>
                                   ))}
                                 </ul>
@@ -196,10 +198,10 @@ export const Roadmap = ({
         <Reveal delay={800}>
           <div className="mt-16 text-center max-w-3xl mx-auto">
             <p className="text-gray-400 leading-relaxed">
-              Our roadmap is ambitious but achievable. We're committed to building the future of Bitcoin DeFi with{' '}
-              <span className="text-green-400 font-semibold">transparency</span>,{' '}
-              <span className="text-primary-400 font-semibold">security</span>, and{' '}
-              <span className="text-secondary-400 font-semibold">community input</span> at every step.
+              {t('Our roadmap is ambitious but achievable. We are committed to building the future of Bitcoin DeFi with')}{' '}
+              <span className="text-green-400 font-semibold">{t('transparency')}</span>,{' '}
+              <span className="text-primary-400 font-semibold">{t('security')}</span>, {t('and')}{' '}
+              <span className="text-secondary-400 font-semibold">{t('community input')}</span> {t('at every step.') }
             </p>
           </div>
         </Reveal>

@@ -2,12 +2,15 @@
 import { ExternalLink } from 'lucide-react'
 import type { CommunityProps } from '@/types/community'
 import { Reveal, Stagger, Tilt, Magnetic, Aurora, Gradient } from '@/components/animations/ReactBitsFallbacks'
+import { useTranslation } from 'react-i18next'
 
 export const Community = ({
   title = 'Join the Bitcoin DeFi Revolution',
   description = 'Connect with developers, traders, and enthusiasts building the future of Bitcoin DeFi',
   socialLinks
 }: CommunityProps) => {
+  const { t } = useTranslation()
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden bg-gray-950/30">
       {/* Aurora Background */}
@@ -28,10 +31,10 @@ export const Community = ({
         <Reveal>
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-400 via-secondary-400 to-green-400 bg-clip-text text-transparent">
-              {title}
+              {t(title)}
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              {description}
+              {t(description)}
             </p>
           </div>
         </Reveal>
@@ -58,12 +61,12 @@ export const Community = ({
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-2">
                               <h3 className={`text-lg font-semibold ${link.color}`}>
-                                {link.name}
+                                {t(link.name)}
                               </h3>
                               <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-gray-300 transition-colors" />
                             </div>
                             <p className="text-sm text-gray-400 leading-relaxed">
-                              {link.description}
+                              {t(link.description)}
                             </p>
                           </div>
                         </div>

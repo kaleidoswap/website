@@ -2,12 +2,15 @@
 import { FeatureCard } from './FeatureCard'
 import type { FeaturesGridProps } from '@/types/features'
 import { Reveal, Stagger, Gradient, Matrix } from '@/components/animations/ReactBitsFallbacks'
+import { useTranslation } from 'react-i18next'
 
 export const Features = ({
   title,
   description,
   features
 }: FeaturesGridProps) => {
+  const { t } = useTranslation()
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       {/* Animated Matrix Background */}
@@ -28,10 +31,10 @@ export const Features = ({
         <Reveal>
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-primary-400 via-secondary-400 to-bitcoin-400 bg-clip-text text-transparent">
-              {title}
+              {t(title)}
             </h2>
             <p className="text-base md:text-lg text-gray-300">
-              {description}
+              {t(description)}
             </p>
           </div>
         </Reveal>

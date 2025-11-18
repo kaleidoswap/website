@@ -5,6 +5,7 @@ import { Tilt, Magnetic, ButtonGlow, Reveal } from '@/components/animations/Reac
 import type { Product } from '@/types/products'
 import { openExternalLink } from '@/lib/utils'
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 interface ProductCardProps extends Product {
   index: number
@@ -68,6 +69,7 @@ export const ProductCard = ({
   index
 }: ProductCardProps) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const colors = colorMap[color]
   const isAvailable = status === 'latest-release' || status === 'beta'
 
@@ -97,12 +99,12 @@ export const ProductCard = ({
               <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${colors.badge} ${
                 status === 'latest-release' ? 'animate-pulse' : ''
               }`}>
-                {badge}
+                {t(badge)}
               </span>
             </div>
 
             <h3 className={`text-2xl font-bold mb-2 ${colors.text}`}>
-              {name}
+              {t(name)}
               {version && <span className="ml-2 text-lg text-gray-400">v{version}</span>}
             </h3>
 
@@ -112,24 +114,24 @@ export const ProductCard = ({
                   key={platform}
                   className="px-2 py-1 text-xs rounded-md bg-gray-800/50 text-gray-400"
                 >
-                  {platform}
+                  {t(platform)}
                 </span>
               ))}
             </div>
 
             <p className="text-gray-300 leading-relaxed">
-              {description}
+              {t(description)}
             </p>
           </div>
 
           {/* Features List */}
           <div className="relative z-10 mb-6 flex-1">
-            <h4 className="text-sm font-semibold text-gray-400 mb-3">Key Features:</h4>
+            <h4 className="text-sm font-semibold text-gray-400 mb-3">{t('Key Features:')}</h4>
             <ul className="space-y-2">
               {features.map((feature, idx) => (
                 <li key={idx} className="flex items-start gap-2 text-sm text-gray-400">
                   <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${colors.text}`} />
-                  <span>{feature}</span>
+                  <span>{t(feature)}</span>
                 </li>
               ))}
             </ul>
@@ -153,7 +155,7 @@ export const ProductCard = ({
                       disabled={!isAvailable && primaryCTA.href === '#waitlist'}
                     >
                       <span className="flex items-center justify-center">
-                        {primaryCTA.label}
+                        {t(primaryCTA.label)}
                         {primaryCTA.external ? (
                           <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1 group-hover/btn:scale-110" />
                         ) : (
@@ -174,7 +176,7 @@ export const ProductCard = ({
                     className="w-full text-gray-400 hover:text-white hover:bg-gray-800/50 group/btn"
                   >
                     <span className="flex items-center justify-center text-sm">
-                      {secondaryCTA.label}
+                      {t(secondaryCTA.label)}
                       {secondaryCTA.external && (
                         <ExternalLink className="ml-2 h-3 w-3 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
                       )}

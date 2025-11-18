@@ -2,6 +2,7 @@
 import { cn } from '@/lib/utils'
 import type { FeatureCardProps } from '@/types/features'
 import { Tilt, Magnetic, Reveal } from '@/components/animations/ReactBitsFallbacks'
+import { useTranslation } from 'react-i18next'
 
 export const FeatureCard = ({
   icon: Icon,
@@ -10,6 +11,8 @@ export const FeatureCard = ({
   className,
   index
 }: FeatureCardProps) => {
+  const { t } = useTranslation()
+
   return (
     <Reveal delay={(index || 0) * 100 + 200}>
       <Magnetic>
@@ -35,11 +38,11 @@ export const FeatureCard = ({
                   <Icon className="w-6 h-6 md:w-7 md:h-7" />
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold group-hover:text-primary-400 transition-colors duration-300">
-                  {title}
+                  {t(title)}
                 </h3>
               </div>
               <p className="text-base md:text-lg text-gray-400 group-hover:text-gray-200 transition-colors duration-300 leading-relaxed">
-                {description}
+                {t(description)}
               </p>
 
               {/* Animated bottom border */}

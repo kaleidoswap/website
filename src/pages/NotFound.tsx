@@ -4,9 +4,11 @@ import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { ArrowLeft, Home } from 'lucide-react'
 import { footerConfig } from '@/constants/footer'
+import { useTranslation } from 'react-i18next'
 
 export const NotFound = () => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   return (
     <div className="min-h-screen bg-gray-900">
@@ -29,9 +31,9 @@ export const NotFound = () => {
             <div className="glass-card border-bitcoin-500/20 p-8 md:p-12 shadow-glow-bitcoin animate-fadeIn max-w-2xl mx-auto">
               <div className="flex flex-col items-center justify-center">
                 <h1 className="text-8xl font-bold mb-4 text-gradient-bitcoin">404</h1>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">Page Not Found</h2>
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">{t('Page Not Found')}</h2>
                 <p className="text-gray-300 mb-8">
-                  The page you're looking for doesn't exist or has been moved.
+                  {t("The page you're looking for doesn't exist or has been moved.")}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 animate-fadeIn">
@@ -42,7 +44,7 @@ export const NotFound = () => {
                   >
                     <span className="relative flex items-center">
                       <ArrowLeft className="mr-2 h-4 w-4" />
-                      Go Back
+                      {t('Go Back')}
                     </span>
                   </Button>
                   
@@ -53,7 +55,7 @@ export const NotFound = () => {
                   >
                     <span className="relative flex items-center">
                       <Home className="mr-2 h-4 w-4" />
-                      Return Home
+                      {t('Return Home')}
                     </span>
                   </Button>
                 </div>
