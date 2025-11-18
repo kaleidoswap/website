@@ -2,6 +2,7 @@
 import { Shield, AlertTriangle, ExternalLink, Zap } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import type { SecurityNoticeProps } from '@/types/security'
+import { useTranslation } from 'react-i18next'
 
 export const SecurityNotice = ({
   title,
@@ -9,6 +10,8 @@ export const SecurityNotice = ({
   warnings,
   cta
 }: SecurityNoticeProps) => {
+  const { t } = useTranslation()
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       {/* Background elements */}
@@ -31,8 +34,8 @@ export const SecurityNotice = ({
               <Shield className="w-8 h-8 text-bitcoin-500" />
             </div>
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gradient-bitcoin">{title}</h2>
-              <p className="text-gray-300">{description}</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gradient-bitcoin">{t(title)}</h2>
+              <p className="text-gray-300">{t(description)}</p>
             </div>
           </div>
 
@@ -46,8 +49,8 @@ export const SecurityNotice = ({
               >
                 <AlertTriangle className="w-5 h-5 text-bitcoin-500 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold mb-1 text-white">{warning.title}</h3>
-                  <p className="text-gray-300 text-sm md:text-base">{warning.description}</p>
+                  <h3 className="font-semibold mb-1 text-white">{t(warning.title)}</h3>
+                  <p className="text-gray-300 text-sm md:text-base">{t(warning.description)}</p>
                 </div>
               </div>
             ))}
@@ -57,10 +60,10 @@ export const SecurityNotice = ({
           <div className="mb-8 p-4 md:p-5 bg-gray-900/40 rounded-lg border border-gray-800/30 animate-fadeIn" style={{ animationDelay: '500ms' }}>
             <h3 className="font-semibold mb-2 text-white flex items-center">
               <Zap className="h-5 w-5 mr-2 text-bitcoin-400" />
-              Active Development
+              {t('Active Development')}
             </h3>
             <p className="text-gray-300 text-sm md:text-base">
-              Kaleidoswap is evolving rapidly with regular updates and new features. Our roadmap includes mainnet support, enhanced trading features, and improved user experience based on community feedback.
+              {t('Kaleidoswap is evolving rapidly with regular updates and new features. Our roadmap includes mainnet support, enhanced trading features, and improved user experience based on community feedback.')}
             </p>
           </div>
 
@@ -73,7 +76,7 @@ export const SecurityNotice = ({
                 className="group relative overflow-hidden border-bitcoin-500/50 text-bitcoin-500 hover:bg-bitcoin-500/10"
               >
                 <span className="relative flex items-center">
-                  {cta.label}
+                  {t(cta.label)}
                   <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
               </Button>

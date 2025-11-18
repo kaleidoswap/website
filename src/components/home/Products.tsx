@@ -2,12 +2,15 @@
 import { ProductCard } from './ProductCard'
 import type { ProductsProps } from '@/types/products'
 import { Reveal, Stagger, Gradient, Particles } from '@/components/animations/ReactBitsFallbacks'
+import { useTranslation } from 'react-i18next'
 
 export const Products = ({
   title = 'Our Product Suite',
   description = 'Explore our growing ecosystem of Bitcoin-native DeFi products',
   products
 }: ProductsProps) => {
+  const { t } = useTranslation()
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden bg-gray-950/50">
       {/* Animated Particle Background */}
@@ -29,10 +32,10 @@ export const Products = ({
         <Reveal>
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-green-400 via-primary-400 to-secondary-400 bg-clip-text text-transparent">
-              {title}
+              {t(title)}
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              {description}
+              {t(description)}
             </p>
           </div>
         </Reveal>
@@ -53,10 +56,11 @@ export const Products = ({
         <Reveal delay={800}>
           <div className="mt-16 text-center max-w-3xl mx-auto">
             <p className="text-gray-400 leading-relaxed">
-              All our products are built on the same foundation:{' '}
-              <span className="text-bitcoin-400 font-semibold">Bitcoin's security</span>,{' '}
-              <span className="text-primary-400 font-semibold">Lightning Network's speed</span>, and{' '}
-              <span className="text-secondary-400 font-semibold">RGB Protocol's programmability</span>.
+              {t('All our products are built on the same foundation:')}{' '}
+              <span className="text-bitcoin-400 font-semibold">{t("Bitcoin's security")}</span>,{' '}
+              <span className="text-primary-400 font-semibold">{t("Lightning Network's speed")}</span>,{' '}
+              {t('and')}{' '}
+              <span className="text-secondary-400 font-semibold">{t("RGB Protocol's programmability")}</span>.
             </p>
           </div>
         </Reveal>

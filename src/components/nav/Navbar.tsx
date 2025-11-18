@@ -6,12 +6,24 @@ import { Button } from '@/components/common/Button'
 import { mainNavItems } from '@/constants/navigation'
 import { cn, openExternalLink } from '@/lib/utils'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
+import { useTranslation } from 'react-i18next'
+import { languageStorageKey } from '@/i18n'
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const { t, i18n } = useTranslation()
+  const languageOptions = [
+    { code: 'en', label: 'English', icon: '🇺🇸' },
+    { code: 'es', label: 'Español', icon: '🇪🇸' },
+    { code: 'it', label: 'Italiano', icon: '🇮🇹' },
+    { code: 'de', label: 'Deutsch', icon: '🇩🇪' },
+    { code: 'fr', label: 'Français', icon: '🇫🇷' },
+    { code: 'ja', label: '日本語', icon: '🇯🇵' },
+    { code: 'zh', label: '中文', icon: '🇨🇳' }
+  ]
 
   // Function to check scroll position
   const checkScroll = useCallback(() => {
@@ -79,6 +91,13 @@ export const Navbar = () => {
     setIsOpen(false)
   }
 
+  const handleLanguageChange = (newLanguage: string) => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(languageStorageKey, newLanguage)
+    }
+    void i18n.changeLanguage(newLanguage)
+  }
+
   return (
     <nav 
       className={cn(
@@ -141,16 +160,38 @@ export const Navbar = () => {
                   ]
                 )}
               >
-                {item.label}
+                {t(item.label)}
               </a>
             ))}
+            <div className="flex items-center gap-3">
+              <label htmlFor="desktop-language-select" className="text-xs uppercase tracking-wide text-gray-500">
+                {t('Language')}
+              </label>
+              <div className="relative">
+                <select
+                  id="desktop-language-select"
+                  value={languageOptions.find((option) => i18n.resolvedLanguage?.startsWith(option.code))?.code ?? 'en'}
+                  onChange={(event) => handleLanguageChange(event.target.value)}
+                  className="appearance-none bg-gray-800/70 text-gray-200 text-sm rounded-md pl-3 pr-8 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500 border border-gray-700"
+                >
+                  {languageOptions.map((option) => (
+                    <option key={option.code} value={option.code}>
+                      {option.icon} {option.label}
+                    </option>
+                  ))}
+                </select>
+                <span className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">
+                  ▾
+                </span>
+              </div>
+            </div>
             <Button
               variant="outline"
               size="default"
               onClick={() => handleNavigation('/downloads')}
               className="group relative overflow-hidden border-gray-600 text-gray-300 hover:text-white hover:border-gray-500 mr-3"
             >
-              <span className="relative">Download</span>
+              <span className="relative">{t('Download')}</span>
             </Button>
             <Button
               variant="default"
@@ -159,7 +200,7 @@ export const Navbar = () => {
               className="group relative overflow-hidden"
             >
               <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
-              <span className="relative">Launch App</span>
+              <span className="relative">{t('Launch App')}</span>
             </Button>
           </div>
 
@@ -168,7 +209,7 @@ export const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all"
-              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-label={isOpen ? t('Close menu') : t('Open menu')}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -193,9 +234,31 @@ export const Navbar = () => {
                   )}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  {item.label}
+                  {t(item.label)}
                 </a>
               ))}
+              <div className="mt-4 mb-6 px-4">
+                <label htmlFor="mobile-language-select" className="text-xs uppercase tracking-wide text-gray-500 block mb-2">
+                  {t('Language')}
+                </label>
+                <div className="relative">
+                  <select
+                    id="mobile-language-select"
+                    value={languageOptions.find((option) => i18n.resolvedLanguage?.startsWith(option.code))?.code ?? 'en'}
+                    onChange={(event) => handleLanguageChange(event.target.value)}
+                    className="w-full bg-gray-800/70 text-gray-200 text-base rounded-md pl-3 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 border border-gray-700"
+                  >
+                    {languageOptions.map((option) => (
+                      <option key={option.code} value={option.code}>
+                        {option.icon} {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">
+                    ▾
+                  </span>
+                </div>
+              </div>
               <div className="mt-6 px-4 space-y-3">
                 <Button
                   variant="default"
@@ -203,7 +266,7 @@ export const Navbar = () => {
                   className="w-full justify-center text-lg py-4"
                   onClick={() => handleNavigation('https://app.kaleidoswap.com', true)}
                 >
-                  <span className="relative">Launch App</span>
+                  <span className="relative">{t('Launch App')}</span>
                 </Button>
                 <Button
                   variant="outline"
@@ -211,17 +274,17 @@ export const Navbar = () => {
                   className="w-full justify-center text-lg py-4 border-gray-600 text-gray-300"
                   onClick={() => handleNavigation('/downloads')}
                 >
-                  <span className="relative">Download Desktop</span>
+                  <span className="relative">{t('Download Desktop')}</span>
                 </Button>
               </div>
               
               {/* Hero section for mobile menu */}
               <div className="mt-10 px-4 py-8 glass-card">
                 <h2 className="text-3xl font-bold mb-4 text-gradient">
-                  Trustless Trading on Lightning Network
+                  {t('Trustless Trading on Lightning Network')}
                 </h2>
                 <p className="text-gray-300 mb-6">
-                  KaleidoSwap is the first decentralized trading platform that combines Bitcoin's security, Lightning Network speed, and RGB programmability in a single open-source desktop application.
+                  {t("KaleidoSwap is the first decentralized trading platform that combines Bitcoin's security, Lightning Network speed, and RGB programmability in a single open-source desktop application.")}
                 </p>
                 <div className="space-y-3">
                   <Button
@@ -232,7 +295,7 @@ export const Navbar = () => {
                       handleNavigation('https://app.kaleidoswap.com', true)
                     }}
                   >
-                    Launch Web App
+                    {t('Launch Web App')}
                   </Button>
                   <Button
                     variant="outline"
@@ -242,7 +305,7 @@ export const Navbar = () => {
                       handleNavigation('/downloads')
                     }}
                   >
-                    Download Desktop
+                    {t('Download Desktop')}
                   </Button>
                   <Button
                     variant="outline"
@@ -252,7 +315,7 @@ export const Navbar = () => {
                       handleNavigation('https://docs.kaleidoswap.com', true)
                     }}
                   >
-                    Explore Docs
+                    {t('Explore Docs')}
                   </Button>
                 </div>
               </div>

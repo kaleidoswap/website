@@ -4,6 +4,7 @@ import { Download, ExternalLink, Github, FileText, Users, Code, Terminal } from 
 import { Reveal, Tilt, Magnetic, ButtonGlow, Matrix, Typewriter } from '@/components/animations/ReactBitsFallbacks'
 import { Button } from '@/components/common/Button'
 import { stripVersionTag } from '@/constants/versions'
+import { useTranslation } from 'react-i18next'
 
 interface DownloadOption {
   platform: string
@@ -67,6 +68,7 @@ const developerResources = [
 
 export const DeveloperSection = () => {
   const [version, setVersion] = useState<string>('')
+  const { t } = useTranslation()
 
   useEffect(() => {
     let isMounted = true
@@ -135,10 +137,10 @@ export const DeveloperSection = () => {
             <Reveal>
               <div className="mb-12">
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-400 via-secondary-400 to-green-400 bg-clip-text text-transparent">
-                  Ready to Start Trading?
+                  {t('Ready to Start Trading?')}
                 </h2>
                 <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
-                  Download KaleidoSwap Alpha and experience the future of Bitcoin DeFi. Built for power users, designed for everyone.
+                  {t('Download KaleidoSwap Alpha and experience the future of Bitcoin DeFi. Built for power users, designed for everyone.')}
                 </p>
 
                 {/* Download Options */}
@@ -161,7 +163,7 @@ export const DeveloperSection = () => {
                             </div>
                             <div>
                               <h4 className="font-semibold text-white">
-                                {option.platform}
+                                {t(option.platform)}
                                 {option.version && (
                                   <span className="ml-2 text-sm text-gray-400">
                                     {option.version}
@@ -170,8 +172,8 @@ export const DeveloperSection = () => {
                               </h4>
                               <p className="text-sm text-gray-400">
                                 {option.status === 'available'
-                                  ? 'Download now'
-                                  : 'Coming soon'}
+                                  ? t('Download now')
+                                  : t('Coming soon')}
                               </p>
                             </div>
                           </div>
@@ -183,7 +185,7 @@ export const DeveloperSection = () => {
                                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-green-500/10 text-green-400 hover:bg-green-500/20 border border-green-500/20 hover:border-green-500/40 font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-green-500/20"
                               >
                                 <Download className="w-4 h-4" />
-                                Download
+                                {t('Download')}
                               </a>
                             </Magnetic>
                           )}
@@ -204,7 +206,7 @@ export const DeveloperSection = () => {
                           className="group bg-gradient-to-r from-green-500 via-green-600 to-green-500 hover:from-green-400 hover:via-green-500 hover:to-green-400 text-black font-bold border-0 shadow-2xl shadow-green-500/30 hover:shadow-green-500/50 bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-500"
                         >
                           <Download className="mr-2 h-5 w-5 transition-transform group-hover:scale-110 group-hover:rotate-6" />
-                          Download Alpha
+                          {t('Download Alpha')}
                         </Button>
                       </ButtonGlow>
                     </Magnetic>
@@ -216,7 +218,7 @@ export const DeveloperSection = () => {
                         className="group border-2 border-gray-600/80 text-gray-300 hover:text-white hover:border-gray-500 hover:bg-gray-800/50 backdrop-blur-sm"
                       >
                         <FileText className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                        Quick Start Guide
+                        {t('Quick Start Guide')}
                       </Button>
                     </Magnetic>
                   </div>
@@ -232,24 +234,24 @@ export const DeveloperSection = () => {
                     <div className="w-3 h-3 rounded-full bg-red-500" />
                     <div className="w-3 h-3 rounded-full bg-yellow-500" />
                     <div className="w-3 h-3 rounded-full bg-green-500" />
-                    <span className="text-sm text-gray-500 ml-2">kaleidoswap-alpha</span>
+                    <span className="text-sm text-gray-500 ml-2">{t('kaleidoswap-alpha')}</span>
                   </div>
 
                   <div className="font-mono text-sm space-y-2">
                     <div className="text-green-400">
-                      <Typewriter text="$ kaleidoswap --version" speed={50} />
+                      <Typewriter text={t('$ kaleidoswap --version')} speed={50} />
                     </div>
                     <div className="text-blue-400 opacity-80">
-                      <Typewriter text="KaleidoSwap v0.3.0 Alpha" speed={30} delay={1000} />
+                      <Typewriter text={t('KaleidoSwap v0.3.0 Alpha')} speed={30} delay={1000} />
                     </div>
                     <div className="text-green-400">
-                      <Typewriter text="$ kaleidoswap connect --testnet" speed={50} delay={2000} />
+                      <Typewriter text={t('$ kaleidoswap connect --testnet')} speed={50} delay={2000} />
                     </div>
                     <div className="text-blue-400 opacity-80">
-                      <Typewriter text="✓ Connected to Bitcoin Testnet" speed={30} delay={3000} />
+                      <Typewriter text={t('✓ Connected to Bitcoin Testnet')} speed={30} delay={3000} />
                     </div>
                     <div className="text-yellow-400">
-                      <Typewriter text="Ready for RGB trading on Lightning Network!" speed={40} delay={4000} />
+                      <Typewriter text={t('Ready for RGB trading on Lightning Network!')} speed={40} delay={4000} />
                     </div>
                   </div>
                 </div>
@@ -262,10 +264,10 @@ export const DeveloperSection = () => {
             <Reveal delay={300}>
               <div className="mb-8">
                 <h3 className="text-2xl md:text-3xl font-bold mb-4 text-primary-400">
-                  Developer Resources
+                  {t('Developer Resources')}
                 </h3>
                 <p className="text-gray-400 leading-relaxed">
-                  Everything you need to build on top of KaleidoSwap and integrate RGB assets into your applications.
+                  {t('Everything you need to build on top of KaleidoSwap and integrate RGB assets into your applications.')}
                 </p>
               </div>
             </Reveal>
@@ -288,12 +290,12 @@ export const DeveloperSection = () => {
                           <div className="flex-1">
                             <div className="flex items-center justify-between mb-2">
                               <h4 className={`text-lg font-semibold ${resource.color}`}>
-                                {resource.title}
+                                {t(resource.title)}
                               </h4>
                               <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-gray-300 transition-colors" />
                             </div>
                             <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
-                              {resource.description}
+                              {t(resource.description)}
                             </p>
                           </div>
                         </div>
@@ -312,11 +314,10 @@ export const DeveloperSection = () => {
               <div className="mt-8 p-6 border border-green-500/20 bg-green-500/5 rounded-xl">
                 <div className="flex items-center gap-3 mb-3">
                   <Github className="w-5 h-5 text-green-400" />
-                  <h4 className="font-semibold text-green-400">100% Open Source</h4>
+                  <h4 className="font-semibold text-green-400">{t('100% Open Source')}</h4>
                 </div>
                 <p className="text-sm text-gray-400 leading-relaxed">
-                  KaleidoSwap is completely open source. Audit our code, contribute to development,
-                  or fork the project to build your own RGB trading platform.
+                  {t('KaleidoSwap is completely open source. Audit our code, contribute to development, or fork the project to build your own RGB trading platform.')}
                 </p>
               </div>
             </Reveal>

@@ -17,6 +17,7 @@ import {
 import bitcoinLogo from '@/assets/bitcoin-logo.svg'
 import rgbSymbol from '@/assets/rgb-symbol.svg'
 import textureBg from '@/assets/backgrounds/texture-bg-1.png'
+import { useTranslation } from 'react-i18next'
 
 export const Hero = ({
   primaryCTA,
@@ -24,6 +25,7 @@ export const Hero = ({
   tertiaryCTA
 }: HeroProps) => {
   const navigate = useNavigate()
+  const { t } = useTranslation()
 
   const handleNavigation = (href: string, external = false) => {
     if (external) {
@@ -80,7 +82,7 @@ export const Hero = ({
       <div className="relative container mx-auto px-4 py-16 md:py-32 text-center z-10">
         <Reveal>
           <SplitText
-            text="Trustless Trading on Lightning Network"
+            text={t('Trustless Trading on Lightning Network')}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-primary-400 to-purple-400 bg-clip-text text-transparent leading-[1.2] pb-2 max-w-6xl mx-auto"
             delay={100}
           />
@@ -88,22 +90,22 @@ export const Hero = ({
 
         <Reveal delay={300}>
           <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 max-w-4xl mx-auto leading-relaxed">
-            Trade RGB assets trustlessly on Lightning Network with atomic swaps, self-custody, and near-instant settlement.
+            {t('Trade RGB assets trustlessly on Lightning Network with atomic swaps, self-custody, and near-instant settlement.')}
           </p>
           <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
             <span className="inline-flex items-center gap-1.5">
               <img src={bitcoinLogo} alt="Bitcoin" className="w-5 h-5 inline" />
-              <span className="text-bitcoin-400 font-semibold">Bitcoin's security</span>
+              <span className="text-bitcoin-400 font-semibold">{t("Bitcoin's security")}</span>
             </span>
             <span className="text-gray-400">+</span>
             <span className="inline-flex items-center gap-1.5">
               <Zap className="w-5 h-5 text-primary-400 inline" />
-              <span className="text-primary-400 font-semibold">Lightning Network's speed</span>
+              <span className="text-primary-400 font-semibold">{t("Lightning Network's speed")}</span>
             </span>
             <span className="text-gray-400">+</span>
             <span className="inline-flex items-center gap-1.5">
               <img src={rgbSymbol} alt="RGB" className="w-5 h-5 inline" />
-              <span className="text-purple-400 font-semibold">RGB Protocol's programmability</span>
+              <span className="text-purple-400 font-semibold">{t("RGB Protocol's programmability")}</span>
             </span>
           </p>
         </Reveal>
@@ -123,7 +125,7 @@ export const Hero = ({
                     className="group relative overflow-hidden bg-gradient-to-r from-primary-500 via-primary-400 to-primary-500 hover:from-primary-400 hover:via-primary-300 hover:to-primary-400 text-white font-bold shadow-[0_12px_35px_rgba(34,197,94,0.35)] hover:shadow-[0_16px_40px_rgba(34,197,94,0.45)] ring-2 ring-primary-400/60 hover:ring-primary-300/70 bg-size-200 bg-pos-0 hover:bg-pos-100 transition-all duration-300"
                   >
                     <Download className="mr-2 h-5 w-5 transition-transform group-hover:scale-110 group-hover:rotate-6" />
-                    {primaryCTA.label}
+                    {t(primaryCTA.label)}
                   </Button>
                 </ButtonGlow>
               </Magnetic>
@@ -142,7 +144,7 @@ export const Hero = ({
                     className="group relative overflow-hidden border border-purple-400/60 bg-purple-500/15 text-white hover:bg-purple-500/30 hover:border-purple-300 backdrop-blur-md shadow-[0_10px_30px_rgba(138,92,246,0.25)] hover:shadow-[0_12px_36px_rgba(138,92,246,0.35)] transition-all duration-300"
                   >
                     <ExternalLink className="mr-2 h-5 w-5 transition-transform group-hover:scale-110" />
-                    {secondaryCTA.label}
+                    {t(secondaryCTA.label)}
                   </Button>
                 </ButtonGlow>
               </Magnetic>
@@ -156,7 +158,7 @@ export const Hero = ({
                   onClick={() => handleNavigation(tertiaryCTA.href, tertiaryCTA.external)}
                   className="group relative text-gray-200 hover:text-white border border-purple-500/20 hover:border-purple-400/40 bg-purple-500/5 hover:bg-purple-500/10 transition-all duration-300"
                 >
-                  View GitHub
+                  {tertiaryCTA?.label ? t(tertiaryCTA.label) : t('View GitHub')}
                   <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </Button>
               </Magnetic>
@@ -169,26 +171,26 @@ export const Hero = ({
           <div className="mt-12 flex flex-wrap justify-center gap-4">
             <Magnetic>
               <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
-                <img src={bitcoinLogo} alt="Bitcoin" className="w-5 h-5" />
-                Bitcoin
+                <img src={bitcoinLogo} alt={t('Bitcoin')} className="w-5 h-5" />
+                {t('Bitcoin')}
               </div>
             </Magnetic>
             <Magnetic>
               <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
                 <Zap className="w-5 h-5 text-primary-400" />
-                Lightning Network
+                {t('Lightning Network')}
               </div>
             </Magnetic>
             <Magnetic>
               <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
-                <img src={rgbSymbol} alt="RGB" className="w-5 h-5" />
-                RGB Protocol
+                <img src={rgbSymbol} alt={t('RGB Protocol')} className="w-5 h-5" />
+                {t('RGB Protocol')}
               </div>
             </Magnetic>
             <Magnetic>
               <div className="glass-card px-6 py-3 text-sm text-gray-300 flex items-center gap-3 hover:scale-105 transition-transform">
                 <span className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></span>
-                Open Source
+                {t('Open Source')}
               </div>
             </Magnetic>
           </div>

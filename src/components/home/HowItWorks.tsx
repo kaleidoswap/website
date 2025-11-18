@@ -1,6 +1,7 @@
 // src/components/home/HowItWorks.tsx
 import { ArrowRight, Wallet, Zap, RefreshCw, Shield } from 'lucide-react'
 import { Reveal, Stagger, Tilt, Magnetic, Wave } from '@/components/animations/ReactBitsFallbacks'
+import { useTranslation } from 'react-i18next'
 
 interface Step {
   number: number
@@ -67,6 +68,8 @@ const steps: Step[] = [
 ]
 
 export const HowItWorks = () => {
+  const { t } = useTranslation()
+
   return (
     <section className="py-16 md:py-24 relative overflow-hidden bg-gray-950/50">
       {/* Animated Wave Background */}
@@ -80,10 +83,10 @@ export const HowItWorks = () => {
         <Reveal>
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-400 via-secondary-400 to-bitcoin-400 bg-clip-text text-transparent">
-              How KaleidoSwap Works
+              {t('How KaleidoSwap Works')}
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              Four simple steps to trustless Bitcoin trading on Lightning Network
+              {t('Four simple steps to trustless Bitcoin trading on Lightning Network')}
             </p>
           </div>
         </Reveal>
@@ -114,10 +117,10 @@ export const HowItWorks = () => {
 
                           {/* Content */}
                           <h3 className={`text-xl font-bold mb-3 ${step.color}`}>
-                            {step.title}
+                            {t(step.title)}
                           </h3>
                           <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                            {step.description}
+                            {t(step.description)}
                           </p>
 
                           {/* Details List */}
@@ -125,7 +128,7 @@ export const HowItWorks = () => {
                             {step.details.map((detail, detailIndex) => (
                               <li key={detailIndex} className="flex items-center gap-2">
                                 <div className={`w-1.5 h-1.5 rounded-full ${step.color.replace('text-', 'bg-')}`} />
-                                {detail}
+                                {t(detail)}
                               </li>
                             ))}
                           </ul>
@@ -171,10 +174,10 @@ export const HowItWorks = () => {
                         {/* Content */}
                         <div className="flex-1">
                           <h3 className={`text-lg font-bold mb-2 ${step.color}`}>
-                            {step.title}
+                            {t(step.title)}
                           </h3>
                           <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                            {step.description}
+                            {t(step.description)}
                           </p>
 
                           {/* Details Grid */}
@@ -182,7 +185,7 @@ export const HowItWorks = () => {
                             {step.details.map((detail, detailIndex) => (
                               <div key={detailIndex} className="flex items-center gap-2">
                                 <div className={`w-1.5 h-1.5 rounded-full ${step.color.replace('text-', 'bg-')}`} />
-                                <span className="text-xs text-gray-500">{detail}</span>
+                                <span className="text-xs text-gray-500">{t(detail)}</span>
                               </div>
                             ))}
                           </div>

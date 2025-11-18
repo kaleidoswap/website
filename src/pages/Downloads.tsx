@@ -14,6 +14,7 @@ import { footerConfig } from '@/constants/footer'
 import type { PlatformDownload } from '@/types/downloads'
 import { Reveal, Stagger, Tilt, Magnetic, ButtonGlow, Gradient, Particles } from '@/components/animations/ReactBitsFallbacks'
 import rgbSymbol from '@/assets/rgb-symbol.svg'
+import { useTranslation } from 'react-i18next'
 
 type GithubRelease = {
   tag_name?: string
@@ -25,6 +26,7 @@ type GithubRelease = {
 export const Downloads = () => {
   const [downloadConfig, setDownloadConfig] = useState(defaultDownloadConfig)
   const [isLoading, setIsLoading] = useState(true)
+  const { t } = useTranslation()
   const {
     currentVersion,
     platforms,
@@ -118,6 +120,9 @@ export const Downloads = () => {
   const renderPlatformCard = (platform: PlatformDownload, index: number) => {
     const Icon = platform.icon
     const isDisabled = platform.disabled || false
+    const localizedTitle = t(platform.title)
+    const architectures = platform.architecture.map((item) => t(item)).join(' • ')
+    const note = platform.note ? t(platform.note) : undefined
 
     return (
       <Reveal delay={index * 150} className="h-full flex flex-col">
@@ -132,7 +137,7 @@ export const Downloads = () => {
               {/* Badge for Coming Soon */}
               {isDisabled && (
                 <div className="absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold bg-gray-500/20 text-gray-400 border border-gray-500/30">
-                  Coming Soon
+                  {t('Coming Soon')}
                 </div>
               )}
 
@@ -144,13 +149,13 @@ export const Downloads = () => {
                   <Icon className="w-10 h-10" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-2xl font-bold mb-2">{platform.title}</h3>
+                  <h3 className="text-2xl font-bold mb-2">{localizedTitle}</h3>
                   <p className="text-sm text-gray-400">
-                    {platform.architecture.join(' • ')}
+                    {architectures}
                   </p>
                   <div className="min-h-[1.5rem] mt-2">
-                    {platform.note && (
-                      <p className="text-sm text-yellow-400">{platform.note}</p>
+                    {note && (
+                      <p className="text-sm text-yellow-400">{note}</p>
                     )}
                   </div>
                 </div>
@@ -177,12 +182,14 @@ export const Downloads = () => {
                       {isLoading ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                          Loading...
+                          {t('Loading...')}
                         </>
                       ) : (
                         <>
                           <Download className="mr-2 h-5 w-5 transition-transform group-hover/btn:scale-110" />
-                          {!isDisabled ? 'Download for ' + platform.title : 'Coming Soon'}
+                          {!isDisabled
+                            ? t('Download for {{platform}}', { platform: localizedTitle })
+                            : t('Coming Soon')}
                         </>
                       )}
                     </Button>
@@ -233,10 +240,10 @@ export const Downloads = () => {
             <Reveal>
               <div className="text-center max-w-4xl mx-auto mb-16">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-primary-400 to-secondary-400 bg-clip-text text-transparent">
-                  Download KaleidoSwap
+                  {t('Download KaleidoSwap')}
                 </h1>
                 <p className="text-lg md:text-xl text-gray-300 mb-6 leading-relaxed">
-                  Get started with the first Bitcoin-native DEX. Available for macOS, Linux, and Windows (coming soon).
+                  {t('Get started with the first Bitcoin-native DEX. Available for macOS, Linux, and Windows (coming soon).')}
                 </p>
 
                 {/* Version Info */}
@@ -244,13 +251,13 @@ export const Downloads = () => {
                   {isLoading ? (
                     <span className="flex items-center gap-2">
                       <Loader2 className="w-4 h-4 text-primary-400 animate-spin" />
-                      <span className="text-gray-300">Loading version...</span>
+                      <span className="text-gray-300">{t('Loading version...')}</span>
                     </span>
                   ) : (
                     <>
                       <span className="flex items-center gap-2">
                         <Terminal className="w-4 h-4 text-primary-400" />
-                        <span className="text-gray-300">Version</span>
+                        <span className="text-gray-300">{t('Version')}</span>
                         <span className="font-bold text-primary-400">{currentVersion.version}</span>
                       </span>
                       <span className="text-gray-600">•</span>
@@ -262,7 +269,7 @@ export const Downloads = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Release Notes
+                        {t('Release Notes')}
                         <ExternalLink className="w-3 h-3" />
                       </a>
                     </>
@@ -289,32 +296,32 @@ export const Downloads = () => {
                   <div className="inline-flex p-3 rounded-full bg-bitcoin-500/10 text-bitcoin-400 mb-4">
                     <Lock className="w-6 h-6" />
                   </div>
-                  <h3 className="font-semibold text-white mb-2">Self-Custody</h3>
-                  <p className="text-sm text-gray-400">Full control of your private keys</p>
+                  <h3 className="font-semibold text-white mb-2">{t('Self-Custody')}</h3>
+                  <p className="text-sm text-gray-400">{t('Full control of your private keys')}</p>
                 </Tilt>
 
                 <Tilt className="glass-card p-6 text-center">
                   <div className="inline-flex p-3 rounded-full bg-primary-500/10 text-primary-400 mb-4">
                     <Zap className="w-6 h-6" />
                   </div>
-                  <h3 className="font-semibold text-white mb-2">Lightning Fast</h3>
-                  <p className="text-sm text-gray-400">Near-instant settlement</p>
+                  <h3 className="font-semibold text-white mb-2">{t('Lightning Fast')}</h3>
+                  <p className="text-sm text-gray-400">{t('Near-instant settlement')}</p>
                 </Tilt>
 
                 <Tilt className="glass-card p-6 text-center">
                   <div className="inline-flex p-3 rounded-full bg-green-500/10 text-green-400 mb-4">
                     <Shield className="w-6 h-6" />
                   </div>
-                  <h3 className="font-semibold text-white mb-2">Open Source</h3>
-                  <p className="text-sm text-gray-400">Fully auditable code</p>
+                  <h3 className="font-semibold text-white mb-2">{t('Open Source')}</h3>
+                  <p className="text-sm text-gray-400">{t('Fully auditable code')}</p>
                 </Tilt>
 
                 <Tilt className="glass-card p-6 text-center">
                   <div className="inline-flex p-3 rounded-full bg-secondary-500/10 text-secondary-400 mb-4">
                     <img src={rgbSymbol} alt="RGB" className="w-6 h-6" />
                   </div>
-                  <h3 className="font-semibold text-white mb-2">RGB Assets</h3>
-                  <p className="text-sm text-gray-400">Trade any RGB token</p>
+                  <h3 className="font-semibold text-white mb-2">{t('RGB Assets')}</h3>
+                  <p className="text-sm text-gray-400">{t('Trade any RGB token')}</p>
                 </Tilt>
               </div>
             </Reveal>
@@ -328,10 +335,10 @@ export const Downloads = () => {
               <div className="max-w-4xl mx-auto">
                 <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-green-400 to-primary-400 bg-clip-text text-transparent">
-                    Verify Your Download
+                    {t('Verify Your Download')}
                   </h2>
                   <p className="text-gray-300 text-lg leading-relaxed">
-                    For security, always verify the authenticity of your download using our cryptographic signatures
+                    {t('For security, always verify the authenticity of your download using our cryptographic signatures')}
                   </p>
                 </div>
 
@@ -342,8 +349,8 @@ export const Downloads = () => {
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-500/10 text-primary-400 font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
                         1
                       </div>
-                      <h3 className="font-semibold text-white mb-2">Download Files</h3>
-                      <p className="text-sm text-gray-400">Get manifest and signature files</p>
+                      <h3 className="font-semibold text-white mb-2">{t('Download Files')}</h3>
+                      <p className="text-sm text-gray-400">{t('Get manifest and signature files')}</p>
                     </div>
                   </Tilt>
 
@@ -352,8 +359,8 @@ export const Downloads = () => {
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-secondary-500/10 text-secondary-400 font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
                         2
                       </div>
-                      <h3 className="font-semibold text-white mb-2">Verify Signature</h3>
-                      <p className="text-sm text-gray-400">Check cryptographic signatures</p>
+                      <h3 className="font-semibold text-white mb-2">{t('Verify Signature')}</h3>
+                      <p className="text-sm text-gray-400">{t('Check cryptographic signatures')}</p>
                     </div>
                   </Tilt>
 
@@ -362,8 +369,8 @@ export const Downloads = () => {
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/10 text-green-400 font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
                         3
                       </div>
-                      <h3 className="font-semibold text-white mb-2">Install Safely</h3>
-                      <p className="text-sm text-gray-400">Run verified application</p>
+                      <h3 className="font-semibold text-white mb-2">{t('Install Safely')}</h3>
+                      <p className="text-sm text-gray-400">{t('Run verified application')}</p>
                     </div>
                   </Tilt>
                 </div>
@@ -375,9 +382,9 @@ export const Downloads = () => {
                       <div className="inline-flex p-4 rounded-full bg-green-500/10 text-green-400 mb-4">
                         <Shield className="w-8 h-8" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2 text-green-400">Verification Files</h3>
+                      <h3 className="text-xl font-bold mb-2 text-green-400">{t('Verification Files')}</h3>
                       <p className="text-gray-400">
-                        Download these files to verify the authenticity of your download
+                        {t('Download these files to verify the authenticity of your download')}
                       </p>
                     </div>
 
@@ -391,7 +398,7 @@ export const Downloads = () => {
                           disabled={!manifestUrl}
                         >
                           <FileText className="w-5 h-5 mr-2" />
-                          Download Manifest
+                          {t('Download Manifest')}
                         </Button>
                       </Magnetic>
 
@@ -404,7 +411,7 @@ export const Downloads = () => {
                           disabled={!manifestSignatureUrl}
                         >
                           <Shield className="w-5 h-5 mr-2" />
-                          Download Signature
+                          {t('Download Signature')}
                         </Button>
                       </Magnetic>
                     </div>
@@ -416,7 +423,7 @@ export const Downloads = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <span>View Full Verification Guide</span>
+                        <span>{t('View Full Verification Guide')}</span>
                         <ExternalLink className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </a>
                     </div>
