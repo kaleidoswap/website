@@ -1,7 +1,9 @@
 {
     "name": "kaleidoswap-landing",
     "compatibility_date": "2026-01-12",
+    "main": "_worker.js",
     "assets": {
-        "directory": "./dist"
+        "directory": "./dist",
+        "binding": "ASSETS"
     }
 }
