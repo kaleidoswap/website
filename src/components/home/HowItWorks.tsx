@@ -1,5 +1,5 @@
 // src/components/home/HowItWorks.tsx
-import { ArrowRight, Wallet, Zap, RefreshCw, Shield } from 'lucide-react'
+import { ArrowRight, Wallet, Zap, RefreshCw } from 'lucide-react'
 import { Reveal, Stagger, Tilt, Magnetic, Wave } from '@/components/animations/ReactBitsFallbacks'
 import { useTranslation } from 'react-i18next'
 
@@ -15,54 +15,41 @@ interface Step {
 const steps: Step[] = [
   {
     number: 1,
-    title: "Connect Your Node",
-    description: "Link your Lightning node or connect to a trusted LSP to begin trading",
+    title: "Select Assets",
+    description: "Choose what you're swapping — BTC, USDT, or any supported asset. Pick source and destination protocols.",
     icon: Wallet,
     color: "text-primary-400",
     details: [
-      "Connect existing Lightning node",
-      "Or use trusted LSP integration",
-      "Secure wallet connection",
-      "Channel management tools"
+      "Select input asset",
+      "Choose output network",
+      "Real-time liquidity check",
+      "Instant routing"
     ]
   },
   {
     number: 2,
-    title: "Manage RGB Channels",
-    description: "Request custom channels with RGB assets for optimal liquidity",
-    icon: Zap,
+    title: "Enter Amount",
+    description: "See real-time rates, fees, and what you'll receive. No hidden costs.",
+    icon: RefreshCw,
     color: "text-secondary-400",
     details: [
-      "Request RGB asset channels",
-      "Configure channel parameters",
-      "Optimize liquidity allocation",
-      "Monitor channel health"
+      "Live exchange rates",
+      "Transparent 1% fee",
+      "Network fee estimation",
+      "Slippage protection"
     ]
   },
   {
     number: 3,
-    title: "Execute Atomic Swaps",
-    description: "Trade assets trustlessly with atomic swap guarantees",
-    icon: RefreshCw,
+    title: "Pay & Receive",
+    description: "Pay the invoice from any wallet. Funds arrive instantly at your destination address.",
+    icon: Zap,
     color: "text-bitcoin-400",
     details: [
-      "Trustless peer-to-peer trading",
-      "Atomic swap technology",
-      "Near-instant settlement",
-      "No counterparty risk"
-    ]
-  },
-  {
-    number: 4,
-    title: "Maintain Full Custody",
-    description: "Keep complete control of your private keys and assets at all times",
-    icon: Shield,
-    color: "text-green-400",
-    details: [
-      "Your keys, your coins",
-      "Non-custodial trading",
-      "End-to-end encryption",
-      "Open source security"
+      "Scan invoice QR",
+      "Atomic execution",
+      "Instant settlement",
+      "Trustless delivery"
     ]
   }
 ]
@@ -83,10 +70,10 @@ export const HowItWorks = () => {
         <Reveal>
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-400 via-secondary-400 to-bitcoin-400 bg-clip-text text-transparent">
-              {t('How KaleidoSwap Works')}
+              {t('Swap in 30 Seconds')}
             </h2>
             <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
-              {t('Four simple steps to trustless Bitcoin trading on Lightning Network')}
+              {t('The fastest, most secure way to swap across Bitcoin L2s.')}
             </p>
           </div>
         </Reveal>

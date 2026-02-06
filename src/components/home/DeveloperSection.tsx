@@ -4,6 +4,7 @@ import { Download, ExternalLink, Github, FileText, Users, Code, Terminal } from 
 import { Reveal, Tilt, Magnetic, ButtonGlow, Matrix, Typewriter } from '@/components/animations/ReactBitsFallbacks'
 import { Button } from '@/components/common/Button'
 import { stripVersionTag } from '@/constants/versions'
+import { GITHUB, PRODUCTS, SOCIALS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 
 interface DownloadOption {
@@ -40,28 +41,28 @@ const developerResources = [
     title: 'GitHub Repository',
     description: 'Open source codebase with full transparency',
     icon: Github,
-    link: 'https://github.com/kaleidoswap',
+    link: GITHUB.orgUrl,
     color: 'text-gray-100'
   },
   {
     title: 'API Documentation',
     description: 'Complete developer guides and API reference',
     icon: FileText,
-    link: 'https://docs.kaleidoswap.com',
+    link: PRODUCTS.docs,
     color: 'text-primary-400'
   },
   {
     title: 'Community Discord',
     description: 'Join developers building on KaleidoSwap',
     icon: Users,
-    link: 'https://discord.gg/kaleidoswap',
+    link: SOCIALS.discord,
     color: 'text-secondary-400'
   },
   {
     title: 'Developer Tools',
     description: 'SDKs and tools for RGB asset integration',
     icon: Code,
-    link: 'https://developers.kaleidoswap.com',
+    link: PRODUCTS.developers,
     color: 'text-green-400'
   }
 ]
@@ -77,7 +78,7 @@ export const DeveloperSection = () => {
     const fetchLatestVersion = async () => {
       try {
         const response = await fetch(
-          'https://api.github.com/repos/kaleidoswap/desktop-app/releases/latest',
+          GITHUB.apiLatestRelease,
           {
             headers: {
               Accept: 'application/vnd.github+json'
@@ -148,17 +149,15 @@ export const DeveloperSection = () => {
                   {downloadOptions.map((option, index) => (
                     <Reveal key={option.platform} delay={index * 100}>
                       <Tilt>
-                        <div className={`glass-card p-4 flex items-center justify-between transition-all duration-300 ${
-                          option.status === 'available'
+                        <div className={`glass-card p-4 flex items-center justify-between transition-all duration-300 ${option.status === 'available'
                             ? 'hover:border-green-500/50 cursor-pointer'
                             : 'opacity-60'
-                        }`}>
+                          }`}>
                           <div className="flex items-center gap-4">
-                            <div className={`p-2 rounded-lg ${
-                              option.status === 'available'
+                            <div className={`p-2 rounded-lg ${option.status === 'available'
                                 ? 'bg-green-500/10 text-green-400'
                                 : 'bg-gray-500/10 text-gray-500'
-                            }`}>
+                              }`}>
                               <option.icon className="w-5 h-5" />
                             </div>
                             <div>
@@ -264,10 +263,13 @@ export const DeveloperSection = () => {
             <Reveal delay={300}>
               <div className="mb-8">
                 <h3 className="text-2xl md:text-3xl font-bold mb-4 text-primary-400">
-                  {t('Developer Resources')}
+                  {t('Build on KaleidoSwap')}
                 </h3>
                 <p className="text-gray-400 leading-relaxed">
-                  {t('Everything you need to build on top of KaleidoSwap and integrate RGB assets into your applications.')}
+                  {t('Integrate swaps into your wallet, app, or service with our SDK. TypeScript and Rust libraries available.')}
+                </p>
+                <p className="text-gray-400 leading-relaxed mt-4">
+                  {t('For market makers: Provide liquidity, earn fees, compete on spreads.')}
                 </p>
               </div>
             </Reveal>

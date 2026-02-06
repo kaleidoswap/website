@@ -1,8 +1,10 @@
 // src/pages/privacy.tsx
 import { Link } from 'react-router-dom'
+import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { footerConfig } from '@/constants/footer'
+import { GITHUB } from '@/constants/urls'
 import { Shield, Lock, Eye, FileText, Mail } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -11,6 +13,12 @@ export const Privacy = () => {
 
   return (
     <div className="min-h-screen bg-gray-950">
+      <SEO
+        title="Privacy Policy"
+        description="KaleidoSwap Privacy Policy. Learn how we protect your data and maintain your privacy while using our Bitcoin DEX."
+        url="/privacy"
+        keywords={['privacy', 'policy', 'data protection', 'bitcoin', 'dex']}
+      />
       {/* Fixed background gradient */}
       <div 
         className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none"
@@ -133,8 +141,8 @@ export const Privacy = () => {
                   {t('If you have any questions about this Privacy Policy, please contact us at:')}
                 </p>
                 <ul className="list-disc pl-6 mt-4 space-y-2">
-                  <li>{t('GitHub:')} <a href="https://github.com/kaleidoswap" className="text-primary-400 hover:text-primary-300">github.com/kaleidoswap</a></li>
-                  <li>{t('Open an issue on our')} <a href="https://github.com/kaleidoswap/desktop-app/issues" className="text-primary-400 hover:text-primary-300">{t('GitHub repository')}</a></li>
+                  <li>{t('GitHub:')} <a href={GITHUB.orgUrl} className="text-primary-400 hover:text-primary-300">github.com/kaleidoswap</a></li>
+                  <li>{t('Open an issue on our')} <a href={GITHUB.issuesUrl} className="text-primary-400 hover:text-primary-300">{t('GitHub repository')}</a></li>
                 </ul>
               </div>
             </div>

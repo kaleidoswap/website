@@ -1,8 +1,10 @@
 // src/pages/terms.tsx
 import { Link } from 'react-router-dom'
+import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { footerConfig } from '@/constants/footer'
+import { GITHUB } from '@/constants/urls'
 import { Scale, AlertTriangle, Server, Shield, FileText, Mail, Code } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
@@ -10,8 +12,14 @@ export const Terms = () => {
   const { t } = useTranslation()
   return (
     <div className="min-h-screen bg-gray-950">
+      <SEO
+        title="Terms of Service"
+        description="KaleidoSwap Terms of Service. Understand the terms and conditions for using our Bitcoin DEX platform."
+        url="/terms"
+        keywords={['terms', 'service', 'conditions', 'legal', 'bitcoin', 'dex']}
+      />
       {/* Fixed background gradient */}
-      <div 
+      <div
         className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none"
         aria-hidden="true"
       />
@@ -199,8 +207,8 @@ export const Terms = () => {
                   {t('For any questions regarding these terms, please contact us via:')}
                 </p>
                 <ul className="list-disc pl-6 mt-4 space-y-2">
-                  <li>{t('GitHub:')} <a href="https://github.com/kaleidoswap" className="text-primary-400 hover:text-primary-300">github.com/kaleidoswap</a></li>
-                  <li>{t('Open an issue on our')} <a href="https://github.com/kaleidoswap/desktop-app/issues" className="text-primary-400 hover:text-primary-300">{t('GitHub repository')}</a></li>
+                  <li>{t('GitHub:')} <a href={GITHUB.orgUrl} className="text-primary-400 hover:text-primary-300">github.com/kaleidoswap</a></li>
+                  <li>{t('Open an issue on our')} <a href={GITHUB.issuesUrl} className="text-primary-400 hover:text-primary-300">{t('GitHub repository')}</a></li>
                 </ul>
               </div>
             </div>

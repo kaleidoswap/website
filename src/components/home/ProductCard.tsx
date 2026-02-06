@@ -51,6 +51,16 @@ const colorMap = {
     shadow: 'shadow-[0_12px_32px_rgba(16,185,129,0.35)]',
     shadowHover: 'hover:shadow-[0_16px_36px_rgba(16,185,129,0.45)]',
     text: 'text-green-400'
+  },
+  gray: {
+    badge: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
+    icon: 'bg-gray-500/10 text-gray-400',
+    glow: '#9CA3AF',
+    buttonGradient: 'from-gray-500 via-gray-600 to-gray-500 hover:from-gray-400 hover:via-gray-500 hover:to-gray-400',
+    ring: 'ring-gray-400/60 hover:ring-gray-300/70',
+    shadow: 'shadow-[0_12px_32px_rgba(156,163,175,0.35)]',
+    shadowHover: 'hover:shadow-[0_16px_36px_rgba(156,163,175,0.45)]',
+    text: 'text-gray-400'
   }
 }
 
@@ -84,9 +94,8 @@ export const ProductCard = ({
   return (
     <Reveal delay={index * 150}>
       <Tilt>
-        <div className={`glass-card p-8 h-full flex flex-col group hover:scale-102 transition-all duration-500 relative overflow-hidden ${
-          !isAvailable ? 'opacity-90' : ''
-        }`}>
+        <div className={`glass-card p-8 h-full flex flex-col group hover:scale-102 transition-all duration-500 relative overflow-hidden ${!isAvailable ? 'opacity-90' : ''
+          }`}>
           {/* Background Glow Effect */}
           <div className={`absolute inset-0 bg-gradient-to-br ${colors.icon.replace('bg-', 'from-').replace('/10', '/5')} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
@@ -96,9 +105,8 @@ export const ProductCard = ({
               <div className={`p-4 rounded-xl ${colors.icon} group-hover:scale-110 transition-transform duration-300`}>
                 <Icon className="w-8 h-8" />
               </div>
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${colors.badge} ${
-                status === 'latest-release' ? 'animate-pulse' : ''
-              }`}>
+              <span className={`px-3 py-1 rounded-full text-xs font-semibold border ${colors.badge} ${status === 'latest-release' ? 'animate-pulse' : ''
+                }`}>
                 {t(badge)}
               </span>
             </div>

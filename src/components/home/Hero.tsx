@@ -20,6 +20,8 @@ import textureBg from '@/assets/backgrounds/texture-bg-1.png'
 import { useTranslation } from 'react-i18next'
 
 export const Hero = ({
+  title,
+  description,
   primaryCTA,
   secondaryCTA,
   tertiaryCTA
@@ -82,7 +84,7 @@ export const Hero = ({
       <div className="relative container mx-auto px-4 py-16 md:py-32 text-center z-10">
         <Reveal>
           <SplitText
-            text={t('Trustless Trading on Lightning Network')}
+            text={t(title)}
             className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-primary-400 to-purple-400 bg-clip-text text-transparent leading-[1.2] pb-2 max-w-6xl mx-auto"
             delay={100}
           />
@@ -90,7 +92,7 @@ export const Hero = ({
 
         <Reveal delay={300}>
           <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-4 max-w-4xl mx-auto leading-relaxed">
-            {t('Trade RGB assets trustlessly on Lightning Network with atomic swaps, self-custody, and near-instant settlement.')}
+            {t(description)}
           </p>
           <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-8 md:mb-12 max-w-4xl mx-auto leading-relaxed flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
             <span className="inline-flex items-center gap-1.5">

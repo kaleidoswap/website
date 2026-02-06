@@ -2,7 +2,7 @@
 import type { LucideIcon } from 'lucide-react'
 
 export type ProductStatus = 'latest-release' | 'beta' | 'coming-soon'
-export type ProductColor = 'primary' | 'secondary' | 'bitcoin' | 'green'
+export type ProductColor = 'primary' | 'secondary' | 'bitcoin' | 'green' | 'gray'
 
 export interface ProductCTA {
   label: string

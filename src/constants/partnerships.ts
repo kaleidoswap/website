@@ -15,5 +15,12 @@ export const partners: Partner[] = [
     logo: '/partners/bitfinex-ventures-logo.svg',
     website: 'https://bitfinex.com',
     type: 'investor'
+  },
+  {
+    name: 'RGB Protocol Association',
+    description: 'Non-profit organization advancing the RGB protocol ecosystem and Bitcoin Layer 2 innovation',
+    logo: '/partners/rgb-protocol-logo.svg',
+    website: 'https://rgb.tech',
+    type: 'strategic'
   }
 ]

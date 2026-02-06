@@ -6,7 +6,17 @@
       "Bash(npm run build:*)",
       "Bash(npm ls:*)",
       "Bash(find:*)",
-      "Bash(npm run lint)"
+      "Bash(npm run lint)",
+      "Bash(wc:*)",
+      "Bash(pnpm run build:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm run test:run:*)",
+      "Bash(node scripts/extract-translations.mjs:*)",
+      "Bash(pnpm build:*)",
+      "Bash(node scripts/sync-translations.mjs:*)",
+      "Bash(grep:*)",
+      "Bash(pnpm i18n:sync:*)",
+      "Bash(pnpm tsc:*)"
     ],
     "deny": [],
     "ask": []

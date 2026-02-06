@@ -10,7 +10,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Mulish', 'sans-serif'],
+        sans: ['Space Grotesk', 'sans-serif'],
+        display: ['Space Grotesk', 'sans-serif'],
+        body: ['Space Grotesk', 'sans-serif'],
       },
       colors: {
         primary: {
@@ -25,6 +27,8 @@ export default {
           800: '#166534',
           900: '#14532d',
         },
+        'background-dark': '#0d1117',
+        'surface-dark': '#161b22',
         teal: {
           50: '#f0fdfa',
           100: '#ccfbf1',

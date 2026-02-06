@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { Download, ExternalLink, FileText, Shield, Terminal, Zap, Lock, Loader2 } from 'lucide-react'
+import { SEO } from '@/components/common/SEO'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -10,6 +11,7 @@ import {
   type GithubReleaseAsset
 } from '@/constants/downloads'
 import { stripVersionTag } from '@/constants/versions'
+import { GITHUB } from '@/constants/urls'
 import { footerConfig } from '@/constants/footer'
 import type { PlatformDownload } from '@/types/downloads'
 import { Reveal, Stagger, Tilt, Magnetic, ButtonGlow, Gradient, Particles } from '@/components/animations/ReactBitsFallbacks'
@@ -53,7 +55,7 @@ export const Downloads = () => {
       try {
         setIsLoading(true)
         const response = await fetch(
-          'https://api.github.com/repos/kaleidoswap/desktop-app/releases/latest',
+          GITHUB.apiLatestRelease,
           {
             headers: {
               Accept: 'application/vnd.github+json'
@@ -208,6 +210,12 @@ export const Downloads = () => {
 
   return (
     <div className="min-h-screen bg-gray-900">
+      <SEO
+        title="Download"
+        description="Download KaleidoSwap for macOS, Linux, or Windows. Self-custody Bitcoin DEX with Lightning Network support and RGB asset trading."
+        url="/downloads"
+        keywords={['download', 'bitcoin wallet', 'lightning', 'rgb', 'dex', 'macos', 'linux', 'windows']}
+      />
       {/* Fixed background gradient */}
       <div
         className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none"

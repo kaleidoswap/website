@@ -1,13 +1,14 @@
 // src/components/home/Community.tsx
 import { ExternalLink } from 'lucide-react'
 import type { CommunityProps } from '@/types/community'
-import { Reveal, Stagger, Tilt, Magnetic, Aurora, Gradient } from '@/components/animations/ReactBitsFallbacks'
+import { Reveal, Stagger, Tilt, Magnetic, Aurora, Gradient, ButtonGlow } from '@/components/animations/ReactBitsFallbacks'
 import { useTranslation } from 'react-i18next'
 
 export const Community = ({
   title = 'Join the Bitcoin DeFi Revolution',
   description = 'Connect with developers, traders, and enthusiasts building the future of Bitcoin DeFi',
-  socialLinks
+  socialLinks,
+  primaryCTA
 }: CommunityProps) => {
   const { t } = useTranslation()
 
@@ -33,9 +34,24 @@ export const Community = ({
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-primary-400 via-secondary-400 to-green-400 bg-clip-text text-transparent">
               {t(title)}
             </h2>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8">
               {t(description)}
             </p>
+            {primaryCTA && (
+              <Magnetic>
+                <ButtonGlow glowColor="#10B981">
+                  <a
+                    href={primaryCTA.href}
+                    target={primaryCTA.external ? "_blank" : undefined}
+                    rel={primaryCTA.external ? "noopener noreferrer" : undefined}
+                    className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-black transition-all duration-300 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl hover:from-green-300 hover:to-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)] hover:shadow-[0_0_30px_rgba(16,185,129,0.5)]"
+                  >
+                    {t(primaryCTA.label)}
+                    <ExternalLink className="ml-2 w-5 h-5" />
+                  </a>
+                </ButtonGlow>
+              </Magnetic>
+            )}
           </div>
         </Reveal>
 

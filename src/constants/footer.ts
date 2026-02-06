@@ -1,5 +1,6 @@
 import type { FooterProps } from '@/types/footer'
 import { GitHubIcon, TelegramIcon, XIcon } from '@/components/icons/SocialIcons'
+import { PRODUCTS, SOCIALS, GITHUB, EXTERNAL } from '@/constants/urls'
 
 export const footerConfig: FooterProps = {
   sections: [
@@ -7,25 +8,25 @@ export const footerConfig: FooterProps = {
       title: "Product",
       links: [
         { label: "Download Alpha", href: "/downloads" },
-        { label: "Documentation", href: "https://docs.kaleidoswap.com", external: true },
+        { label: "Documentation", href: PRODUCTS.docs, external: true },
       ]
     },
     {
       title: "Resources",
       links: [
-        { label: "GitHub Repository", href: "https://github.com/kaleidoswap", external: true },
-        { label: "RGB Protocol", href: "https://rgb.info", external: true },
-        { label: "Lightning Network", href: "https://lightning.network", external: true },
-        { label: "Bitcoin Whitepaper", href: "https://bitcoin.org/bitcoin.pdf", external: true }
+        { label: "GitHub Repository", href: GITHUB.orgUrl, external: true },
+        { label: "RGB Protocol", href: EXTERNAL.rgbInfo, external: true },
+        { label: "Lightning Network", href: EXTERNAL.lightningNetwork, external: true },
+        { label: "Bitcoin Whitepaper", href: EXTERNAL.bitcoinWhitepaper, external: true }
       ]
     },
     {
       title: "Community",
       links: [
-        { label: "Discord", href: "https://discord.gg/kaleidoswap", external: true },
-        { label: "Telegram", href: "https://t.me/kaleidoswap", external: true },
-        { label: "Twitter/X", href: "https://x.com/kaleidoswap", external: true },
-        { label: "Blog", href: "https://medium.kaleidoswap.com", external: true }
+        { label: "Discord", href: SOCIALS.discord, external: true },
+        { label: "Telegram", href: SOCIALS.telegram, external: true },
+        { label: "Twitter/X", href: SOCIALS.twitter, external: true },
+        { label: "Blog", href: PRODUCTS.blog, external: true }
       ]
     },
     {
@@ -33,24 +34,24 @@ export const footerConfig: FooterProps = {
       links: [
         { label: "Privacy Policy", href: "/privacy" },
         { label: "Terms of Service", href: "/terms" },
-        { label: "Security", href: "https://github.com/kaleidoswap/desktop-app/security", external: true }
+        { label: "Security", href: GITHUB.securityUrl, external: true }
       ]
     }
   ],
   socials: [
     {
       platform: "GitHub",
-      href: "https://github.com/kaleidoswap",
+      href: SOCIALS.github,
       icon: GitHubIcon
     },
     {
       platform: "Telegram",
-      href: "https://t.me/kaleidoswap",
+      href: SOCIALS.telegram,
       icon: TelegramIcon
     },
     {
       platform: "X",
-      href: "https://x.com/kaleidoswap",
+      href: SOCIALS.twitter,
       icon: XIcon
     }
   ]
