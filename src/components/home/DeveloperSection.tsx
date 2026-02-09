@@ -51,13 +51,6 @@ const developerResources = [
     color: 'text-primary-400'
   },
   {
-    title: 'Community Discord',
-    description: 'Join developers building on KaleidoSwap',
-    icon: Users,
-    link: 'https://discord.gg/kaleidoswap',
-    color: 'text-secondary-400'
-  },
-  {
     title: 'Developer Tools',
     description: 'SDKs and tools for RGB asset integration',
     icon: Code,

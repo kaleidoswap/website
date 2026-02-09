@@ -2916,15 +2916,6 @@ const baseTranslations: LocalizedString[] = [
     ja: 'Twitter / X',
   },
   {
-    key: 'Discord',
-    es: 'Discord',
-    it: 'Discord',
-    zh: 'Discord',
-    de: 'Discord',
-    fr: 'Discord',
-    ja: 'Discord',
-  },
-  {
     key: 'Telegram',
     es: 'Telegram',
     it: 'Telegram',
