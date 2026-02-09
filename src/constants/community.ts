@@ -20,14 +20,6 @@ export const socialLinks: SocialLink[] = [
     color: 'text-primary-400'
   },
   {
-    id: 'discord',
-    name: 'Discord',
-    description: 'Join our community for support, discussions, and collaboration',
-    icon: MessageCircle,
-    href: 'https://discord.gg/kaleidoswap',
-    color: 'text-secondary-400'
-  },
-  {
     id: 'telegram',
     name: 'Telegram',
     description: 'Get real-time updates and connect with the community',

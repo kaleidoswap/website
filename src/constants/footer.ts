@@ -22,7 +22,6 @@ export const footerConfig: FooterProps = {
     {
       title: "Community",
       links: [
-        { label: "Discord", href: "https://discord.gg/kaleidoswap", external: true },
         { label: "Telegram", href: "https://t.me/kaleidoswap", external: true },
         { label: "Twitter/X", href: "https://x.com/kaleidoswap", external: true },
         { label: "Blog", href: "https://medium.kaleidoswap.com", external: true }
