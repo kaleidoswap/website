@@ -1,6 +1,6 @@
 // src/components/home/DeveloperSection.tsx
 import { useEffect, useState } from 'react'
-import { Download, ExternalLink, Github, FileText, Users, Code, Terminal } from 'lucide-react'
+import { Download, ExternalLink, Github, FileText, Code, Terminal } from 'lucide-react'
 import { Reveal, Tilt, Magnetic, ButtonGlow, Matrix, Typewriter } from '@/components/animations/ReactBitsFallbacks'
 import { Button } from '@/components/common/Button'
 import { stripVersionTag } from '@/constants/versions'

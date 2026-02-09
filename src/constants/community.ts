@@ -1,6 +1,6 @@
 // src/constants/community.ts
 import type { SocialLink } from '@/types/community'
-import { Github, Twitter, MessageCircle, Send, BookOpen } from 'lucide-react'
+import { Github, Twitter, Send, BookOpen } from 'lucide-react'
 
 export const socialLinks: SocialLink[] = [
   {
