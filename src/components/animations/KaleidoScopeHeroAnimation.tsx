@@ -56,6 +56,7 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
   const rafId = useRef(0)
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [hoveredProtocol, setHoveredProtocol] = useState<string | null>(null)
 
   const c = 250
   const orbitR = 148
@@ -218,6 +219,11 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
             <stop offset="60%" stopColor="#0e9dff" stopOpacity="0.03" />
             <stop offset="100%" stopColor="#8a5cf6" stopOpacity="0.06" />
           </radialGradient>
+
+          {/* Circular clip for protocol icons */}
+          <clipPath id="kh-icon-clip">
+            <circle cx="0" cy="0" r={iconR * 0.56} />
+          </clipPath>
         </defs>
 
         {/* Background haze */}
@@ -405,10 +411,16 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
             {/* Protocol icons */}
             {protocols.map((proto, i) => {
               const pos = iconPositions[i]
+              const labelWidth = Math.max(proto.name.length * 5.5 + 10, 32)
+              const isHovered = hoveredProtocol === proto.name
               return (
                 <g key={proto.name} transform={`translate(${pos.x},${pos.y})`}>
                   {/* Counter-rotate to stay upright */}
-                  <g>
+                  <g
+                    onMouseEnter={() => setHoveredProtocol(proto.name)}
+                    onMouseLeave={() => setHoveredProtocol(null)}
+                    style={{ cursor: 'pointer' }}
+                  >
                     {anim && (
                       <animateTransform attributeName="transform" type="rotate"
                         from="0 0 0" to="-360 0 0" dur="40s" repeatCount="indefinite" />
@@ -461,8 +473,35 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
                       <image href={proto.logo}
                         x={-iconR * 0.58} y={-iconR * 0.58}
                         width={iconR * 1.16} height={iconR * 1.16}
+                        clipPath="url(#kh-icon-clip)"
                       />
                     )}
+
+                    {/* Network name label on hover */}
+                    <g opacity={isHovered ? 1 : 0} style={{ transition: 'opacity 0.2s ease' }}>
+                      <rect
+                        x={-labelWidth / 2}
+                        y={iconR + 6}
+                        width={labelWidth}
+                        height={16}
+                        rx={4}
+                        fill="rgba(0,0,0,0.85)"
+                        stroke={proto.color}
+                        strokeWidth={0.5}
+                        strokeOpacity={0.4}
+                      />
+                      <text
+                        x="0"
+                        y={iconR + 18}
+                        textAnchor="middle"
+                        fill="white"
+                        fontSize="9"
+                        fontWeight="600"
+                        fontFamily="system-ui, -apple-system, sans-serif"
+                      >
+                        {proto.name}
+                      </text>
+                    </g>
                   </g>
                 </g>
               )
