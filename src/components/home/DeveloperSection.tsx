@@ -1,10 +1,10 @@
 // src/components/home/DeveloperSection.tsx
 import { useEffect, useState } from 'react'
-import { Download, ExternalLink, Github, FileText, Users, Code, Terminal } from 'lucide-react'
+import { Download, ExternalLink, Github, FileText, Code, Terminal } from 'lucide-react'
 import { Reveal, Tilt, Magnetic, ButtonGlow, Matrix, Typewriter } from '@/components/animations/ReactBitsFallbacks'
 import { Button } from '@/components/common/Button'
 import { stripVersionTag } from '@/constants/versions'
-import { GITHUB, PRODUCTS, SOCIALS } from '@/constants/urls'
+import { GITHUB, PRODUCTS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 
 interface DownloadOption {
@@ -50,13 +50,6 @@ const developerResources = [
     icon: FileText,
     link: PRODUCTS.docs,
     color: 'text-primary-400'
-  },
-  {
-    title: 'Community Discord',
-    description: 'Join developers building on KaleidoSwap',
-    icon: Users,
-    link: SOCIALS.discord,
-    color: 'text-secondary-400'
   },
   {
     title: 'Developer Tools',

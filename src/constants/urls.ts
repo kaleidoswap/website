@@ -40,7 +40,6 @@ export const GITHUB = {
 export const SOCIALS = {
   twitter: 'https://x.com/kaleidoswap',
   twitterLegacy: 'https://twitter.com/kaleidoswap',
-  discord: 'https://discord.gg/kaleidoswap',
   telegram: 'https://t.me/kaleidoswap',
   github: GITHUB.orgUrl,
 } as const

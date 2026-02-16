@@ -12,21 +12,21 @@ import { useState } from 'react'
 const features = [
   {
     icon: Package,
-    title: 'TypeScript & Rust',
-    description: 'Native SDKs for web and systems programming.',
-  },
-  {
-    icon: BookOpen,
-    title: 'Full Documentation',
-    description: 'Comprehensive guides, API reference, and examples.',
-  },
-  {
-    icon: Terminal,
-    title: 'CLI Tools',
-    description: 'Command-line utilities for testing and automation.',
+    title: 'Multi-Language SDKs',
+    description: 'Built in Rust with native bindings for Python and TypeScript.',
   },
   {
     icon: Code,
+    title: 'Type Safe',
+    description: 'Auto-generated models from OpenAPI specs with full type definitions.',
+  },
+  {
+    icon: Terminal,
+    title: 'Real-Time WebSocket',
+    description: 'Live price streaming, quote updates, and auto-reconnection.',
+  },
+  {
+    icon: BookOpen,
     title: 'Open Source',
     description: 'MIT licensed. Fork, modify, and contribute.',
   },
@@ -34,66 +34,78 @@ const features = [
 
 const useCases = [
   {
-    title: 'Wallet Integration',
-    description: 'Add atomic swap capabilities to your Bitcoin wallet.',
-    code: `import { KaleidoSwap } from '@kaleidoswap/sdk'
+    title: 'Market Data',
+    description: 'Fetch assets, trading pairs, and real-time quotes from any application.',
+    language: 'typescript',
+    code: `import { KaleidoClient } from 'kaleidoswap-sdk';
 
-const kaleido = new KaleidoSwap({
-  network: 'testnet',
-  wallet: yourWalletProvider
-})
+const client = KaleidoClient.create({
+  baseUrl: 'https://api.kaleidoswap.com',
+});
 
-// Get a quote
-const quote = await kaleido.getQuote({
-  from: 'BTC',
-  to: 'USDT',
-  amount: '0.01'
-})
+// List available assets
+const assets = await client.maker.listAssets();
+console.log(\`Found \${assets.length} assets\`);
 
-// Execute swap
-const tx = await kaleido.executeSwap(quote)`,
+// Get all trading pairs
+const pairs = await client.maker.listPairs();
+
+// Get a quote for BTC → USDT
+const quote = await client.maker.getQuote({
+  from_asset: 'BTC',
+  to_asset: 'USDT',
+  from_amount: 100_000,
+  from_layer: 'BTC_LN',
+  to_layer: 'RGB_LN',
+});
+console.log(\`Rate: \${quote.rate}\`);`,
   },
   {
-    title: 'Market Making',
-    description: 'Build automated trading bots and liquidity providers.',
-    code: `import { KaleidoSwap, OrderBook } from '@kaleidoswap/sdk'
+    title: 'Atomic Swaps',
+    description: 'Execute trustless swaps across Bitcoin layers with full type safety.',
+    language: 'python',
+    code: `from kaleidoswap import KaleidoClient, KaleidoConfig
 
-const kaleido = new KaleidoSwap({ network: 'testnet' })
+config = KaleidoConfig(
+    base_url="https://api.kaleidoswap.com"
+)
+client = KaleidoClient(config)
 
-// Subscribe to orderbook
-kaleido.orderbook.subscribe('BTC/USDT', (update) => {
-  console.log('Best bid:', update.bestBid)
-  console.log('Best ask:', update.bestAsk)
-})
+# Get a quote
+quote = client.market.get_best_quote(
+    "BTC/USDT", 1_000_000
+)
+print(f"Rate: {quote.price}")
+print(f"Fee: {quote.fee.amount} {quote.fee.asset_ticker}")
 
-// Place a maker order
-await kaleido.createOrder({
-  pair: 'BTC/USDT',
-  side: 'buy',
-  price: '42000',
-  amount: '0.1'
-})`,
+# Initiate and track a swap
+swap = client.swaps.initiate_swap(quote.rfq_id)
+status = client.swaps.get_swap_status(swap.swap_id)
+print(f"Swap status: {status.state}")`,
   },
   {
-    title: 'Exchange Backend',
-    description: 'Power your exchange with trustless settlement.',
-    code: `use kaleidoswap_sdk::{Client, SwapRequest};
+    title: 'Real-Time Streaming',
+    description: 'Stream live prices and quotes with WebSocket auto-reconnection.',
+    language: 'rust',
+    code: `use kaleidoswap_core::{KaleidoClient, KaleidoConfig, WsEvent};
 
 #[tokio::main]
-async fn main() -> Result<()> {
-    let client = Client::new("testnet")?;
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = KaleidoConfig::new(
+        "https://api.kaleidoswap.com"
+    );
+    let client = KaleidoClient::new(config)?;
 
-    // Create swap request
-    let swap = SwapRequest::new()
-        .from_asset("BTC")
-        .to_asset("USDT")
-        .amount(10_000_000) // sats
-        .build()?;
+    // Stream real-time price updates
+    client.connect_websocket().await?;
 
-    // Execute atomically
-    let result = client.execute(swap).await?;
-    println!("Swap complete: {}", result.txid);
+    client.on_websocket_event(
+        WsEvent::PriceUpdate, |data| {
+        println!("Price: {} - \${}",
+            data["pair"], data["price"]);
+    }).await?;
 
+    client.subscribe_to_pair("BTC/USDT").await?;
     Ok(())
 }`,
   },
@@ -133,7 +145,7 @@ export const SDK = () => {
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
         title="Developer SDK"
-        description="Integrate KaleidoSwap into your application. TypeScript and Rust SDKs with full documentation and examples."
+        description="Integrate KaleidoSwap into your application. Rust, Python, and TypeScript SDKs with full documentation and examples."
         url="/products/sdk"
       />
 
@@ -156,7 +168,7 @@ export const SDK = () => {
               {t('Build on KaleidoSwap')}
             </h1>
             <p className="text-xl text-slate-400 mb-8 leading-relaxed">
-              {t('Integrate atomic swaps into your wallet, exchange, or application. Full SDKs for TypeScript and Rust with comprehensive documentation.')}
+              {t('Integrate atomic swaps into your wallet, exchange, or application. Built in Rust with native bindings for Python and TypeScript.')}
             </p>
 
             <div className="flex flex-wrap gap-4 mb-8">
@@ -178,16 +190,28 @@ export const SDK = () => {
               </Button>
             </div>
 
-            {/* Install command */}
-            <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm inline-flex items-center gap-4">
-              <span className="text-slate-500">$</span>
-              <span className="text-green-400">npm install @kaleidoswap/sdk</span>
-              <button
-                onClick={() => navigator.clipboard.writeText('npm install @kaleidoswap/sdk')}
-                className="text-slate-500 hover:text-white transition-colors"
-              >
-                <Copy className="w-4 h-4" />
-              </button>
+            {/* Install commands */}
+            <div className="flex flex-col gap-2">
+              <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm inline-flex items-center gap-4">
+                <span className="text-slate-500">$</span>
+                <span className="text-green-400">pnpm add kaleidoswap-sdk</span>
+                <button
+                  onClick={() => navigator.clipboard.writeText('pnpm add kaleidoswap-sdk')}
+                  className="text-slate-500 hover:text-white transition-colors"
+                >
+                  <Copy className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm inline-flex items-center gap-4">
+                <span className="text-slate-500">$</span>
+                <span className="text-green-400">pip install kaleidoswap-sdk</span>
+                <button
+                  onClick={() => navigator.clipboard.writeText('pip install kaleidoswap-sdk')}
+                  className="text-slate-500 hover:text-white transition-colors"
+                >
+                  <Copy className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -240,7 +264,7 @@ export const SDK = () => {
                 <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
                   <CodeBlock
                     code={useCase.code}
-                    language={useCase.title === 'Exchange Backend' ? 'rust' : 'typescript'}
+                    language={useCase.language}
                   />
                 </div>
               </div>
@@ -257,10 +281,10 @@ export const SDK = () => {
               <div>
                 <h2 className="text-3xl font-bold mb-4">{t('API Reference')}</h2>
                 <p className="text-slate-400 mb-6">
-                  {t('Complete API documentation with TypeScript types, method signatures, and response schemas.')}
+                  {t('Complete API documentation with typed models auto-generated from OpenAPI specs across all languages.')}
                 </p>
                 <ul className="space-y-3 mb-6">
-                  {['REST API endpoints', 'WebSocket subscriptions', 'Error handling', 'Rate limits & authentication'].map((item) => (
+                  {['Market, Swap & Order APIs', 'WebSocket real-time streaming', 'RGB Lightning Node integration', 'LSPS1 channel management'].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-slate-300">
                       <Check className="w-4 h-4 text-green-500" />
                       {t(item)}
@@ -278,15 +302,17 @@ export const SDK = () => {
               <div className="bg-gray-900 rounded-xl p-6 font-mono text-sm">
                 <div className="text-slate-500 mb-2">// {t('API Response Types')}</div>
                 <div className="text-purple-400">interface</div>
-                <span className="text-green-400"> SwapQuote </span>
+                <span className="text-green-400"> PairQuoteResponse </span>
                 <span className="text-white">{'{'}</span>
                 <div className="pl-4 text-slate-400">
-                  <div>id: <span className="text-yellow-400">string</span></div>
-                  <div>fromAsset: <span className="text-yellow-400">Asset</span></div>
-                  <div>toAsset: <span className="text-yellow-400">Asset</span></div>
-                  <div>rate: <span className="text-yellow-400">string</span></div>
-                  <div>expiresAt: <span className="text-yellow-400">number</span></div>
-                  <div>htlc: <span className="text-yellow-400">HTLCParams</span></div>
+                  <div>rfq_id: <span className="text-yellow-400">string</span></div>
+                  <div>from_asset: <span className="text-yellow-400">string</span></div>
+                  <div>to_asset: <span className="text-yellow-400">string</span></div>
+                  <div>from_amount: <span className="text-yellow-400">number</span></div>
+                  <div>to_amount: <span className="text-yellow-400">number</span></div>
+                  <div>rate: <span className="text-yellow-400">number</span></div>
+                  <div>fee: <span className="text-yellow-400">Fee</span></div>
+                  <div>expires_at: <span className="text-yellow-400">number</span></div>
                 </div>
                 <span className="text-white">{'}'}</span>
               </div>
@@ -310,13 +336,6 @@ export const SDK = () => {
             >
               <BookOpen className="w-4 h-4 mr-2" />
               {t('Read Documentation')}
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => window.open('https://discord.gg/kaleidoswap', '_blank')}
-            >
-              {t('Join Discord')}
             </Button>
           </div>
         </div>

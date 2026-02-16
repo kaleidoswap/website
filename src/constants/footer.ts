@@ -23,7 +23,6 @@ export const footerConfig: FooterProps = {
     {
       title: "Community",
       links: [
-        { label: "Discord", href: SOCIALS.discord, external: true },
         { label: "Telegram", href: SOCIALS.telegram, external: true },
         { label: "Twitter/X", href: SOCIALS.twitter, external: true },
         { label: "Blog", href: PRODUCTS.blog, external: true }

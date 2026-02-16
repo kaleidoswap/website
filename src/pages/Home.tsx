@@ -17,7 +17,7 @@ import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
 import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.png'
 
 // Animation
-import { ProtocolOrbitAnimation } from '@/components/animations/ProtocolOrbitAnimation'
+import { KaleidoScopeHeroAnimation } from '@/components/animations/KaleidoScopeHeroAnimation'
 
 // Components
 import { FAQ } from '@/components/home/FAQ'
@@ -159,7 +159,7 @@ export const Home = () => {
           {/* Hero Visualization - Protocol Orbit Animation */}
           <div className="relative hidden lg:block">
             <div className="relative w-full aspect-square max-w-[550px] mx-auto flex items-center justify-center">
-              <ProtocolOrbitAnimation size={500} />
+              <KaleidoScopeHeroAnimation size={500} />
             </div>
           </div>
         </div>

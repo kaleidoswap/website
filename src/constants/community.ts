@@ -1,6 +1,6 @@
 // src/constants/community.ts
 import type { SocialLink } from '@/types/community'
-import { Github, Twitter, MessageCircle, Send, BookOpen } from 'lucide-react'
+import { Github, Twitter, Send, BookOpen } from 'lucide-react'
 import { SOCIALS, PRODUCTS } from '@/constants/urls'
 
 export const socialLinks: SocialLink[] = [
@@ -19,14 +19,6 @@ export const socialLinks: SocialLink[] = [
     icon: Twitter,
     href: SOCIALS.twitterLegacy,
     color: 'text-primary-400'
-  },
-  {
-    id: 'discord',
-    name: 'Discord',
-    description: 'Join our community for support, discussions, and collaboration',
-    icon: MessageCircle,
-    href: SOCIALS.discord,
-    color: 'text-secondary-400'
   },
   {
     id: 'telegram',

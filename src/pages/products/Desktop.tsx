@@ -109,27 +109,15 @@ export const Desktop = () => {
               </div>
             </div>
 
-            {/* Screenshot Placeholder */}
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-secondary-500/20 to-primary-500/20 rounded-2xl blur-2xl opacity-50" />
-              <div className="relative rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-surface-dark">
-                {/* Window chrome */}
-                <div className="bg-gray-800 px-4 py-3 flex items-center gap-2 border-b border-white/5">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                  </div>
-                  <span className="text-xs text-slate-500 ml-2">KaleidoSwap</span>
-                </div>
-                {/* Placeholder for screenshot */}
-                <div className="aspect-[16/10] bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <Monitor className="w-16 h-16 text-secondary-500/50 mx-auto mb-4" />
-                    <p className="text-slate-500 text-sm">{t('Desktop App Screenshot')}</p>
-                  </div>
-                </div>
-              </div>
+            {/* Desktop Screenshot */}
+            <div className="relative group">
+              <div className="absolute -inset-8 bg-gradient-to-r from-secondary-500/30 to-primary-500/30 rounded-3xl blur-3xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+              <div className="absolute -inset-4 bg-gradient-to-br from-secondary-500/10 via-transparent to-primary-500/10 rounded-2xl" />
+              <img
+                src="/images/desktop-app-screenshot.png"
+                alt={t('Desktop App Screenshot')}
+                className="relative w-full drop-shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+              />
             </div>
           </div>
         </div>
