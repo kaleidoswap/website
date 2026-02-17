@@ -14,6 +14,7 @@ const NotFound = lazy(() => import('@/pages/NotFound').then((m) => ({ default: m
 const WebApp = lazy(() => import('@/pages/products/WebApp').then((m) => ({ default: m.WebApp })))
 const Desktop = lazy(() => import('@/pages/products/Desktop').then((m) => ({ default: m.Desktop })))
 const SDK = lazy(() => import('@/pages/products/SDK').then((m) => ({ default: m.SDK })))
+const RateExtension = lazy(() => import('@/pages/products/RateExtension').then((m) => ({ default: m.RateExtension })))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -36,6 +37,7 @@ const AnimatedRoutes = () => {
         <Route path="/products/web-app" element={<WebApp />} />
         <Route path="/products/desktop" element={<Desktop />} />
         <Route path="/products/sdk" element={<SDK />} />
+        <Route path="/products/rate-extension" element={<RateExtension />} />
         <Route path="/downloads" element={<Downloads />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />

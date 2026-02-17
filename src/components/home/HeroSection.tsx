@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/common/Button'
 import { PRODUCTS } from '@/constants/urls'
 import { KaleidoScopeHeroAnimation } from '@/components/animations/KaleidoScopeHeroAnimation'
-import { MobileHeroAnimation } from '@/components/animations/MobileHeroAnimation'
 import { useTranslation } from 'react-i18next'
 import { useAppNavigation } from '@/hooks/useNavigation'
 import { AnimateIn } from '@/components/animations/AnimateIn'
@@ -95,15 +94,12 @@ export const HeroSection = () => {
           </AnimateIn>
         </div>
 
-        {/* Hero Visualization - Desktop: Kaleidoscope, Mobile: Protocol orbit */}
-        <AnimateIn variant="scale" delay={200} duration={800} className="relative hidden lg:block">
-          <div className="relative w-full aspect-square max-w-[550px] mx-auto flex items-center justify-center">
-            <KaleidoScopeHeroAnimation size={500} />
+        {/* Hero Visualization - Kaleidoscope animation (responsive) */}
+        <AnimateIn variant="scale" delay={200} duration={800} className="relative">
+          <div className="relative w-full aspect-square max-w-[300px] sm:max-w-[400px] lg:max-w-[550px] mx-auto flex items-center justify-center">
+            <KaleidoScopeHeroAnimation className="w-full h-full" />
           </div>
         </AnimateIn>
-        <div className="lg:hidden">
-          <MobileHeroAnimation />
-        </div>
       </div>
     </section>
   )

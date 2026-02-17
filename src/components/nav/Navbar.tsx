@@ -127,9 +127,11 @@ export const Navbar = () => {
       <nav
         className={cn(
           'fixed w-full z-50 transition-all duration-300',
-          scrolled || isOpen
-            ? 'bg-gray-900/95 backdrop-blur-md shadow-md'
-            : 'bg-transparent'
+          isOpen
+            ? 'bg-gray-900 shadow-md'
+            : scrolled
+              ? 'bg-gray-900/95 backdrop-blur-md shadow-md'
+              : 'bg-transparent'
         )}
         role="navigation"
         aria-label={t('Main navigation')}
@@ -176,30 +178,33 @@ export const Navbar = () => {
 
                 {productsOpen && (
                   <div className="absolute top-full left-0 mt-2 w-56 bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden" role="menu">
-                    {productItems.map((item) => (
-                      <button
-                        key={item.label}
-                        onClick={() =>
-                          item.status === 'live' &&
-                          handleNavigation(item.href, item.external)
-                        }
-                        disabled={item.status === 'coming-soon'}
-                        role="menuitem"
-                        className={cn(
-                          'w-full px-4 py-3 text-left flex items-center justify-between transition-colors',
-                          item.status === 'live'
-                            ? 'text-gray-200 hover:bg-gray-700/50 hover:text-white'
-                            : 'text-gray-500 cursor-not-allowed'
-                        )}
-                      >
-                        <span>{t(item.label)}</span>
-                        {item.status === 'coming-soon' ? (
-                          <span className="text-xs text-gray-500">Soon</span>
-                        ) : item.external ? (
-                          <ExternalLink className="w-3 h-3 text-gray-500" />
-                        ) : null}
-                      </button>
-                    ))}
+                    {productItems.map((item) => {
+                      const hasPage = item.href !== '#'
+                      return (
+                        <button
+                          key={item.label}
+                          onClick={() =>
+                            hasPage &&
+                            handleNavigation(item.href, item.external)
+                          }
+                          disabled={!hasPage}
+                          role="menuitem"
+                          className={cn(
+                            'w-full px-4 py-3 text-left flex items-center justify-between transition-colors',
+                            hasPage
+                              ? 'text-gray-200 hover:bg-gray-700/50 hover:text-white'
+                              : 'text-gray-500 cursor-not-allowed'
+                          )}
+                        >
+                          <span>{t(item.label)}</span>
+                          {item.status === 'coming-soon' ? (
+                            <span className="text-xs text-gray-500">Soon</span>
+                          ) : item.external ? (
+                            <ExternalLink className="w-3 h-3 text-gray-500" />
+                          ) : null}
+                        </button>
+                      )
+                    })}
                   </div>
                 )}
               </div>
@@ -265,27 +270,30 @@ export const Navbar = () => {
                   <p className="text-xs uppercase tracking-wide text-gray-500 mb-3 px-4">
                     {t('Products')}
                   </p>
-                  {productItems.map((item) => (
-                    <button
-                      key={item.label}
-                      onClick={() =>
-                        item.status === 'live' &&
-                        handleNavigation(item.href, item.external)
-                      }
-                      disabled={item.status === 'coming-soon'}
-                      className={cn(
-                        'w-full py-3 px-4 text-left text-lg rounded-lg flex items-center justify-between my-1',
-                        item.status === 'live'
-                          ? 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-                          : 'text-gray-600 cursor-not-allowed'
-                      )}
-                    >
-                      <span>{t(item.label)}</span>
-                      {item.status === 'coming-soon' && (
-                        <span className="text-xs text-gray-600">Soon</span>
-                      )}
-                    </button>
-                  ))}
+                  {productItems.map((item) => {
+                    const hasPage = item.href !== '#'
+                    return (
+                      <button
+                        key={item.label}
+                        onClick={() =>
+                          hasPage &&
+                          handleNavigation(item.href, item.external)
+                        }
+                        disabled={!hasPage}
+                        className={cn(
+                          'w-full py-3 px-4 text-left text-lg rounded-lg flex items-center justify-between my-1',
+                          hasPage
+                            ? 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                            : 'text-gray-600 cursor-not-allowed'
+                        )}
+                      >
+                        <span>{t(item.label)}</span>
+                        {item.status === 'coming-soon' && (
+                          <span className="text-xs text-gray-600">Soon</span>
+                        )}
+                      </button>
+                    )
+                  })}
                 </div>
 
                 {/* Other links */}

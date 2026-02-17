@@ -10,6 +10,7 @@ import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
 import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.png'
 
 interface KaleidoScopeHeroAnimationProps {
+  /** @deprecated Use className with width/height instead */
   size?: number
   className?: string
 }
@@ -146,12 +147,12 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
     <div
       ref={containerRef}
       className={`relative ${className}`}
-      style={{ width: size, height: size }}
+      style={size ? { width: size, height: size } : undefined}
     >
       <svg
         viewBox="0 0 500 500"
-        width={size}
-        height={size}
+        width="100%"
+        height="100%"
         xmlns="http://www.w3.org/2000/svg"
         className="overflow-visible"
       >

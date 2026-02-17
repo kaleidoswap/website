@@ -21,7 +21,7 @@ function useFaqItems() {
     },
     {
       question: t('What wallets are supported?'),
-      answer: t('The web app supports WebLN-compatible wallets like Alby and Bitmask. The desktop app includes a built-in RGB Lightning node, so no external wallet is required. More wallet integrations are coming soon.'),
+      answer: t('The web app supports WebLN-compatible wallets like Alby, Bitmask, Rate Extension, and Xverse. The desktop app includes a built-in RGB Lightning node, so no external wallet is required. More wallet integrations are coming soon.'),
     },
     {
       question: t('What are the fees?'),

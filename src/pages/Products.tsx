@@ -14,7 +14,7 @@ const products = [
     name: 'Web App',
     icon: Globe,
     status: 'live' as const,
-    description: 'The fastest way to swap. No download required. Connect your WebLN wallet and trade instantly.',
+    description: 'The fastest way to swap. No download required. Connect your wallet and trade instantly. Supports Alby, Bitmask, Rate Extension, and Xverse.',
     features: [
       'No installation required',
       'Works on any browser',
@@ -66,18 +66,18 @@ const products = [
     color: 'gray',
   },
   {
-    id: 'extension',
-    name: 'Browser Extension',
+    id: 'rate-extension',
+    name: 'Rate Extension',
     icon: Puzzle,
     status: 'coming-soon' as const,
-    description: 'Quick swaps from your toolbar. Chrome, Firefox, and Safari support.',
+    description: 'Multi-protocol Chrome extension wallet. Bitcoin, Lightning, RGB, and more from your toolbar.',
     features: [
-      'One-click swaps',
-      'Portfolio overview',
-      'All major browsers',
+      'Multi-protocol wallet',
+      'WebLN & Nostr built-in',
+      'DApp connectivity',
     ],
-    href: '#',
-    color: 'gray',
+    href: '/products/rate-extension',
+    color: 'purple',
   },
 ]
 
@@ -117,26 +117,30 @@ export const Products = () => {
               const Icon = product.icon
               const isLive = product.status === 'live'
 
+              const hasPage = product.href !== '#'
+
               return (
                 <div
                   key={product.id}
                   className={`glass-card rounded-2xl p-8 transition-all ${
-                    isLive
+                    hasPage
                       ? 'cursor-pointer hover:border-primary-500/30'
                       : 'opacity-60'
                   }`}
-                  onClick={() => isLive && navigate(product.href)}
+                  onClick={() => hasPage && navigate(product.href)}
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-6">
                     {/* Icon */}
                     <div
                       className={`p-4 rounded-xl shrink-0 w-fit ${
-                        isLive
-                          ? product.color === 'primary'
-                            ? 'bg-primary-500/10 text-primary-400'
-                            : product.color === 'secondary'
-                            ? 'bg-secondary-500/10 text-secondary-400'
-                            : 'bg-green-500/10 text-green-400'
+                        product.color === 'primary'
+                          ? 'bg-primary-500/10 text-primary-400'
+                          : product.color === 'secondary'
+                          ? 'bg-secondary-500/10 text-secondary-400'
+                          : product.color === 'green'
+                          ? 'bg-green-500/10 text-green-400'
+                          : product.color === 'purple'
+                          ? 'bg-purple-500/10 text-purple-400'
                           : 'bg-gray-700/50 text-gray-500'
                       }`}
                     >
@@ -172,7 +176,7 @@ export const Products = () => {
                           >
                             <Check
                               className={`w-4 h-4 ${
-                                isLive ? 'text-primary-500' : 'text-gray-600'
+                                hasPage ? 'text-primary-500' : 'text-gray-600'
                               }`}
                             />
                             {t(feature)}
@@ -182,7 +186,7 @@ export const Products = () => {
                     </div>
 
                     {/* Arrow */}
-                    {isLive && (
+                    {hasPage && (
                       <div className="shrink-0">
                         <Button
                           variant="outline"

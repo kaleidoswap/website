@@ -117,7 +117,7 @@ export const ProductEcosystem = () => {
           </AnimateIn>
 
           {/* SDK */}
-          <AnimateIn variant="fade-up" delay={400} className="md:col-span-1 lg:col-span-2">
+          <AnimateIn variant="fade-up" delay={400} className="md:col-span-2 lg:col-span-2 lg:col-start-2">
             <div className="glass-card rounded-2xl p-6 flex items-center justify-between relative overflow-hidden h-full">
               <div className="relative z-10 max-w-[60%]">
                 <h3 className="text-xl font-bold mb-2">{t('Developer SDK')}</h3>
