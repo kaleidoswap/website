@@ -28,11 +28,39 @@ Object.defineProperty(window, 'scrollTo', {
   value: vi.fn(),
 })
 
-// Mock IntersectionObserver
-class MockIntersectionObserver {
-  observe = vi.fn()
-  unobserve = vi.fn()
-  disconnect = vi.fn()
+// Mock IntersectionObserver with callback support
+const intersectionCallbacks: Map<Element, IntersectionObserverCallback> = new Map()
+
+class MockIntersectionObserver implements IntersectionObserver {
+  readonly root: Element | Document | null = null
+  readonly rootMargin: string = '0px'
+  readonly thresholds: ReadonlyArray<number> = [0]
+  private callback: IntersectionObserverCallback
+
+  constructor(callback: IntersectionObserverCallback) {
+    this.callback = callback
+  }
+
+  observe(target: Element) {
+    intersectionCallbacks.set(target, this.callback)
+    // Auto-trigger as intersecting for test convenience
+    this.callback(
+      [{ isIntersecting: true, target } as IntersectionObserverEntry],
+      this
+    )
+  }
+
+  unobserve(target: Element) {
+    intersectionCallbacks.delete(target)
+  }
+
+  disconnect() {
+    intersectionCallbacks.clear()
+  }
+
+  takeRecords(): IntersectionObserverEntry[] {
+    return []
+  }
 }
 
 Object.defineProperty(window, 'IntersectionObserver', {

@@ -50,10 +50,27 @@ export const Downloads = () => {
   useEffect(() => {
     let isMounted = true
     const controller = new AbortController()
+    const CACHE_KEY = 'kaleidoswap_release_cache'
+    const CACHE_TTL = 10 * 60 * 1000 // 10 minutes
 
     const fetchLatestRelease = async () => {
       try {
         setIsLoading(true)
+
+        // Check sessionStorage cache first
+        const cached = sessionStorage.getItem(CACHE_KEY)
+        if (cached) {
+          const { data, timestamp } = JSON.parse(cached)
+          if (Date.now() - timestamp < CACHE_TTL) {
+            const config = createDownloadConfig(data)
+            if (isMounted) {
+              setDownloadConfig(config)
+              setIsLoading(false)
+            }
+            return
+          }
+        }
+
         const response = await fetch(
           GITHUB.apiLatestRelease,
           {
@@ -88,12 +105,21 @@ export const Downloads = () => {
             })
           : undefined
 
-        const updatedConfig = createDownloadConfig({
+        const configData = {
           version,
           date: publishedAt,
           notesUrl: data.html_url,
           assets: data.assets ?? []
-        })
+        }
+
+        // Cache the parsed config data
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: configData, timestamp: Date.now() }))
+        } catch {
+          // sessionStorage full or unavailable — no-op
+        }
+
+        const updatedConfig = createDownloadConfig(configData)
 
         if (isMounted) {
           setDownloadConfig(updatedConfig)

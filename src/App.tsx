@@ -1,6 +1,6 @@
-// src/App.tsx
 import { lazy, Suspense } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { ErrorBoundary } from '@/components/common/ErrorBoundary'
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('@/pages/Home').then((m) => ({ default: m.Home })))
@@ -25,23 +25,35 @@ const PageLoader = () => (
   </div>
 )
 
+const AnimatedRoutes = () => {
+  const location = useLocation()
+
+  return (
+    <div key={location.pathname} className="animate-fadeIn">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/web-app" element={<WebApp />} />
+        <Route path="/products/desktop" element={<Desktop />} />
+        <Route path="/products/sdk" element={<SDK />} />
+        <Route path="/downloads" element={<Downloads />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  )
+}
+
 function App() {
   return (
-    <Router>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/products/web-app" element={<WebApp />} />
-          <Route path="/products/desktop" element={<Desktop />} />
-          <Route path="/products/sdk" element={<SDK />} />
-          <Route path="/downloads" element={<Downloads />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Suspense>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <Suspense fallback={<PageLoader />}>
+          <AnimatedRoutes />
+        </Suspense>
+      </Router>
+    </ErrorBoundary>
   )
 }
 

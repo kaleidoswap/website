@@ -14,7 +14,34 @@ const DEFAULT_TITLE = 'KaleidoSwap - Bitcoin L2 DEX'
 const DEFAULT_DESCRIPTION =
   'Trade BTC, USDT, and any RGB asset across Lightning, RGB, Spark, and Arkade. Atomic swaps with low fees and better privacy. No bridges. No custody. No tokens.'
 const DEFAULT_IMAGE = '/og-image.png'
-const SITE_URL = 'https://kaleidoswap.com'
+const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://kaleidoswap.com'
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'KaleidoSwap',
+  url: SITE_URL,
+  logo: `${SITE_URL}/logo.svg`,
+  sameAs: [
+    'https://x.com/kaleidoswap',
+    'https://t.me/kaleidoswap',
+    'https://github.com/kaleidoswap',
+  ],
+}
+
+const softwareJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'KaleidoSwap',
+  applicationCategory: 'FinanceApplication',
+  operatingSystem: 'macOS, Linux, Windows, Web',
+  description: DEFAULT_DESCRIPTION,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+}
 
 export const SEO = ({
   title,
@@ -55,6 +82,14 @@ export const SEO = ({
 
       {/* Canonical URL */}
       <link rel="canonical" href={fullUrl} />
+
+      {/* JSON-LD Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(organizationJsonLd)}
+      </script>
+      <script type="application/ld+json">
+        {JSON.stringify(softwareJsonLd)}
+      </script>
     </Helmet>
   )
 }

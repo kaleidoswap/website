@@ -16,7 +16,9 @@
       "Bash(node scripts/sync-translations.mjs:*)",
       "Bash(grep:*)",
       "Bash(pnpm i18n:sync:*)",
-      "Bash(pnpm tsc:*)"
+      "Bash(pnpm tsc:*)",
+      "Bash(npm run test:run:*)",
+      "Bash(npm run i18n:sync:*)"
     ],
     "deny": [],
     "ask": []

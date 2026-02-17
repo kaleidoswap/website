@@ -57,6 +57,7 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
   const [offset, setOffset] = useState({ x: 0, y: 0 })
   const [reducedMotion, setReducedMotion] = useState(false)
   const [hoveredProtocol, setHoveredProtocol] = useState<string | null>(null)
+  const [isVisible, setIsVisible] = useState(true)
 
   const c = 250
   const orbitR = 148
@@ -72,6 +73,18 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
+  }, [])
+
+  // Pause animations when not visible (IntersectionObserver)
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -91,7 +104,7 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
   }, [])
 
   useEffect(() => {
-    if (reducedMotion) return
+    if (reducedMotion || !isVisible) return
     const lerp = () => {
       const cur = currentOffset.current
       const tgt = targetOffset.current
@@ -105,7 +118,7 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
     }
     rafId.current = requestAnimationFrame(lerp)
     return () => cancelAnimationFrame(rafId.current)
-  }, [reducedMotion])
+  }, [reducedMotion, isVisible])
 
   useEffect(() => {
     document.addEventListener('mousemove', handleMouseMove)
@@ -122,7 +135,7 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
     return `translate(${offset.x * layer},${offset.y * layer})`
   }
 
-  const anim = !reducedMotion
+  const anim = !reducedMotion && isVisible
 
   const iconPositions = protocols.map((_, i) => {
     const angle = (Math.PI * 2 * i) / 7 - Math.PI / 2
