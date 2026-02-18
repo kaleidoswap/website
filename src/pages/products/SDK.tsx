@@ -142,7 +142,7 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
   }
 
   return (
-    <div className="relative bg-gray-900 rounded-xl overflow-hidden">
+    <div className="relative bg-gray-900 rounded-xl overflow-hidden w-full max-w-full">
       <div className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-white/5">
         <span className="text-xs text-slate-500">{language}</span>
         <button
@@ -152,8 +152,8 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
           {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
         </button>
       </div>
-      <pre className="p-4 overflow-x-auto text-sm">
-        <code className="text-slate-300">{code}</code>
+      <pre className="p-4 overflow-x-auto text-sm max-w-full">
+        <code className="text-slate-300 text-xs sm:text-sm">{code}</code>
       </pre>
     </div>
   )
@@ -216,7 +216,7 @@ export const SDK = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
         title="Developer SDK"
         description="Integrate KaleidoSwap into your application. Rust, Python, and TypeScript SDKs with full documentation and examples."
@@ -227,8 +227,8 @@ export const SDK = () => {
 
       {/* Hero */}
       <section className="pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-green-500/20 rounded-full blur-[120px] -z-10 opacity-40" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary-500/15 rounded-full blur-[100px] -z-10" />
+        <div className="absolute top-0 left-0 w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-green-500/20 rounded-full blur-[120px] -z-10 opacity-40" />
+        <div className="absolute bottom-0 right-0 w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-primary-500/15 rounded-full blur-[100px] -z-10" />
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -421,7 +421,7 @@ export const SDK = () => {
             {useCases.map((useCase, index) => (
               <div
                 key={useCase.title}
-                className={`grid md:grid-cols-2 gap-8 items-start ${
+                className={`grid md:grid-cols-2 gap-8 items-start min-w-0 ${
                   index % 2 === 1 ? 'md:grid-flow-dense' : ''
                 }`}
               >
@@ -438,7 +438,7 @@ export const SDK = () => {
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
-                <div className={`min-w-0 ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
+                <div className={`min-w-0 overflow-hidden ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
                   <CodeBlock
                     code={useCase.code}
                     language={useCase.language}
@@ -453,8 +453,8 @@ export const SDK = () => {
       {/* API Reference */}
       <section className="py-20 bg-gray-950/50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="glass-card rounded-2xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="glass-card rounded-2xl p-8 md:p-12 overflow-hidden">
+            <div className="grid md:grid-cols-2 gap-8 items-center min-w-0">
               <div className="min-w-0">
                 <h2 className="text-3xl font-bold mb-4">{t('API Reference')}</h2>
                 <p className="text-slate-400 mb-6">
@@ -476,16 +476,16 @@ export const SDK = () => {
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
-              <div className="bg-gray-900 rounded-xl p-6 font-mono text-sm overflow-x-auto whitespace-nowrap min-w-0">
+              <div className="bg-gray-900 rounded-xl p-4 sm:p-6 font-mono text-xs sm:text-sm overflow-x-auto min-w-0 max-w-full">
                 <div className="text-slate-500 mb-2">// {t('GetQuoteResponse')}</div>
-                <div className="text-purple-400">interface<span className="text-green-400"> GetQuoteResponse </span><span className="text-white">{'{'}</span></div>
+                <div className="text-purple-400 whitespace-nowrap">interface<span className="text-green-400"> GetQuoteResponse </span><span className="text-white">{'{'}</span></div>
                 <div className="pl-4 text-slate-400 space-y-0.5">
-                  <div>rfq_id<span className="text-slate-500">:</span>      <span className="text-yellow-400">string</span></div>
-                  <div>from_asset<span className="text-slate-500">:</span>  <span className="text-yellow-400">SwapLeg</span>  <span className="text-slate-600">{'// { asset_id, ticker, layer, amount }'}</span></div>
-                  <div>to_asset<span className="text-slate-500">:</span>    <span className="text-yellow-400">SwapLeg</span>  <span className="text-slate-600">{'// { asset_id, ticker, layer, amount }'}</span></div>
-                  <div>price<span className="text-slate-500">:</span>       <span className="text-yellow-400">number</span></div>
-                  <div>fee<span className="text-slate-500">:</span>         <span className="text-yellow-400">SwapFee</span>  <span className="text-slate-600">{'// { final_fee, fee_asset }'}</span></div>
-                  <div>expires_at<span className="text-slate-500">:</span>  <span className="text-yellow-400">number</span></div>
+                  <div className="whitespace-nowrap">rfq_id<span className="text-slate-500">:</span>      <span className="text-yellow-400">string</span></div>
+                  <div className="whitespace-nowrap">from_asset<span className="text-slate-500">:</span>  <span className="text-yellow-400">SwapLeg</span>  <span className="text-slate-600 hidden sm:inline">{'// { asset_id, ticker, layer, amount }'}</span></div>
+                  <div className="whitespace-nowrap">to_asset<span className="text-slate-500">:</span>    <span className="text-yellow-400">SwapLeg</span>  <span className="text-slate-600 hidden sm:inline">{'// { asset_id, ticker, layer, amount }'}</span></div>
+                  <div className="whitespace-nowrap">price<span className="text-slate-500">:</span>       <span className="text-yellow-400">number</span></div>
+                  <div className="whitespace-nowrap">fee<span className="text-slate-500">:</span>         <span className="text-yellow-400">SwapFee</span>  <span className="text-slate-600 hidden sm:inline">{'// { final_fee, fee_asset }'}</span></div>
+                  <div className="whitespace-nowrap">expires_at<span className="text-slate-500">:</span>  <span className="text-yellow-400">number</span></div>
                 </div>
                 <span className="text-white">{'}'}</span>
               </div>
