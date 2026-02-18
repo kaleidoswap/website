@@ -20,22 +20,6 @@ function useFaqItems() {
       answer: t('No. KaleidoSwap is 100% non-custodial. Your private keys never leave your device, and we never take possession of your funds. You maintain full control throughout the entire swap process.'),
     },
     {
-      question: t('What wallets are supported?'),
-      answer: t('The web app supports WebLN-compatible wallets like Alby, Bitmask, Rate Extension, and Xverse. The desktop app includes a built-in RGB Lightning node, so no external wallet is required. More wallet integrations are coming soon.'),
-    },
-    {
-      question: t('What are the fees?'),
-      answer: t('KaleidoSwap charges a flat 1% fee on swaps. This fee is transparent and displayed before you confirm any transaction. There are no hidden charges or variable fees.'),
-    },
-    {
-      question: t('Which networks are supported?'),
-      answer: t('Currently, we support Bitcoin, Lightning Network, RGB Protocol, and Spark. Support for Arkade, Liquid Network, and Taproot Assets is coming in Q4 2026.'),
-    },
-    {
-      question: t('Is KaleidoSwap open source?'),
-      answer: t('Yes, KaleidoSwap is 100% open source. You can audit the code, contribute, or fork it on GitHub. Transparency and verifiability are core to our mission.'),
-    },
-    {
       question: t('Is KaleidoSwap available on mainnet?'),
       answer: t('KaleidoSwap is currently live on Signet and Testnet. Mainnet launch is coming soon. Join our community channels to stay updated on the launch date.'),
     },

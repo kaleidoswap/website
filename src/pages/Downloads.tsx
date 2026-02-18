@@ -39,7 +39,7 @@ export const Downloads = () => {
 
   const downloadFile = (url?: string) => {
     if (!url) return
-    window.location.href = url
+    window.open(url, '_blank', 'noopener,noreferrer')
   }
 
   useLayoutEffect(() => {
@@ -252,7 +252,7 @@ export const Downloads = () => {
               <span className="text-gradient">{t('KaleidoSwap')}</span>
             </h1>
             <p className="text-lg text-slate-400 leading-relaxed mb-8">
-              {t('Get started with the first Bitcoin-native DEX. Available for macOS, Linux, and Windows (coming soon).')}
+              {t('Get started with the first Bitcoin-native DEX. Available for macOS, Linux, and Windows.')}
             </p>
 
             {/* Version pill */}

@@ -43,7 +43,7 @@ const features = [
 
 const platforms = [
   { name: 'macOS', icon: Monitor, arch: 'Apple Silicon & Intel' },
-  { name: 'Windows', icon: Monitor, arch: 'x64', disabled: true },
+  { name: 'Windows', icon: Monitor, arch: 'x64' },
   { name: 'Linux', icon: Terminal, arch: 'x64 / AppImage' },
 ]
 

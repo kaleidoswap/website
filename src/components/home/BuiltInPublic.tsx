@@ -8,15 +8,15 @@ export const BuiltInPublic = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="py-24">
+    <section className="py-14">
       <div className="max-w-7xl mx-auto px-6">
         {/* Open Source */}
-        <AnimateIn variant="fade-up" className="text-center mb-20">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Built in Public')}</h2>
-          <p className="text-xl text-slate-400 mb-8">
+        <AnimateIn variant="fade-up" className="text-center mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3">{t('Built in Public')}</h2>
+          <p className="text-base text-slate-400 mb-6">
             {t('100% open source. Audit the code, contribute, or fork it.')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href={GITHUB.repoUrl}
               target="_blank"
@@ -43,7 +43,7 @@ export const BuiltInPublic = () => {
 
         {/* Achievements */}
         <AnimateIn variant="blur">
-          <div className="flex flex-col sm:flex-row justify-center gap-6 text-center mb-16">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 text-center mb-10">
             <div className="flex items-center justify-center gap-2 text-slate-300 glass-card px-6 py-4 rounded-xl">
               <span className="text-yellow-500 text-xl" role="img" aria-label="Trophy">🏆</span>
               <span>{t('Winner — PlanB Lugano Hackathon')}</span>
@@ -57,24 +57,24 @@ export const BuiltInPublic = () => {
 
         {/* Backers */}
         <AnimateIn variant="fade-up" delay={100}>
-          <div className="text-center mb-16">
-            <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-10">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
               {t('Backed By')}
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
               {backers.map((backer) => (
                 <a
                   key={backer.name}
                   href={backer.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white rounded-xl px-6 py-4 hover:scale-105 transition-transform"
+                  className="bg-white rounded-lg px-4 py-3 hover:scale-105 transition-transform"
                   title={backer.name}
                 >
                   <img
                     src={backer.logo}
                     alt={backer.name}
-                    className="h-8 md:h-10 w-auto object-contain"
+                    className="h-6 md:h-8 w-auto object-contain"
                   />
                 </a>
               ))}
@@ -85,26 +85,26 @@ export const BuiltInPublic = () => {
         {/* Partners */}
         <AnimateIn variant="fade-up" delay={200}>
           <div className="text-center">
-            <p className="text-sm font-semibold text-slate-500 uppercase tracking-widest mb-10">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
               {t('Partners')}
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8">
               {partners.map((partner) => (
                 <a
                   key={partner.name}
                   href={partner.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 hover:scale-105 transition-transform"
+                  className="flex items-center gap-2 hover:scale-105 transition-transform"
                   title={partner.name}
                 >
                   <img
                     src={partner.logo}
                     alt={partner.showName ? '' : partner.name}
-                    className="h-10 md:h-12 w-auto object-contain"
+                    className="h-7 md:h-9 w-auto object-contain"
                   />
                   {partner.showName && (
-                    <span className="text-white font-semibold text-lg hover:text-primary-400 transition-colors">
+                    <span className="text-white font-semibold text-base hover:text-primary-400 transition-colors">
                       {t(partner.name)}
                     </span>
                   )}
