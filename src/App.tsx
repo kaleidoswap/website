@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { ErrorBoundary } from '@/components/common/ErrorBoundary'
+import { ScrollToTop } from '@/components/common/ScrollToTop'
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('@/pages/Home').then((m) => ({ default: m.Home })))
@@ -30,20 +31,23 @@ const AnimatedRoutes = () => {
   const location = useLocation()
 
   return (
-    <div key={location.pathname} className="animate-fadeIn">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/web-app" element={<WebApp />} />
-        <Route path="/products/desktop" element={<Desktop />} />
-        <Route path="/products/sdk" element={<SDK />} />
-        <Route path="/products/rate-extension" element={<RateExtension />} />
-        <Route path="/downloads" element={<Downloads />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </div>
+    <>
+      <ScrollToTop />
+      <div key={location.pathname} className="animate-fadeIn">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/web-app" element={<WebApp />} />
+          <Route path="/products/desktop" element={<Desktop />} />
+          <Route path="/products/sdk" element={<SDK />} />
+          <Route path="/products/rate-extension" element={<RateExtension />} />
+          <Route path="/downloads" element={<Downloads />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </>
   )
 }
 
