@@ -234,7 +234,7 @@ export const SDK = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
 
             {/* Left — text & CTAs */}
-            <div>
+            <div className="min-w-0">
               <AnimateIn variant="fade-down" duration={500}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6 w-fit">
                   <Code className="w-4 h-4 text-green-400" />
@@ -250,7 +250,7 @@ export const SDK = () => {
                     {t('Build on KaleidoSwap')}
                   </h1>
                   <p className="text-xl text-slate-400 leading-relaxed">
-                    {t('Integrate atomic swaps into your wallet, exchange, or application. Built in Rust with native bindings for Python and TypeScript.')}
+                    {t('Integrate atomic swaps into your wallet, exchange, or application. TypeScript and Python SDKs auto-generated from the OpenAPI spec.')}
                   </p>
                 </div>
               </AnimateIn>
@@ -284,8 +284,8 @@ export const SDK = () => {
             </div>
 
             {/* Right — live code preview */}
-            <AnimateIn variant="scale" delay={200} duration={800}>
-              <div className="relative group">
+            <AnimateIn variant="scale" delay={200} duration={800} className="hidden lg:block min-w-0">
+              <div className="relative group min-w-0">
                 <div className="absolute -inset-4 bg-gradient-to-br from-green-500/20 to-primary-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
                 <div className="relative bg-gray-900 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
                   {/* Window chrome */}
@@ -301,7 +301,7 @@ export const SDK = () => {
                     </span>
                   </div>
                   {/* Syntax-highlighted snippet */}
-                  <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto">
+                  <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto whitespace-nowrap">
                     <div>
                       <span className="text-purple-400">import</span>
                       <span className="text-slate-300"> {'{ KaleidoClient }'} </span>
@@ -425,7 +425,7 @@ export const SDK = () => {
                   index % 2 === 1 ? 'md:grid-flow-dense' : ''
                 }`}
               >
-                <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
+                <div className={`min-w-0 ${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
                   <h3 className="text-2xl font-bold mb-3">{t(useCase.title)}</h3>
                   <p className="text-slate-400 mb-4">{t(useCase.description)}</p>
                   <a
@@ -438,7 +438,7 @@ export const SDK = () => {
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
-                <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
+                <div className={`min-w-0 ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
                   <CodeBlock
                     code={useCase.code}
                     language={useCase.language}
@@ -455,7 +455,7 @@ export const SDK = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="glass-card rounded-2xl p-8 md:p-12">
             <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
+              <div className="min-w-0">
                 <h2 className="text-3xl font-bold mb-4">{t('API Reference')}</h2>
                 <p className="text-slate-400 mb-6">
                   {t('Complete API documentation with typed models auto-generated from OpenAPI specs for TypeScript and Python.')}
@@ -476,7 +476,7 @@ export const SDK = () => {
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
-              <div className="bg-gray-900 rounded-xl p-6 font-mono text-sm">
+              <div className="bg-gray-900 rounded-xl p-6 font-mono text-sm overflow-x-auto whitespace-nowrap min-w-0">
                 <div className="text-slate-500 mb-2">// {t('GetQuoteResponse')}</div>
                 <div className="text-purple-400">interface<span className="text-green-400"> GetQuoteResponse </span><span className="text-white">{'{'}</span></div>
                 <div className="pl-4 text-slate-400 space-y-0.5">

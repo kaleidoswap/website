@@ -1,4 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+
+// Saved page-scroll position while the mobile menu is open (iOS needs position:fixed on body)
+let _savedScrollY = 0
 import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
@@ -40,13 +43,28 @@ export const Navbar = () => {
   }, [location.pathname, checkScroll])
 
   useEffect(() => {
+    const body = document.body
     if (isOpen) {
-      document.body.style.overflow = 'hidden'
+      // Save current scroll position before locking
+      _savedScrollY = window.scrollY
+      // position:fixed is the only reliable way to prevent background scroll on iOS Safari
+      body.style.overflow = 'hidden'
+      body.style.position = 'fixed'
+      body.style.top = `-${_savedScrollY}px`
+      body.style.width = '100%'
     } else {
-      document.body.style.overflow = ''
+      // Restore scroll position when menu closes
+      body.style.overflow = ''
+      body.style.position = ''
+      body.style.top = ''
+      body.style.width = ''
+      window.scrollTo(0, _savedScrollY)
     }
     return () => {
-      document.body.style.overflow = ''
+      body.style.overflow = ''
+      body.style.position = ''
+      body.style.top = ''
+      body.style.width = ''
     }
   }, [isOpen])
 
@@ -314,7 +332,7 @@ export const Navbar = () => {
             <div
               ref={mobileMenuRef}
               id="mobile-menu"
-              className="md:hidden fixed inset-0 top-16 bg-gray-900/95 backdrop-blur-md z-40 overflow-y-auto"
+              className="md:hidden fixed inset-0 top-16 bg-gray-900/95 backdrop-blur-md z-40 overflow-y-auto overscroll-contain"
               role="dialog"
               aria-modal="true"
               aria-label={t('Mobile navigation menu')}

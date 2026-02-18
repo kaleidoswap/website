@@ -19,7 +19,6 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { footerConfig } from '@/constants/footer'
-import { GITHUB } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 
 const features = [
@@ -137,9 +136,10 @@ export const RateExtension = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  onClick={() => window.open(GITHUB.orgUrl, '_blank')}
+                  disabled
+                  className="border-slate-700 text-slate-500 cursor-not-allowed"
                 >
-                  {t('View on GitHub')}
+                  {t('Soon on GitHub')}
                 </Button>
               </div>
 
@@ -376,15 +376,9 @@ export const RateExtension = () => {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={GITHUB.orgUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-purple-400 hover:text-purple-300 flex items-center gap-1"
-                >
-                  {t('Review the source code')}
-                  <ArrowRight className="w-4 h-4" />
-                </a>
+                <span className="text-slate-500 flex items-center gap-1 text-sm">
+                  {t('Source code coming soon on GitHub')}
+                </span>
               </div>
               <div className="flex flex-col gap-4">
                 <div className="glass-card p-5 rounded-xl">
@@ -428,9 +422,10 @@ export const RateExtension = () => {
             <Button
               variant="outline"
               size="lg"
-              onClick={() => window.open(GITHUB.orgUrl, '_blank')}
+              disabled
+              className="border-slate-700 text-slate-500 cursor-not-allowed"
             >
-              {t('Star on GitHub')}
+              {t('Soon on GitHub')}
             </Button>
           </div>
         </div>
