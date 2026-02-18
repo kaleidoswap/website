@@ -31,7 +31,7 @@ void i18n
 
     // Detection configuration
     detection: {
-      order: ['localStorage', 'navigator'],
+      order: ['localStorage'],
       lookupLocalStorage: storageKey,
       caches: ['localStorage'],
     },
