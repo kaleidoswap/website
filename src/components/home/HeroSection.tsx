@@ -3,9 +3,11 @@ import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/common/Button'
 import { PRODUCTS } from '@/constants/urls'
 import { KaleidoScopeHeroAnimation } from '@/components/animations/KaleidoScopeHeroAnimation'
+import { MobileHeroAnimation } from '@/components/animations/MobileHeroAnimation'
 import { useTranslation } from 'react-i18next'
 import { useAppNavigation } from '@/hooks/useNavigation'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import bitcoinLogo from '@/assets/icons/bitcoin/bitcoin-logo.svg'
 import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
 import sparkAsterisk from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
@@ -18,6 +20,7 @@ const heroIconsToPreload = [bitcoinLogo, rgbLogo, sparkAsterisk, arkadeLogo, liq
 export const HeroSection = () => {
   const { t } = useTranslation()
   const { handleNavigation } = useAppNavigation()
+  const isMobile = useIsMobile()
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
@@ -94,11 +97,15 @@ export const HeroSection = () => {
           </AnimateIn>
         </div>
 
-        {/* Hero Visualization - Kaleidoscope animation (responsive) */}
+        {/* Hero Visualization - conditional mobile/desktop animation */}
         <AnimateIn variant="scale" delay={200} duration={800} className="relative">
-          <div className="relative w-full aspect-square max-w-[300px] sm:max-w-[400px] lg:max-w-[550px] mx-auto flex items-center justify-center">
-            <KaleidoScopeHeroAnimation className="w-full h-full" />
-          </div>
+          {isMobile ? (
+            <MobileHeroAnimation />
+          ) : (
+            <div className="relative w-full aspect-square max-w-[300px] sm:max-w-[400px] lg:max-w-[550px] mx-auto flex items-center justify-center">
+              <KaleidoScopeHeroAnimation className="w-full h-full" />
+            </div>
+          )}
         </AnimateIn>
       </div>
     </section>

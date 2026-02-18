@@ -1,4 +1,5 @@
 import { Globe, Monitor, Smartphone, Puzzle, Download } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/common/Button'
 import { PRODUCTS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
@@ -32,7 +33,11 @@ export const ProductEcosystem = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]">
           {/* Web App (Large) */}
           <AnimateIn variant="fade-up" delay={0} className="md:col-span-2 lg:col-span-2 row-span-2">
-            <div className="glass-card rounded-2xl overflow-hidden relative group h-full">
+            <motion.div
+              className="glass-card rounded-2xl overflow-hidden relative group h-full"
+              whileHover={{ scale: 1.01 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
               <div className="p-8 relative z-10 h-full flex flex-col">
                 <div className="w-12 h-12 bg-primary-500 rounded-lg mb-4 flex items-center justify-center text-white">
                   <Globe className="w-6 h-6" />
@@ -51,12 +56,16 @@ export const ProductEcosystem = () => {
                 </div>
               </div>
               <div className="absolute right-0 bottom-0 w-3/4 h-3/4 translate-x-1/4 translate-y-1/4 bg-gradient-to-tl from-primary-500/20 to-transparent rounded-tl-xl" />
-            </div>
+            </motion.div>
           </AnimateIn>
 
           {/* Desktop */}
           <AnimateIn variant="fade-up" delay={100} className="md:col-span-1 lg:col-span-2">
-            <div className="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group h-full">
+            <motion.div
+              className="glass-card rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden group h-full"
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
               <div className="absolute top-0 right-0 p-32 bg-primary-500/10 blur-[60px] rounded-full" />
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
@@ -81,12 +90,16 @@ export const ProductEcosystem = () => {
                   {t('Download')}
                 </Button>
               </div>
-            </div>
+            </motion.div>
           </AnimateIn>
 
           {/* Mobile */}
           <AnimateIn variant="fade-up" delay={200} className="md:col-span-1">
-            <div className="glass-card rounded-2xl p-6 flex flex-col justify-between group hover:bg-white/5 transition-colors h-full">
+            <motion.div
+              className="glass-card rounded-2xl p-6 flex flex-col justify-between group h-full"
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
               <div>
                 <div className="w-10 h-10 bg-secondary-500/20 text-secondary-400 rounded-lg mb-3 flex items-center justify-center">
                   <Smartphone className="w-5 h-5" />
@@ -97,12 +110,16 @@ export const ProductEcosystem = () => {
               <div className="mt-4 flex items-center gap-2 text-sm text-slate-500">
                 <span>{t('Coming Soon')}</span>
               </div>
-            </div>
+            </motion.div>
           </AnimateIn>
 
           {/* Extension */}
           <AnimateIn variant="fade-up" delay={300} className="md:col-span-1">
-            <div className="glass-card rounded-2xl p-6 flex flex-col justify-between group hover:bg-white/5 transition-colors h-full">
+            <motion.div
+              className="glass-card rounded-2xl p-6 flex flex-col justify-between group h-full"
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
               <div>
                 <div className="w-10 h-10 bg-bitcoin-500/20 text-bitcoin-400 rounded-lg mb-3 flex items-center justify-center">
                   <Puzzle className="w-5 h-5" />
@@ -113,12 +130,16 @@ export const ProductEcosystem = () => {
               <div className="mt-4 flex items-center gap-2 text-sm text-slate-500">
                 <span>{t('Coming Soon')}</span>
               </div>
-            </div>
+            </motion.div>
           </AnimateIn>
 
           {/* SDK */}
           <AnimateIn variant="fade-up" delay={400} className="md:col-span-2 lg:col-span-2 lg:col-start-2">
-            <div className="glass-card rounded-2xl p-6 flex items-center justify-between relative overflow-hidden h-full">
+            <motion.div
+              className="glass-card rounded-2xl p-6 flex items-center justify-between relative overflow-hidden h-full"
+              whileHover={{ y: -4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            >
               <div className="relative z-10 max-w-[60%]">
                 <h3 className="text-xl font-bold mb-2">{t('Developer SDK')}</h3>
                 <p className="text-slate-400 text-sm">{t('Build your own swap interface or integrate Kaleido into your wallet.')}</p>
@@ -134,7 +155,7 @@ export const ProductEcosystem = () => {
                   {t('Read Docs')}
                 </Button>
               </div>
-            </div>
+            </motion.div>
           </AnimateIn>
         </div>
       </div>

@@ -33,5 +33,5 @@ export const backers = [
 ]
 
 export const partners = [
-  { name: 'RGB Protocol Association', logo: rgbAssociationLogo, showName: true, url: 'https://www.rgbprotocol.org' },
+  { name: 'RGB Protocol Association', logo: rgbAssociationLogo, showName: true, url: 'https://rgbprotocol.org/' },
 ]

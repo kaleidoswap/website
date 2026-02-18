@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+import { motion } from 'framer-motion'
 import { coreFeatures } from '@/constants/home'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 
@@ -19,7 +20,11 @@ export const CoreFeatures = () => {
         <div className="grid md:grid-cols-3 gap-6">
           {coreFeatures.map((feature, index) => (
             <AnimateIn key={feature.title} variant="fade-up" delay={index * 120}>
-              <div className="glass-card p-8 rounded-2xl flex flex-col gap-6 group h-full">
+              <motion.div
+                className="glass-card p-8 rounded-2xl flex flex-col gap-6 group h-full"
+                whileHover={{ y: -4, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center transition-colors ${feature.color === 'primary'
                   ? 'bg-primary-500/10 text-primary-400 group-hover:bg-primary-500 group-hover:text-white'
                   : feature.color === 'purple'
@@ -50,7 +55,7 @@ export const CoreFeatures = () => {
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </AnimateIn>
           ))}
         </div>

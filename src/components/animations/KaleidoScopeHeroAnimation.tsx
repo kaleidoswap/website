@@ -105,7 +105,7 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
   }, [])
 
   useEffect(() => {
-    if (reducedMotion || !isVisible) return
+    if (reducedMotion || !isVisible || window.matchMedia('(pointer: coarse)').matches) return
     const lerp = () => {
       const cur = currentOffset.current
       const tgt = targetOffset.current
@@ -122,6 +122,7 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
   }, [reducedMotion, isVisible])
 
   useEffect(() => {
+    if (window.matchMedia('(pointer: coarse)').matches) return
     document.addEventListener('mousemove', handleMouseMove)
     const el = containerRef.current
     if (el) el.addEventListener('mouseleave', handleMouseLeave)
