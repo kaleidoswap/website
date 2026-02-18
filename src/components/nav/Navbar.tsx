@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
-import { mainNavItems, productItems } from '@/constants/navigation'
+import { mainNavItems, productItems, developerItems } from '@/constants/navigation'
 import { PRODUCTS } from '@/constants/urls'
 import { cn, openExternalLink } from '@/lib/utils'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
@@ -13,7 +13,9 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
+  const [developersOpen, setDevelopersOpen] = useState(false)
   const productsRef = useRef<HTMLDivElement>(null)
+  const developersRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const location = useLocation()
@@ -34,6 +36,7 @@ export const Navbar = () => {
     checkScroll()
     setIsOpen(false)
     setProductsOpen(false)
+    setDevelopersOpen(false)
   }, [location.pathname, checkScroll])
 
   useEffect(() => {
@@ -47,11 +50,14 @@ export const Navbar = () => {
     }
   }, [isOpen])
 
-  // Close dropdown when clicking outside
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (productsRef.current && !productsRef.current.contains(event.target as Node)) {
         setProductsOpen(false)
+      }
+      if (developersRef.current && !developersRef.current.contains(event.target as Node)) {
+        setDevelopersOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -64,6 +70,8 @@ export const Navbar = () => {
       if (e.key === 'Escape') {
         if (productsOpen) {
           setProductsOpen(false)
+        } else if (developersOpen) {
+          setDevelopersOpen(false)
         } else if (isOpen) {
           setIsOpen(false)
           menuButtonRef.current?.focus()
@@ -72,7 +80,7 @@ export const Navbar = () => {
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [productsOpen, isOpen])
+  }, [productsOpen, developersOpen, isOpen])
 
   // Focus trap for mobile menu
   useEffect(() => {
@@ -112,6 +120,7 @@ export const Navbar = () => {
     }
     setIsOpen(false)
     setProductsOpen(false)
+    setDevelopersOpen(false)
   }
 
   return (
@@ -209,6 +218,52 @@ export const Navbar = () => {
                 )}
               </div>
 
+              {/* Developers Dropdown */}
+              <div ref={developersRef} className="relative">
+                <button
+                  onClick={() => setDevelopersOpen(!developersOpen)}
+                  aria-expanded={developersOpen}
+                  aria-haspopup="true"
+                  className={cn(
+                    'flex items-center gap-1 text-gray-300 hover:text-white transition-colors py-1',
+                    developersOpen && 'text-white'
+                  )}
+                >
+                  {t('Developers')}
+                  <ChevronDown
+                    className={cn(
+                      'w-4 h-4 transition-transform',
+                      developersOpen && 'rotate-180'
+                    )}
+                  />
+                </button>
+
+                {developersOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden" role="menu">
+                    {developerItems.map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handleNavigation(item.href, item.external)
+                        }}
+                        role="menuitem"
+                        className="flex items-start gap-3 px-4 py-3 hover:bg-gray-700/50 transition-colors group"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5 text-gray-200 group-hover:text-white font-medium text-sm">
+                            {t(item.label)}
+                            <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-gray-300 shrink-0" />
+                          </div>
+                          <p className="text-xs text-gray-500 mt-0.5">{t(item.description)}</p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
               {/* Other nav items */}
               {mainNavItems
                 .filter((item) => item.label !== 'Products')
@@ -296,26 +351,25 @@ export const Navbar = () => {
                   })}
                 </div>
 
-                {/* Other links */}
+                {/* Developers section */}
                 <div className="border-t border-gray-800 pt-6 mb-6">
-                  {mainNavItems
-                    .filter((item) => item.label !== 'Products')
-                    .map((item) => (
-                      <a
-                        key={item.href}
-                        href={item.href}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          handleNavigation(item.href, item.external)
-                        }}
-                        className="block py-3 px-4 text-lg rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 my-1"
-                      >
-                        {t(item.label)}
-                        {item.external && (
-                          <ExternalLink className="inline w-4 h-4 ml-2" />
-                        )}
-                      </a>
-                    ))}
+                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-3 px-4">
+                    {t('Developers')}
+                  </p>
+                  {developerItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleNavigation(item.href, item.external)
+                      }}
+                      className="flex items-center justify-between py-3 px-4 text-lg rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 my-1"
+                    >
+                      <span>{t(item.label)}</span>
+                      <ExternalLink className="w-4 h-4 text-gray-500" />
+                    </a>
+                  ))}
                 </div>
 
                 {/* Language Switcher */}

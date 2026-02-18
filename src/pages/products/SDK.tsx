@@ -4,110 +4,131 @@ import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
+import { AnimateIn } from '@/components/animations/AnimateIn'
 import { footerConfig } from '@/constants/footer'
-import { PRODUCTS, GITHUB } from '@/constants/urls'
+import { PRODUCTS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
 const features = [
   {
     icon: Package,
-    title: 'Multi-Language SDKs',
-    description: 'Built in Rust with native bindings for Python and TypeScript.',
+    title: 'TypeScript & Python',
+    description: 'Native SDKs for TypeScript and Python, auto-generated from OpenAPI specs with full type safety.',
   },
   {
     icon: Code,
     title: 'Type Safe',
-    description: 'Auto-generated models from OpenAPI specs with full type definitions.',
+    description: 'Auto-generated models from OpenAPI specs — full TypeScript types and Python Pydantic models.',
   },
   {
     icon: Terminal,
     title: 'Real-Time WebSocket',
-    description: 'Live price streaming, quote updates, and auto-reconnection.',
+    description: 'Live quote streaming, price updates, and auto-reconnection built in.',
   },
   {
     icon: BookOpen,
-    title: 'Open Source',
-    description: 'MIT licensed. Fork, modify, and contribute.',
+    title: 'MIT Licensed',
+    description: 'Open source and free to use. Fork, modify, and contribute.',
   },
 ]
 
 const useCases = [
   {
     title: 'Market Data',
-    description: 'Fetch assets, trading pairs, and real-time quotes from any application.',
+    description: 'Fetch trading pairs and real-time quotes with full type safety from any TypeScript application.',
     language: 'typescript',
-    code: `import { KaleidoClient } from 'kaleidoswap-sdk';
+    code: `import { KaleidoClient, createAssetPairMapper } from 'kaleidoswap-sdk';
 
 const client = KaleidoClient.create({
   baseUrl: 'https://api.kaleidoswap.com',
 });
 
-// List available assets
-const assets = await client.maker.listAssets();
-console.log(\`Found \${assets.length} assets\`);
+// list available trading pairs
+const pairsResponse = await client.maker.listPairs();
+const mapper = createAssetPairMapper(pairsResponse);
 
-// Get all trading pairs
-const pairs = await client.maker.listPairs();
+const btc  = mapper.findByTicker('BTC');
+const usdt = mapper.findByTicker('USDT');
 
-// Get a quote for BTC → USDT
+// get a quote for 0.001 BTC → USDT
 const quote = await client.maker.getQuote({
-  from_asset: 'BTC',
-  to_asset: 'USDT',
-  from_amount: 100_000,
-  from_layer: 'BTC_LN',
-  to_layer: 'RGB_LN',
+  from_asset: { asset_id: btc.asset_id,  layer: 'BTC_LN', amount: 100_000 },
+  to_asset:   { asset_id: usdt.asset_id, layer: 'RGB_LN' },
 });
-console.log(\`Rate: \${quote.rate}\`);`,
+
+console.log(\`Price:   \${quote.price}\`);
+console.log(\`Expires: \${new Date(quote.expires_at).toLocaleString()}\`);`,
   },
   {
     title: 'Atomic Swaps',
-    description: 'Execute trustless swaps across Bitcoin layers with full type safety.',
+    description: 'Execute trustless swaps across Bitcoin layers from Python with Pydantic-typed models.',
     language: 'python',
-    code: `from kaleidoswap import KaleidoClient, KaleidoConfig
-
-config = KaleidoConfig(
-    base_url="https://api.kaleidoswap.com"
+    code: `from kaleidoswap_sdk import (
+    KaleidoClient, Layer,
+    PairQuoteRequest, SwapLegInput,
+    CreateSwapOrderRequest,
 )
-client = KaleidoClient(config)
 
-# Get a quote
-quote = client.market.get_best_quote(
-    "BTC/USDT", 1_000_000
+client = KaleidoClient.create(base_url="https://api.kaleidoswap.com")
+
+# request a quote
+quote = await client.maker.get_quote(PairQuoteRequest(
+    from_asset=SwapLegInput(
+        asset_id="BTC",
+        layer=Layer.BTC_LN,
+        amount=100_000,
+    ),
+    to_asset=SwapLegInput(
+        asset_id="USDT",
+        layer=Layer.RGB_LN,
+    ),
+))
+print(f"Price: {quote.price} | RFQ: {quote.rfq_id}")
+
+# build the order request (rfq_id, from/to assets, receiver_address)
+order_req = CreateSwapOrderRequest(
+    rfq_id=quote.rfq_id,
+    from_asset=...,  # from quote.from_asset
+    to_asset=...,    # from quote.to_asset
 )
-print(f"Rate: {quote.price}")
-print(f"Fee: {quote.fee.amount} {quote.fee.asset_ticker}")
-
-# Initiate and track a swap
-swap = client.swaps.initiate_swap(quote.rfq_id)
-status = client.swaps.get_swap_status(swap.swap_id)
-print(f"Swap status: {status.state}")`,
+order  = await client.maker.create_swap_order(order_req)
+result = await client.maker.wait_for_swap_completion(order.id)
+print(f"Swap status: {result.status}")`,
   },
   {
     title: 'Real-Time Streaming',
-    description: 'Stream live prices and quotes with WebSocket auto-reconnection.',
-    language: 'rust',
-    code: `use kaleidoswap_core::{KaleidoClient, KaleidoConfig, WsEvent};
+    description: 'Stream live quotes over WebSocket with built-in auto-reconnection and typed event handlers.',
+    language: 'typescript',
+    code: `import { KaleidoClient } from 'kaleidoswap-sdk';
+import { randomUUID } from 'crypto';
 
-#[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let config = KaleidoConfig::new(
-        "https://api.kaleidoswap.com"
-    );
-    let client = KaleidoClient::new(config)?;
+const client = KaleidoClient.create({
+  baseUrl: 'https://api.kaleidoswap.com',
+});
 
-    // Stream real-time price updates
-    client.connect_websocket().await?;
+// open a WebSocket connection
+const clientId = randomUUID();
+const ws = client.maker.enableWebSocket(
+  \`wss://api.kaleidoswap.com/api/v1/market/ws/\${clientId}\`
+);
 
-    client.on_websocket_event(
-        WsEvent::PriceUpdate, |data| {
-        println!("Price: {} - \${}",
-            data["pair"], data["price"]);
-    }).await?;
+ws.on('connected',     () => console.log('Connected'));
+ws.on('disconnected',  () => console.log('Disconnected'));
+ws.on('quoteResponse', (quote) => {
+  console.log(\`\${quote.from_amount} → \${quote.to_amount}\`);
+  console.log(\`Price: \${quote.price}\`);
+});
 
-    client.subscribe_to_pair("BTC/USDT").await?;
-    Ok(())
-}`,
+await ws.connect();
+
+// stream live quotes for BTC/USDT
+ws.requestQuote({
+  from_asset: 'btc',  to_asset: 'usdt',
+  from_amount: 100_000,
+  from_layer:  'BTC_LN',
+  to_layer:    'RGB_LN',
+});`,
   },
 ]
 
@@ -138,6 +159,59 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
   )
 }
 
+const installTabs = [
+  { label: 'npm', color: 'text-red-400', cmd: 'pnpm add kaleidoswap-sdk' },
+  { label: 'pip', color: 'text-blue-400', cmd: 'pip install kaleidoswap-sdk' },
+]
+
+const InstallTabs = () => {
+  const [active, setActive] = useState(0)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(installTabs[active].cmd)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div className="bg-gray-900 rounded-xl overflow-hidden border border-white/5">
+      {/* Tab bar */}
+      <div className="flex items-center border-b border-white/5 px-1 pt-1">
+        {installTabs.map((tab, i) => (
+          <button
+            key={tab.label}
+            onClick={() => setActive(i)}
+            className={`px-4 py-2 text-xs font-mono font-semibold rounded-t transition-colors ${
+              active === i
+                ? `${tab.color} border-b-2 border-current -mb-px bg-gray-800/60`
+                : 'text-slate-500 hover:text-slate-300'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      {/* Command line */}
+      <div className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center gap-3 font-mono text-sm min-w-0">
+          <span className="text-slate-600 shrink-0">$</span>
+          <span className={`${installTabs[active].color} truncate`}>
+            {installTabs[active].cmd}
+          </span>
+        </div>
+        <button
+          onClick={handleCopy}
+          className="text-slate-500 hover:text-white transition-colors shrink-0 ml-3"
+          aria-label="Copy command"
+        >
+          {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export const SDK = () => {
   const { t } = useTranslation()
 
@@ -154,65 +228,168 @@ export const SDK = () => {
       {/* Hero */}
       <section className="pt-32 pb-20 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-green-500/20 rounded-full blur-[120px] -z-10 opacity-40" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary-500/15 rounded-full blur-[100px] -z-10" />
 
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6">
-              <Code className="w-4 h-4 text-green-400" />
-              <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">
-                {t('Developer Tools')}
-              </span>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+            {/* Left — text & CTAs */}
+            <div>
+              <AnimateIn variant="fade-down" duration={500}>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6 w-fit">
+                  <Code className="w-4 h-4 text-green-400" />
+                  <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">
+                    {t('Developer Tools')}
+                  </span>
+                </div>
+              </AnimateIn>
+
+              <AnimateIn variant="fade-up" delay={100}>
+                <div className="space-y-4 mb-8">
+                  <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                    {t('Build on KaleidoSwap')}
+                  </h1>
+                  <p className="text-xl text-slate-400 leading-relaxed">
+                    {t('Integrate atomic swaps into your wallet, exchange, or application. Built in Rust with native bindings for Python and TypeScript.')}
+                  </p>
+                </div>
+              </AnimateIn>
+
+              <AnimateIn variant="fade-up" delay={250}>
+                <div className="flex flex-wrap gap-4 mb-8">
+                  <Button
+                    size="lg"
+                    onClick={() => window.open(PRODUCTS.docs, '_blank')}
+                    className="bg-green-500 hover:bg-green-600 flex items-center gap-2"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    {t('Read the Docs')}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    disabled
+                    className="border-slate-700 text-slate-500 cursor-not-allowed flex items-center gap-2"
+                  >
+                    {t('Soon on GitHub')}
+                    <ExternalLink className="w-4 h-4" />
+                  </Button>
+                </div>
+              </AnimateIn>
+
+              {/* Install commands */}
+              <AnimateIn variant="fade-up" delay={350}>
+                <InstallTabs />
+              </AnimateIn>
             </div>
 
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              {t('Build on KaleidoSwap')}
-            </h1>
-            <p className="text-xl text-slate-400 mb-8 leading-relaxed">
-              {t('Integrate atomic swaps into your wallet, exchange, or application. Built in Rust with native bindings for Python and TypeScript.')}
-            </p>
-
-            <div className="flex flex-wrap gap-4 mb-8">
-              <Button
-                size="lg"
-                onClick={() => window.open(PRODUCTS.docs, '_blank')}
-                className="bg-green-500 hover:bg-green-600"
-              >
-                <BookOpen className="w-4 h-4 mr-2" />
-                {t('Read the Docs')}
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => window.open(GITHUB.orgUrl, '_blank')}
-              >
-                {t('View on GitHub')}
-                <ExternalLink className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
-
-            {/* Install commands */}
-            <div className="flex flex-col gap-2">
-              <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm inline-flex items-center gap-4">
-                <span className="text-slate-500">$</span>
-                <span className="text-green-400">pnpm add kaleidoswap-sdk</span>
-                <button
-                  onClick={() => navigator.clipboard.writeText('pnpm add kaleidoswap-sdk')}
-                  className="text-slate-500 hover:text-white transition-colors"
-                >
-                  <Copy className="w-4 h-4" />
-                </button>
+            {/* Right — live code preview */}
+            <AnimateIn variant="scale" delay={200} duration={800}>
+              <div className="relative group">
+                <div className="absolute -inset-4 bg-gradient-to-br from-green-500/20 to-primary-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+                <div className="relative bg-gray-900 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+                  {/* Window chrome */}
+                  <div className="flex items-center justify-between px-4 py-3 bg-gray-950/80 border-b border-white/5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/70" />
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
+                      <div className="w-3 h-3 rounded-full bg-green-500/70" />
+                    </div>
+                    <span className="text-xs text-slate-500 font-mono">swap.ts</span>
+                    <span className="text-xs px-2 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20 font-mono">
+                      TypeScript
+                    </span>
+                  </div>
+                  {/* Syntax-highlighted snippet */}
+                  <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto">
+                    <div>
+                      <span className="text-purple-400">import</span>
+                      <span className="text-slate-300"> {'{ KaleidoClient }'} </span>
+                      <span className="text-purple-400">from</span>
+                      <span className="text-green-300"> 'kaleidoswap-sdk'</span>
+                      <span className="text-slate-500">;</span>
+                    </div>
+                    <div className="mt-4">
+                      <span className="text-purple-400">const</span>
+                      <span className="text-blue-300"> client</span>
+                      <span className="text-slate-300"> = KaleidoClient.</span>
+                      <span className="text-yellow-300">create</span>
+                      <span className="text-slate-300">{'({'}</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-slate-400">baseUrl</span>
+                      <span className="text-slate-300">: </span>
+                      <span className="text-green-300">'https://api.kaleidoswap.com'</span>
+                      <span className="text-slate-500">,</span>
+                    </div>
+                    <div><span className="text-slate-300">{'});'}</span></div>
+                    <div className="mt-4 text-slate-600">{'// get a quote'}</div>
+                    <div>
+                      <span className="text-purple-400">const</span>
+                      <span className="text-blue-300"> quote</span>
+                      <span className="text-slate-300"> = </span>
+                      <span className="text-purple-400">await</span>
+                      <span className="text-slate-300"> client.maker.</span>
+                      <span className="text-yellow-300">getQuote</span>
+                      <span className="text-slate-300">{'({'}</span>
+                    </div>
+                    <div className="pl-4 space-y-0.5">
+                      <div>
+                        <span className="text-slate-400">from_asset</span>
+                        <span className="text-slate-300">{': { '}</span>
+                        <span className="text-slate-400">asset_id</span>
+                        <span className="text-slate-300">: </span>
+                        <span className="text-green-300">'BTC'</span>
+                        <span className="text-slate-500">, </span>
+                        <span className="text-slate-400">layer</span>
+                        <span className="text-slate-300">: </span>
+                        <span className="text-green-300">'BTC_LN'</span>
+                        <span className="text-slate-500">, </span>
+                        <span className="text-slate-400">amount</span>
+                        <span className="text-slate-300">: </span>
+                        <span className="text-orange-300">100_000</span>
+                        <span className="text-slate-300">{' },'}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-400">to_asset</span>
+                        <span className="text-slate-300">{': { '}</span>
+                        <span className="text-slate-400">asset_id</span>
+                        <span className="text-slate-300">: </span>
+                        <span className="text-green-300">'USDT'</span>
+                        <span className="text-slate-500">, </span>
+                        <span className="text-slate-400">layer</span>
+                        <span className="text-slate-300">: </span>
+                        <span className="text-green-300">'RGB_LN'</span>
+                        <span className="text-slate-300">{' },'}</span>
+                      </div>
+                    </div>
+                    <div><span className="text-slate-300">{'});'}</span></div>
+                    <div className="mt-4 text-slate-600">{'// execute the swap'}</div>
+                    <div>
+                      <span className="text-purple-400">const</span>
+                      <span className="text-blue-300"> order</span>
+                      <span className="text-slate-300"> = </span>
+                      <span className="text-purple-400">await</span>
+                      <span className="text-slate-300"> client.maker.</span>
+                      <span className="text-yellow-300">createSwapOrder</span>
+                      <span className="text-slate-300">{'({ rfq_id: quote.rfq_id });'}</span>
+                    </div>
+                    <div className="mt-4 text-slate-600">{'// wait for completion'}</div>
+                    <div>
+                      <span className="text-purple-400">await</span>
+                      <span className="text-slate-300"> client.maker.</span>
+                      <span className="text-yellow-300">waitForSwapCompletion</span>
+                      <span className="text-slate-300">(order.id);</span>
+                    </div>
+                    <div className="mt-3 flex items-center gap-1">
+                      <span className="text-slate-600">{'>'}</span>
+                      <span className="w-2 h-[1.1em] bg-green-400/70 animate-pulse ml-1 inline-block" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm inline-flex items-center gap-4">
-                <span className="text-slate-500">$</span>
-                <span className="text-green-400">pip install kaleidoswap-sdk</span>
-                <button
-                  onClick={() => navigator.clipboard.writeText('pip install kaleidoswap-sdk')}
-                  className="text-slate-500 hover:text-white transition-colors"
-                >
-                  <Copy className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+            </AnimateIn>
+
           </div>
         </div>
       </section>
@@ -281,7 +458,7 @@ export const SDK = () => {
               <div>
                 <h2 className="text-3xl font-bold mb-4">{t('API Reference')}</h2>
                 <p className="text-slate-400 mb-6">
-                  {t('Complete API documentation with typed models auto-generated from OpenAPI specs across all languages.')}
+                  {t('Complete API documentation with typed models auto-generated from OpenAPI specs for TypeScript and Python.')}
                 </p>
                 <ul className="space-y-3 mb-6">
                   {['Market, Swap & Order APIs', 'WebSocket real-time streaming', 'RGB Lightning Node integration', 'LSPS1 channel management'].map((item) => (
@@ -300,19 +477,15 @@ export const SDK = () => {
                 </Button>
               </div>
               <div className="bg-gray-900 rounded-xl p-6 font-mono text-sm">
-                <div className="text-slate-500 mb-2">// {t('API Response Types')}</div>
-                <div className="text-purple-400">interface</div>
-                <span className="text-green-400"> PairQuoteResponse </span>
-                <span className="text-white">{'{'}</span>
-                <div className="pl-4 text-slate-400">
-                  <div>rfq_id: <span className="text-yellow-400">string</span></div>
-                  <div>from_asset: <span className="text-yellow-400">string</span></div>
-                  <div>to_asset: <span className="text-yellow-400">string</span></div>
-                  <div>from_amount: <span className="text-yellow-400">number</span></div>
-                  <div>to_amount: <span className="text-yellow-400">number</span></div>
-                  <div>rate: <span className="text-yellow-400">number</span></div>
-                  <div>fee: <span className="text-yellow-400">Fee</span></div>
-                  <div>expires_at: <span className="text-yellow-400">number</span></div>
+                <div className="text-slate-500 mb-2">// {t('GetQuoteResponse')}</div>
+                <div className="text-purple-400">interface<span className="text-green-400"> GetQuoteResponse </span><span className="text-white">{'{'}</span></div>
+                <div className="pl-4 text-slate-400 space-y-0.5">
+                  <div>rfq_id<span className="text-slate-500">:</span>      <span className="text-yellow-400">string</span></div>
+                  <div>from_asset<span className="text-slate-500">:</span>  <span className="text-yellow-400">SwapLeg</span>  <span className="text-slate-600">{'// { asset_id, ticker, layer, amount }'}</span></div>
+                  <div>to_asset<span className="text-slate-500">:</span>    <span className="text-yellow-400">SwapLeg</span>  <span className="text-slate-600">{'// { asset_id, ticker, layer, amount }'}</span></div>
+                  <div>price<span className="text-slate-500">:</span>       <span className="text-yellow-400">number</span></div>
+                  <div>fee<span className="text-slate-500">:</span>         <span className="text-yellow-400">SwapFee</span>  <span className="text-slate-600">{'// { final_fee, fee_asset }'}</span></div>
+                  <div>expires_at<span className="text-slate-500">:</span>  <span className="text-yellow-400">number</span></div>
                 </div>
                 <span className="text-white">{'}'}</span>
               </div>

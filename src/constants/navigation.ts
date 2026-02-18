@@ -34,19 +34,24 @@ export const productItems = [
   },
 ]
 
-export const mainNavItems: NavItem[] = [
+export const developerItems = [
   {
-    label: 'Products',
-    href: '/products',
-  },
-  {
-    label: 'Docs',
+    label: 'Documentation',
     href: PRODUCTS.docs,
     external: true,
+    description: 'API reference, guides & examples',
   },
   {
     label: 'GitHub',
     href: GITHUB.orgUrl,
     external: true,
+    description: 'Desktop app & open-source code',
+  },
+]
+
+export const mainNavItems: NavItem[] = [
+  {
+    label: 'Products',
+    href: '/products',
   },
 ]

@@ -13,8 +13,8 @@ const products = [
     id: 'web-app',
     name: 'Web App',
     icon: Globe,
-    status: 'live' as const,
-    description: 'The fastest way to swap. No download required. Connect your wallet and trade instantly. Supports Alby, Bitmask, Rate Extension, and Xverse.',
+    status: 'testnet-soon' as const,
+    description: 'The fastest way to swap. No download required. Launching on testnet soon — app.kaleidoswap.com will be your gateway to RGB swaps directly in the browser.',
     features: [
       'No installation required',
       'Works on any browser',
@@ -116,6 +116,7 @@ export const Products = () => {
             {products.map((product) => {
               const Icon = product.icon
               const isLive = product.status === 'live'
+              const isTestnetSoon = product.status === 'testnet-soon'
 
               const hasPage = product.href !== '#'
 
@@ -157,10 +158,12 @@ export const Products = () => {
                           className={`text-xs font-medium px-2 py-1 rounded-full ${
                             isLive
                               ? 'bg-green-500/20 text-green-400'
+                              : isTestnetSoon
+                              ? 'bg-amber-500/20 text-amber-400'
                               : 'bg-gray-700 text-gray-400'
                           }`}
                         >
-                          {isLive ? t('Live') : t('Coming Soon')}
+                          {isLive ? t('Live') : isTestnetSoon ? t('Testnet Soon') : t('Coming Soon')}
                         </span>
                       </div>
 

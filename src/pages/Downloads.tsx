@@ -297,8 +297,8 @@ export const Downloads = () => {
               { icon: Shield, label: t('Open Source'), desc: t('Fully auditable code'), color: 'text-green-400', bg: 'bg-green-500/10' },
               { icon: null, label: t('RGB Assets'), desc: t('Trade any RGB token'), color: 'text-secondary-400', bg: 'bg-secondary-500/10' },
             ].map((item, i) => (
-              <AnimateIn key={item.label} variant="fade-up" delay={600 + i * 80}>
-                <div className="glass-card p-5 text-center rounded-2xl">
+              <AnimateIn key={item.label} variant="fade-up" delay={600 + i * 80} className="h-full">
+                <div className="glass-card p-5 text-center rounded-2xl h-full">
                   <div className={`inline-flex p-2.5 rounded-full ${item.bg} ${item.color} mb-3`}>
                     {item.icon ? (
                       <item.icon className="w-5 h-5" />
@@ -332,8 +332,8 @@ export const Downloads = () => {
               { num: '2', title: t('Verify Signature'), desc: t('Check cryptographic signatures'), color: 'text-secondary-400', bg: 'bg-secondary-500/10', border: 'border-secondary-500/20' },
               { num: '3', title: t('Install Safely'), desc: t('Run verified application'), color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
             ].map((step, i) => (
-              <AnimateIn key={step.num} variant="fade-up" delay={i * 120}>
-                <div className={`glass-card p-6 text-center rounded-2xl border ${step.border}`}>
+              <AnimateIn key={step.num} variant="fade-up" delay={i * 120} className="h-full">
+                <div className={`glass-card p-6 text-center rounded-2xl border h-full ${step.border}`}>
                   <div className={`inline-flex items-center justify-center w-11 h-11 rounded-full ${step.bg} ${step.color} font-bold text-lg mb-4`}>
                     {step.num}
                   </div>

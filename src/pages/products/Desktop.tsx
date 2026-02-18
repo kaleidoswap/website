@@ -132,38 +132,16 @@ export const Desktop = () => {
               </AnimateIn>
             </div>
 
-            {/* Terminal preview */}
+            {/* Desktop App Screenshot */}
             <AnimateIn variant="scale" delay={200} duration={800}>
-              <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-br from-secondary-500/20 to-primary-500/20 rounded-3xl blur-2xl opacity-50" />
-                <div className="relative bg-gray-900 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-                  {/* Window chrome */}
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-gray-950/60">
-                    <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                    <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                    <span className="ml-2 text-xs text-slate-500 font-mono">kaleidoswap</span>
-                  </div>
-                  {/* Terminal content */}
-                  <div className="p-6 font-mono text-sm space-y-2">
-                    <div className="text-slate-500"># {t('Start your node')}</div>
-                    <div className="text-green-400">$ kaleidoswap --version</div>
-                    <div className="text-slate-400 pl-2">KaleidoSwap Desktop v0.1.0</div>
-                    <div className="text-slate-400 pl-2">rgb-lightning-node v0.3.0</div>
-                    <div className="mt-3 text-slate-500"># {t('Connect to testnet')}</div>
-                    <div className="text-green-400">$ kaleidoswap connect --testnet</div>
-                    <div className="text-slate-400 pl-2">
-                      <span className="text-primary-400">✓</span> {t('Connected to signet')}
-                    </div>
-                    <div className="text-slate-400 pl-2">
-                      <span className="text-primary-400">✓</span> {t('RGB node synced')}
-                    </div>
-                    <div className="flex items-center gap-1 mt-3">
-                      <span className="text-green-400">$</span>
-                      <span className="w-2 h-4 bg-green-400 animate-pulse ml-1" />
-                    </div>
-                  </div>
-                </div>
+              <div className="relative group">
+                <div className="absolute -inset-8 bg-gradient-to-r from-secondary-500/30 to-primary-500/30 rounded-3xl blur-3xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+                <div className="absolute -inset-4 bg-gradient-to-br from-secondary-500/10 via-transparent to-primary-500/10 rounded-2xl" />
+                <img
+                  src="/images/desktop-app-screenshot.png"
+                  alt={t('Desktop App Screenshot')}
+                  className="relative w-full rounded-xl drop-shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+                />
               </div>
             </AnimateIn>
           </div>
@@ -207,9 +185,9 @@ export const Desktop = () => {
 
           <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             {platforms.map((platform, index) => (
-              <AnimateIn key={platform.name} variant="fade-up" delay={index * 100}>
+              <AnimateIn key={platform.name} variant="fade-up" delay={index * 100} className="h-full">
                 <motion.div
-                  className={`glass-card p-6 rounded-2xl text-center cursor-pointer ${
+                  className={`glass-card p-6 rounded-2xl text-center cursor-pointer h-full flex flex-col items-center ${
                     platform.disabled ? 'opacity-50' : 'hover:border-secondary-500/30'
                   }`}
                   whileHover={!platform.disabled ? { y: -4 } : {}}
@@ -219,11 +197,13 @@ export const Desktop = () => {
                   <platform.icon className="w-10 h-10 text-slate-300 mx-auto mb-3" />
                   <h3 className="text-lg font-bold mb-1">{platform.name}</h3>
                   <p className="text-slate-500 text-sm">{platform.arch}</p>
-                  {platform.disabled && (
-                    <span className="inline-block mt-2 text-xs text-slate-500 border border-slate-700 px-2 py-0.5 rounded-full">
-                      {t('Coming Soon')}
-                    </span>
-                  )}
+                  <div className="mt-auto pt-2 min-h-[28px] flex items-center justify-center">
+                    {platform.disabled && (
+                      <span className="text-xs text-slate-500 border border-slate-700 px-2 py-0.5 rounded-full">
+                        {t('Coming Soon')}
+                      </span>
+                    )}
+                  </div>
                 </motion.div>
               </AnimateIn>
             ))}
