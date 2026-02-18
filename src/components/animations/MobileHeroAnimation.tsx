@@ -34,20 +34,20 @@ export const MobileHeroAnimation = () => {
         {/* Center glow */}
         <div className="absolute inset-0 flex items-center justify-center">
           <div
-            className="w-20 h-20 rounded-full bg-primary-500/20 blur-xl transition-all duration-1000"
+            className="w-20 h-20 rounded-full bg-primary-500/20 blur-xl transition-all duration-400"
             style={{
               opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'scale(1)' : 'scale(0.5)',
+              transform: isVisible ? 'scale(1)' : 'scale(0.7)',
             }}
           />
         </div>
 
         {/* Center logo */}
         <div
-          className="absolute inset-0 flex items-center justify-center transition-all duration-700"
+          className="absolute inset-0 flex items-center justify-center transition-all duration-300"
           style={{
             opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'scale(1)' : 'scale(0.7)',
+            transform: isVisible ? 'scale(1)' : 'scale(0.85)',
           }}
         >
           <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
@@ -57,7 +57,7 @@ export const MobileHeroAnimation = () => {
 
         {/* Orbit ring */}
         <div
-          className="absolute inset-0 flex items-center justify-center transition-opacity duration-700"
+          className="absolute inset-0 flex items-center justify-center transition-opacity duration-300"
           style={{ opacity: isVisible ? 0.3 : 0 }}
         >
           <div
@@ -88,8 +88,8 @@ export const MobileHeroAnimation = () => {
                   ? `translate(${x}px, ${y}px)`
                   : 'translate(0px, 0px) scale(0)',
                 opacity: isVisible ? 1 : 0,
-                transitionDuration: '800ms',
-                transitionDelay: `${300 + index * 120}ms`,
+                transitionDuration: '400ms',
+                transitionDelay: `${100 + index * 60}ms`,
               }}
             >
               <div className="w-full h-full rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center animate-float"
@@ -111,8 +111,8 @@ export const MobileHeroAnimation = () => {
 
         {/* Connecting lines (subtle) */}
         <svg
-          className="absolute inset-0 w-full h-full transition-opacity duration-1000"
-          style={{ opacity: isVisible ? 0.1 : 0, transitionDelay: '800ms' }}
+          className="absolute inset-0 w-full h-full transition-opacity duration-500"
+          style={{ opacity: isVisible ? 0.1 : 0, transitionDelay: '300ms' }}
           viewBox="0 0 260 260"
         >
           {liveProtocols.map((_, index) => {

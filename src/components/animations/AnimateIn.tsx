@@ -1,5 +1,6 @@
 import { type ReactNode, type CSSProperties } from 'react'
 import { useInView } from '@/hooks/useInView'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 type Variant = 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale' | 'blur'
 
@@ -12,7 +13,7 @@ interface AnimateInProps {
   className?: string
 }
 
-const variantStyles: Record<Variant, { from: CSSProperties; to: CSSProperties }> = {
+const desktopVariants: Record<Variant, { from: CSSProperties; to: CSSProperties }> = {
   'fade-up': {
     from: { opacity: 0, transform: 'translateY(32px)' },
     to: { opacity: 1, transform: 'translateY(0)' },
@@ -39,6 +40,36 @@ const variantStyles: Record<Variant, { from: CSSProperties; to: CSSProperties }>
   },
 }
 
+const mobileVariants: Record<Variant, { from: CSSProperties; to: CSSProperties }> = {
+  'fade-up': {
+    from: { opacity: 0, transform: 'translateY(16px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+  },
+  'fade-down': {
+    from: { opacity: 0, transform: 'translateY(-16px)' },
+    to: { opacity: 1, transform: 'translateY(0)' },
+  },
+  'fade-left': {
+    from: { opacity: 0, transform: 'translateX(-16px)' },
+    to: { opacity: 1, transform: 'translateX(0)' },
+  },
+  'fade-right': {
+    from: { opacity: 0, transform: 'translateX(16px)' },
+    to: { opacity: 1, transform: 'translateX(0)' },
+  },
+  scale: {
+    from: { opacity: 0, transform: 'scale(0.95)' },
+    to: { opacity: 1, transform: 'scale(1)' },
+  },
+  blur: {
+    from: { opacity: 0, filter: 'blur(4px)', transform: 'translateY(4px)' },
+    to: { opacity: 1, filter: 'blur(0px)', transform: 'translateY(0)' },
+  },
+}
+
+const MOBILE_DURATION_SCALE = 0.55
+const MOBILE_DELAY_SCALE = 0.4
+
 export const AnimateIn = ({
   children,
   variant = 'fade-up',
@@ -48,7 +79,10 @@ export const AnimateIn = ({
   className = '',
 }: AnimateInProps) => {
   const { ref, isInView } = useInView({ threshold })
-  const styles = variantStyles[variant]
+  const mobile = useIsMobile()
+  const styles = mobile ? mobileVariants[variant] : desktopVariants[variant]
+  const d = mobile ? Math.round(duration * MOBILE_DURATION_SCALE) : duration
+  const dl = mobile ? Math.round(delay * MOBILE_DELAY_SCALE) : delay
 
   return (
     <div
@@ -56,7 +90,7 @@ export const AnimateIn = ({
       className={className}
       style={{
         ...(isInView ? styles.to : styles.from),
-        transition: `opacity ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, transform ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms, filter ${duration}ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+        transition: `opacity ${d}ms cubic-bezier(0.22, 1, 0.36, 1) ${dl}ms, transform ${d}ms cubic-bezier(0.22, 1, 0.36, 1) ${dl}ms, filter ${d}ms cubic-bezier(0.22, 1, 0.36, 1) ${dl}ms`,
         willChange: isInView ? 'auto' : 'opacity, transform',
       }}
     >

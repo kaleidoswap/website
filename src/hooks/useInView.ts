@@ -6,9 +6,11 @@ interface UseInViewOptions {
   once?: boolean
 }
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+
 export function useInView({
   threshold = 0.15,
-  rootMargin = '0px 0px -40px 0px',
+  rootMargin = isMobile ? '0px 0px 0px 0px' : '0px 0px -40px 0px',
   once = true,
 }: UseInViewOptions = {}) {
   const ref = useRef<HTMLDivElement>(null)
@@ -18,7 +20,6 @@ export function useInView({
     const el = ref.current
     if (!el) return
 
-    // Respect reduced motion preference
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setIsInView(true)
       return
@@ -33,7 +34,7 @@ export function useInView({
           setIsInView(false)
         }
       },
-      { threshold, rootMargin }
+      { threshold: isMobile ? Math.min(threshold, 0.1) : threshold, rootMargin }
     )
 
     observer.observe(el)
