@@ -1,4 +1,4 @@
-import { PRODUCTS, GITHUB } from '@/constants/urls'
+import { PRODUCTS, GITHUB, DOCS } from '@/constants/urls'
 import fulgurLogo from '@/assets/fulgur-logo.svg'
 import bitfinexLogo from '@/assets/BrandLogo.org-Bitfinex-Logo.png'
 import rgbAssociationLogo from '/icons/rgb/logo-protocol-association.png'
