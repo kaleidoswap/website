@@ -56,6 +56,11 @@ export const PRODUCTS = {
 export const DOCS = {
   home: PRODUCTS.docs,
   verifyBinaries: `${PRODUCTS.docs}/desktop-app/verify-binaries`,
+  sdk: `${PRODUCTS.docs}/sdk/introduction`,
+  desktop: `${PRODUCTS.docs}/desktop-app/getting-started/introduction`,
+  rateExtension: `${PRODUCTS.docs}/extensions/rate/introduction`,
+  webApp: `${PRODUCTS.docs}/web-app/introduction`,
+  apiReference: `${PRODUCTS.docs}/api-reference/introduction`,
 } as const
 
 // External resources (third-party)

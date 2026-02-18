@@ -6,7 +6,7 @@ import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { footerConfig } from '@/constants/footer'
-import { PRODUCTS } from '@/constants/urls'
+import { PRODUCTS, DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
@@ -259,7 +259,7 @@ export const SDK = () => {
                 <div className="flex flex-wrap gap-4 mb-8">
                   <Button
                     size="lg"
-                    onClick={() => window.open(PRODUCTS.docs, '_blank')}
+                    onClick={() => window.open(DOCS.sdk, '_blank')}
                     className="bg-green-500 hover:bg-green-600 flex items-center gap-2"
                   >
                     <BookOpen className="w-4 h-4" />
@@ -429,7 +429,7 @@ export const SDK = () => {
                   <h3 className="text-2xl font-bold mb-3">{t(useCase.title)}</h3>
                   <p className="text-slate-400 mb-4">{t(useCase.description)}</p>
                   <a
-                    href={PRODUCTS.docs}
+                    href={DOCS.sdk}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-green-400 hover:text-green-300 flex items-center gap-1"
@@ -469,7 +469,7 @@ export const SDK = () => {
                   ))}
                 </ul>
                 <Button
-                  onClick={() => window.open(PRODUCTS.docs, '_blank')}
+                  onClick={() => window.open(DOCS.apiReference, '_blank')}
                   className="bg-green-500 hover:bg-green-600"
                 >
                   {t('Explore API Docs')}

@@ -1,11 +1,11 @@
 // src/pages/products/Desktop.tsx
-import { Monitor, Shield, Server, Lock, Download, ArrowRight, Check, Terminal } from 'lucide-react'
+import { Monitor, Shield, Server, Lock, Download, ArrowRight, Check, Terminal, BookOpen } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { footerConfig } from '@/constants/footer'
-import { GITHUB } from '@/constants/urls'
+import { GITHUB, DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { motion } from 'framer-motion'
@@ -104,6 +104,15 @@ export const Desktop = () => {
                   >
                     <Download className="w-4 h-4" />
                     {t('Download Now')}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => window.open(DOCS.desktop, '_blank')}
+                    className="border-slate-600 hover:border-white text-slate-300 hover:text-white flex items-center gap-2"
+                  >
+                    <BookOpen className="w-4 h-4" />
+                    {t('Read the Docs')}
                   </Button>
                   <Button
                     variant="outline"

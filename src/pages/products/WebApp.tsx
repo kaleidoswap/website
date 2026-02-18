@@ -5,7 +5,7 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { footerConfig } from '@/constants/footer'
-import { PRODUCTS } from '@/constants/urls'
+import { PRODUCTS, DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 
 const features = [
@@ -84,7 +84,7 @@ export const WebApp = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  onClick={() => window.open(PRODUCTS.docs, '_blank')}
+                  onClick={() => window.open(DOCS.webApp, '_blank')}
                 >
                   {t('View Documentation')}
                 </Button>

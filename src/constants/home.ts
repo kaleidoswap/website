@@ -23,7 +23,7 @@ export const coreFeatures = [
     title: 'Run Your Node',
     description: 'Verify everything yourself. Our desktop app bundles a full RGB Lightning node. Your infrastructure. Your sovereignty.',
     color: 'green' as const,
-    link: { label: 'Setup documentation', href: PRODUCTS.docs },
+    link: { label: 'Setup documentation', href: DOCS.desktop },
   },
 ]
 

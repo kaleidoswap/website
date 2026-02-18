@@ -1,7 +1,7 @@
 import { Globe, Monitor, Smartphone, Puzzle, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/common/Button'
-import { PRODUCTS } from '@/constants/urls'
+import { PRODUCTS, DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useAppNavigation } from '@/hooks/useNavigation'
 import { AnimateIn } from '@/components/animations/AnimateIn'
@@ -152,7 +152,7 @@ export const ProductEcosystem = () => {
               </div>
               <div className="relative z-10">
                 <Button
-                  onClick={() => handleNavigation(PRODUCTS.docs, true)}
+                  onClick={() => handleNavigation(DOCS.sdk, true)}
                   className="bg-white text-gray-900 hover:bg-slate-200"
                 >
                   {t('Read Docs')}
