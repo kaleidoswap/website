@@ -41,7 +41,7 @@ const features = [
   },
 ]
 
-const platforms = [
+const platforms: { name: string; icon: typeof Monitor; arch: string; disabled?: boolean }[] = [
   { name: 'macOS', icon: Monitor, arch: 'Apple Silicon & Intel' },
   { name: 'Windows', icon: Monitor, arch: 'x64' },
   { name: 'Linux', icon: Terminal, arch: 'x64 / AppImage' },
