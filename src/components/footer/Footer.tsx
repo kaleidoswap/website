@@ -1,5 +1,6 @@
 // src/components/footer/Footer.tsx
 import { ExternalLink } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import type { FooterProps } from '@/types/footer'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
 import { useTranslation } from 'react-i18next'
@@ -32,17 +33,24 @@ export const Footer = ({ sections, socials }: FooterProps) => {
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-white flex items-center gap-1"
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                    >
-                      {t(link.label)}
-                      {link.external && (
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        className="text-gray-400 hover:text-white flex items-center gap-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {t(link.label)}
                         <ExternalLink className="w-3 h-3" />
-                      )}
-                    </a>
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-gray-400 hover:text-white flex items-center gap-1"
+                      >
+                        {t(link.label)}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
