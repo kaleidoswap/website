@@ -6,8 +6,8 @@
 
 import { GITHUB, DOCS } from '@/constants/urls'
 
-export const APP_VERSION = '0.3.0'
-export const RELEASE_DATE = '2025-10-15'
+export const APP_VERSION = '0.3.2'
+export const RELEASE_DATE = '2025-11-10'
 export const GITHUB_REPO = `${GITHUB.org}/${GITHUB.repo}`
 
 // Platform definitions
@@ -86,17 +86,19 @@ export const getLinuxDownload = (version: string = APP_VERSION) =>
 export const getMacDownload = (version: string = APP_VERSION) =>
   getDownloadUrl(PLATFORMS.MAC_DMG, version);
 
-// Helper function to get signature URLs (deprecated, kept for backward compatibility)
-export const getSignatureUrl = (platform: string, version: string = APP_VERSION) => 
-  `${getDownloadUrl(platform, version)}.sig`
+// Returns the GPG detached signature URL (.asc) for a given binary download URL
+export const getSignatureUrl = (platform: string, version: string = APP_VERSION) =>
+  `${getDownloadUrl(platform, version)}.asc`
 
-// Helper function to get manifest URL
-export const getManifestUrl = (version: string = APP_VERSION) => 
-  `${buildGithubUrls(version).downloadBase}/manifest.txt`
+// Manifest.txt is produced by CI and uploaded as a GitHub Actions artifact (not a release asset).
+// The URL below will resolve only if the file has been manually attached to the release.
+export const getManifestUrl = (version: string = APP_VERSION) =>
+  `${buildGithubUrls(version).releaseTag}`
 
-// Helper function to get manifest signature URL
-export const getManifestSignatureUrl = (version: string = APP_VERSION) => 
-  `${buildGithubUrls(version).downloadBase}/manifest.txt.sig`
+// No manifest.txt.sig exists in the release; signatures are per-binary (.asc files).
+// This returns the releases page URL as a fallback so users can find the .asc files.
+export const getManifestSignatureUrl = (version: string = APP_VERSION) =>
+  `${buildGithubUrls(version).releaseTag}`
 
 // Helper function to get full version string (for display)
 export const getVersionString = (version: string = APP_VERSION) => `v${version}`

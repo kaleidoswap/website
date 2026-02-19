@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { Download, ExternalLink, FileText, Shield, Terminal, Zap, Lock, Loader2, Check } from 'lucide-react'
+import { Download, ExternalLink, FileText, Shield, Terminal, Zap, Lock, Loader2, Check, Key } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SEO } from '@/components/common/SEO'
 import { Button } from '@/components/common/Button'
@@ -33,8 +33,6 @@ export const Downloads = () => {
   const {
     currentVersion,
     platforms,
-    manifestUrl,
-    manifestSignatureUrl
   } = downloadConfig
 
   const downloadFile = (url?: string) => {
@@ -215,6 +213,19 @@ export const Downloads = () => {
             )}
           </Button>
 
+          {/* GPG signature link */}
+          {!isDisabled && platform.signatureUrl && (
+            <a
+              href={platform.signatureUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex items-center justify-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors"
+            >
+              <Key className="w-3 h-3" />
+              {t('GPG signature (.asc)')}
+            </a>
+          )}
+
           {/* Bottom accent */}
           <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-700" />
         </motion.div>
@@ -316,21 +327,21 @@ export const Downloads = () => {
       </section>
 
       {/* Verification Section */}
-      <section className="py-20 relative overflow-hidden bg-gray-950/50">
+      <section className="py-16 relative overflow-hidden bg-gray-950/50">
         <div className="max-w-4xl mx-auto px-6">
           <AnimateIn variant="fade-up" className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Verify Your Download')}</h2>
             <p className="text-slate-400 text-lg leading-relaxed">
-              {t('For security, always verify the authenticity of your download using our cryptographic signatures')}
+              {t('Every release binary is individually GPG-signed. Verify before installing.')}
             </p>
           </AnimateIn>
 
           {/* Steps */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {[
-              { num: '1', title: t('Download Files'), desc: t('Get manifest and signature files'), color: 'text-primary-400', bg: 'bg-primary-500/10', border: 'border-primary-500/20' },
-              { num: '2', title: t('Verify Signature'), desc: t('Check cryptographic signatures'), color: 'text-secondary-400', bg: 'bg-secondary-500/10', border: 'border-secondary-500/20' },
-              { num: '3', title: t('Install Safely'), desc: t('Run verified application'), color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
+              { num: '1', title: t('Import GPG Key'), desc: t('One-time setup of the developer public key'), color: 'text-primary-400', bg: 'bg-primary-500/10', border: 'border-primary-500/20' },
+              { num: '2', title: t('Download .asc File'), desc: t('Grab the signature alongside your binary'), color: 'text-secondary-400', bg: 'bg-secondary-500/10', border: 'border-secondary-500/20' },
+              { num: '3', title: t('Run gpg --verify'), desc: t('Confirm a good signature before installing'), color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
             ].map((step, i) => (
               <AnimateIn key={step.num} variant="fade-up" delay={i * 120} className="h-full">
                 <div className={`glass-card p-6 text-center rounded-2xl border h-full ${step.border}`}>
@@ -344,51 +355,72 @@ export const Downloads = () => {
             ))}
           </div>
 
-          {/* Verification files */}
+          {/* Command blocks */}
           <AnimateIn variant="fade-up" delay={400}>
-            <div className="glass-card p-8 rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/5 to-transparent">
-              <div className="text-center mb-6">
-                <div className="inline-flex p-3 rounded-full bg-green-500/10 text-green-400 mb-4">
-                  <Shield className="w-7 h-7" />
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-green-400">{t('Verification Files')}</h3>
-                <p className="text-slate-400 text-sm">
-                  {t('Download these files to verify the authenticity of your download')}
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-green-500/40 text-green-400 hover:text-white hover:bg-green-500/10 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  onClick={() => downloadFile(manifestUrl)}
-                  disabled={!manifestUrl}
-                >
-                  <FileText className="w-5 h-5" />
-                  {t('Download Manifest')}
-                </Button>
-
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-green-500/40 text-green-400 hover:text-white hover:bg-green-500/10 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  onClick={() => downloadFile(manifestSignatureUrl)}
-                  disabled={!manifestSignatureUrl}
-                >
+            <div className="glass-card rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/5 to-transparent overflow-hidden">
+              <div className="p-6 border-b border-white/5 flex items-center gap-3">
+                <div className="inline-flex p-2.5 rounded-full bg-green-500/10 text-green-400">
                   <Shield className="w-5 h-5" />
-                  {t('Download Signature')}
-                </Button>
+                </div>
+                <div>
+                  <h3 className="font-bold text-white">{t('Verification Commands')}</h3>
+                  <p className="text-xs text-slate-400">{t('Run in your terminal after downloading the binary and its .asc file')}</p>
+                </div>
               </div>
 
-              <div className="text-center">
+              <div className="divide-y divide-white/5">
+                {/* Step 1 */}
+                <div className="p-5">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                    {t('1 — Import developer public key (once)')}
+                  </p>
+                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-green-300 font-mono overflow-x-auto">
+                    {`curl -s https://github.com/bitwalt.gpg | gpg --import`}
+                  </pre>
+                </div>
+
+                {/* Step 2 */}
+                <div className="p-5">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                    {t('2 — Verify the binary against its signature')}
+                  </p>
+                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-green-300 font-mono overflow-x-auto whitespace-pre-wrap">
+                    {`# macOS (Apple Silicon)\ngpg --verify KaleidoSwap_${currentVersion.version}_aarch64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_aarch64.dmg\n\n# macOS (Intel)\ngpg --verify KaleidoSwap_${currentVersion.version}_x64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_x64.dmg\n\n# Linux\ngpg --verify KaleidoSwap_${currentVersion.version}_amd64.AppImage.asc \\\n        KaleidoSwap_${currentVersion.version}_amd64.AppImage\n\n# Windows\ngpg --verify KaleidoSwap_${currentVersion.version}_x64-setup.msi.asc \\\n        KaleidoSwap_${currentVersion.version}_x64-setup.msi`}
+                  </pre>
+                </div>
+
+                {/* Expected output */}
+                <div className="p-5">
+                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                    {t('Expected output')}
+                  </p>
+                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-slate-300 font-mono overflow-x-auto">
+                    {`gpg: using RSA key 9EE396C0452755F0\ngpg: Good signature from "Walter (Kaleidoswap Developer) <walter@kaleidoswap.com>"`}
+                  </pre>
+                  <p className="text-xs text-slate-500 mt-2">
+                    {t('The key phrase is "Good signature". Any other result means the file should not be trusted.')}
+                  </p>
+                </div>
+              </div>
+
+              <div className="p-5 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <a
-                  href={verificationGuideUrl}
-                  className="text-green-400 hover:text-green-300 inline-flex items-center gap-2 transition-colors"
+                  href={`https://github.com/${GITHUB.org}/${GITHUB.repo}/releases/tag/v${currentVersion.version}`}
+                  className="text-slate-400 hover:text-white inline-flex items-center gap-2 text-sm transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <span>{t('View Full Verification Guide')}</span>
+                  <FileText className="w-4 h-4" />
+                  <span>{t('Browse all release assets & .asc files')}</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href={verificationGuideUrl}
+                  className="text-green-400 hover:text-green-300 inline-flex items-center gap-2 text-sm transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>{t('Full verification guide')}</span>
                   <ExternalLink className="w-4 h-4" />
                 </a>
               </div>

@@ -15,14 +15,14 @@ export const coreFeatures = [
     icon: 'verified_user',
     title: 'Non-Custodial',
     description: 'You hold your keys always. KaleidoSwap never takes possession of your coins. You are your own bank, from start to finish.',
-    color: 'purple' as const,
+    color: 'primary' as const,
     link: { label: 'View on GitHub', href: GITHUB.orgUrl },
   },
   {
     icon: 'dns',
     title: 'Run Your Node',
     description: 'Verify everything yourself. Our desktop app bundles a full RGB Lightning node. Your infrastructure. Your sovereignty.',
-    color: 'green' as const,
+    color: 'primary' as const,
     link: { label: 'Setup documentation', href: DOCS.desktop },
   },
 ]

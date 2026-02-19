@@ -21,14 +21,14 @@ export const productItems = [
     status: 'live' as const,
   },
   {
-    label: 'Rate (Mobile)',
-    href: '#',
+    label: 'Rate Extension',
+    href: '/products/rate-extension',
     external: false,
     status: 'coming-soon' as const,
   },
   {
-    label: 'Rate Extension',
-    href: '/products/rate-extension',
+    label: 'Rate (Mobile)',
+    href: '#',
     external: false,
     status: 'coming-soon' as const,
   },

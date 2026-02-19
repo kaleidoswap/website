@@ -10,7 +10,7 @@ export const FinalCTA = () => {
   const { handleNavigation } = useAppNavigation()
 
   return (
-    <section className="py-24 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 border-t border-white/5">
+    <section className="py-16 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 border-t border-white/5">
       <AnimateIn variant="scale" className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Try KaleidoSwap')}</h2>
         <p className="text-xl text-slate-400 mb-10">

@@ -12,16 +12,17 @@ export interface Protocol {
   icon: string | null
   lucideIcon?: LucideIcon
   status: 'live' | 'coming-soon'
+  url?: string
 }
 
 export const protocols: Protocol[] = [
-  { name: 'Bitcoin', icon: bitcoinLogo, status: 'live' },
-  { name: 'Lightning', icon: null, lucideIcon: Zap, status: 'live' },
-  { name: 'RGB', icon: rgbLogo, status: 'live' },
-  { name: 'Spark', icon: sparkAsterisk, status: 'live' },
-  { name: 'Arkade', icon: arkadeLogo, status: 'coming-soon' },
-  { name: 'Liquid', icon: liquidLogo, status: 'coming-soon' },
-  { name: 'Taproot Assets', icon: taprootLogo, status: 'coming-soon' },
+  { name: 'Bitcoin', icon: bitcoinLogo, status: 'live', url: 'https://bitcoin.org' },
+  { name: 'Lightning', icon: null, lucideIcon: Zap, status: 'live', url: 'https://lightning.network' },
+  { name: 'RGB', icon: rgbLogo, status: 'live', url: 'https://rgb.info' },
+  { name: 'Spark', icon: sparkAsterisk, status: 'live', url: 'https://www.spark.money' },
+  { name: 'Arkade', icon: arkadeLogo, status: 'coming-soon', url: 'https://arkade.money' },
+  { name: 'Liquid', icon: liquidLogo, status: 'coming-soon', url: 'https://liquid.net' },
+  { name: 'Taproot Assets', icon: taprootLogo, status: 'coming-soon', url: 'https://docs.lightning.engineering/the-lightning-network/taproot-assets' },
 ]
 
 export const liveProtocols = protocols.filter(p => p.status === 'live')

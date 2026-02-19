@@ -52,20 +52,6 @@ const products = [
     color: 'green',
   },
   {
-    id: 'mobile',
-    name: 'Rate (Mobile)',
-    icon: Smartphone,
-    status: 'coming-soon' as const,
-    description: 'Swap on the go. Native iOS and Android apps with the same security.',
-    features: [
-      'Native iOS & Android',
-      'Biometric security',
-      'Push notifications',
-    ],
-    href: '#',
-    color: 'gray',
-  },
-  {
     id: 'rate-extension',
     name: 'Rate Extension',
     icon: Puzzle,
@@ -78,6 +64,20 @@ const products = [
     ],
     href: '/products/rate-extension',
     color: 'purple',
+  },
+  {
+    id: 'mobile',
+    name: 'Rate (Mobile)',
+    icon: Smartphone,
+    status: 'coming-soon' as const,
+    description: 'Swap on the go. Native iOS and Android apps with the same security.',
+    features: [
+      'Native iOS & Android',
+      'Biometric security',
+      'Push notifications',
+    ],
+    href: '#',
+    color: 'gray',
   },
 ]
 

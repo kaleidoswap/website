@@ -55,7 +55,7 @@ export const PRODUCTS = {
 // Documentation URLs
 export const DOCS = {
   home: PRODUCTS.docs,
-  verifyBinaries: `${PRODUCTS.docs}/desktop-app/verify-binaries`,
+  verifyBinaries: `${PRODUCTS.docs}/desktop-app/getting-started/verify-binaries`,
   sdk: `${PRODUCTS.docs}/sdk/introduction`,
   desktop: `${PRODUCTS.docs}/desktop-app/getting-started/introduction`,
   rateExtension: `${PRODUCTS.docs}/extensions/rate/introduction`,

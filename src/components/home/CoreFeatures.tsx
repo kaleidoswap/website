@@ -8,11 +8,11 @@ export const CoreFeatures = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-16 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-primary-900/10 via-transparent to-transparent -z-10" />
 
       <div className="max-w-7xl mx-auto px-6">
-        <AnimateIn variant="fade-up" className="text-center mb-16">
+        <AnimateIn variant="fade-up" className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Core Protocol Features')}</h2>
           <p className="text-slate-400 max-w-2xl mx-auto">{t('Built for sovereigns who demand security, speed, and privacy.')}</p>
         </AnimateIn>

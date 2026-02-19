@@ -8,10 +8,10 @@ export const BuiltInPublic = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="py-14">
+    <section className="py-8">
       <div className="max-w-7xl mx-auto px-6">
         {/* Open Source */}
-        <AnimateIn variant="fade-up" className="text-center mb-12">
+        <AnimateIn variant="fade-up" className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">{t('Built in Public')}</h2>
           <p className="text-base text-slate-400 mb-6">
             {t('100% open source. Audit the code, contribute, or fork it.')}
@@ -44,14 +44,26 @@ export const BuiltInPublic = () => {
         {/* Achievements */}
         <AnimateIn variant="blur">
           <div className="flex flex-col sm:flex-row justify-center gap-4 text-center mb-10">
-            <div className="flex items-center justify-center gap-2 text-slate-300 glass-card px-6 py-4 rounded-xl">
+            <a
+              href="https://x.com/kaleidoswap/status/1950561318144217201"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-slate-300 glass-card px-6 py-4 rounded-xl hover:border-yellow-500/30 hover:text-white transition-colors group"
+            >
               <span className="text-yellow-500 text-xl" role="img" aria-label="Trophy">🏆</span>
               <span>{t('Winner — PlanB Lugano Hackathon')}</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-slate-300 glass-card px-6 py-4 rounded-xl">
+              <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-slate-300 transition-colors shrink-0" />
+            </a>
+            <a
+              href="https://kaleidoswap.medium.com/%EF%B8%8F-the-first-ever-rgb-asset-swap-on-lightning-mainnet-1b940dcd0efd"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-slate-300 glass-card px-6 py-4 rounded-xl hover:border-primary-500/30 hover:text-white transition-colors group"
+            >
               <Zap className="w-5 h-5 text-primary-400" />
               <span>{t('First RGB swap on Lightning')}</span>
-            </div>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-slate-300 transition-colors shrink-0" />
+            </a>
           </div>
         </AnimateIn>
 
