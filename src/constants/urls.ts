@@ -9,7 +9,7 @@ const DOMAINS = {
   app: 'app.kaleidoswap.com',
   docs: 'docs.kaleidoswap.com',
   developers: 'developers.kaleidoswap.com',
-  blog: 'medium.kaleidoswap.com',
+  blog: 'kaleidoswap.medium.com',
 } as const
 
 // GitHub configuration
