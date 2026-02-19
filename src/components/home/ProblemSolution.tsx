@@ -74,18 +74,16 @@ export const ProblemSolution = () => {
           <div className="order-1 lg:order-2 flex flex-col gap-6">
             <AnimateIn variant="fade-left">
               <h2 className="text-3xl md:text-4xl font-bold leading-tight">
-                {t('Bitcoin Layers Are Fragmented.')}
+                {t('Private Bitcoin Swaps.')}
               </h2>
               <h2 className="text-3xl md:text-4xl font-bold leading-tight text-primary-400 mt-1">
-                {t('We Unite Them.')}
+                {t('The Way It Should Have Always Been.')}
               </h2>
             </AnimateIn>
 
             <AnimateIn variant="fade-left" delay={150}>
               <p className="text-slate-400 text-lg leading-relaxed">
-                {t('Moving assets between Lightning, RGB, and sidechains usually requires trusted intermediaries or complex peg-in/peg-out mechanisms. KaleidoSwap eliminates that friction with the first protocol for true P2P cross-layer interoperability, powered by')}{' '}
-                <strong className="text-white">{t('HTLCs and atomic swaps')}</strong>
-                {t(' — no centralized exchange, no bridges, no counterparty risk.')}
+                {t('Swap BTC, USDT, and any asset across Lightning, RGB, Spark, and beyond — instantly, non-custodially, without intermediaries. No bridges. No trust required.')}
               </p>
             </AnimateIn>
 
