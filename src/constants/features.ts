@@ -1,37 +1,37 @@
 // src/constants/features.ts
-import { Zap, Repeat, Shield, Wallet, History, Network } from 'lucide-react';
+import { Zap, Repeat, Shield, Wallet, Network } from 'lucide-react';
 import type { Feature, SupportedNetwork } from '@/types/features';
 
 export const features: Feature[] = [
   {
     icon: Repeat,
-    title: "Trustless Multi-Asset Trading",
-    description: "Trade BTC and RGB assets directly over Lightning Network with no intermediaries. Your keys, your coins, your trades—always."
+    title: "Atomic Swaps",
+    description: "All-or-nothing execution. Your funds never sit in limbo. Either the swap completes or nothing moves."
   },
   {
     icon: Network,
-    title: "Seamless Lightning Integration",
-    description: "Request custom channels with RGB assets from trusted LSPs to kickstart your trading journey with optimal liquidity."
-  },
-  {
-    icon: Zap,
-    title: "Complete Channel Control",
-    description: "Manage your Lightning channels with precision—open, close, and configure with RGB assets for maximum flexibility."
-  },
-  {
-    icon: Wallet,
-    title: "Unified Asset Management",
-    description: "Deposit and withdraw both Bitcoin and RGB assets seamlessly, whether on-chain or via Lightning Network, all from one interface."
-  },
-  {
-    icon: History,
-    title: "Transparent Transaction History",
-    description: "Track every movement with a comprehensive history of all your deposits, withdrawals, and swaps in a clean, intuitive dashboard."
+    title: "Multi-Protocol",
+    description: "Lightning, RGB, Spark, Arkade — swap across any Bitcoin L2 from one interface. More protocols coming."
   },
   {
     icon: Shield,
-    title: "True Self-Custody Security",
-    description: "Rest easy with robust security features including encrypted backups, open-source code, and complete control over your private keys."
+    title: "Non-Custodial",
+    description: "Your keys, your coins. We never touch your funds. Swaps execute peer-to-peer using HTLCs."
+  },
+  {
+    icon: Zap,
+    title: "Instant Settlement",
+    description: "Lightning-speed finality. Swaps complete in seconds, not minutes or hours."
+  },
+  {
+    icon: Shield, // Re-using Shield for Privacy as well, or maybe generic Lock if available, but Shield is fine.
+    title: "Privacy by Design",
+    description: "No accounts. No KYC. No tracking. Connect a wallet, swap, done."
+  },
+  {
+    icon: Wallet,
+    title: "1% Fee",
+    description: "Simple, transparent pricing. What you see is what you pay."
   }
 ];
 

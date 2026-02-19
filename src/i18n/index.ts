@@ -1,35 +1,46 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import resources from './resources'
+import HttpBackend from 'i18next-http-backend'
+import LanguageDetector from 'i18next-browser-languagedetector'
 
 const supportedLanguages = ['en', 'es', 'it', 'zh', 'de', 'fr', 'ja'] as const
 const fallbackLng = 'en'
 const storageKey = 'kaleidoswap_locale'
 
-const getInitialLanguage = (): string => {
-  if (typeof window === 'undefined') {
-    return fallbackLng
-  }
+void i18n
+  .use(HttpBackend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    fallbackLng,
+    supportedLngs: supportedLanguages,
+    debug: import.meta.env.DEV,
 
-  const stored = window.localStorage.getItem(storageKey)
-  if (stored && supportedLanguages.includes(stored as (typeof supportedLanguages)[number])) {
-    return stored
-  }
+    interpolation: {
+      escapeValue: false,
+    },
 
-  return fallbackLng
-}
+    // Key separator disabled - we use flat keys
+    keySeparator: false,
+    nsSeparator: false,
 
-void i18n.use(initReactI18next).init({
-  resources,
-  lng: getInitialLanguage(),
-  fallbackLng,
-  supportedLngs: supportedLanguages,
-  interpolation: {
-    escapeValue: false
-  },
-  keySeparator: false,
-  nsSeparator: false
-})
+    // Backend configuration for loading translations
+    backend: {
+      loadPath: '/locales/{{lng}}/translation.json',
+    },
+
+    // Detection configuration
+    detection: {
+      order: ['localStorage'],
+      lookupLocalStorage: storageKey,
+      caches: ['localStorage'],
+    },
+
+    // React specific options
+    react: {
+      useSuspense: true,
+    },
+  })
 
 export const languageStorageKey = storageKey
 

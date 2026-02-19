@@ -4,9 +4,11 @@
  * Update this file for new releases
  */
 
+import { GITHUB, DOCS } from '@/constants/urls'
+
 export const APP_VERSION = '0.3.0'
 export const RELEASE_DATE = '2025-10-15'
-export const GITHUB_REPO = 'kaleidoswap/desktop-app'
+export const GITHUB_REPO = `${GITHUB.org}/${GITHUB.repo}`
 
 // Platform definitions
 export const PLATFORMS = {
@@ -22,8 +24,8 @@ export const PLATFORMS = {
 }
 
 const DOCS_URLS = {
-  verification: `https://docs.kaleidoswap.com/desktop-app/verify-binaries`,
-  issues: `https://github.com/${GITHUB_REPO}/issues/new`
+  verification: DOCS.verifyBinaries,
+  issues: GITHUB.newIssueUrl
 }
 
 export const normalizeVersionTag = (version: string) =>

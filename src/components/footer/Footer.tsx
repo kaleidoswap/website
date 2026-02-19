@@ -1,8 +1,10 @@
 // src/components/footer/Footer.tsx
 import { ExternalLink } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import type { FooterProps } from '@/types/footer'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
 import { useTranslation } from 'react-i18next'
+import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 
 const currentYear = new Date().getFullYear()
 
@@ -20,7 +22,7 @@ export const Footer = ({ sections, socials }: FooterProps) => {
             </div>
 
             <p className="text-gray-400">
-              {t('Decentralized trading on Bitcoin using RGB protocol and Lightning Network')}
+              {t('The universal swap protocol for Bitcoin L2.')}
             </p>
           </div>
 
@@ -31,17 +33,24 @@ export const Footer = ({ sections, socials }: FooterProps) => {
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className="text-gray-400 hover:text-white flex items-center gap-1"
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noopener noreferrer" : undefined}
-                    >
-                      {t(link.label)}
-                      {link.external && (
+                    {link.external ? (
+                      <a
+                        href={link.href}
+                        className="text-gray-400 hover:text-white flex items-center gap-1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {t(link.label)}
                         <ExternalLink className="w-3 h-3" />
-                      )}
-                    </a>
+                      </a>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-gray-400 hover:text-white flex items-center gap-1"
+                      >
+                        {t(link.label)}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -51,24 +60,29 @@ export const Footer = ({ sections, socials }: FooterProps) => {
 
         {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-12 pt-8 border-t border-gray-700/50">
-          <div className="text-gray-400">
+          <div className="text-gray-400 text-sm">
             {t('© {{year}} KaleidoSwap. All rights reserved.', { year: currentYear })}
           </div>
 
-          {/* Social Links */}
-          <div className="flex gap-4">
-            {socials.map(({ platform, href, icon: Icon }) => (
-              <a
-                key={platform}
-                href={href}
-                className="text-gray-200 hover:text-white transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={platform}
-              >
-                <Icon className="w-5 h-5" />
-              </a>
-            ))}
+          <div className="flex items-center gap-6">
+            {/* Language Switcher */}
+            <LanguageSwitcher variant="compact" />
+
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {socials.map(({ platform, href, icon: Icon }) => (
+                <a
+                  key={platform}
+                  href={href}
+                  className="text-gray-400 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={platform}
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>

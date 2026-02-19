@@ -1,8 +1,9 @@
+// src/pages/NotFound.tsx
 import { useNavigate } from 'react-router-dom'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
-import { ArrowLeft, Home } from 'lucide-react'
+import { ArrowLeft, Home, Search } from 'lucide-react'
 import { footerConfig } from '@/constants/footer'
 import { useTranslation } from 'react-i18next'
 
@@ -11,61 +12,91 @@ export const NotFound = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-gray-900">
-      {/* Fixed background gradient */}
-      <div 
-        className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none"
-        aria-hidden="true"
-      />
+    <div className="min-h-screen bg-background-dark text-white font-display">
+      <Navbar />
 
-      {/* Content */}
-      <div className="relative">
-        <Navbar />
-        
-        <section className="py-20 md:py-32 relative overflow-hidden">
-          {/* Background elements */}
-          <div className="absolute inset-0 grid-background opacity-10" aria-hidden="true" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-radial from-bitcoin-500/10 to-transparent rounded-full blur-3xl animate-pulse-slow" aria-hidden="true" />
-          
-          <div className="container relative z-10 text-center">
-            <div className="glass-card border-bitcoin-500/20 p-8 md:p-12 shadow-glow-bitcoin animate-fadeIn max-w-2xl mx-auto">
-              <div className="flex flex-col items-center justify-center">
-                <h1 className="text-8xl font-bold mb-4 text-gradient-bitcoin">404</h1>
-                <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">{t('Page Not Found')}</h2>
-                <p className="text-gray-300 mb-8">
-                  {t("The page you're looking for doesn't exist or has been moved.")}
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 animate-fadeIn">
-                  <Button
-                    variant="outline"
-                    onClick={() => navigate(-1)}
-                    className="group relative overflow-hidden border-bitcoin-500/50 text-bitcoin-500 hover:bg-bitcoin-500/10"
-                  >
-                    <span className="relative flex items-center">
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      {t('Go Back')}
-                    </span>
-                  </Button>
-                  
-                  <Button
-                    variant="secondary"
-                    onClick={() => navigate('/')}
-                    className="group relative overflow-hidden bg-gradient-to-r from-bitcoin-500 to-bitcoin-600 hover:from-bitcoin-400 hover:to-bitcoin-500"
-                  >
-                    <span className="relative flex items-center">
-                      <Home className="mr-2 h-4 w-4" />
-                      {t('Return Home')}
-                    </span>
-                  </Button>
-                </div>
+      <section className="min-h-[80vh] flex items-center justify-center relative overflow-hidden">
+        {/* Background Glows */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-500/10 rounded-full blur-[120px] -z-10" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-secondary-500/10 rounded-full blur-[100px] -z-10" />
+
+        <div className="container mx-auto px-6 text-center">
+          <div className="max-w-lg mx-auto">
+            {/* 404 Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary-500/30 bg-primary-500/10 mb-8">
+              <Search className="w-4 h-4 text-primary-400" />
+              <span className="text-sm font-medium text-primary-400">{t('Page Not Found')}</span>
+            </div>
+
+            {/* Big 404 */}
+            <h1 className="text-[150px] md:text-[200px] font-bold leading-none text-gradient mb-4">
+              404
+            </h1>
+
+            <p className="text-xl text-slate-400 mb-8">
+              {t("The page you're looking for doesn't exist or has been moved.")}
+            </p>
+
+            {/* Quick Links */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => navigate(-1)}
+                className="border-slate-600 hover:border-white"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                {t('Go Back')}
+              </Button>
+
+              <Button
+                size="lg"
+                onClick={() => navigate('/')}
+                className="btn-glow"
+              >
+                <Home className="w-4 h-4 mr-2" />
+                {t('Return Home')}
+              </Button>
+            </div>
+
+            {/* Helpful Links */}
+            <div className="glass-card rounded-xl p-6">
+              <p className="text-sm text-slate-500 mb-4">{t('Looking for something?')}</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <a
+                  href="/products/web-app"
+                  className="text-sm text-slate-300 hover:text-primary-400 transition-colors"
+                >
+                  {t('Web App')}
+                </a>
+                <span className="text-slate-700">•</span>
+                <a
+                  href="/products/desktop"
+                  className="text-sm text-slate-300 hover:text-primary-400 transition-colors"
+                >
+                  {t('Desktop App')}
+                </a>
+                <span className="text-slate-700">•</span>
+                <a
+                  href="/products/sdk"
+                  className="text-sm text-slate-300 hover:text-primary-400 transition-colors"
+                >
+                  {t('SDK')}
+                </a>
+                <span className="text-slate-700">•</span>
+                <a
+                  href="/downloads"
+                  className="text-sm text-slate-300 hover:text-primary-400 transition-colors"
+                >
+                  {t('Downloads')}
+                </a>
               </div>
             </div>
           </div>
-        </section>
-        
-        <Footer {...footerConfig} />
-      </div>
+        </div>
+      </section>
+
+      <Footer {...footerConfig} />
     </div>
   )
-} 
+}

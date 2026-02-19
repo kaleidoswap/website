@@ -1,117 +1,172 @@
-// src/components/nav/Navbar.tsx
-import { useState, useEffect, useCallback } from 'react'
-import { Menu, X } from 'lucide-react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+
+// Saved page-scroll position while the mobile menu is open (iOS needs position:fixed on body)
+let _savedScrollY = 0
+import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
-import { mainNavItems } from '@/constants/navigation'
+import { mainNavItems, productItems, developerItems } from '@/constants/navigation'
+import { PRODUCTS } from '@/constants/urls'
 import { cn, openExternalLink } from '@/lib/utils'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
 import { useTranslation } from 'react-i18next'
-import { languageStorageKey } from '@/i18n'
+import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [productsOpen, setProductsOpen] = useState(false)
+  const [developersOpen, setDevelopersOpen] = useState(false)
+  const productsRef = useRef<HTMLDivElement>(null)
+  const developersRef = useRef<HTMLDivElement>(null)
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
   const location = useLocation()
   const navigate = useNavigate()
-  const { t, i18n } = useTranslation()
-  const languageOptions = [
-    { code: 'en', label: 'English', icon: '🇺🇸' },
-    { code: 'es', label: 'Español', icon: '🇪🇸' },
-    { code: 'it', label: 'Italiano', icon: '🇮🇹' },
-    { code: 'de', label: 'Deutsch', icon: '🇩🇪' },
-    { code: 'fr', label: 'Français', icon: '🇫🇷' },
-    { code: 'ja', label: '日本語', icon: '🇯🇵' },
-    { code: 'zh', label: '中文', icon: '🇨🇳' }
-  ]
+  const { t } = useTranslation()
 
-  // Function to check scroll position
   const checkScroll = useCallback(() => {
     setScrolled(window.scrollY > 10)
   }, [])
 
-  // Initialize scroll state and set up listener
   useEffect(() => {
-    // Check initial scroll position
     checkScroll()
-    
-    // Add scroll event listener
     window.addEventListener('scroll', checkScroll)
-    
-    // Clean up
     return () => window.removeEventListener('scroll', checkScroll)
   }, [checkScroll])
 
-  // Reset scroll check when route changes
   useEffect(() => {
-    // Check scroll position on route change
     checkScroll()
-    
-    // Close mobile menu when navigating
     setIsOpen(false)
+    setProductsOpen(false)
+    setDevelopersOpen(false)
   }, [location.pathname, checkScroll])
 
-  // Handle mobile menu body scrolling
   useEffect(() => {
+    const body = document.body
     if (isOpen) {
-      // Prevent background scrolling when menu is open
-      document.body.style.overflow = 'hidden'
-      document.body.classList.add('menu-open')
+      // Save current scroll position before locking
+      _savedScrollY = window.scrollY
+      // position:fixed is the only reliable way to prevent background scroll on iOS Safari
+      body.style.overflow = 'hidden'
+      body.style.position = 'fixed'
+      body.style.top = `-${_savedScrollY}px`
+      body.style.width = '100%'
     } else {
-      // Restore scrolling when menu is closed
-      document.body.style.overflow = ''
-      document.body.classList.remove('menu-open')
+      // Restore scroll position when menu closes
+      body.style.overflow = ''
+      body.style.position = ''
+      body.style.top = ''
+      body.style.width = ''
+      window.scrollTo(0, _savedScrollY)
     }
-    
-    // Cleanup function
     return () => {
-      document.body.style.overflow = ''
-      document.body.classList.remove('menu-open')
+      body.style.overflow = ''
+      body.style.position = ''
+      body.style.top = ''
+      body.style.width = ''
     }
   }, [isOpen])
 
-  const isActive = (href: string) => {
-    if (href === '/') {
-      return location.pathname === '/'
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (productsRef.current && !productsRef.current.contains(event.target as Node)) {
+        setProductsOpen(false)
+      }
+      if (developersRef.current && !developersRef.current.contains(event.target as Node)) {
+        setDevelopersOpen(false)
+      }
     }
-    return location.pathname.startsWith(href)
-  }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
-  // Handle navigation with proper state updates
+  // Close dropdowns and mobile menu on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (productsOpen) {
+          setProductsOpen(false)
+        } else if (developersOpen) {
+          setDevelopersOpen(false)
+        } else if (isOpen) {
+          setIsOpen(false)
+          menuButtonRef.current?.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [productsOpen, developersOpen, isOpen])
+
+  // Focus trap for mobile menu
+  useEffect(() => {
+    if (!isOpen || !mobileMenuRef.current) return
+
+    const menu = mobileMenuRef.current
+    const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    const focusableElements = menu.querySelectorAll<HTMLElement>(focusableSelector)
+    const firstFocusable = focusableElements[0]
+    const lastFocusable = focusableElements[focusableElements.length - 1]
+
+    const handleTabKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstFocusable || document.activeElement === menuButtonRef.current) {
+          e.preventDefault()
+          lastFocusable?.focus()
+        }
+      } else {
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault()
+          menuButtonRef.current?.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleTabKey)
+    return () => document.removeEventListener('keydown', handleTabKey)
+  }, [isOpen])
+
   const handleNavigation = (href: string, external = false) => {
     if (external) {
-      // Open external links in a new tab
       openExternalLink(href)
     } else {
-      // Use React Router for internal navigation
       navigate(href)
     }
-    
-    // Still close the mobile menu
     setIsOpen(false)
-  }
-
-  const handleLanguageChange = (newLanguage: string) => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(languageStorageKey, newLanguage)
-    }
-    void i18n.changeLanguage(newLanguage)
+    setProductsOpen(false)
+    setDevelopersOpen(false)
   }
 
   return (
-    <nav 
-      className={cn(
-        "fixed w-full z-50 transition-all duration-300",
-        scrolled || isOpen
-          ? "bg-gray-900/95 backdrop-blur-md shadow-md" 
-          : "bg-transparent"
-      )}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo and Brand */}
-          <div className="flex items-center gap-2">
-            <a 
+    <>
+      {/* Skip to main content link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-500 focus:text-white focus:rounded-lg focus:outline-none"
+      >
+        {t('Skip to main content')}
+      </a>
+
+      <nav
+        className={cn(
+          'fixed w-full z-50 transition-all duration-300',
+          isOpen
+            ? 'bg-gray-900 shadow-md'
+            : scrolled
+              ? 'bg-gray-900/95 backdrop-blur-md shadow-md'
+              : 'bg-transparent'
+        )}
+        role="navigation"
+        aria-label={t('Main navigation')}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center h-16 md:h-20">
+            {/* Logo */}
+            <a
               onClick={(e) => {
                 e.preventDefault()
                 handleNavigation('/')
@@ -119,210 +174,251 @@ export const Navbar = () => {
               href="/"
               className="flex items-center gap-2 group"
             >
-              <div className="relative">
-                <img 
-                  src={kaleidoFullLogo} 
-                  alt="KaleidoSwap" 
-                  className="h-8 md:h-10 transition-transform duration-300 group-hover:scale-105" 
-                />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute inset-0 bg-primary-500/20 blur-xl rounded-lg"></div>
-                </div>
-              </div>
+              <img
+                src={kaleidoFullLogo}
+                alt="KaleidoSwap - Home"
+                className="h-8 md:h-10 transition-transform duration-300 group-hover:scale-105"
+              />
             </a>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
-            {mainNavItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavigation(item.href, item.external)
-                }}
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors relative py-1",
-                  isActive(item.href) && [
-                    "text-white font-medium",
-                    "after:absolute after:bottom-0 after:left-0 after:right-0",
-                    "after:h-0.5 after:bg-primary-500",
-                    "after:transform after:scale-x-100",
-                    "after:transition-transform"
-                  ],
-                  !isActive(item.href) && [
-                    "after:absolute after:bottom-0 after:left-0 after:right-0",
-                    "after:h-0.5 after:bg-primary-500",
-                    "after:transform after:scale-x-0",
-                    "after:transition-transform",
-                    "hover:after:scale-x-100"
-                  ]
-                )}
-              >
-                {t(item.label)}
-              </a>
-            ))}
-            <div className="flex items-center gap-3">
-              <label htmlFor="desktop-language-select" className="text-xs uppercase tracking-wide text-gray-500">
-                {t('Language')}
-              </label>
-              <div className="relative">
-                <select
-                  id="desktop-language-select"
-                  value={languageOptions.find((option) => i18n.resolvedLanguage?.startsWith(option.code))?.code ?? 'en'}
-                  onChange={(event) => handleLanguageChange(event.target.value)}
-                  className="appearance-none bg-gray-800/70 text-gray-200 text-sm rounded-md pl-3 pr-8 py-1 focus:outline-none focus:ring-2 focus:ring-primary-500 border border-gray-700"
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-8">
+              {/* Products Dropdown */}
+              <div ref={productsRef} className="relative">
+                <button
+                  onClick={() => setProductsOpen(!productsOpen)}
+                  aria-expanded={productsOpen}
+                  aria-haspopup="true"
+                  className={cn(
+                    'flex items-center gap-1 text-gray-300 hover:text-white transition-colors py-1',
+                    productsOpen && 'text-white'
+                  )}
                 >
-                  {languageOptions.map((option) => (
-                    <option key={option.code} value={option.code}>
-                      {option.icon} {option.label}
-                    </option>
-                  ))}
-                </select>
-                <span className="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-400">
-                  ▾
-                </span>
-              </div>
-            </div>
-            <Button
-              variant="outline"
-              size="default"
-              onClick={() => handleNavigation('/downloads')}
-              className="group relative overflow-hidden border-gray-600 text-gray-300 hover:text-white hover:border-gray-500 mr-3"
-            >
-              <span className="relative">{t('Download')}</span>
-            </Button>
-            <Button
-              variant="default"
-              size="default"
-              onClick={() => handleNavigation('https://app.kaleidoswap.com', true)}
-              className="group relative overflow-hidden"
-            >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary-600 to-primary-500 group-hover:from-primary-500 group-hover:to-primary-400 transition-all duration-300"></span>
-              <span className="relative">{t('Launch App')}</span>
-            </Button>
-          </div>
+                  {t('Products')}
+                  <ChevronDown
+                    className={cn(
+                      'w-4 h-4 transition-transform',
+                      productsOpen && 'rotate-180'
+                    )}
+                  />
+                </button>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+                {productsOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden" role="menu">
+                    {productItems.map((item) => {
+                      const hasPage = item.href !== '#'
+                      return (
+                        <button
+                          key={item.label}
+                          onClick={() =>
+                            hasPage &&
+                            handleNavigation(item.href, item.external)
+                          }
+                          disabled={!hasPage}
+                          role="menuitem"
+                          className={cn(
+                            'w-full px-4 py-3 text-left flex items-center justify-between transition-colors',
+                            hasPage
+                              ? 'text-gray-200 hover:bg-gray-700/50 hover:text-white'
+                              : 'text-gray-500 cursor-not-allowed'
+                          )}
+                        >
+                          <span>{t(item.label)}</span>
+                          {item.status === 'coming-soon' ? (
+                            <span className="text-xs text-gray-500">Soon</span>
+                          ) : item.external ? (
+                            <ExternalLink className="w-3 h-3 text-gray-500" />
+                          ) : null}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Developers Dropdown */}
+              <div ref={developersRef} className="relative">
+                <button
+                  onClick={() => setDevelopersOpen(!developersOpen)}
+                  aria-expanded={developersOpen}
+                  aria-haspopup="true"
+                  className={cn(
+                    'flex items-center gap-1 text-gray-300 hover:text-white transition-colors py-1',
+                    developersOpen && 'text-white'
+                  )}
+                >
+                  {t('Developers')}
+                  <ChevronDown
+                    className={cn(
+                      'w-4 h-4 transition-transform',
+                      developersOpen && 'rotate-180'
+                    )}
+                  />
+                </button>
+
+                {developersOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden" role="menu">
+                    {developerItems.map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handleNavigation(item.href, item.external)
+                        }}
+                        role="menuitem"
+                        className="flex items-start gap-3 px-4 py-3 hover:bg-gray-700/50 transition-colors group"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1.5 text-gray-200 group-hover:text-white font-medium text-sm">
+                            {t(item.label)}
+                            <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-gray-300 shrink-0" />
+                          </div>
+                          <p className="text-xs text-gray-500 mt-0.5">{t(item.description)}</p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Other nav items */}
+              {mainNavItems
+                .filter((item) => item.label !== 'Products')
+                .map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavigation(item.href, item.external)
+                    }}
+                    className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors py-1"
+                  >
+                    {t(item.label)}
+                    {item.external && <ExternalLink className="w-3 h-3" />}
+                  </a>
+                ))}
+
+              {/* Language Switcher */}
+              <LanguageSwitcher variant="compact" dropdownPosition="below" />
+
+              {/* CTA */}
+              <Button
+                variant="default"
+                size="default"
+                onClick={() => handleNavigation(PRODUCTS.app, true)}
+                className="ml-4"
+              >
+                {t('Launch App')}
+              </Button>
+            </div>
+
+            {/* Mobile menu button */}
             <button
+              ref={menuButtonRef}
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all"
+              className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-all"
               aria-label={isOpen ? t('Close menu') : t('Open menu')}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-        </div>
 
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden fixed inset-0 top-16 bg-gray-900/95 backdrop-blur-md z-40 overflow-y-auto pt-2 pb-20 mobile-menu animate-fadeIn">
-            <div className="container mx-auto px-4 py-4">
-              {mainNavItems.map((item, index) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNavigation(item.href, item.external)
-                  }}
-                  className={cn(
-                    "block py-3 px-4 text-lg rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors my-1",
-                    isActive(item.href) && "text-white font-medium bg-gray-800/50"
-                  )}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  {t(item.label)}
-                </a>
-              ))}
-              <div className="mt-4 mb-6 px-4">
-                <label htmlFor="mobile-language-select" className="text-xs uppercase tracking-wide text-gray-500 block mb-2">
-                  {t('Language')}
-                </label>
-                <div className="relative">
-                  <select
-                    id="mobile-language-select"
-                    value={languageOptions.find((option) => i18n.resolvedLanguage?.startsWith(option.code))?.code ?? 'en'}
-                    onChange={(event) => handleLanguageChange(event.target.value)}
-                    className="w-full bg-gray-800/70 text-gray-200 text-base rounded-md pl-3 pr-10 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 border border-gray-700"
-                  >
-                    {languageOptions.map((option) => (
-                      <option key={option.code} value={option.code}>
-                        {option.icon} {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">
-                    ▾
-                  </span>
+          {/* Mobile Navigation */}
+          {isOpen && (
+            <div
+              ref={mobileMenuRef}
+              id="mobile-menu"
+              className="md:hidden fixed inset-0 top-16 bg-gray-900/95 backdrop-blur-md z-40 overflow-y-auto overscroll-contain"
+              role="dialog"
+              aria-modal="true"
+              aria-label={t('Mobile navigation menu')}
+            >
+              <div className="container mx-auto px-4 py-6">
+                {/* Products section */}
+                <div className="mb-6">
+                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-3 px-4">
+                    {t('Products')}
+                  </p>
+                  {productItems.map((item) => {
+                    const hasPage = item.href !== '#'
+                    return (
+                      <button
+                        key={item.label}
+                        onClick={() =>
+                          hasPage &&
+                          handleNavigation(item.href, item.external)
+                        }
+                        disabled={!hasPage}
+                        className={cn(
+                          'w-full py-3 px-4 text-left text-lg rounded-lg flex items-center justify-between my-1',
+                          hasPage
+                            ? 'text-gray-300 hover:text-white hover:bg-gray-800/50'
+                            : 'text-gray-600 cursor-not-allowed'
+                        )}
+                      >
+                        <span>{t(item.label)}</span>
+                        {item.status === 'coming-soon' && (
+                          <span className="text-xs text-gray-600">Soon</span>
+                        )}
+                      </button>
+                    )
+                  })}
                 </div>
-              </div>
-              <div className="mt-6 px-4 space-y-3">
-                <Button
-                  variant="default"
-                  size="lg"
-                  className="w-full justify-center text-lg py-4"
-                  onClick={() => handleNavigation('https://app.kaleidoswap.com', true)}
-                >
-                  <span className="relative">{t('Launch App')}</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full justify-center text-lg py-4 border-gray-600 text-gray-300"
-                  onClick={() => handleNavigation('/downloads')}
-                >
-                  <span className="relative">{t('Download Desktop')}</span>
-                </Button>
-              </div>
-              
-              {/* Hero section for mobile menu */}
-              <div className="mt-10 px-4 py-8 glass-card">
-                <h2 className="text-3xl font-bold mb-4 text-gradient">
-                  {t('Trustless Trading on Lightning Network')}
-                </h2>
-                <p className="text-gray-300 mb-6">
-                  {t("KaleidoSwap is the first decentralized trading platform that combines Bitcoin's security, Lightning Network speed, and RGB programmability in a single open-source desktop application.")}
-                </p>
-                <div className="space-y-3">
+
+                {/* Developers section */}
+                <div className="border-t border-gray-800 pt-6 mb-6">
+                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-3 px-4">
+                    {t('Developers')}
+                  </p>
+                  {developerItems.map((item) => (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleNavigation(item.href, item.external)
+                      }}
+                      className="flex items-center justify-between py-3 px-4 text-lg rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 my-1"
+                    >
+                      <span>{t(item.label)}</span>
+                      <ExternalLink className="w-4 h-4 text-gray-500" />
+                    </a>
+                  ))}
+                </div>
+
+                {/* Language Switcher */}
+                <div className="border-t border-gray-800 pt-6 mb-6 px-4">
+                  <LanguageSwitcher variant="default" dropdownPosition="below" />
+                </div>
+
+                {/* CTAs */}
+                <div className="space-y-3 px-4">
                   <Button
                     variant="default"
                     size="lg"
                     className="w-full justify-center"
-                    onClick={() => {
-                      handleNavigation('https://app.kaleidoswap.com', true)
-                    }}
+                    onClick={() => handleNavigation(PRODUCTS.app, true)}
                   >
-                    {t('Launch Web App')}
+                    {t('Launch App')}
                   </Button>
                   <Button
                     variant="outline"
                     size="lg"
                     className="w-full justify-center border-gray-600 text-gray-300"
-                    onClick={() => {
-                      handleNavigation('/downloads')
-                    }}
+                    onClick={() => handleNavigation('/downloads')}
                   >
                     {t('Download Desktop')}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="w-full justify-center border-gray-600 text-gray-300"
-                    onClick={() => {
-                      handleNavigation('https://docs.kaleidoswap.com', true)
-                    }}
-                  >
-                    {t('Explore Docs')}
                   </Button>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-    </nav>
+          )}
+        </div>
+      </nav>
+    </>
   )
 }

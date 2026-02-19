@@ -15,4 +15,9 @@ export interface CommunityProps {
   title?: string
   description?: string
   socialLinks: SocialLink[]
+  primaryCTA?: {
+    label: string
+    href: string
+    external?: boolean
+  }
 }

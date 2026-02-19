@@ -1,92 +1,92 @@
 // src/constants/products.ts
 import type { Product } from '@/types/products'
-import { Download, Code, Smartphone, Globe } from 'lucide-react'
+import { Code, Globe, Zap, Network } from 'lucide-react'
 
 export const products: Product[] = [
   {
-    id: 'desktop-app',
-    name: 'Desktop App',
-    version: '0.3.1',
+    id: 'lightning',
+    name: 'Lightning Network',
     status: 'latest-release',
-    badge: 'Latest Release',
-    description: 'Open-source desktop application for Linux and macOS. Trade RGB assets with complete self-custody and privacy.',
+    badge: 'Live',
+    description: 'Instant BTC payments. The base layer for fast, cheap Bitcoin transactions.',
     features: [
-      'Unified asset management',
-      'Full Lightning channel control',
-      'Transparent transaction history',
-      'Secure node backups'
+      'Instant settlement',
+      'Low fees',
+      'Global reach',
+      'Bitcoin security'
     ],
-    icon: Download,
-    platforms: ['Linux', 'macOS'],
-    primaryCTA: {
-      label: 'Download Now',
-      href: '/downloads',
-      external: false
-    },
-    secondaryCTA: {
-      label: 'View on GitHub',
-      href: 'https://github.com/kaleidoswap/desktop-app',
-      external: true
-    },
-    color: 'green'
+    icon: Zap,
+    platforms: ['Layer 2'],
+    color: 'bitcoin'
   },
   {
-    id: 'sdk',
-    name: 'SDK',
-    version: '0.1.0',
+    id: 'rgb',
+    name: 'RGB Protocol',
     status: 'latest-release',
-    badge: 'Latest Release',
-    description: 'Build on KaleidoSwap. Integrate RGB asset trading into your applications with our developer SDK.',
+    badge: 'Live',
+    description: 'Smart contracts on Bitcoin. Asset issuance and scalable client-side validation.',
     features: [
-      'Easy integration',
-      'Comprehensive documentation',
-      'RGB protocol support',
-      'Lightning Network ready'
+      'Client-side validation',
+      'Scalable smart contracts',
+      'Asset issuance',
+      'Privacy'
     ],
     icon: Code,
-    platforms: ['Node.js', 'TypeScript'],
-    primaryCTA: {
-      label: 'Documentation',
-      href: 'https://docs.kaleidoswap.com/sdk',
-      external: true
-    },
-    secondaryCTA: {
-      label: 'GitHub Repository',
-      href: 'https://github.com/kaleidoswap/sdk',
-      external: true
-    },
+    platforms: ['Layer 2', 'Layer 3'],
     color: 'primary'
   },
   {
-    id: 'mobile-app',
-    name: 'Mobile App',
-    status: 'coming-soon',
-    badge: 'Coming Soon',
-    description: 'Trade RGB assets on-the-go with the KaleidoSwap mobile experience. Native apps for iOS and Android.',
+    id: 'spark',
+    name: 'Spark',
+    status: 'latest-release',
+    badge: 'Live',
+    description: 'Statechains for scalability. manage UTXOs off-chain without on-chain fees.',
     features: [
-      'Mobile-optimized trading',
-      'Push notifications',
-      'Biometric security',
-      'Sync with desktop'
+      'UTXO management',
+      'Off-chain scaling',
+      'Instant transfer',
+      'Cheaper than on-chain'
     ],
-    icon: Smartphone,
-    platforms: ['iOS', 'Android'],
+    icon: Network, // Using Network icon for Spark
+    platforms: ['Layer 2'],
     color: 'secondary'
   },
   {
-    id: 'web-app',
-    name: 'Web App',
-    status: 'coming-soon',
-    badge: 'Coming Soon',
-    description: 'Access KaleidoSwap directly from your browser. No downloads required.',
+    id: 'arkade',
+    name: 'Arkade',
+    status: 'latest-release',
+    badge: 'Live',
+    description: 'Virtual UTXOs for enhanced liquidity and seamless swaps.',
     features: [
-      'Browser-based trading',
-      'Cross-platform compatibility',
-      'WebLN integration',
-      'No installation needed'
+      'Virtual UTXOs',
+      'Liquidity pools',
+      'Atomic swaps',
+      'Trustless'
     ],
+    icon: Globe, // Using Globe icon for Arkade
+    platforms: ['Layer 2'],
+    color: 'green'
+  },
+  {
+    id: 'taproot-assets',
+    name: 'Taproot Assets',
+    status: 'coming-soon',
+    badge: 'Coming Q4 2026',
+    description: 'Assets on Bitcoin blockchain using Taproot transactions.',
+    features: [],
+    icon: Code,
+    platforms: ['Layer 1'],
+    color: 'gray'
+  },
+  {
+    id: 'liquid',
+    name: 'Liquid Network',
+    status: 'coming-soon',
+    badge: 'Coming Q4 2026',
+    description: 'Sidechain for Bitcoin with faster settlement and asset issuance.',
+    features: [],
     icon: Globe,
-    platforms: ['Web'],
-    color: 'bitcoin'
+    platforms: ['Sidechain'],
+    color: 'gray'
   }
 ]
