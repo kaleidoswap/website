@@ -43,7 +43,17 @@ export const BuiltInPublic = () => {
 
         {/* Achievements */}
         <AnimateIn variant="blur">
-          <div className="flex flex-col sm:flex-row justify-center gap-4 text-center mb-10">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 text-center mb-10">
+            <a
+              href="https://x.com/kaleidoswap/status/2027780906757276109"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-slate-300 glass-card px-6 py-4 rounded-xl hover:border-blue-500/30 hover:text-white transition-colors group"
+            >
+              <span className="text-blue-500 text-xl" role="img" aria-label="Medal">🏅</span>
+              <span>{t('Winner — 1st CypherTank Edition')}</span>
+              <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-slate-300 transition-colors shrink-0" />
+            </a>
             <a
               href="https://x.com/kaleidoswap/status/1950561318144217201"
               target="_blank"
