@@ -20,8 +20,8 @@ export const coreFeatures = [
   },
   {
     icon: 'dns',
-    title: 'Run Your Node',
-    description: 'Verify everything yourself. Our desktop app bundles a full RGB Lightning node. Your infrastructure. Your sovereignty.',
+    title: 'Full Sovereignty',
+    description: 'Our desktop app bundles a full RGB Lightning node. Keep full control over your infrastructure and verify everything yourself.',
     color: 'primary' as const,
     link: { label: 'Setup documentation', href: DOCS.desktop },
   },

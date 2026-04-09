@@ -20,7 +20,7 @@ export const protocols: Protocol[] = [
   { name: 'Lightning', icon: null, lucideIcon: Zap, status: 'live', url: 'https://lightning.network' },
   { name: 'RGB', icon: rgbLogo, status: 'live', url: 'https://rgb.info' },
   { name: 'Spark', icon: sparkAsterisk, status: 'live', url: 'https://www.spark.money' },
-  { name: 'Arkade', icon: arkadeLogo, status: 'coming-soon', url: 'https://arkade.money' },
+  { name: 'Arkade', icon: arkadeLogo, status: 'live', url: 'https://arkade.money' },
   { name: 'Liquid', icon: liquidLogo, status: 'coming-soon', url: 'https://liquid.net' },
   { name: 'Taproot Assets', icon: taprootLogo, status: 'coming-soon', url: 'https://docs.lightning.engineering/the-lightning-network/taproot-assets' },
 ]

@@ -70,7 +70,7 @@ export const ProductEcosystem = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]">
 
-          {/* ── Web App — hero (2 × 2) ─────────────────────────────────── */}
+          {/* ── SDK — hero (2 × 2) ────────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={0} className="md:col-span-2 lg:col-span-2 row-span-2 h-full">
             <motion.div
               className={CARD_BASE}
@@ -78,36 +78,41 @@ export const ProductEcosystem = () => {
               transition={SPRING}
             >
               {/* Richer layered glow for the hero */}
-              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary-500/20 rounded-full blur-[100px] pointer-events-none" />
-              <div className="absolute top-1/3 right-0 w-40 h-40 bg-primary-400/10 rounded-full blur-[60px] pointer-events-none" />
+              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary-500/20 rounded-full blur-[100px] pointer-events-none" />
+              <div className="absolute top-1/3 right-0 w-40 h-40 bg-secondary-400/10 rounded-full blur-[60px] pointer-events-none" />
+
+              {/* Decorative watermark */}
+              <div className="absolute right-8 bottom-8 flex items-center pointer-events-none select-none">
+                <span className="text-[120px] font-mono font-black text-white/[0.025] leading-none">&lt;/&gt;</span>
+              </div>
 
               <div className="p-8 relative z-10 h-full flex flex-col">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white shadow-lg shadow-primary-500/30 mb-5">
-                  <Globe className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary-400 to-secondary-600 flex items-center justify-center text-white shadow-lg shadow-secondary-500/30 mb-5">
+                  <Terminal className="w-6 h-6" />
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-2">{t('Web App')}</h3>
+                <h3 className="text-xl font-bold text-white mb-2">{t('SDK')}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed mb-4 max-w-xs">
-                  {t('The fastest way to swap. No download required. Connect your wallet and go.')}
+                  {t('Build your own swap interface or integrate Kaleido into your wallet.')}
                 </p>
 
-                <span className="inline-flex items-center gap-1.5 w-fit px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
-                  {t('Testnet Soon')}
+                <span className="inline-flex items-center gap-1.5 w-fit px-2.5 py-1 rounded-full text-xs font-medium bg-primary-500/10 text-primary-400 border border-primary-500/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse shrink-0" />
+                  {t('Live on Testnet')}
                 </span>
 
                 <div className="mt-auto pt-6 flex items-center gap-4">
                   <Button
-                    onClick={() => handleNavigation(PRODUCTS.app, true)}
-                    className="bg-primary-500/15 hover:bg-primary-500/25 text-primary-300 border border-primary-500/25 hover:border-primary-500/40 transition-all"
+                    onClick={() => handleNavigation(DOCS.sdk, true)}
+                    className="btn-glow"
                   >
-                    {t('Launch App')}
+                    {t('Read Docs')}
                   </Button>
                   <button
-                    onClick={() => handleNavigation('/products/web-app', false)}
+                    onClick={() => handleNavigation('/products/sdk', false)}
                     className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
                   >
-                    {t('See More')}
+                    {t('Learn more')}
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -148,7 +153,7 @@ export const ProductEcosystem = () => {
                     onClick={() => handleNavigation('/products/desktop', false)}
                     className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
                   >
-                    {t('See More')}
+                    {t('Learn more')}
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -156,39 +161,20 @@ export const ProductEcosystem = () => {
             </motion.div>
           </AnimateIn>
 
-          {/* ── Developer SDK ─────────────────────────────────────────────── */}
+          {/* ── Web App ───────────────────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={200} className="md:col-span-1 lg:col-span-2 h-full">
             <motion.div className={CARD_BASE} whileHover={CARD_HOVER} transition={SPRING}>
-              <GlowOrb color="bg-secondary-500/8" />
-
-              {/* Decorative watermark */}
-              <div className="absolute right-6 inset-y-0 flex items-center pointer-events-none select-none">
-                <span className="text-[72px] font-mono font-black text-white/[0.03] leading-none">&lt;/&gt;</span>
-              </div>
-
+              <GlowOrb color="bg-primary-500/10" />
               <div className="p-6 relative z-10 flex flex-col h-full">
-                <CardIcon color="bg-secondary-500/10 text-secondary-400">
-                  <Terminal className="w-5 h-5" />
+                <CardIcon color="bg-primary-500/10 text-primary-400">
+                  <Globe className="w-5 h-5" />
                 </CardIcon>
-                <h3 className="text-base font-bold text-white mt-3 mb-1">{t('Developer SDK')}</h3>
+                <h3 className="text-base font-bold text-white mt-3 mb-1">{t('Web App')}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  {t('Build your own swap interface or integrate Kaleido into your wallet.')}
+                  {t('The fastest way to swap. No download required. Connect your wallet and go.')}
                 </p>
-                <div className="mt-auto pt-4 flex items-center gap-4">
-                  <Button
-                    size="sm"
-                    onClick={() => handleNavigation(DOCS.sdk, true)}
-                    className="bg-white text-gray-900 hover:bg-slate-100 font-semibold shadow-lg shadow-black/20"
-                  >
-                    {t('Read Docs')}
-                  </Button>
-                  <button
-                    onClick={() => handleNavigation('/products/sdk', false)}
-                    className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
-                  >
-                    {t('See More')}
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
+                <div className="mt-auto pt-4">
+                  <ComingSoonBadge label={t('Coming Soon')} />
                 </div>
               </div>
             </motion.div>
