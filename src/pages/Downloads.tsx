@@ -7,8 +7,8 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import {
   createDownloadConfig,
-  defaultDownloadConfig,
   verificationGuideUrl,
+  type DownloadConfig,
   type GithubReleaseAsset
 } from '@/constants/downloads'
 import { stripVersionTag } from '@/constants/versions'
@@ -27,13 +27,11 @@ type GithubRelease = {
 }
 
 export const Downloads = () => {
-  const [downloadConfig, setDownloadConfig] = useState(defaultDownloadConfig)
+  const [downloadConfig, setDownloadConfig] = useState<DownloadConfig | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const { t } = useTranslation()
-  const {
-    currentVersion,
-    platforms,
-  } = downloadConfig
+  const currentVersion = downloadConfig?.currentVersion ?? { version: '', date: '', notes: '' }
+  const platforms = downloadConfig?.platforms ?? []
 
   const downloadFile = (url?: string) => {
     if (!url) return
@@ -226,6 +224,34 @@ export const Downloads = () => {
             </a>
           )}
 
+          {/* Secondary downloads */}
+          {!isDisabled && platform.secondaryDownloads && platform.secondaryDownloads.length > 0 && (
+            <div className="mt-4 pt-4 border-t border-white/5">
+              <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
+                {t('Also available')}
+              </p>
+              <div className="flex flex-col gap-1.5">
+                {platform.secondaryDownloads.map((dl) => (
+                  <a
+                    key={dl.label}
+                    href={dl.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between px-3 py-1.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors group/dl"
+                  >
+                    <span className="flex items-center gap-2">
+                      <Download className="w-3.5 h-3.5 opacity-0 group-hover/dl:opacity-100 transition-opacity" />
+                      <span>{t(dl.label)}</span>
+                    </span>
+                    {dl.size && (
+                      <span className="text-xs text-slate-600">{dl.size}</span>
+                    )}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Bottom accent */}
           <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 group-hover:w-full transition-all duration-700" />
         </motion.div>
@@ -385,7 +411,7 @@ export const Downloads = () => {
                     {t('2 — Verify the binary against its signature')}
                   </p>
                   <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-green-300 font-mono overflow-x-auto whitespace-pre-wrap">
-                    {`# macOS (Apple Silicon)\ngpg --verify KaleidoSwap_${currentVersion.version}_aarch64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_aarch64.dmg\n\n# macOS (Intel)\ngpg --verify KaleidoSwap_${currentVersion.version}_x64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_x64.dmg\n\n# Linux\ngpg --verify KaleidoSwap_${currentVersion.version}_amd64.AppImage.asc \\\n        KaleidoSwap_${currentVersion.version}_amd64.AppImage\n\n# Windows\ngpg --verify KaleidoSwap_${currentVersion.version}_x64-setup.msi.asc \\\n        KaleidoSwap_${currentVersion.version}_x64-setup.msi`}
+                    {`# macOS (Apple Silicon)\ngpg --verify KaleidoSwap_${currentVersion.version}_aarch64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_aarch64.dmg\n\n# macOS (Intel)\ngpg --verify KaleidoSwap_${currentVersion.version}_x64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_x64.dmg\n\n# Linux\ngpg --verify KaleidoSwap_${currentVersion.version}_amd64.AppImage.asc \\\n        KaleidoSwap_${currentVersion.version}_amd64.AppImage\n\n# Windows\ngpg --verify KaleidoSwap_${currentVersion.version}_x64-setup.exe.asc \\\n        KaleidoSwap_${currentVersion.version}_x64-setup.exe`}
                   </pre>
                 </div>
 

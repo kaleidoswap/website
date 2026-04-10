@@ -8,17 +8,24 @@ export interface DownloadVersion {
   notes: string
 }
 
+export interface SecondaryDownload {
+  label: string
+  url: string
+  size?: string
+}
+
 export interface PlatformDownload {
   platform: string
   icon: LucideIcon
   title: string
   architecture: string[]
   downloadUrl: string
-  signatureUrl: string // Deprecated, kept for backward compatibility
+  signatureUrl: string
   manifestUrl?: string
   manifestSignatureUrl?: string
   disabled?: boolean
   note?: string
+  secondaryDownloads?: SecondaryDownload[]
 }
 
 export interface DownloadsPageProps {
