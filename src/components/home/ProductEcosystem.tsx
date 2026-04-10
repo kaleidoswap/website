@@ -104,7 +104,7 @@ export const ProductEcosystem = () => {
                 <div className="mt-auto pt-6 flex items-center gap-4">
                   <Button
                     onClick={() => handleNavigation(DOCS.sdk, true)}
-                    className="btn-glow"
+                    className="btn-glow bg-violet-600 hover:bg-violet-700 shadow-lg shadow-violet-500/20 hover:shadow-xl hover:shadow-violet-500/30 focus:ring-violet-400/50"
                   >
                     {t('Read Docs')}
                   </Button>
