@@ -43,11 +43,11 @@ const buildPlatforms = (
   assets?: GithubReleaseAsset[]
 ): PlatformDownload[] => {
   const macArmAsset = findAsset(assets, (name) =>
-    name.includes('darwin') && name.includes('aarch64') && name.endsWith('.dmg')
+    name.includes('aarch64') && name.endsWith('.dmg') && !isSignature(name)
   )
 
   const macIntelAsset = findAsset(assets, (name) =>
-    name.includes('darwin') && name.includes('x64') && name.endsWith('.dmg')
+    name.includes('x64') && name.endsWith('.dmg') && !isSignature(name)
   )
 
   const macPrimaryAsset = macArmAsset ?? macIntelAsset
@@ -98,7 +98,7 @@ const buildPlatforms = (
   }
 
   const windowsInstallerAsset = findAsset(assets, (name) =>
-    name.includes('windows') && name.endsWith('.msi') && !isSignature(name)
+    name.includes('x64-setup') && name.endsWith('.exe') && !isSignature(name)
   )
 
   const windowsSignatureAsset = windowsInstallerAsset

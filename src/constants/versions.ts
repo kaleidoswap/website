@@ -6,8 +6,8 @@
 
 import { GITHUB, DOCS } from '@/constants/urls'
 
-export const APP_VERSION = '0.3.2'
-export const RELEASE_DATE = '2025-11-10'
+export const APP_VERSION = '0.4.0'
+export const RELEASE_DATE = '2026-04-09'
 export const GITHUB_REPO = `${GITHUB.org}/${GITHUB.repo}`
 
 // Platform definitions
@@ -56,9 +56,9 @@ export const getDownloadUrl = (platform: string, version: string = APP_VERSION) 
 
   switch(platform) {
     case PLATFORMS.WINDOWS_INSTALLER:
-      return `${downloadBase}/KaleidoSwap_${version}_x64-setup.msi`;
+      return `${downloadBase}/KaleidoSwap_${version}_x64-setup.exe`;
     case PLATFORMS.WINDOWS_PORTABLE:
-      return `${downloadBase}/KaleidoSwap_${version}_x64-portable.exe`;
+      return `${downloadBase}/KaleidoSwap_${version}_x64_en-US.msi`;
     case PLATFORMS.LINUX_RPM:
       return `${downloadBase}/KaleidoSwap-${version}-1.x86_64.rpm`;
     case PLATFORMS.LINUX_DEB:
