@@ -1,5 +1,5 @@
 // src/constants/downloads.ts
-import type { PlatformDownload, DownloadVersion } from '@/types/downloads'
+import type { PlatformDownload } from '@/types/downloads'
 import {
   AppleIcon,
   LinuxIcon,
@@ -13,22 +13,27 @@ import {
   getSignatureUrl,
   getManifestUrl,
   getManifestSignatureUrl,
-  githubUrls
+  buildGithubUrls,
 } from '@/constants/versions'
-
-type DownloadConfigOverrides = {
-  version?: string
-  date?: string
-  notesUrl?: string
-  assets?: GithubReleaseAsset[]
-}
+import { DOCS } from '@/constants/urls'
 
 export interface GithubReleaseAsset {
   name: string
   browser_download_url: string
 }
 
-const fallbackVersionInfo = getVersionInfo()
+export interface DownloadConfig {
+  currentVersion: {
+    version: string
+    versionDisplay?: string
+    date: string
+    notes: string
+  }
+  platforms: PlatformDownload[]
+  manifestUrl: string
+  manifestSignatureUrl: string
+  verificationGuideUrl: string
+}
 
 const findAsset = (
   assets: GithubReleaseAsset[] | undefined,
@@ -151,28 +156,28 @@ const buildPlatforms = (
   ]
 }
 
-export const createDownloadConfig = (
-  overrides: DownloadConfigOverrides = {}
-) => {
-  const version = overrides.version ?? fallbackVersionInfo.version
-  const versionInfo: DownloadVersion = getVersionInfo({
+export const createDownloadConfig = (params: {
+  version: string
+  date?: string
+  notesUrl?: string
+  assets?: GithubReleaseAsset[]
+}): DownloadConfig => {
+  const { version, date, notesUrl, assets } = params
+
+  const versionInfo = getVersionInfo({
     version,
-    date:
-      overrides.date ??
-      (overrides.version && overrides.version !== fallbackVersionInfo.version
-        ? 'Date not available'
-        : fallbackVersionInfo.date),
-    notes: overrides.notesUrl
+    date,
+    notes: notesUrl
   })
 
-  const platforms = buildPlatforms(version, overrides.assets)
+  const platforms = buildPlatforms(version, assets)
 
-  const manifestAsset = findAsset(overrides.assets, (name) =>
+  const manifestAsset = findAsset(assets, (name) =>
     name === 'latest.json'
   )
 
   const manifestSignatureAsset = manifestAsset
-    ? findAsset(overrides.assets, (name) =>
+    ? findAsset(assets, (name) =>
         name === `${manifestAsset.name}.sig` || name === `${manifestAsset.name}.asc`
       )
     : undefined
@@ -184,20 +189,12 @@ export const createDownloadConfig = (
     manifestSignatureUrl:
       manifestSignatureAsset?.browser_download_url ??
       getManifestSignatureUrl(version),
-    verificationGuideUrl: githubUrls.verification
+    verificationGuideUrl: DOCS.verifyBinaries
   }
 }
 
-const defaultConfig = createDownloadConfig()
-
-export const currentVersion = defaultConfig.currentVersion
-export const platforms = defaultConfig.platforms
-export const manifestUrl = defaultConfig.manifestUrl
-export const manifestSignatureUrl = defaultConfig.manifestSignatureUrl
-
 // URL for verification guide
-export const verificationGuideUrl = githubUrls.verification
+export const verificationGuideUrl = DOCS.verifyBinaries
 
 // Re-export helper for convenience
-export const defaultDownloadConfig = defaultConfig
-export { buildPlatforms }
+export { buildPlatforms, buildGithubUrls }

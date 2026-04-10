@@ -7,8 +7,8 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import {
   createDownloadConfig,
-  defaultDownloadConfig,
   verificationGuideUrl,
+  type DownloadConfig,
   type GithubReleaseAsset
 } from '@/constants/downloads'
 import { stripVersionTag } from '@/constants/versions'
@@ -27,13 +27,11 @@ type GithubRelease = {
 }
 
 export const Downloads = () => {
-  const [downloadConfig, setDownloadConfig] = useState(defaultDownloadConfig)
+  const [downloadConfig, setDownloadConfig] = useState<DownloadConfig | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const { t } = useTranslation()
-  const {
-    currentVersion,
-    platforms,
-  } = downloadConfig
+  const currentVersion = downloadConfig?.currentVersion ?? { version: '', date: '', notes: '' }
+  const platforms = downloadConfig?.platforms ?? []
 
   const downloadFile = (url?: string) => {
     if (!url) return
