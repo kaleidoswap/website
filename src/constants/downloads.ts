@@ -1,5 +1,5 @@
 // src/constants/downloads.ts
-import type { PlatformDownload } from '@/types/downloads'
+import type { PlatformDownload, SecondaryDownload } from '@/types/downloads'
 import {
   AppleIcon,
   LinuxIcon,
@@ -43,104 +43,144 @@ const findAsset = (
 const isSignature = (name: string) =>
   name.endsWith('.sig') || name.endsWith('.asc')
 
+const formatSize = (bytes: number): string => {
+  const mb = Math.round(bytes / (1024 * 1024))
+  return `${mb} MB`
+}
+
+const findAssetWithSize = (
+  assets: GithubReleaseAsset[] | undefined,
+  matcher: (name: string) => boolean
+) => {
+  const asset = assets?.find((a) => matcher(a.name.toLowerCase()))
+  return asset
+    ? { url: asset.browser_download_url, size: 'size' in asset ? formatSize((asset as GithubReleaseAssetWithSize).size) : undefined, name: asset.name }
+    : undefined
+}
+
+export interface GithubReleaseAssetWithSize extends GithubReleaseAsset {
+  size: number
+}
+
 const buildPlatforms = (
   version: string,
   assets?: GithubReleaseAsset[]
 ): PlatformDownload[] => {
+  // --- macOS ---
   const macArmAsset = findAsset(assets, (name) =>
     name.includes('aarch64') && name.endsWith('.dmg') && !isSignature(name)
   )
-
   const macIntelAsset = findAsset(assets, (name) =>
     name.includes('x64') && name.endsWith('.dmg') && !isSignature(name)
   )
-
   const macPrimaryAsset = macArmAsset ?? macIntelAsset
-
   const macSignatureAsset = macPrimaryAsset
     ? findAsset(assets, (name) =>
         name.includes(macPrimaryAsset.name.toLowerCase()) && isSignature(name)
       )
     : undefined
 
-  const macArchitectures: string[] = []
-  if (macArmAsset) {
-    macArchitectures.push(
-      macPrimaryAsset === macArmAsset ? 'Apple Silicon' : 'Apple Silicon (via releases)'
+  const macSecondary: SecondaryDownload[] = []
+  if (macArmAsset && macIntelAsset) {
+    const intelSized = findAssetWithSize(assets, (name) =>
+      name.includes('x64') && name.endsWith('.dmg') && !isSignature(name)
     )
-  }
-  if (macIntelAsset) {
-    macArchitectures.push(
-      macPrimaryAsset === macIntelAsset ? 'Intel' : 'Intel (via releases)'
-    )
-  }
-  if (!macArchitectures.length) {
-    macArchitectures.push('Apple Silicon')
+    macSecondary.push({
+      label: 'Intel (x64)',
+      url: macIntelAsset.browser_download_url,
+      size: intelSized?.size
+    })
   }
 
+  // --- Linux ---
   const linuxAppImageAsset = findAsset(assets, (name) =>
     name.includes('appimage') && !isSignature(name)
   )
-
   const linuxSignatureAsset = linuxAppImageAsset
     ? findAsset(assets, (name) =>
         name.includes(linuxAppImageAsset.name.toLowerCase()) && isSignature(name)
       )
     : undefined
-
   const linuxDebAsset = findAsset(assets, (name) =>
     name.endsWith('.deb') && !isSignature(name)
   )
-
   const linuxRpmAsset = findAsset(assets, (name) =>
     name.endsWith('.rpm') && !isSignature(name)
   )
 
-  const linuxArchitectures = ['AppImage']
-  const hasLinuxPackages = linuxDebAsset || linuxRpmAsset
-  if (hasLinuxPackages) {
-    linuxArchitectures.push('DEB & RPM via releases')
+  const linuxSecondary: SecondaryDownload[] = []
+  if (linuxDebAsset) {
+    const debSized = findAssetWithSize(assets, (name) =>
+      name.endsWith('.deb') && !isSignature(name)
+    )
+    linuxSecondary.push({
+      label: '.deb (Debian/Ubuntu)',
+      url: linuxDebAsset.browser_download_url,
+      size: debSized?.size
+    })
+  }
+  if (linuxRpmAsset) {
+    const rpmSized = findAssetWithSize(assets, (name) =>
+      name.endsWith('.rpm') && !isSignature(name)
+    )
+    linuxSecondary.push({
+      label: '.rpm (Fedora/RHEL)',
+      url: linuxRpmAsset.browser_download_url,
+      size: rpmSized?.size
+    })
   }
 
-  const windowsInstallerAsset = findAsset(assets, (name) =>
+  // --- Windows ---
+  const windowsExeAsset = findAsset(assets, (name) =>
     name.includes('x64-setup') && name.endsWith('.exe') && !isSignature(name)
   )
-
-  const windowsSignatureAsset = windowsInstallerAsset
+  const windowsExeSignature = windowsExeAsset
     ? findAsset(assets, (name) =>
-        name.includes(windowsInstallerAsset.name.toLowerCase()) && isSignature(name)
+        name.includes(windowsExeAsset.name.toLowerCase()) && isSignature(name)
       )
     : undefined
+  const windowsMsiAsset = findAsset(assets, (name) =>
+    name.endsWith('.msi') && !isSignature(name)
+  )
+
+  const windowsSecondary: SecondaryDownload[] = []
+  if (windowsMsiAsset) {
+    const msiSized = findAssetWithSize(assets, (name) =>
+      name.endsWith('.msi') && !isSignature(name)
+    )
+    windowsSecondary.push({
+      label: 'MSI Installer',
+      url: windowsMsiAsset.browser_download_url,
+      size: msiSized?.size
+    })
+  }
 
   return [
     {
       platform: 'mac',
       icon: AppleIcon,
       title: 'macOS',
-      architecture: macArchitectures,
+      architecture: ['Apple Silicon', ...(macIntelAsset ? ['Intel'] : [])],
       downloadUrl:
         macPrimaryAsset?.browser_download_url ?? getMacDownload(version),
       signatureUrl:
         macSignatureAsset?.browser_download_url ?? getSignatureUrl('mac', version),
-      note:
-        macArmAsset && macIntelAsset
-          ? macPrimaryAsset === macArmAsset
-            ? 'Intel build available via GitHub releases.'
-            : 'Apple Silicon build available via GitHub releases.'
-          : undefined
+      secondaryDownloads: macSecondary.length ? macSecondary : undefined
     },
     {
       platform: 'linux',
       icon: LinuxIcon,
       title: 'Linux',
-      architecture: linuxArchitectures,
+      architecture: [
+        'AppImage',
+        ...(linuxDebAsset ? ['.deb'] : []),
+        ...(linuxRpmAsset ? ['.rpm'] : [])
+      ],
       downloadUrl:
         linuxAppImageAsset?.browser_download_url ?? getLinuxDownload(version),
       signatureUrl:
         linuxSignatureAsset?.browser_download_url ?? getSignatureUrl('linux', version),
-      note: hasLinuxPackages
-        ? 'Additional DEB and RPM packages available on GitHub.'
-        : undefined
+      secondaryDownloads: linuxSecondary.length ? linuxSecondary : undefined
     },
     {
       platform: 'windows',
@@ -148,10 +188,11 @@ const buildPlatforms = (
       title: 'Windows',
       architecture: ['x64'],
       downloadUrl:
-        windowsInstallerAsset?.browser_download_url ?? getWindowsDownload(version),
+        windowsExeAsset?.browser_download_url ?? getWindowsDownload(version),
       signatureUrl:
-        windowsSignatureAsset?.browser_download_url ??
-        getSignatureUrl('win-installer', version)
+        windowsExeSignature?.browser_download_url ??
+        getSignatureUrl('win-installer', version),
+      secondaryDownloads: windowsSecondary.length ? windowsSecondary : undefined
     }
   ]
 }
