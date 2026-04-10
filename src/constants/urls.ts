@@ -42,6 +42,7 @@ export const SOCIALS = {
   twitterLegacy: 'https://twitter.com/kaleidoswap',
   telegram: 'https://t.me/kaleidoswap',
   github: GITHUB.orgUrl,
+  medium: `https://${DOMAINS.blog}`,
 } as const
 
 // Product URLs

@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 
 // Saved page-scroll position while the mobile menu is open (iOS needs position:fixed on body)
 let _savedScrollY = 0
-import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react'
+import { Menu, X, ChevronDown, ExternalLink, Hammer } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
 import { mainNavItems, productItems, developerItems } from '@/constants/navigation'
-import { PRODUCTS } from '@/constants/urls'
+import { DOCS } from '@/constants/urls'
 import { cn, openExternalLink } from '@/lib/utils'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
 import { useTranslation } from 'react-i18next'
@@ -307,10 +307,11 @@ export const Navbar = () => {
               <Button
                 variant="default"
                 size="default"
-                onClick={() => handleNavigation(PRODUCTS.app, true)}
-                className="ml-4"
+                onClick={() => handleNavigation(DOCS.home, true)}
+                className="ml-4 flex items-center gap-2"
               >
-                {t('Launch App')}
+                <Hammer className="w-4 h-4" />
+                {t('Start Building')}
               </Button>
             </div>
 
@@ -400,10 +401,11 @@ export const Navbar = () => {
                   <Button
                     variant="default"
                     size="lg"
-                    className="w-full justify-center"
-                    onClick={() => handleNavigation(PRODUCTS.app, true)}
+                    className="w-full justify-center flex items-center gap-2"
+                    onClick={() => handleNavigation(DOCS.home, true)}
                   >
-                    {t('Launch App')}
+                    <Hammer className="w-4 h-4" />
+                    {t('Start Building')}
                   </Button>
                   <Button
                     variant="outline"

@@ -1,4 +1,4 @@
-import { Check, Download } from 'lucide-react'
+import { Check, Download, Hammer } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/common/Button'
 import { PRODUCTS } from '@/constants/urls'
@@ -63,11 +63,11 @@ export const HeroSection = () => {
             <div className="flex flex-wrap gap-4">
               <Button
                 size="lg"
-                onClick={() => handleNavigation(PRODUCTS.app, true)}
+                onClick={() => handleNavigation('https://docs.kaleidoswap.com/sdk/introduction', true)}
                 className="h-12 px-8 btn-glow flex items-center gap-2"
               >
-                <span className="material-symbols-outlined text-[20px]">rocket_launch</span>
-                {t('Launch Web App')}
+                <Hammer className="w-5 h-5" />
+                {t('Build with the SDK')}
               </Button>
               <Button
                 variant="outline"
@@ -88,10 +88,13 @@ export const HeroSection = () => {
                 <Check className="w-4 h-4 text-primary-500" />
                 <span>{t('100% Open Source')}</span>
               </div>
-              <div className="w-1 h-1 bg-slate-700 rounded-full" />
               <div className="flex items-center gap-1">
                 <Check className="w-4 h-4 text-primary-500" />
                 <span>{t('Non-Custodial')}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <Check className="w-4 h-4 text-primary-500" />
+                <span>{t('Permissionless')}</span>
               </div>
             </div>
           </AnimateIn>

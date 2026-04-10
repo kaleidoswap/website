@@ -1,5 +1,5 @@
 import type { FooterProps } from '@/types/footer'
-import { GitHubIcon, TelegramIcon, XIcon } from '@/components/icons/SocialIcons'
+import { GitHubIcon, TelegramIcon, XIcon, MediumIcon } from '@/components/icons/SocialIcons'
 import { PRODUCTS, SOCIALS, GITHUB, EXTERNAL } from '@/constants/urls'
 
 export const footerConfig: FooterProps = {
@@ -47,6 +47,11 @@ export const footerConfig: FooterProps = {
       platform: "Telegram",
       href: SOCIALS.telegram,
       icon: TelegramIcon
+    },
+    {
+      platform: "Medium",
+      href: SOCIALS.medium,
+      icon: MediumIcon
     },
     {
       platform: "X",
