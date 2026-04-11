@@ -38,85 +38,94 @@ const useCases = [
     title: 'Market Data',
     description: 'Fetch trading pairs and real-time quotes with full type safety from any TypeScript application.',
     language: 'typescript',
-    code: `import { KaleidoClient, createAssetPairMapper } from 'kaleidoswap-sdk';
+    code: `import { KaleidoClient, toDisplayAmount } from 'kaleido-sdk';
+import type { Layer } from 'kaleido-sdk';
 
 const client = KaleidoClient.create({
   baseUrl: 'https://api.kaleidoswap.com',
 });
 
-// list available trading pairs
+// fetch trading pairs
 const pairsResponse = await client.maker.listPairs();
-const mapper = createAssetPairMapper(pairsResponse);
+const pair = pairsResponse.pairs[0];
+const route = pair.routes[0];
 
-const btc  = mapper.findByTicker('BTC');
-const usdt = mapper.findByTicker('USDT');
-
-// get a quote for 0.001 BTC → USDT
+// get a quote for 0.001 BTC
 const quote = await client.maker.getQuote({
-  from_asset: { asset_id: btc.asset_id,  layer: 'BTC_LN', amount: 100_000 },
-  to_asset:   { asset_id: usdt.asset_id, layer: 'RGB_LN' },
+  from_asset: {
+    asset_id: pair.base.asset_id,
+    layer: route.from_layer as Layer,
+    amount: 100_000,
+  },
+  to_asset: {
+    asset_id: pair.quote.asset_id,
+    layer: route.to_layer as Layer,
+  },
 });
 
-console.log(\`Price:   \${quote.price}\`);
-console.log(\`Expires: \${new Date(quote.expires_at).toLocaleString()}\`);`,
+console.log(\`From: \${quote.from_asset.amount} \${quote.from_asset.ticker}\`);
+console.log(\`To:   \${quote.to_asset.amount} \${quote.to_asset.ticker}\`);
+console.log(\`Price: \${quote.price}\`);`,
   },
   {
     title: 'Atomic Swaps',
     description: 'Execute trustless swaps across Bitcoin layers from Python with Pydantic-typed models.',
     language: 'python',
-    code: `from kaleidoswap_sdk import (
+    code: `from kaleido_sdk import (
     KaleidoClient, Layer,
     PairQuoteRequest, SwapLegInput,
-    CreateSwapOrderRequest,
+    CreateSwapOrderRequest, ReceiverAddress,
+    ReceiverAddressFormat, to_display_amount,
 )
 
 client = KaleidoClient.create(base_url="https://api.kaleidoswap.com")
 
-# request a quote
+# get a quote for USDT → BTC
 quote = await client.maker.get_quote(PairQuoteRequest(
     from_asset=SwapLegInput(
-        asset_id="BTC",
-        layer=Layer.BTC_LN,
-        amount=100_000,
+        asset_id=rgb_asset_id,
+        layer=Layer.RGB_LN,
+        amount=1_000_000,
     ),
     to_asset=SwapLegInput(
-        asset_id="USDT",
-        layer=Layer.RGB_LN,
+        asset_id="BTC",
+        layer=Layer.BTC_L1,
     ),
 ))
 print(f"Price: {quote.price} | RFQ: {quote.rfq_id}")
 
-# build the order request (rfq_id, from/to assets, receiver_address)
-order_req = CreateSwapOrderRequest(
-    rfq_id=quote.rfq_id,
-    from_asset=...,  # from quote.from_asset
-    to_asset=...,    # from quote.to_asset
+# create the swap order
+order = await client.maker.create_swap_order(
+    CreateSwapOrderRequest(
+        rfq_id=quote.rfq_id,
+        from_asset=quote.from_asset,
+        to_asset=quote.to_asset,
+        receiver_address=ReceiverAddress(
+            address=receiver_address,
+            format=ReceiverAddressFormat.BTC_ADDRESS,
+        ),
+    )
 )
-order  = await client.maker.create_swap_order(order_req)
-result = await client.maker.wait_for_swap_completion(order.id)
-print(f"Swap status: {result.status}")`,
+print(f"Order {order.id}: {order.status}")`,
   },
   {
     title: 'Real-Time Streaming',
     description: 'Stream live quotes over WebSocket with built-in auto-reconnection and typed event handlers.',
     language: 'typescript',
-    code: `import { KaleidoClient } from 'kaleidoswap-sdk';
-import { randomUUID } from 'crypto';
+    code: `import { KaleidoClient } from 'kaleido-sdk';
 
 const client = KaleidoClient.create({
   baseUrl: 'https://api.kaleidoswap.com',
 });
 
-// open a WebSocket connection
-const clientId = randomUUID();
-const ws = client.maker.enableWebSocket(
-  \`wss://api.kaleidoswap.com/api/v1/market/ws/\${clientId}\`
-);
+const wsUrl = 'wss://api.kaleidoswap.com/api/v1/market/ws';
+const ws = client.maker.enableWebSocket(wsUrl);
 
-ws.on('connected',     () => console.log('Connected'));
-ws.on('disconnected',  () => console.log('Disconnected'));
+ws.on('connected', () => console.log('WebSocket connected!'));
+ws.on('disconnected', () => console.log('Disconnected'));
 ws.on('quoteResponse', (quote) => {
-  console.log(\`\${quote.from_amount} → \${quote.to_amount}\`);
+  console.log(\`From: \${quote.from_asset.amount} \${quote.from_asset.ticker}\`);
+  console.log(\`To:   \${quote.to_asset.amount} \${quote.to_asset.ticker}\`);
   console.log(\`Price: \${quote.price}\`);
 });
 
@@ -124,10 +133,11 @@ await ws.connect();
 
 // stream live quotes for BTC/USDT
 ws.requestQuote({
-  from_asset: 'btc',  to_asset: 'usdt',
+  from_asset: 'btc',
+  to_asset: 'usdt',
   from_amount: 100_000,
-  from_layer:  'BTC_LN',
-  to_layer:    'RGB_LN',
+  from_layer: 'BTC_LN',
+  to_layer: 'RGB_LN',
 });`,
   },
 ]
@@ -160,8 +170,8 @@ const CodeBlock = ({ code, language }: { code: string; language: string }) => {
 }
 
 const installTabs = [
-  { label: 'npm', color: 'text-red-400', cmd: 'pnpm add kaleidoswap-sdk' },
-  { label: 'pip', color: 'text-blue-400', cmd: 'pip install kaleidoswap-sdk' },
+  { label: 'npm', color: 'text-red-400', cmd: 'pnpm add kaleido-sdk' },
+  { label: 'pip', color: 'text-blue-400', cmd: 'pip install kaleido-sdk' },
 ]
 
 const InstallTabs = () => {
@@ -268,10 +278,10 @@ export const SDK = () => {
                   <Button
                     variant="outline"
                     size="lg"
-                    disabled
-                    className="border-slate-700 text-slate-500 cursor-not-allowed flex items-center gap-2"
+                    onClick={() => window.open('https://github.com/kaleidoswap/kaleido-sdk', '_blank')}
+                    className="flex items-center gap-2"
                   >
-                    {t('Soon on GitHub')}
+                    {t('View on GitHub')}
                     <ExternalLink className="w-4 h-4" />
                   </Button>
                 </div>
@@ -304,9 +314,9 @@ export const SDK = () => {
                   <div className="p-5 font-mono text-sm leading-relaxed overflow-x-auto whitespace-nowrap">
                     <div>
                       <span className="text-purple-400">import</span>
-                      <span className="text-slate-300"> {'{ KaleidoClient }'} </span>
+                      <span className="text-slate-300"> {'{ KaleidoClient, toDisplayAmount }'} </span>
                       <span className="text-purple-400">from</span>
-                      <span className="text-green-300"> 'kaleidoswap-sdk'</span>
+                      <span className="text-green-300"> 'kaleido-sdk'</span>
                       <span className="text-slate-500">;</span>
                     </div>
                     <div className="mt-4">
@@ -323,7 +333,16 @@ export const SDK = () => {
                       <span className="text-slate-500">,</span>
                     </div>
                     <div><span className="text-slate-300">{'});'}</span></div>
-                    <div className="mt-4 text-slate-600">{'// get a quote'}</div>
+                    <div className="mt-4 text-slate-600">{'// fetch pairs & get a quote'}</div>
+                    <div>
+                      <span className="text-purple-400">const</span>
+                      <span className="text-blue-300"> pairs</span>
+                      <span className="text-slate-300"> = </span>
+                      <span className="text-purple-400">await</span>
+                      <span className="text-slate-300"> client.maker.</span>
+                      <span className="text-yellow-300">listPairs</span>
+                      <span className="text-slate-300">();</span>
+                    </div>
                     <div>
                       <span className="text-purple-400">const</span>
                       <span className="text-blue-300"> quote</span>
@@ -338,12 +357,12 @@ export const SDK = () => {
                         <span className="text-slate-400">from_asset</span>
                         <span className="text-slate-300">{': { '}</span>
                         <span className="text-slate-400">asset_id</span>
-                        <span className="text-slate-300">: </span>
-                        <span className="text-green-300">'BTC'</span>
-                        <span className="text-slate-500">, </span>
+                        <span className="text-slate-300">: pair.base.asset_id</span>
+                        <span className="text-slate-500">,</span>
+                      </div>
+                      <div className="pl-4">
                         <span className="text-slate-400">layer</span>
-                        <span className="text-slate-300">: </span>
-                        <span className="text-green-300">'BTC_LN'</span>
+                        <span className="text-slate-300">: route.from_layer</span>
                         <span className="text-slate-500">, </span>
                         <span className="text-slate-400">amount</span>
                         <span className="text-slate-300">: </span>
@@ -354,12 +373,12 @@ export const SDK = () => {
                         <span className="text-slate-400">to_asset</span>
                         <span className="text-slate-300">{': { '}</span>
                         <span className="text-slate-400">asset_id</span>
-                        <span className="text-slate-300">: </span>
-                        <span className="text-green-300">'USDT'</span>
-                        <span className="text-slate-500">, </span>
+                        <span className="text-slate-300">: pair.quote.asset_id</span>
+                        <span className="text-slate-500">,</span>
+                      </div>
+                      <div className="pl-4">
                         <span className="text-slate-400">layer</span>
-                        <span className="text-slate-300">: </span>
-                        <span className="text-green-300">'RGB_LN'</span>
+                        <span className="text-slate-300">: route.to_layer</span>
                         <span className="text-slate-300">{' },'}</span>
                       </div>
                     </div>
@@ -372,14 +391,7 @@ export const SDK = () => {
                       <span className="text-purple-400">await</span>
                       <span className="text-slate-300"> client.maker.</span>
                       <span className="text-yellow-300">createSwapOrder</span>
-                      <span className="text-slate-300">{'({ rfq_id: quote.rfq_id });'}</span>
-                    </div>
-                    <div className="mt-4 text-slate-600">{'// wait for completion'}</div>
-                    <div>
-                      <span className="text-purple-400">await</span>
-                      <span className="text-slate-300"> client.maker.</span>
-                      <span className="text-yellow-300">waitForSwapCompletion</span>
-                      <span className="text-slate-300">(order.id);</span>
+                      <span className="text-slate-300">({'{'} rfq_id: quote.rfq_id {'}'});</span>
                     </div>
                     <div className="mt-3 flex items-center gap-1">
                       <span className="text-slate-600">{'>'}</span>
