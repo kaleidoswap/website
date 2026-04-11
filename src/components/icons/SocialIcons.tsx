@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import type { SVGProps } from 'react'
-import { siGithub, siTelegram, siX, siMedium } from 'simple-icons'
+import { siGithub, siTelegram, siX, siMedium, siRumble } from 'simple-icons'
 
 export const GitHubIcon = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => {
   return (
@@ -62,7 +62,23 @@ export const MediumIcon = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((pr
   )
 })
 
+export const RumbleIcon = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => {
+  return (
+    <svg
+      ref={ref}
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="currentColor"
+      {...props}
+    >
+      <path d={siRumble.path} />
+    </svg>
+  )
+})
+
 GitHubIcon.displayName = 'GitHubIcon'
 TelegramIcon.displayName = 'TelegramIcon'
 XIcon.displayName = 'XIcon'
-MediumIcon.displayName = 'MediumIcon' 
+MediumIcon.displayName = 'MediumIcon'
+RumbleIcon.displayName = 'RumbleIcon' 

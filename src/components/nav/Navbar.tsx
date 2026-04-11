@@ -307,11 +307,10 @@ export const Navbar = () => {
               <Button
                 variant="default"
                 size="default"
-                onClick={() => handleNavigation(DOCS.home, true)}
+                onClick={() => window.open('https://forms.gle/e1RR26RURF8qwGou5', '_blank')}
                 className="ml-4 flex items-center gap-2"
               >
-                <Hammer className="w-4 h-4" />
-                {t('Start Building')}
+                {t('Get Support')}
               </Button>
             </div>
 
@@ -402,10 +401,9 @@ export const Navbar = () => {
                     variant="default"
                     size="lg"
                     className="w-full justify-center flex items-center gap-2"
-                    onClick={() => handleNavigation(DOCS.home, true)}
+                    onClick={() => window.open('https://forms.gle/e1RR26RURF8qwGou5', '_blank')}
                   >
-                    <Hammer className="w-4 h-4" />
-                    {t('Start Building')}
+                    {t('Get Support')}
                   </Button>
                   <Button
                     variant="outline"

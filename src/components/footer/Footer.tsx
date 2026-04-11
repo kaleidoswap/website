@@ -1,10 +1,10 @@
 // src/components/footer/Footer.tsx
 import { ExternalLink } from 'lucide-react'
+import { Button } from '@/components/common/Button'
 import { Link } from 'react-router-dom'
 import type { FooterProps } from '@/types/footer'
 import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
 import { useTranslation } from 'react-i18next'
-import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 
 const currentYear = new Date().getFullYear()
 
@@ -14,7 +14,7 @@ export const Footer = ({ sections, socials }: FooterProps) => {
   return (
     <footer className="bg-gray-800/50 border-t border-gray-700/50">
       <div className="container py-12 md:py-16">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
+        <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
           {/* Brand */}
           <div className="space-y-4 lg:w-56 shrink-0">
             <div className="flex items-center gap-2">
@@ -26,9 +26,9 @@ export const Footer = ({ sections, socials }: FooterProps) => {
           </div>
 
           {/* Sections */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 flex-1">
+          <div className="flex gap-12 flex-wrap flex-1 justify-center">
             {sections.map((section) => (
-              <div key={section.title} className={section.title === 'Community' ? 'flex flex-col' : ''}>
+              <div key={section.title}>
                 <h3 className="font-semibold mb-4">{t(section.title)}</h3>
                 <ul className="space-y-3">
                   {section.links.map((link) => (
@@ -54,24 +54,19 @@ export const Footer = ({ sections, socials }: FooterProps) => {
                     </li>
                   ))}
                 </ul>
-                {section.title === 'Community' && (
-                  <div className="mt-auto pt-6 flex gap-3 justify-end">
-                    {socials.map(({ platform, href, icon: Icon }) => (
-                      <a
-                        key={platform}
-                        href={href}
-                        className="text-gray-400 hover:text-white transition-colors"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={platform}
-                      >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    ))}
-                  </div>
-                )}
               </div>
             ))}
+          </div>
+
+          {/* CTA */}
+          <div className="shrink-0">
+            <Button
+              variant="default"
+              size="default"
+              onClick={() => window.open('https://forms.gle/e1RR26RURF8qwGou5', '_blank')}
+            >
+              {t('Get Support')}
+            </Button>
           </div>
         </div>
 
@@ -81,9 +76,19 @@ export const Footer = ({ sections, socials }: FooterProps) => {
             {t('© {{year}} KaleidoSwap. All rights reserved.', { year: currentYear })}
           </div>
 
-          <div className="flex items-center gap-6">
-            {/* Language Switcher */}
-            <LanguageSwitcher variant="compact" />
+          <div className="flex items-center gap-3">
+            {socials.map(({ platform, href, icon: Icon }) => (
+              <a
+                key={platform}
+                href={href}
+                className="text-gray-400 hover:text-white transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={platform}
+              >
+                <Icon className="w-5 h-5" />
+              </a>
+            ))}
           </div>
         </div>
       </div>
