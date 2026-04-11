@@ -54,9 +54,9 @@ describe('Navbar', () => {
     expect(productsBtn).toHaveAttribute('aria-expanded', 'false')
   })
 
-  it('renders Launch App button', () => {
+  it('renders Get Support button', () => {
     render(<Navbar />)
-    const launchBtns = screen.getAllByRole('button', { name: /launch app/i })
-    expect(launchBtns.length).toBeGreaterThanOrEqual(1)
+    const supportBtns = screen.getAllByRole('button', { name: /get support/i })
+    expect(supportBtns.length).toBeGreaterThanOrEqual(1)
   })
 })
