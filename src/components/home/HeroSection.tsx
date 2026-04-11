@@ -1,7 +1,6 @@
 import { Check, Download, Hammer } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/common/Button'
-import { PRODUCTS } from '@/constants/urls'
 import { KaleidoScopeHeroAnimation } from '@/components/animations/KaleidoScopeHeroAnimation'
 import { MobileHeroAnimation } from '@/components/animations/MobileHeroAnimation'
 import { useTranslation } from 'react-i18next'
