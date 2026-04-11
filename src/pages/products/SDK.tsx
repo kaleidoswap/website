@@ -278,10 +278,10 @@ export const SDK = () => {
                   <Button
                     variant="outline"
                     size="lg"
-                    disabled
-                    className="border-slate-700 text-slate-500 cursor-not-allowed flex items-center gap-2"
+                    onClick={() => window.open('https://github.com/kaleidoswap/kaleido-sdk', '_blank')}
+                    className="flex items-center gap-2"
                   >
-                    {t('Soon on GitHub')}
+                    {t('View on GitHub')}
                     <ExternalLink className="w-4 h-4" />
                   </Button>
                 </div>
