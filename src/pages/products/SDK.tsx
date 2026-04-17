@@ -7,7 +7,7 @@ import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { footerConfig } from '@/constants/footer'
 import { FinalCTA } from '@/components/home/FinalCTA'
-import { PRODUCTS, DOCS } from '@/constants/urls'
+import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 
