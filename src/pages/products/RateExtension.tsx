@@ -139,7 +139,7 @@ export const RateExtension = () => {
                   variant="outline"
                   size="lg"
                   onClick={() => window.open(DOCS.rateExtension, '_blank')}
-                  className="border-slate-600 hover:border-white text-slate-300 hover:text-white flex items-center gap-2"
+                  className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex items-center gap-2"
                 >
                   <BookOpen className="w-4 h-4" />
                   {t('Read the Docs')}

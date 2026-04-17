@@ -15,8 +15,8 @@ const features = [
     icon: Server,
     title: 'Integrated RGB-LN Node',
     description: 'Full RGB Lightning node bundled. No external dependencies.',
-    color: 'text-secondary-400',
-    bg: 'bg-secondary-500/10',
+    color: 'text-green-400',
+    bg: 'bg-green-500/10',
   },
   {
     icon: Shield,
@@ -29,15 +29,15 @@ const features = [
     icon: Lock,
     title: 'Self-Custody',
     description: 'Keys never leave your device. True sovereign trading.',
-    color: 'text-bitcoin-400',
-    bg: 'bg-bitcoin-500/10',
+    color: 'text-green-400',
+    bg: 'bg-green-500/10',
   },
   {
     icon: Terminal,
     title: 'Power User Features',
     description: 'Channel management, liquidity controls, advanced settings.',
-    color: 'text-primary-400',
-    bg: 'bg-primary-500/10',
+    color: 'text-green-400',
+    bg: 'bg-green-500/10',
   },
 ]
 
@@ -76,9 +76,9 @@ export const Desktop = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <AnimateIn variant="fade-down" duration={500}>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-secondary-500/30 bg-secondary-500/10 mb-6 w-fit">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6 w-fit">
                   <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-xs font-semibold text-secondary-400 uppercase tracking-wider">
+                  <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">
                     {t('Available Now')}
                   </span>
                 </div>
@@ -109,19 +109,10 @@ export const Desktop = () => {
                     variant="outline"
                     size="lg"
                     onClick={() => window.open(DOCS.desktop, '_blank')}
-                    className="border-slate-600 hover:border-white text-slate-300 hover:text-white flex items-center gap-2"
+                    className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex items-center gap-2"
                   >
                     <BookOpen className="w-4 h-4" />
                     {t('Read the Docs')}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={() => window.open(GITHUB.repoUrl, '_blank')}
-                    className="border-slate-600 hover:border-white text-slate-300 hover:text-white flex items-center gap-2"
-                  >
-                    {t('View on GitHub')}
-                    <ArrowRight className="w-4 h-4" />
                   </Button>
                 </div>
               </AnimateIn>
@@ -137,6 +128,11 @@ export const Desktop = () => {
                     <Check className="w-4 h-4 text-primary-500" />
                     <span>{t('No Telemetry')}</span>
                   </div>
+                  <div className="w-1 h-1 bg-slate-700 rounded-full" />
+                  <div className="flex items-center gap-1">
+                    <Check className="w-4 h-4 text-primary-500" />
+                    <span>{t('Self Custodial')}</span>
+                  </div>
                 </div>
               </AnimateIn>
             </div>
@@ -144,13 +140,25 @@ export const Desktop = () => {
             {/* Desktop App Screenshot */}
             <AnimateIn variant="scale" delay={200} duration={800}>
               <div className="relative group">
-                <div className="absolute -inset-8 bg-gradient-to-r from-secondary-500/30 to-primary-500/30 rounded-3xl blur-3xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
-                <div className="absolute -inset-4 bg-gradient-to-br from-secondary-500/10 via-transparent to-primary-500/10 rounded-2xl" />
-                <img
-                  src="/images/desktop-app-screenshot.png"
-                  alt={t('Desktop App Screenshot')}
-                  className="relative w-full rounded-xl drop-shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
-                />
+                {/* Ambient glow */}
+                <div className="absolute -inset-6 bg-gradient-to-br from-secondary-500/20 to-primary-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
+
+                {/* App window frame */}
+                <div className="relative rounded-2xl border border-white/10 bg-[#0d1117] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.6)]">
+                  {/* Window chrome */}
+                  <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/5 bg-white/[0.03]">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+                    <span className="ml-3 text-xs text-slate-600 font-mono">KaleidoSwap Desktop</span>
+                  </div>
+                  {/* Screenshot */}
+                  <img
+                    src="/images/desktop-app-screenshot-v2.png"
+                    alt={t('Desktop App Screenshot')}
+                    className="w-full block"
+                  />
+                </div>
               </div>
             </AnimateIn>
           </div>
@@ -232,7 +240,7 @@ export const Desktop = () => {
       </section>
 
       {/* RGB Lightning Node */}
-      <section className="py-20 bg-gray-950/50">
+      <section className="pt-20 pb-32 bg-gray-950/50">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <div className="glass-card rounded-2xl p-8 md:p-12">

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 // Saved page-scroll position while the mobile menu is open (iOS needs position:fixed on body)
 let _savedScrollY = 0
@@ -13,7 +13,6 @@ import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
   const [developersOpen, setDevelopersOpen] = useState(false)
   const productsRef = useRef<HTMLDivElement>(null)
@@ -24,35 +23,21 @@ export const Navbar = () => {
   const navigate = useNavigate()
   const { t } = useTranslation()
 
-  const checkScroll = useCallback(() => {
-    setScrolled(window.scrollY > 10)
-  }, [])
-
   useEffect(() => {
-    checkScroll()
-    window.addEventListener('scroll', checkScroll)
-    return () => window.removeEventListener('scroll', checkScroll)
-  }, [checkScroll])
-
-  useEffect(() => {
-    checkScroll()
     setIsOpen(false)
     setProductsOpen(false)
     setDevelopersOpen(false)
-  }, [location.pathname, checkScroll])
+  }, [location.pathname])
 
   useEffect(() => {
     const body = document.body
     if (isOpen) {
-      // Save current scroll position before locking
       _savedScrollY = window.scrollY
-      // position:fixed is the only reliable way to prevent background scroll on iOS Safari
       body.style.overflow = 'hidden'
       body.style.position = 'fixed'
       body.style.top = `-${_savedScrollY}px`
       body.style.width = '100%'
     } else {
-      // Restore scroll position when menu closes
       body.style.overflow = ''
       body.style.position = ''
       body.style.top = ''
@@ -111,7 +96,6 @@ export const Navbar = () => {
 
     const handleTabKey = (e: KeyboardEvent) => {
       if (e.key !== 'Tab') return
-
       if (e.shiftKey) {
         if (document.activeElement === firstFocusable || document.activeElement === menuButtonRef.current) {
           e.preventDefault()
@@ -151,14 +135,7 @@ export const Navbar = () => {
       </a>
 
       <nav
-        className={cn(
-          'fixed w-full z-50 transition-all duration-300',
-          isOpen
-            ? 'bg-gray-900 shadow-md'
-            : scrolled
-              ? 'bg-gray-900/95 backdrop-blur-md shadow-md'
-              : 'bg-transparent'
-        )}
+        className="fixed w-full z-50"
         role="navigation"
         aria-label={t('Main navigation')}
       >
@@ -205,19 +182,19 @@ export const Navbar = () => {
                 {productsOpen && (
                   <div className="absolute top-full left-0 mt-2 w-56 bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden" role="menu">
                     {productItems.map((item) => {
-                      const hasPage = item.href !== '#'
+                      const isAvailable = item.status === 'live'
                       return (
                         <button
                           key={item.label}
                           onClick={() =>
-                            hasPage &&
+                            isAvailable &&
                             handleNavigation(item.href, item.external)
                           }
-                          disabled={!hasPage}
+                          disabled={!isAvailable}
                           role="menuitem"
                           className={cn(
                             'w-full px-4 py-3 text-left flex items-center justify-between transition-colors',
-                            hasPage
+                            isAvailable
                               ? 'text-gray-200 hover:bg-gray-700/50 hover:text-white'
                               : 'text-gray-500 cursor-not-allowed'
                           )}
@@ -225,9 +202,9 @@ export const Navbar = () => {
                           <span>{t(item.label)}</span>
                           {item.status === 'coming-soon' ? (
                             <span className="text-xs text-gray-500">Soon</span>
-                          ) : item.external ? (
+                          ) : (
                             <ExternalLink className="w-3 h-3 text-gray-500" />
-                          ) : null}
+                          )}
                         </button>
                       )
                     })}
@@ -266,15 +243,15 @@ export const Navbar = () => {
                           handleNavigation(item.href, item.external)
                         }}
                         role="menuitem"
-                        className="flex items-start gap-3 px-4 py-3 hover:bg-gray-700/50 transition-colors group"
+                        className="flex items-center justify-between px-4 py-3 hover:bg-gray-700/50 transition-colors group"
                       >
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-1.5 text-gray-200 group-hover:text-white font-medium text-sm">
+                          <div className="text-gray-200 group-hover:text-white font-medium text-sm">
                             {t(item.label)}
-                            <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-gray-300 shrink-0" />
                           </div>
                           <p className="text-xs text-gray-500 mt-0.5">{t(item.description)}</p>
                         </div>
+                        <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-gray-300 shrink-0" />
                       </a>
                     ))}
                   </div>

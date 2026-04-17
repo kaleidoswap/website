@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { footerConfig } from '@/constants/footer'
+import { FinalCTA } from '@/components/home/FinalCTA'
 import { PRODUCTS, DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
@@ -224,6 +225,7 @@ const InstallTabs = () => {
 
 export const SDK = () => {
   const { t } = useTranslation()
+  const [activeCase, setActiveCase] = useState(0)
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
@@ -257,7 +259,7 @@ export const SDK = () => {
               <AnimateIn variant="fade-up" delay={100}>
                 <div className="space-y-4 mb-8">
                   <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-                    {t('Build on KaleidoSwap')}
+                    {t('KaleidoSDK')}
                   </h1>
                   <p className="text-xl text-slate-400 leading-relaxed">
                     {t('Integrate atomic swaps into your wallet, exchange, or application. TypeScript and Python SDKs auto-generated from the OpenAPI spec.')}
@@ -424,46 +426,64 @@ export const SDK = () => {
       {/* Use Cases with Code Examples */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-4">{t('Use Cases')}</h2>
-          <p className="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
-            {t('See how developers are building with KaleidoSwap')}
-          </p>
 
-          <div className="space-y-12">
-            {useCases.map((useCase, index) => (
-              <div
-                key={useCase.title}
-                className={`grid md:grid-cols-2 gap-8 items-start min-w-0 ${
-                  index % 2 === 1 ? 'md:grid-flow-dense' : ''
-                }`}
-              >
-                <div className={`min-w-0 ${index % 2 === 1 ? 'md:col-start-2' : ''}`}>
+          {/* Header row: title left, tabs right */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+            <h2 className="text-4xl font-bold">{t('Use Cases')}</h2>
+            <div className="flex gap-2 shrink-0">
+              {useCases.map((useCase, index) => (
+                <button
+                  key={useCase.title}
+                  onClick={() => setActiveCase(index)}
+                  className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${
+                    activeCase === index
+                      ? 'bg-green-500/15 text-green-400 border-green-500/30'
+                      : 'text-slate-400 hover:text-white border-white/5 hover:border-white/15'
+                  }`}
+                >
+                  {t(useCase.title)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Active use case */}
+          <div className="grid md:grid-cols-2 gap-12 items-start min-w-0">
+            {/* Left: all use cases stacked absolutely so the container never resizes */}
+            <div className="relative h-[180px] min-w-0 mt-8">
+              {useCases.map((useCase, index) => (
+                <div
+                  key={useCase.title}
+                  className={`absolute inset-0 flex flex-col justify-start transition-opacity duration-300 ${
+                    index === activeCase ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                  }`}
+                >
                   <h3 className="text-2xl font-bold mb-3">{t(useCase.title)}</h3>
-                  <p className="text-slate-400 mb-4">{t(useCase.description)}</p>
+                  <p className="text-slate-400 mb-6 leading-relaxed">{t(useCase.description)}</p>
                   <a
                     href={DOCS.sdk}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-green-400 hover:text-green-300 flex items-center gap-1"
+                    className="text-green-400 hover:text-green-300 flex items-center gap-1 w-fit"
                   >
                     {t('View full example')}
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
-                <div className={`min-w-0 overflow-hidden ${index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
-                  <CodeBlock
-                    code={useCase.code}
-                    language={useCase.language}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="min-w-0 overflow-hidden">
+              <CodeBlock
+                code={useCases[activeCase].code}
+                language={useCases[activeCase].language}
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* API Reference */}
-      <section className="py-20 bg-gray-950/50">
+      <section className="py-32 bg-gray-950/50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="glass-card rounded-2xl p-8 md:p-12 overflow-hidden">
             <div className="grid md:grid-cols-2 gap-8 items-center min-w-0">
@@ -506,25 +526,7 @@ export const SDK = () => {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">{t('Start Building')}</h2>
-          <p className="text-slate-400 mb-8">
-            {t('Join developers building the future of Bitcoin trading.')}
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button
-              size="lg"
-              onClick={() => window.open(PRODUCTS.docs, '_blank')}
-              className="bg-green-500 hover:bg-green-600"
-            >
-              <BookOpen className="w-4 h-4 mr-2" />
-              {t('Read Documentation')}
-            </Button>
-          </div>
-        </div>
-      </section>
+      <FinalCTA />
 
       <Footer {...footerConfig} />
     </div>

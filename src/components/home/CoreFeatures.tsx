@@ -8,7 +8,7 @@ export const CoreFeatures = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="py-28 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-primary-900/10 via-transparent to-transparent -z-10" />
 
       <div className="max-w-7xl mx-auto px-6">

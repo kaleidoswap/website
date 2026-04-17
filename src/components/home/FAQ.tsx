@@ -57,7 +57,7 @@ const FaqItem = memo(({
   <AnimateIn
     variant="fade-up"
     delay={index * 60}
-    className="glass-card rounded-xl overflow-hidden"
+    className="rounded-xl overflow-hidden border border-white/10 hover:border-white/20 transition-colors"
   >
     <button
       onClick={() => onToggle(index)}
@@ -117,7 +117,7 @@ export const FAQ = () => {
   const mid = Math.ceil(faqItems.length / 2)
 
   return (
-    <section className="py-16 relative">
+    <section className="pt-16 pb-32 relative">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify(faqJsonLd)}
@@ -128,9 +128,7 @@ export const FAQ = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {t('Frequently Asked Questions')}
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            {t('Everything you need to know about KaleidoSwap.')}
-          </p>
+
         </AnimateIn>
 
         <div className="grid md:grid-cols-2 gap-4 items-start">
