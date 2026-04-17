@@ -72,7 +72,7 @@ export const HeroSection = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => handleNavigation('/downloads', false)}
-                className="h-12 px-8 border-slate-600 hover:border-white text-slate-300 hover:text-white flex items-center gap-2"
+                className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
                 {t('Download Desktop')}

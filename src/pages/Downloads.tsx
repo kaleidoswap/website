@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { Download, ExternalLink, FileText, Shield, Terminal, Zap, Lock, Loader2, Check, Key } from 'lucide-react'
+import { Download, ExternalLink, Shield, Terminal, Loader2, Check, Key } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SEO } from '@/components/common/SEO'
 import { Button } from '@/components/common/Button'
@@ -15,7 +15,6 @@ import { stripVersionTag } from '@/constants/versions'
 import { GITHUB } from '@/constants/urls'
 import { footerConfig } from '@/constants/footer'
 import type { PlatformDownload } from '@/types/downloads'
-import rgbSymbol from '@/assets/rgb-symbol.svg'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 
@@ -152,7 +151,7 @@ export const Downloads = () => {
     return (
       <AnimateIn key={platform.platform} variant="fade-up" delay={index * 120} className="h-full flex flex-col">
         <motion.div
-          className={`glass-card p-8 h-full flex flex-col relative overflow-hidden ${
+          className={`glass-card rounded-2xl p-8 h-full flex flex-col relative overflow-hidden min-h-[340px] border !border-white/15 ${
             isDisabled ? 'opacity-60' : ''
           }`}
           whileHover={!isDisabled ? { y: -4, scale: 1.02 } : {}}
@@ -181,17 +180,14 @@ export const Downloads = () => {
             </div>
           </div>
 
-          {/* Spacer */}
-          <div className="flex-1" />
-
           {/* Download Button */}
           <Button
             variant={!isDisabled ? 'default' : 'outline'}
             size="lg"
             className={
               !isDisabled
-                ? 'w-full btn-glow flex items-center gap-2'
-                : 'w-full border-slate-600 text-slate-500 cursor-not-allowed'
+                ? 'w-full btn-glow flex items-center gap-2 mt-8'
+                : 'w-full border-slate-600 text-slate-500 cursor-not-allowed mt-8'
             }
             onClick={() => !isDisabled && !isLoading && downloadFile(platform.downloadUrl)}
             disabled={isDisabled || isLoading}
@@ -204,12 +200,11 @@ export const Downloads = () => {
             ) : (
               <>
                 <Download className="h-5 w-5" />
-                {!isDisabled
-                  ? t('Download for {{platform}}', { platform: localizedTitle })
-                  : t('Coming Soon')}
+                {!isDisabled ? t('Download') : t('Coming Soon')}
               </>
             )}
           </Button>
+
 
           {/* GPG signature link */}
           {!isDisabled && platform.signatureUrl && (
@@ -230,22 +225,17 @@ export const Downloads = () => {
               <p className="text-xs font-medium text-slate-500 uppercase tracking-wider mb-2">
                 {t('Also available')}
               </p>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-row flex-wrap gap-1.5">
                 {platform.secondaryDownloads.map((dl) => (
                   <a
                     key={dl.label}
                     href={dl.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between px-3 py-1.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors group/dl"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors group/dl"
                   >
-                    <span className="flex items-center gap-2">
-                      <Download className="w-3.5 h-3.5 opacity-0 group-hover/dl:opacity-100 transition-opacity" />
-                      <span>{t(dl.label)}</span>
-                    </span>
-                    {dl.size && (
-                      <span className="text-xs text-slate-600">{dl.size}</span>
-                    )}
+                    <Download className="w-3.5 h-3.5 opacity-0 group-hover/dl:opacity-100 transition-opacity" />
+                    <span>{t(dl.label)}</span>
                   </a>
                 ))}
               </div>
@@ -326,34 +316,11 @@ export const Downloads = () => {
             {platforms.map((platform, index) => renderPlatformCard(platform, index))}
           </div>
 
-          {/* Feature Highlights */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {[
-              { icon: Lock, label: t('Self-Custody'), desc: t('Full control of your private keys'), color: 'text-bitcoin-400', bg: 'bg-bitcoin-500/10' },
-              { icon: Zap, label: t('Lightning Fast'), desc: t('Near-instant settlement'), color: 'text-primary-400', bg: 'bg-primary-500/10' },
-              { icon: Shield, label: t('Open Source'), desc: t('Fully auditable code'), color: 'text-green-400', bg: 'bg-green-500/10' },
-              { icon: null, label: t('RGB Assets'), desc: t('Trade any RGB token'), color: 'text-secondary-400', bg: 'bg-secondary-500/10' },
-            ].map((item, i) => (
-              <AnimateIn key={item.label} variant="fade-up" delay={600 + i * 80} className="h-full">
-                <div className="glass-card p-5 text-center rounded-2xl h-full">
-                  <div className={`inline-flex p-2.5 rounded-full ${item.bg} ${item.color} mb-3`}>
-                    {item.icon ? (
-                      <item.icon className="w-5 h-5" />
-                    ) : (
-                      <img src={rgbSymbol} alt="RGB" className="w-5 h-5" />
-                    )}
-                  </div>
-                  <h3 className="font-semibold text-white text-sm mb-1">{item.label}</h3>
-                  <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
-                </div>
-              </AnimateIn>
-            ))}
-          </div>
         </div>
       </section>
 
       {/* Verification Section */}
-      <section className="py-16 relative overflow-hidden bg-gray-950/50">
+      <section className="pt-8 pb-16 relative overflow-hidden bg-gray-950/50">
         <div className="max-w-4xl mx-auto px-6">
           <AnimateIn variant="fade-up" className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Verify Your Download')}</h2>
@@ -363,27 +330,32 @@ export const Downloads = () => {
           </AnimateIn>
 
           {/* Steps */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            {[
-              { num: '1', title: t('Import GPG Key'), desc: t('One-time setup of the developer public key'), color: 'text-primary-400', bg: 'bg-primary-500/10', border: 'border-primary-500/20' },
-              { num: '2', title: t('Download .asc File'), desc: t('Grab the signature alongside your binary'), color: 'text-secondary-400', bg: 'bg-secondary-500/10', border: 'border-secondary-500/20' },
-              { num: '3', title: t('Run gpg --verify'), desc: t('Confirm a good signature before installing'), color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20' },
-            ].map((step, i) => (
-              <AnimateIn key={step.num} variant="fade-up" delay={i * 120} className="h-full">
-                <div className={`glass-card p-6 text-center rounded-2xl border h-full ${step.border}`}>
-                  <div className={`inline-flex items-center justify-center w-11 h-11 rounded-full ${step.bg} ${step.color} font-bold text-lg mb-4`}>
-                    {step.num}
+          <AnimateIn variant="fade-up" delay={100}>
+            <div className="flex items-start max-w-3xl mx-auto mb-12">
+              {[
+                { num: '01', title: t('Import GPG Key'), desc: t('One-time setup of the developer public key') },
+                { num: '02', title: t('Download .asc File'), desc: t('Grab the signature alongside your binary') },
+                { num: '03', title: t('Run gpg --verify'), desc: t('Confirm a good signature before installing') },
+              ].map((step, i) => (
+                <div key={step.num} className="flex items-start flex-1">
+                  <div className="flex flex-col items-center text-center flex-1">
+                    <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex items-center justify-center mb-4">
+                      <span className="text-xl font-bold text-green-400">{step.num}</span>
+                    </div>
+                    <h3 className="font-semibold text-white mb-1">{step.title}</h3>
+                    <p className="text-sm text-slate-400">{step.desc}</p>
                   </div>
-                  <h3 className="font-semibold text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-slate-400">{step.desc}</p>
+                  {i < 2 && (
+                    <div className="h-px bg-white/15 mt-8 w-12 shrink-0" />
+                  )}
                 </div>
-              </AnimateIn>
-            ))}
-          </div>
+              ))}
+            </div>
+          </AnimateIn>
 
           {/* Command blocks */}
           <AnimateIn variant="fade-up" delay={400}>
-            <div className="glass-card rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/5 to-transparent overflow-hidden">
+            <div className="glass-card rounded-2xl border border-white/10 overflow-hidden">
               <div className="p-6 border-b border-white/5 flex items-center gap-3">
                 <div className="inline-flex p-2.5 rounded-full bg-green-500/10 text-green-400">
                   <Shield className="w-5 h-5" />
@@ -400,7 +372,7 @@ export const Downloads = () => {
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
                     {t('1 — Import developer public key (once)')}
                   </p>
-                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-green-300 font-mono overflow-x-auto">
+                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-slate-200 font-mono overflow-x-auto">
                     {`curl -s https://github.com/bitwalt.gpg | gpg --import`}
                   </pre>
                 </div>
@@ -410,7 +382,7 @@ export const Downloads = () => {
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
                     {t('2 — Verify the binary against its signature')}
                   </p>
-                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-green-300 font-mono overflow-x-auto whitespace-pre-wrap">
+                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-slate-200 font-mono overflow-x-auto whitespace-pre-wrap">
                     {`# macOS (Apple Silicon)\ngpg --verify KaleidoSwap_${currentVersion.version}_aarch64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_aarch64.dmg\n\n# macOS (Intel)\ngpg --verify KaleidoSwap_${currentVersion.version}_x64.dmg.asc \\\n        KaleidoSwap_${currentVersion.version}_x64.dmg\n\n# Linux\ngpg --verify KaleidoSwap_${currentVersion.version}_amd64.AppImage.asc \\\n        KaleidoSwap_${currentVersion.version}_amd64.AppImage\n\n# Windows\ngpg --verify KaleidoSwap_${currentVersion.version}_x64-setup.exe.asc \\\n        KaleidoSwap_${currentVersion.version}_x64-setup.exe`}
                   </pre>
                 </div>
@@ -420,7 +392,7 @@ export const Downloads = () => {
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
                     {t('Expected output')}
                   </p>
-                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-slate-300 font-mono overflow-x-auto">
+                  <pre className="bg-black/40 rounded-xl px-4 py-3 text-sm text-slate-200 font-mono overflow-x-auto">
                     {`gpg: using RSA key 9EE396C0452755F0\ngpg: Good signature from "Walter (Kaleidoswap Developer) <walter@kaleidoswap.com>"`}
                   </pre>
                   <p className="text-xs text-slate-500 mt-2">
@@ -436,18 +408,17 @@ export const Downloads = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FileText className="w-4 h-4" />
                   <span>{t('Browse all release assets & .asc files')}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
                 <a
                   href={verificationGuideUrl}
-                  className="text-green-400 hover:text-green-300 inline-flex items-center gap-2 text-sm transition-colors"
+                  className="inline-flex items-center gap-1.5 h-7 px-3 text-xs rounded-xl font-semibold border-2 border-gray-600/80 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50 hover:text-white transition-all duration-300"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <span>{t('Full verification guide')}</span>
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
             </div>
@@ -455,7 +426,7 @@ export const Downloads = () => {
 
           {/* Trust signals */}
           <AnimateIn variant="fade-up" delay={500}>
-            <div className="flex flex-wrap items-center justify-center gap-6 mt-10 text-sm text-slate-500">
+            <div className="flex flex-wrap items-center justify-center gap-6 mt-10 text-sm text-slate-500 max-w-4xl mx-auto">
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4 text-primary-500" />
                 <span>{t('100% Open Source')}</span>
