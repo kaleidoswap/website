@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { Download, ExternalLink, Shield, Terminal, Loader2, Check, Key } from 'lucide-react'
+import { Download, ExternalLink, Shield, Terminal, Loader2, Key } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SEO } from '@/components/common/SEO'
 import { Button } from '@/components/common/Button'
@@ -232,9 +232,9 @@ export const Downloads = () => {
                     href={dl.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-slate-400 hover:text-white hover:bg-white/5 transition-colors group/dl"
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm text-slate-400 bg-white/[0.04] border border-white/[0.06] hover:text-white hover:bg-white/[0.08] hover:border-white/10 transition-all duration-200"
                   >
-                    <Download className="w-3.5 h-3.5 opacity-0 group-hover/dl:opacity-100 transition-opacity" />
+                    <Download className="w-3.5 h-3.5 shrink-0" />
                     <span>{t(dl.label)}</span>
                   </a>
                 ))}
@@ -420,26 +420,6 @@ export const Downloads = () => {
                   <span>{t('Full verification guide')}</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
-              </div>
-            </div>
-          </AnimateIn>
-
-          {/* Trust signals */}
-          <AnimateIn variant="fade-up" delay={500}>
-            <div className="flex flex-wrap items-center justify-center gap-6 mt-10 text-sm text-slate-500 max-w-4xl mx-auto">
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-primary-500" />
-                <span>{t('100% Open Source')}</span>
-              </div>
-              <div className="w-1 h-1 bg-slate-700 rounded-full" />
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-primary-500" />
-                <span>{t('No Telemetry')}</span>
-              </div>
-              <div className="w-1 h-1 bg-slate-700 rounded-full" />
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-primary-500" />
-                <span>{t('Non-Custodial')}</span>
               </div>
             </div>
           </AnimateIn>

@@ -24,7 +24,7 @@ export const ProblemSolution = () => {
                         href={protocol.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2.5 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-primary-500/30 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl hover:bg-gray-800/50 hover:border-slate-600 hover:text-white transition-all duration-300"
                       >
                         {protocol.icon ? (
                           <img src={protocol.icon} alt={protocol.name} className="h-6 w-6 object-contain" />
