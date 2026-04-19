@@ -86,21 +86,21 @@ export const Desktop = () => {
 
               <AnimateIn variant="fade-up" delay={100}>
                 <div className="space-y-4 mb-8">
-                  <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
                     {t('Desktop App')}
                   </h1>
-                  <p className="text-xl text-slate-400 leading-relaxed">
+                  <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
                     {t('Full sovereignty. Run your own RGB Lightning node. Manage channels, control liquidity, and trade with maximum privacy.')}
                   </p>
                 </div>
               </AnimateIn>
 
               <AnimateIn variant="fade-up" delay={250}>
-                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Button
                     size="lg"
                     onClick={() => window.location.href = '/downloads'}
-                    className="btn-glow flex items-center gap-2"
+                    className="btn-glow flex items-center justify-center gap-2 w-full sm:w-auto"
                   >
                     <Download className="w-4 h-4" />
                     {t('Download Now')}
@@ -109,7 +109,7 @@ export const Desktop = () => {
                     variant="outline"
                     size="lg"
                     onClick={() => window.open(DOCS.desktop, '_blank')}
-                    className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex items-center gap-2"
+                    className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex items-center justify-center gap-2 w-full sm:w-auto"
                   >
                     <BookOpen className="w-4 h-4" />
                     {t('Read the Docs')}

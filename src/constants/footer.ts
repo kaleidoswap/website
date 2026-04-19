@@ -50,4 +50,4 @@ export const footerConfig: FooterProps = {
       icon: XIcon
     }
   ]
-} 
+}
