@@ -91,7 +91,7 @@ export const ProductEcosystem = () => {
                   <Terminal className="w-6 h-6" />
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-2">{t('SDK')}</h3>
+                <h3 className="text-xl font-bold text-white mb-2">{t('KaleidoSDK')}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed mb-4 max-w-xs">
                   {t('Build your own swap interface or integrate Kaleido into your wallet.')}
                 </p>
@@ -123,10 +123,10 @@ export const ProductEcosystem = () => {
           {/* ── Desktop ──────────────────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={100} className="md:col-span-1 lg:col-span-2 h-full">
             <motion.div className={CARD_BASE} whileHover={CARD_HOVER} transition={SPRING}>
-              <GlowOrb color="bg-teal-500/10" />
+              <GlowOrb color="bg-primary-500/10" />
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-4">
-                  <CardIcon color="bg-teal-500/10 text-teal-400">
+                  <CardIcon color="bg-primary-500/10 text-primary-400">
                     <Monitor className="w-5 h-5" />
                   </CardIcon>
                   <div className="flex gap-1.5 flex-wrap justify-end">
@@ -188,7 +188,7 @@ export const ProductEcosystem = () => {
               transition={SPRING}
             >
               <div className="p-6 relative z-10 flex flex-col h-full">
-                <CardIcon color="bg-secondary-500/10 text-secondary-400">
+                <CardIcon color="bg-primary-500/10 text-primary-400">
                   <Smartphone className="w-5 h-5" />
                 </CardIcon>
                 <h3 className="text-base font-bold text-white mt-3 mb-1">{t('Mobile')}</h3>
@@ -208,7 +208,7 @@ export const ProductEcosystem = () => {
               transition={SPRING}
             >
               <div className="p-6 relative z-10 flex flex-col h-full">
-                <CardIcon color="bg-bitcoin-500/10 text-bitcoin-400">
+                <CardIcon color="bg-primary-500/10 text-primary-400">
                   <Puzzle className="w-5 h-5" />
                 </CardIcon>
                 <h3 className="text-base font-bold text-white mt-3 mb-1">{t('Extension')}</h3>
