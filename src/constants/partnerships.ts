@@ -5,15 +5,22 @@ export const partners: Partner[] = [
   {
     name: 'Fulgur Ventures',
     description: 'Leading Bitcoin venture capital firm focused on Lightning Network and Layer 2 solutions',
-    logo: '/partners/fulgur-ventures-logo.svg',
+    logo: '/images/fulgur-logo.svg',
     website: 'https://fulgur.ventures',
     type: 'investor'
   },
   {
     name: 'Bitfinex Ventures',
     description: 'Investment arm of Bitfinex supporting Bitcoin ecosystem innovation and early-stage projects',
-    logo: '/partners/bitfinex-ventures-logo.svg',
+    logo: '/images/bitfinex-logo.svg',
     website: 'https://bitfinex.com',
+    type: 'investor'
+  },
+  {
+    name: 'Plan B VC',
+    description: 'Venture capital firm supporting Bitcoin-native startups and infrastructure builders',
+    logo: '/images/planbvc-logo.svg',
+    website: 'https://planbvc.fund/',
     type: 'investor'
   },
   {

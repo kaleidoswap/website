@@ -1,15 +1,7 @@
 // src/components/partnerships/Partnerships.tsx
 import type { PartnershipsProps } from '@/types/partnerships'
 import { Reveal, Gradient, Aurora } from '@/components/animations/ReactBitsFallbacks'
-import bitfinexLogo from '@/assets/BrandLogo.org-Bitfinex-Logo.png'
-import fulgurLogo from '@/assets/fulgur-logo.svg'
 import { useTranslation } from 'react-i18next'
-
-const getPartnerLogo = (partnerName: string) => {
-  if (partnerName === 'Bitfinex Ventures') return bitfinexLogo
-  if (partnerName === 'Fulgur Ventures') return fulgurLogo
-  return ''
-}
 
 export const Partnerships = ({
   title,
@@ -60,7 +52,7 @@ export const Partnerships = ({
                       className="flex-shrink-0 transition-all duration-300 active:scale-95 snap-center"
                     >
                       <img
-                        src={getPartnerLogo(partner.name)}
+                        src={partner.logo}
                         alt={partner.name}
                         className="h-12 w-auto max-w-[200px] object-contain"
                         style={{ filter: 'brightness(0) invert(1)' }}
@@ -81,7 +73,7 @@ export const Partnerships = ({
                     className="flex-shrink-0 transition-all duration-300 hover:scale-110 opacity-100"
                   >
                     <img
-                      src={getPartnerLogo(partner.name)}
+                      src={partner.logo}
                       alt={partner.name}
                       className="h-12 md:h-14 w-auto max-w-[200px] object-contain transition-all duration-300"
                       style={{ filter: 'brightness(0) invert(1)' }}
