@@ -26,9 +26,9 @@ interface Protocol {
 const protocols: Protocol[] = [
   { name: 'Bitcoin', logo: bitcoinLogo, color: '#F7931A', glowColor: 'rgba(247,147,26,0.5)' },
   { name: 'Lightning', logo: '', color: '#fbbf24', glowColor: 'rgba(251,191,36,0.5)', isLightning: true },
-  { name: 'RGB', logo: rgbLogo, color: '#8a5cf6', glowColor: 'rgba(138,92,246,0.5)' },
+  { name: 'RGB', logo: rgbLogo, color: '#EF4444', glowColor: 'rgba(239,68,68,0.5)' },
   { name: 'Spark', logo: sparkAsterisk, color: '#FFFFFF', glowColor: 'rgba(255,255,255,0.3)' },
-  { name: 'Arkade', logo: arkadeLogo, color: '#22c55e', glowColor: 'rgba(34,197,94,0.5)' },
+  { name: 'Arkade', logo: arkadeLogo, color: '#8B5CF6', glowColor: 'rgba(139,92,246,0.5)' },
   { name: 'Liquid', logo: liquidLogo, color: '#14909c', glowColor: 'rgba(20,144,156,0.5)' },
   { name: 'Taproot Assets', logo: taprootLogo, color: '#F7931A', glowColor: 'rgba(247,147,26,0.5)' },
 ]
