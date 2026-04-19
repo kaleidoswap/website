@@ -1,4 +1,4 @@
-import { Check, Download, Hammer } from 'lucide-react'
+import { Check, Download, Hammer, Monitor } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/common/Button'
 import { KaleidoScopeHeroAnimation } from '@/components/animations/KaleidoScopeHeroAnimation'
@@ -22,7 +22,7 @@ export const HeroSection = () => {
   const isMobile = useIsMobile()
 
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+    <section className="relative min-h-screen flex items-center pt-28 sm:pt-20 overflow-hidden">
       <Helmet>
         {heroIconsToPreload.map((icon) => (
           <link key={icon} rel="preload" href={icon} as="image" />
@@ -47,11 +47,11 @@ export const HeroSection = () => {
           {/* Headline */}
           <AnimateIn variant="fade-up" delay={150}>
             <div className="space-y-4">
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
                 {t('Trustless Swaps on')}{' '}
                 <span className="text-gradient">{t('Bitcoin Layers')}</span>
               </h1>
-              <p className="text-lg text-slate-400 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-xl text-slate-400 max-w-xl leading-relaxed">
                 {t('The DEX for Bitcoin\'s multi-layer future. Swap BTC, USDT, stablecoins, and real-world assets across Lightning, RGB, and Spark. Sovereign by design.')}
               </p>
             </div>
@@ -59,11 +59,11 @@ export const HeroSection = () => {
 
           {/* CTAs */}
           <AnimateIn variant="fade-up" delay={300}>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
                 onClick={() => handleNavigation('https://docs.kaleidoswap.com/sdk/introduction', true)}
-                className="h-12 px-8 btn-glow flex items-center gap-2"
+                className="h-12 px-8 btn-glow flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 <Hammer className="w-5 h-5" />
                 {t('Build with the SDK')}
@@ -72,7 +72,16 @@ export const HeroSection = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => handleNavigation('/downloads', false)}
-                className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex items-center gap-2"
+                className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex sm:hidden items-center justify-center gap-2 w-full"
+              >
+                <Monitor className="w-5 h-5" />
+                {t('Test Desktop App')}
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => handleNavigation('/downloads', false)}
+                className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 hidden sm:flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
                 {t('Download Desktop')}
@@ -82,17 +91,17 @@ export const HeroSection = () => {
 
           {/* Trust Signals */}
           <AnimateIn variant="fade-up" delay={450}>
-            <div className="flex items-center gap-4 text-sm text-slate-500 pt-4">
+            <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-500 pt-4">
               <div className="flex items-center gap-1">
-                <Check className="w-4 h-4 text-primary-500" />
-                <span>{t('100% Open Source')}</span>
+                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-primary-500" />
+                <span>{t('Open Source')}</span>
               </div>
               <div className="flex items-center gap-1">
-                <Check className="w-4 h-4 text-primary-500" />
+                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-primary-500" />
                 <span>{t('Non-Custodial')}</span>
               </div>
               <div className="flex items-center gap-1">
-                <Check className="w-4 h-4 text-primary-500" />
+                <Check className="w-3 h-3 sm:w-4 sm:h-4 text-primary-500" />
                 <span>{t('Permissionless')}</span>
               </div>
             </div>
