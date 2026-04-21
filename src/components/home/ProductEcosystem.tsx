@@ -50,15 +50,15 @@ export const ProductEcosystem = () => {
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <AnimateIn variant="fade-up">
           <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
+            <div className="text-center md:text-left">
               <h2 className="text-3xl md:text-4xl font-bold mb-2">{t('Our Ecosystem')}</h2>
-              <p className="text-slate-400">{t('One protocol, multiple ways to interact.')}</p>
+              <p className="text-base sm:text-xl text-slate-400 leading-relaxed">{t('One protocol, multiple ways to interact.')}</p>
             </div>
             <a
               href={PRODUCTS.docs}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/link flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-sm"
+              className="group/link hidden md:flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-sm"
             >
               <span className="border-b border-slate-700 group-hover/link:border-primary-500 pb-0.5 transition-colors">
                 {t('View Developer Documentation')}
@@ -221,6 +221,22 @@ export const ProductEcosystem = () => {
           </AnimateIn>
 
         </div>
+
+        {/* CTA below cards — mobile only */}
+        <div className="flex md:hidden justify-center mt-8">
+          <a
+            href={PRODUCTS.docs}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/link flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-sm"
+          >
+            <span className="border-b border-slate-700 group-hover/link:border-primary-500 pb-0.5 transition-colors">
+              {t('View Developer Documentation')}
+            </span>
+            <ArrowUpRight className="w-3.5 h-3.5 shrink-0 group-hover/link:text-primary-400 transition-colors" />
+          </a>
+        </div>
+
       </div>
     </section>
   )

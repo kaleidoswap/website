@@ -320,25 +320,27 @@ export const Navbar = () => {
                     {t('Products')}
                   </p>
                   {productItems.map((item) => {
-                    const hasPage = item.href !== '#'
+                    const isAvailable = item.status === 'live'
                     return (
                       <button
                         key={item.label}
                         onClick={() =>
-                          hasPage &&
+                          isAvailable &&
                           handleNavigation(item.href, item.external)
                         }
-                        disabled={!hasPage}
+                        disabled={!isAvailable}
                         className={cn(
                           'w-full py-3 px-4 text-left text-lg rounded-lg flex items-center justify-between my-1',
-                          hasPage
-                            ? 'text-gray-300 hover:text-white hover:bg-gray-800/50'
-                            : 'text-gray-600 cursor-not-allowed'
+                          isAvailable
+                            ? 'text-gray-200 hover:bg-gray-700/50 hover:text-white'
+                            : 'text-gray-500 cursor-not-allowed'
                         )}
                       >
                         <span>{t(item.label)}</span>
-                        {item.status === 'coming-soon' && (
-                          <span className="text-xs text-gray-600">Soon</span>
+                        {item.status === 'coming-soon' ? (
+                          <span className="text-xs text-gray-500">Soon</span>
+                        ) : (
+                          <ExternalLink className="w-3 h-3 text-gray-500" />
                         )}
                       </button>
                     )
@@ -358,10 +360,10 @@ export const Navbar = () => {
                         e.preventDefault()
                         handleNavigation(item.href, item.external)
                       }}
-                      className="flex items-center justify-between py-3 px-4 text-lg rounded-lg text-gray-300 hover:text-white hover:bg-gray-800/50 my-1"
+                      className="flex items-center justify-between py-3 px-4 text-lg rounded-lg text-gray-200 hover:text-white hover:bg-gray-700/50 my-1"
                     >
                       <span>{t(item.label)}</span>
-                      <ExternalLink className="w-4 h-4 text-gray-500" />
+                      <ExternalLink className="w-3 h-3 text-gray-500" />
                     </a>
                   ))}
                 </div>
