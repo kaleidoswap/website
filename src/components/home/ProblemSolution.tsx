@@ -82,7 +82,7 @@ export const ProblemSolution = () => {
             </AnimateIn>
 
             <AnimateIn variant="fade-left" delay={150}>
-              <p className="text-slate-400 text-lg leading-relaxed">
+              <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
                 {t('Swap BTC, USDT, and any asset across Lightning, RGB, Spark, and beyond — instantly, non-custodially, without intermediaries. No bridges. No trust required.')}
               </p>
             </AnimateIn>

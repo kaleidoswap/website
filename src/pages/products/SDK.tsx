@@ -258,21 +258,21 @@ export const SDK = () => {
 
               <AnimateIn variant="fade-up" delay={100}>
                 <div className="space-y-4 mb-8">
-                  <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
                     {t('KaleidoSDK')}
                   </h1>
-                  <p className="text-xl text-slate-400 leading-relaxed">
+                  <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
                     {t('Integrate atomic swaps into your wallet, exchange, or application. TypeScript and Python SDKs auto-generated from the OpenAPI spec.')}
                   </p>
                 </div>
               </AnimateIn>
 
               <AnimateIn variant="fade-up" delay={250}>
-                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <Button
                     size="lg"
                     onClick={() => window.open(DOCS.sdk, '_blank')}
-                    className="bg-green-500 hover:bg-green-600 flex items-center gap-2"
+                    className="bg-green-500 hover:bg-green-600 flex items-center justify-center gap-2 w-full sm:w-auto"
                   >
                     <BookOpen className="w-4 h-4" />
                     {t('Read the Docs')}
@@ -281,7 +281,7 @@ export const SDK = () => {
                     variant="outline"
                     size="lg"
                     onClick={() => window.open('https://github.com/kaleidoswap/kaleido-sdk', '_blank')}
-                    className="flex items-center gap-2"
+                    className="flex items-center justify-center gap-2 w-full sm:w-auto"
                   >
                     {t('View on GitHub')}
                     <ExternalLink className="w-4 h-4" />

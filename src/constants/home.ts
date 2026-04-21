@@ -1,6 +1,4 @@
 import { PRODUCTS, GITHUB, DOCS } from '@/constants/urls'
-import fulgurLogo from '@/assets/fulgur-logo.svg'
-import bitfinexLogo from '@/assets/BrandLogo.org-Bitfinex-Logo.png'
 import rgbAssociationLogo from '/icons/rgb/logo-protocol-association.png'
 
 export const coreFeatures = [
@@ -28,8 +26,9 @@ export const coreFeatures = [
 ]
 
 export const backers = [
-  { name: 'Fulgur Ventures', logo: fulgurLogo, url: 'https://fulgur.ventures' },
-  { name: 'Bitfinex Ventures', logo: bitfinexLogo, url: 'https://www.bitfinex.com' },
+  { name: 'Fulgur Ventures', logo: '/images/fulgur-logo.svg', url: 'https://fulgur.ventures' },
+  { name: 'Bitfinex Ventures', logo: '/images/bitfinex-logo.svg', url: 'https://www.bitfinex.com' },
+  { name: 'Plan B VC', logo: '/images/planbvc-logo.svg', url: 'https://planbvc.fund/' },
 ]
 
 export const partners = [

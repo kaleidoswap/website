@@ -274,11 +274,11 @@ export const Downloads = () => {
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight">
               {t('Download')}{' '}
               <span className="text-gradient">{t('KaleidoSwap')}</span>
             </h1>
-            <p className="text-lg text-slate-400 leading-relaxed mb-8">
+            <p className="text-base sm:text-xl text-slate-400 leading-relaxed mb-8">
               {t('Get started with the first Bitcoin-native DEX. Available for macOS, Linux, and Windows.')}
             </p>
 
