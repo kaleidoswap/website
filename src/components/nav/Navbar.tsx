@@ -258,6 +258,18 @@ export const Navbar = () => {
                 )}
               </div>
 
+              {/* Blog link */}
+              <a
+                href="/blog"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleNavigation('/blog')
+                }}
+                className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors py-1"
+              >
+                {t('Blog')}
+              </a>
+
               {/* Other nav items */}
               {mainNavItems
                 .filter((item) => item.label !== 'Products')
@@ -366,6 +378,23 @@ export const Navbar = () => {
                       <ExternalLink className="w-3 h-3 text-gray-500" />
                     </a>
                   ))}
+                </div>
+
+                {/* Blog section */}
+                <div className="border-t border-gray-800 pt-6 mb-6">
+                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-3 px-4">
+                    {t('Blog')}
+                  </p>
+                  <a
+                    href="/blog"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavigation('/blog')
+                    }}
+                    className="flex items-center py-3 px-4 text-lg rounded-lg text-gray-200 hover:text-white hover:bg-gray-700/50 my-1"
+                  >
+                    {t('Latest posts')}
+                  </a>
                 </div>
 
                 {/* Language Switcher */}

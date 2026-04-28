@@ -11,6 +11,10 @@ const Privacy = lazy(() => import('@/pages/Privacy').then((m) => ({ default: m.P
 const Terms = lazy(() => import('@/pages/Terms').then((m) => ({ default: m.Terms })))
 const NotFound = lazy(() => import('@/pages/NotFound').then((m) => ({ default: m.NotFound })))
 
+// Blog pages
+const BlogList = lazy(() => import('@/blog').then((m) => ({ default: m.BlogList })))
+const BlogPost = lazy(() => import('@/blog').then((m) => ({ default: m.BlogPost })))
+
 // Product pages
 const WebApp = lazy(() => import('@/pages/products/WebApp').then((m) => ({ default: m.WebApp })))
 const Desktop = lazy(() => import('@/pages/products/Desktop').then((m) => ({ default: m.Desktop })))
@@ -41,6 +45,8 @@ const AnimatedRoutes = () => {
           <Route path="/products/desktop" element={<Desktop />} />
           <Route path="/products/sdk" element={<SDK />} />
           <Route path="/products/rate-extension" element={<RateExtension />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
