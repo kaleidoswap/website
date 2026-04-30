@@ -10,7 +10,7 @@ export default defineConfig({
         },
     },
     optimizeDeps: {
-        include: ['gray-matter'],
+        include: ['front-matter'],
     },
     server: {
         host: '0.0.0.0',

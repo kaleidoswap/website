@@ -60,54 +60,50 @@ export function BlogPost() {
           {/* ── Main content ── */}
           <main className="flex-1 min-w-0 max-w-3xl mx-auto">
 
-            {/* Hero: cover image with title overlay */}
-            <header className="relative w-full rounded-2xl overflow-hidden mb-10">
-              {post.coverImage ? (
-                <>
+            {/* Hero: cover image above title */}
+            <header className="mb-10">
+              {post.coverImage && (
+                <div className="w-full rounded-2xl overflow-hidden mb-6">
                   <img
                     src={post.coverImage}
                     alt={post.title}
                     className="w-full object-cover h-72 block"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 via-[55%] to-transparent" />
-                </>
-              ) : (
-                <div className="w-full h-48 bg-gray-900/80" />
+                </div>
               )}
 
-              {/* Text overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-primary-500/20 text-primary-300 border border-primary-400/40 rounded-full px-2.5 py-0.5 text-xs font-medium backdrop-blur-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-2 drop-shadow-lg">
-                  {post.title}
-                </h1>
-
-                {/* Author · date · reading time */}
-                <div className="flex items-center gap-3 text-sm text-gray-300 drop-shadow flex-wrap">
-                  <span>{post.author}</span>
-                  <span className="text-gray-500">·</span>
-                  <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                  <span className="text-gray-500">·</span>
-                  <span className="inline-flex items-center gap-1 text-gray-300">
-                    <Clock className="w-3.5 h-3.5" />
-                    {post.readingTime} min read
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-primary-500/20 text-primary-300 border border-primary-400/40 rounded-full px-2.5 py-0.5 text-xs font-medium"
+                  >
+                    {tag}
                   </span>
-                </div>
+                ))}
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-4">
+                {post.title}
+              </h1>
+
+              {/* Author · date · reading time */}
+              <div className="flex items-center gap-3 text-sm text-gray-400 flex-wrap">
+                <span>{post.author}</span>
+                <span className="text-gray-600">·</span>
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                <span className="text-gray-600">·</span>
+                <span className="inline-flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5" />
+                  {post.readingTime} min read
+                </span>
               </div>
             </header>
 
