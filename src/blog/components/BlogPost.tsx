@@ -108,7 +108,7 @@ export function BlogPost() {
             </header>
 
             <article
-              className="prose prose-invert prose-neutral max-w-none prose-a:text-white prose-a:decoration-white/30 hover:prose-a:text-primary-300 hover:prose-a:decoration-primary-300/50"
+              className="prose prose-invert prose-neutral max-w-none prose-a:text-white prose-a:decoration-white/50 prose-a:underline-offset-2 hover:prose-a:text-primary-300 hover:prose-a:decoration-primary-300/70"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </main>
