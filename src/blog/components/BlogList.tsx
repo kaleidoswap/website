@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
-import { ChevronDown, Check } from 'lucide-react'
+import { SlidersHorizontal, ArrowUpDown, Check } from 'lucide-react'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { SEO } from '@/components/common/SEO'
@@ -7,7 +7,7 @@ import { footerConfig } from '@/constants/footer'
 import { getAllPosts } from '../lib/posts'
 import { BlogCard } from './BlogCard'
 
-const CATEGORIES = ['Announcement', 'Deep Dive', 'Partnership', 'Release Notes'] as const
+const CATEGORIES = ['All', 'Announcement', 'Deep Dive', 'Partnership', 'Release Notes'] as const
 
 type SortKey = 'date-desc' | 'date-asc' | 'alpha'
 
@@ -17,10 +17,17 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'alpha', label: 'A → Z' },
 ]
 
-function SortDropdown({ value, onChange }: { value: SortKey; onChange: (v: SortKey) => void }) {
+function IconDropdown({
+  icon,
+  children,
+  align = 'right',
+}: {
+  icon: React.ReactNode
+  children: (close: () => void) => React.ReactNode
+  align?: 'left' | 'right'
+}) {
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const current = SORT_OPTIONS.find((o) => o.value === value)!
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -31,35 +38,25 @@ function SortDropdown({ value, onChange }: { value: SortKey; onChange: (v: SortK
   }, [])
 
   return (
-    <div ref={ref} className="relative shrink-0">
+    <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((o) => !o)}
-        className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-sm font-medium border transition-colors ${
+        className={`p-2 rounded-lg border transition-colors ${
           open
-            ? 'bg-primary-500/25 text-primary-300 border-primary-400/60'
-            : 'bg-white/5 text-gray-400 border-white/10 hover:border-white/25 hover:text-white'
+            ? 'bg-primary-500/20 border-primary-400/50 text-primary-300'
+            : 'bg-white/5 border-white/10 text-gray-400 hover:border-white/25 hover:text-white'
         }`}
       >
-        {current.label}
-        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
+        {icon}
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 w-40 rounded-xl border border-white/10 bg-gray-900/95 backdrop-blur-sm shadow-xl z-20 overflow-hidden">
-          {SORT_OPTIONS.map((o) => (
-            <button
-              key={o.value}
-              onClick={() => { onChange(o.value); setOpen(false) }}
-              className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
-                o.value === value
-                  ? 'text-primary-300 bg-primary-500/10'
-                  : 'text-gray-300 hover:bg-white/5 hover:text-white'
-              }`}
-            >
-              {o.label}
-              {o.value === value && <Check className="w-3.5 h-3.5 text-primary-400" />}
-            </button>
-          ))}
+        <div
+          className={`absolute mt-2 w-44 rounded-xl border border-white/10 bg-gray-900/95 backdrop-blur-sm shadow-xl z-20 overflow-hidden ${
+            align === 'right' ? 'right-0' : 'left-0'
+          }`}
+        >
+          {children(() => setOpen(false))}
         </div>
       )}
     </div>
@@ -68,27 +65,21 @@ function SortDropdown({ value, onChange }: { value: SortKey; onChange: (v: SortK
 
 export function BlogList() {
   const allPosts = getAllPosts()
-  const [selected, setSelected] = useState<string[]>([])
+  const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [sort, setSort] = useState<SortKey>('date-desc')
-
-  const toggleCategory = (cat: string) => {
-    setSelected((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
-    )
-  }
 
   const posts = useMemo(() => {
     const filtered =
-      selected.length === 0
+      selectedCategory === 'All'
         ? allPosts
-        : allPosts.filter((p) => p.tags.some((t) => selected.includes(t)))
+        : allPosts.filter((p) => p.tags.includes(selectedCategory))
 
     return [...filtered].sort((a, b) => {
       if (sort === 'date-desc') return new Date(b.date).getTime() - new Date(a.date).getTime()
       if (sort === 'date-asc') return new Date(a.date).getTime() - new Date(b.date).getTime()
       return a.title.localeCompare(b.title)
     })
-  }, [allPosts, selected, sort])
+  }, [allPosts, selectedCategory, sort])
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
@@ -112,47 +103,53 @@ export function BlogList() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-20 relative z-10">
 
-        {/* Header row: title | categories | sort */}
-        <div className="flex flex-wrap items-center gap-4 mb-10">
+        {/* Header row: title | spacer | filter icon | sort icon */}
+        <div className="flex items-center gap-3 mb-10">
+          <h1 className="text-4xl font-bold text-white flex-1">Blog</h1>
 
-          {/* Title */}
-          <h1 className="text-4xl font-bold text-white shrink-0">Blog</h1>
-
-          {/* Category chips — centered */}
-          <div className="flex flex-1 justify-center">
-            <div className="flex flex-wrap gap-2 justify-center">
-              <button
-                onClick={() => setSelected([])}
-                className={`rounded-full px-3.5 py-1 text-sm font-medium border transition-colors ${
-                  selected.length === 0
-                    ? 'bg-primary-500/25 text-primary-300 border-primary-400/60'
-                    : 'bg-white/5 text-gray-400 border-white/10 hover:border-white/25 hover:text-white'
-                }`}
-              >
-                All
-              </button>
-
-              {CATEGORIES.map((cat) => {
-                const active = selected.includes(cat)
-                return (
+          {/* Filter by category */}
+          <IconDropdown icon={<SlidersHorizontal className="w-4 h-4" />} align="right">
+            {(close) => (
+              <>
+                {CATEGORIES.map((cat) => (
                   <button
                     key={cat}
-                    onClick={() => toggleCategory(cat)}
-                    className={`rounded-full px-3.5 py-1 text-sm font-medium border transition-colors ${
-                      active
-                        ? 'bg-primary-500/25 text-primary-300 border-primary-400/60'
-                        : 'bg-white/5 text-gray-400 border-white/10 hover:border-white/25 hover:text-white'
+                    onClick={() => { setSelectedCategory(cat); close() }}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
+                      cat === selectedCategory
+                        ? 'text-primary-300 bg-primary-500/10'
+                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
                     }`}
                   >
                     {cat}
+                    {cat === selectedCategory && <Check className="w-3.5 h-3.5 text-primary-400" />}
                   </button>
-                )
-              })}
-            </div>
-          </div>
+                ))}
+              </>
+            )}
+          </IconDropdown>
 
-          {/* Sort dropdown — right */}
-          <SortDropdown value={sort} onChange={setSort} />
+          {/* Sort order */}
+          <IconDropdown icon={<ArrowUpDown className="w-4 h-4" />} align="right">
+            {(close) => (
+              <>
+                {SORT_OPTIONS.map((o) => (
+                  <button
+                    key={o.value}
+                    onClick={() => { setSort(o.value); close() }}
+                    className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
+                      o.value === sort
+                        ? 'text-primary-300 bg-primary-500/10'
+                        : 'text-gray-300 hover:bg-white/5 hover:text-white'
+                    }`}
+                  >
+                    {o.label}
+                    {o.value === sort && <Check className="w-3.5 h-3.5 text-primary-400" />}
+                  </button>
+                ))}
+              </>
+            )}
+          </IconDropdown>
         </div>
 
         {/* Grid */}
