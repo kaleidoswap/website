@@ -27,8 +27,12 @@ export function TableOfContents({ content }: TableOfContentsProps) {
   const observerRef = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {
-    if (headings.length === 0) return
+    setActiveId(headings[0]?.id ?? '')
 
+    if (headings.length === 0) {
+      observerRef.current?.disconnect()
+      return
+    }
     observerRef.current?.disconnect()
 
     const handleIntersect: IntersectionObserverCallback = (entries) => {
