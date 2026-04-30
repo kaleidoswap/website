@@ -1,4 +1,5 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { ChevronLeft, Clock } from 'lucide-react'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -8,6 +9,7 @@ import { getPostBySlug } from '../lib/posts'
 import { TableOfContents } from './TableOfContents'
 
 export function BlogPost() {
+  const { t } = useTranslation()
   const { slug } = useParams<{ slug: string }>()
   const post = slug ? getPostBySlug(slug) : null
 
@@ -45,7 +47,7 @@ export function BlogPost() {
           >
             <ChevronLeft className="w-3.5 h-3.5 shrink-0 group-hover/link:text-primary-400 transition-colors" />
             <span className="border-b border-slate-700 group-hover/link:border-primary-500 pb-0.5 transition-colors">
-              Back to Blog
+              {t('Back to Blog')}
             </span>
           </Link>
         </nav>
@@ -105,7 +107,7 @@ export function BlogPost() {
                   <span className="text-gray-500">·</span>
                   <span className="inline-flex items-center gap-1 text-gray-300">
                     <Clock className="w-3.5 h-3.5" />
-                    {post.readingTime} min read
+                    {t('{{count}} min read', { count: post.readingTime })}
                   </span>
                 </div>
               </div>

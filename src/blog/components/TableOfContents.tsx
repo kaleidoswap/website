@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 interface Heading {
   id: string
@@ -20,6 +21,7 @@ function parseHeadings(html: string): Heading[] {
 }
 
 export function TableOfContents({ content }: TableOfContentsProps) {
+  const { t } = useTranslation()
   const headings = parseHeadings(content)
   const [activeId, setActiveId] = useState<string>(headings[0]?.id ?? '')
   const observerRef = useRef<IntersectionObserver | null>(null)
@@ -56,7 +58,7 @@ export function TableOfContents({ content }: TableOfContentsProps) {
   return (
     <nav aria-label="Table of contents">
       <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">
-        Contents
+        {t('Contents')}
       </p>
       <ul className="space-y-1">
         {headings.map(({ id, text, level }) => (

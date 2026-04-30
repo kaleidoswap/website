@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { SEO } from '@/components/common/SEO'
@@ -6,13 +7,14 @@ import { getAllPosts } from '../lib/posts'
 import { BlogCard } from './BlogCard'
 
 export function BlogList() {
+  const { t } = useTranslation()
   const posts = getAllPosts()
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
-        title="Blog"
-        description="Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK."
+        title={t('Blog')}
+        description={t('Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK.')}
         url="/blog"
         keywords={['blog', 'RGB', 'Lightning', 'Bitcoin', 'DEX', 'SDK', 'KaleidoSwap']}
       />
@@ -30,15 +32,15 @@ export function BlogList() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-20 relative z-10">
         <div className="mb-10">
-          <h1 className="text-4xl font-bold text-white mb-3">Blog</h1>
+          <h1 className="text-4xl font-bold text-white mb-3">{t('Blog')}</h1>
           <p className="text-gray-400 text-lg">
-            Insights, tutorials, and updates from the KaleidoSwap team.
+            {t('Insights, tutorials, and updates from the KaleidoSwap team.')}
           </p>
         </div>
 
         {posts.length === 0 ? (
           <div className="glass-card rounded-2xl p-10 text-center">
-            <p className="text-gray-400">No posts yet — check back soon.</p>
+            <p className="text-gray-400">{t('No posts yet — check back soon.')}</p>
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
