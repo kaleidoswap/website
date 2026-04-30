@@ -2,7 +2,7 @@
 title: "KaleidoSwap × UTEXO: Bringing RGB-native USD₮ Swaps to Lightning"
 date: "2025-09-23"
 author: "KaleidoSwap Team"
-tags: ["Partnership", "Stablecoins", "RGB", "Lightning"]
+tags: ["Partnership"]
 slug: "kaleidoswap-utexo"
 excerpt: "KaleidoSwap integrates with UTEXO, the team behind the first RGB bridge, to bring fast, trustless BTC ⇄ USD₮ swaps with the privacy and self-custody guarantees of Bitcoin's infrastructure."
 coverImage: "/blog/images/kaleidoswap-utexo/cover.png"

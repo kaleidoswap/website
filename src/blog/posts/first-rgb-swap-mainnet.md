@@ -2,7 +2,7 @@
 title: "The First Ever RGB Asset Swap on Lightning Mainnet"
 date: "2025-09-30"
 author: "KaleidoSwap Team"
-tags: ["Milestone", "RGB", "Lightning", "Mainnet"]
+tags: ["Deep Dive"]
 slug: "first-rgb-swap-mainnet"
 excerpt: "KaleidoSwap has executed the first atomic swap of an RGB asset over the Lightning Network on mainnet — a historic milestone for Bitcoin's Layer 2 ecosystem."
 coverImage: "/blog/images/first-rgb-swap-mainnet/cover.png"

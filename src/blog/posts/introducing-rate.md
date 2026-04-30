@@ -2,7 +2,7 @@
 title: "Introducing Rate: AI-Powered Self-Sovereign RGB Lightning Wallet"
 date: "2025-07-30"
 author: "Walter"
-tags: ["Hackathon", "Product", "AI", "Lightning"]
+tags: ["Announcement"]
 slug: "introducing-rate"
 excerpt: "Rate, our AI-powered RGB Lightning wallet, just won the Plan B Hackathon in Lugano. Here's the story of how we built a Bitcoin assistant that makes Lightning, RGB assets, and social payments accessible to everyone."
 coverImage: "/blog/images/introducing-rate/cover.png"

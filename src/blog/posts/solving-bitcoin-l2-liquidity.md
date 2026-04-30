@@ -2,7 +2,7 @@
 title: "Solving Bitcoin's L2 Liquidity Problem: KaleidoSwap's Multi-Protocol DEX Layer"
 date: "2026-01-15"
 author: "KaleidoSwap Team"
-tags: ["Vision", "Roadmap", "2026", "Product"]
+tags: ["Deep Dive"]
 slug: "solving-bitcoin-l2-liquidity"
 excerpt: "2025 was the year of RGB. Now, as we head into 2026, KaleidoSwap is evolving from a single-protocol proof into a unified multi-protocol liquidity engine for the entire Bitcoin L2 ecosystem."
 coverImage: "/blog/images/solving-bitcoin-l2-liquidity/cover.png"

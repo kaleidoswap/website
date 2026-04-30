@@ -2,7 +2,7 @@
 title: "KaleidoSwap v0.2.0 — RGB Is Now Live on Mainnet"
 date: "2025-07-23"
 author: "KaleidoSwap Team"
-tags: ["Release", "Product", "RGB"]
+tags: ["Announcement"]
 slug: "kaleidoswap-v020"
 excerpt: "KaleidoSwap v0.2.0 lands as RGB v0.11.1 goes live on Bitcoin mainnet — bringing advanced asset swaps, improved UX, and stronger Lightning infrastructure integration."
 coverImage: "/blog/images/kaleidoswap-v020/cover.png"
