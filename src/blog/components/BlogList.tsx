@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
+import { ChevronDown, Check } from 'lucide-react'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { SEO } from '@/components/common/SEO'
@@ -15,6 +16,55 @@ const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: 'date-asc', label: 'Oldest First' },
   { value: 'alpha', label: 'A → Z' },
 ]
+
+function SortDropdown({ value, onChange }: { value: SortKey; onChange: (v: SortKey) => void }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const current = SORT_OPTIONS.find((o) => o.value === value)!
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  return (
+    <div ref={ref} className="relative shrink-0">
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-sm font-medium border transition-colors ${
+          open
+            ? 'bg-primary-500/25 text-primary-300 border-primary-400/60'
+            : 'bg-white/5 text-gray-400 border-white/10 hover:border-white/25 hover:text-white'
+        }`}
+      >
+        {current.label}
+        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 mt-2 w-40 rounded-xl border border-white/10 bg-gray-900/95 backdrop-blur-sm shadow-xl z-20 overflow-hidden">
+          {SORT_OPTIONS.map((o) => (
+            <button
+              key={o.value}
+              onClick={() => { onChange(o.value); setOpen(false) }}
+              className={`w-full flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${
+                o.value === value
+                  ? 'text-primary-300 bg-primary-500/10'
+                  : 'text-gray-300 hover:bg-white/5 hover:text-white'
+              }`}
+            >
+              {o.label}
+              {o.value === value && <Check className="w-3.5 h-3.5 text-primary-400" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 export function BlogList() {
   const allPosts = getAllPosts()
@@ -71,7 +121,6 @@ export function BlogList() {
           {/* Category chips — centered */}
           <div className="flex flex-1 justify-center">
             <div className="flex flex-wrap gap-2 justify-center">
-              {/* All chip */}
               <button
                 onClick={() => setSelected([])}
                 className={`rounded-full px-3.5 py-1 text-sm font-medium border transition-colors ${
@@ -102,20 +151,8 @@ export function BlogList() {
             </div>
           </div>
 
-          {/* Sort — right */}
-          <div className="shrink-0">
-            <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value as SortKey)}
-              className="bg-white/5 border border-white/10 text-gray-300 text-sm rounded-lg px-3 py-1.5 outline-none hover:border-white/25 focus:border-primary-400/60 transition-colors cursor-pointer"
-            >
-              {SORT_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value} className="bg-gray-900">
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Sort dropdown — right */}
+          <SortDropdown value={sort} onChange={setSort} />
         </div>
 
         {/* Grid */}
