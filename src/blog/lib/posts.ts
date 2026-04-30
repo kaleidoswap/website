@@ -41,9 +41,10 @@ export function getAllPosts(): PostMeta[] {
 }
 
 export function getPostBySlug(slug: string): Post | null {
-  const entry = Object.entries(modules).find(([filePath]) =>
-    filePath.includes(slug)
-  )
+  const entry = Object.entries(modules).find(([filePath, raw]) => {
+    const { attributes } = fm<PostMeta>(raw)
+    return attributes.slug === slug || (!attributes.slug && filePath.endsWith(`/${slug}.md`))
+  })
   if (!entry) return null
   const { attributes, body } = fm<PostMeta>(entry[1])
   const rawHtml = marked(body) as string
