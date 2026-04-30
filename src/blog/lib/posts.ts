@@ -1,5 +1,6 @@
 import fm from 'front-matter'
 import { marked } from 'marked'
+import DOMPurify from 'dompurify'
 import type { Post, PostMeta } from './types'
 
 // Vite loads all .md files under posts/ as raw strings at build time.
@@ -46,9 +47,10 @@ export function getPostBySlug(slug: string): Post | null {
   if (!entry) return null
   const { attributes, body } = fm<PostMeta>(entry[1])
   const rawHtml = marked(body) as string
+  const sanitizedHtml = addHeadingIds(DOMPurify.sanitize(rawHtml))
   return {
     ...attributes,
-    content: addHeadingIds(rawHtml),
+    content: sanitizedHtml,
     readingTime: readingTime(body),
   }
 }
