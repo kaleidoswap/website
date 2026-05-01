@@ -8,6 +8,7 @@ interface Heading {
 
 interface TableOfContentsProps {
   content: string
+  hideTitle?: boolean
 }
 
 function parseHeadings(html: string): Heading[] {
@@ -19,7 +20,7 @@ function parseHeadings(html: string): Heading[] {
   }))
 }
 
-export function TableOfContents({ content }: TableOfContentsProps) {
+export function TableOfContents({ content, hideTitle = false }: TableOfContentsProps) {
   const headings = parseHeadings(content)
   const [activeId, setActiveId] = useState<string>(headings[0]?.id ?? '')
   const observerRef = useRef<IntersectionObserver | null>(null)
@@ -55,9 +56,11 @@ export function TableOfContents({ content }: TableOfContentsProps) {
 
   return (
     <nav aria-label="Table of contents">
-      <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">
-        Contents
-      </p>
+      {!hideTitle && (
+        <p className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">
+          Contents
+        </p>
+      )}
       <ul className="space-y-1">
         {headings.map(({ id, text, level }) => (
           <li key={id}>

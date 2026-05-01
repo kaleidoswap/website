@@ -115,7 +115,7 @@ export function BlogPost() {
                     <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
                   </summary>
                   <div className="px-4 pb-4">
-                    <TableOfContents content={post.content} />
+                    <TableOfContents content={post.content} hideTitle />
                   </div>
                 </details>
               </div>
