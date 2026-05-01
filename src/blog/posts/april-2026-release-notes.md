@@ -1,92 +1,100 @@
 ---
-title: "April 2026: Desktop App v0.4.0, HODL Invoice Integration, and the Road to Mainnet"
+title: "KaleidoSwap — Release Notes · April 2026"
 date: "2026-04-30"
 author: "KaleidoSwap Team"
 tags: ["Release Notes"]
 slug: "april-2026-release-notes"
-excerpt: "April was a dense month of shipping. The Desktop App reached v0.4.0 with trading automation. The RGB Lightning Node gained HODL invoice support. The SDK went through six patch releases. All of it converges on the May mainnet launch."
+excerpt: "Three repositories were the primary focus in April: the Desktop App shipped its biggest release to date, the SDK received several bug fixes, and KaleidoCLI saw a wave of enhancements. All oriented toward the upcoming May mainnet launch."
 coverImage: "/blog/images/april-2026-release-notes/cover.png"
 coverImageMobile: "/blog/images/april-2026-release-notes/cover-mobile.png"
 coverImageCard: "/blog/images/april-2026-release-notes/cover-card.png"
 ---
 
-April was a dense month of shipping. The Desktop App reached v0.4.0 with a full set of trading automation features. The RGB Lightning Node gained HODL invoice support, a critical step toward trustless atomic swap settlement. The SDK went through six patch releases. KaleidoCLI received a significant expansion of its command surface. All of it is converging on the May mainnet launch.
+> Development update across all public repositories.
+
+Three repositories were the primary focus in April: the Desktop App shipped its biggest release to date, the SDK received several bug fixes, and KaleidoCLI saw a wave of enhancements and improved test coverage. Most of this activity was oriented toward the upcoming May mainnet launch.
 
 ---
 
-## Desktop App v0.4.0: Trading Automation on a Local Node
+## 🚀 Releases
 
-The biggest release of the month was [KaleidoSwap Desktop App v0.4.0](https://github.com/kaleidoswap/desktop-app/releases/tag/v0.4.0), shipped on April 16.
+### [KaleidoSwap Desktop App v0.4.0](https://github.com/kaleidoswap/desktop-app/releases/tag/v0.4.0) · STABLE RELEASE
 
-The headline features are **limit orders** and **dollar-cost averaging (DCA)**. Both run locally via Tauri. Limit orders persist across sessions and execute automatically when the target price is hit. DCA lets users schedule recurring bitcoin purchases funded from a USDT Lightning balance, with retry logic and full order history.
+`2026-04-16` · KaleidoSwap Desktop App
 
-The node backend model also got a significant upgrade. Users can now run the RGB Lightning Node in a **Docker container** directly from the app — automatic image pull, container lifecycle management, and health monitoring included. This removes the manual dependency setup that was a friction point for new users. Alternatively, users can connect to a remote node or continue using the native local node with tray controls and background-mode support.
+Limit orders, dollar-cost averaging, Docker node backend, BIP21 deposit URIs, reverse quote support, and expanded internationalization. Users can now set automated buy orders and schedule recurring bitcoin purchases funded with a USDT Lightning balance. The node setup flow supports local native nodes, Docker-managed containers, and remote node connections.
 
-Other additions in v0.4.0:
+**What's new:**
+- **Limit Orders** — Set a price target and walk away. Orders persist locally via Tauri and execute automatically when the target is hit.
+- **Dollar-Cost Averaging (DCA)** — Automated bitcoin buying on a schedule or price trigger, with full order tracking and retry logic.
+- **Docker Node Backend** — Run the RGB Lightning Node in a container directly from the app. Automatic image pull, container lifecycle management, and health monitoring with no manual setup.
+- **Reverse Quote Support** — Accept quotes from the maker side, enabling two-way RFQ trading.
+- **BIP21 Deposit URIs** — Generate BIP21-compliant deposit URIs for easier on-chain bitcoin deposits.
+- **Node Reachability Monitoring** — Continuous background health checks with automatic reconnection and status indicators.
+- **Port Conflict Resolution** — Automatically detects and resolves port conflicts on local node startup.
 
-- **Reverse Quote Support** — The app can now accept quotes from the maker side, enabling full two-way RFQ trading rather than taker-only flows.
-- **BIP21 Deposit URIs** — Generates standards-compliant deposit URIs for on-chain bitcoin deposits.
-- **Port Conflict Resolution** — Automatically detects and resolves port conflicts on node startup.
-- **Expanded i18n** — Broader multi-language coverage across trading, wallet history, setup, and channel management.
-
-Under the hood: trading page initialization was parallelized to reduce load time; Docker Smart Resume skips container restart when switching accounts; security vulnerabilities were patched alongside two reported bugs (#95, #96).
-
-The full release notes are on [GitHub](https://github.com/kaleidoswap/desktop-app/releases/tag/v0.4.0). The download is at [kaleidoswap.com/downloads](https://kaleidoswap.com/downloads).
-
----
-
-## HODL Invoice Support in the RGB Lightning Node
-
-The RGB Lightning Node shipped four releases in April, with the most significant being `v0.6.2-hodl.1` and `v0.6.4-hodl.1`.
-
-**HODL invoices** (also called hold invoices) are a Lightning primitive that allows a payment to be held in a pending state until the recipient explicitly resolves or cancels it. This is the mechanism that makes atomic swaps safe on Lightning: both legs of the swap are locked simultaneously, and either both settle or neither does. Without HODL invoice support in the node, trustless atomic swaps are not possible.
-
-The `-hodl.1` builds are pre-release integration targets — they are not yet the production release, but they represent the interface the swap engine is being built against. `v0.6.3` also added **Mutinynet support**, the custom Signet environment used for end-to-end testnet validation ahead of mainnet.
-
-The RGB Lightning Node is developed as an open-source fork and contribution to the upstream [rgb-lightning-node](https://github.com/kaleidoswap/rgb-lightning-node) project.
+**Under the hood:**
+- Parallelized trading page initialization calls for faster load times.
+- Docker Smart Resume: when switching accounts with Docker already running, navigates directly to unlock without restarting the container.
+- Dashboard loading skeletons for better perceived performance.
+- Security patches and UI polish across sidebar navigation, channel sub-menu, and trading views.
 
 ---
 
-## KaleidoSDK: Six Patches in Ten Days
+### [KaleidoSDK v0.1.4](https://github.com/kaleidoswap/kaleido-sdk/releases/tag/v0.1.4) · PATCH
 
-KaleidoSDK went from v0.1.0 to v0.1.6 between March 21 and April 10. The April patch cycle fixed:
+`2026-04-08` · KaleidoSDK
 
-- **IFA (Inbound Forwarding Arrangement) integration** — `v0.1.2` and `v0.1.6` fixed the asset list function and updated the RLN integration layer.
-- **SignetCustom network type** — `v0.1.4` added `SignetCustom` to the `BitcoinNetwork` enum. The RGB Lightning Node returns this value on custom Signet environments; its absence was causing validation errors on the maker.
-- **API type alignment** — `v0.1.3` and a separate refactor PR updated types and models to match the current RLN and maker interfaces.
-- **Unit conversion** — `parse_rgb_amount` replaced two separate functions (`to_smallest_units`, `to_display_units`), unifying asset amount handling across Rust, Python, and TypeScript bindings.
-
-The SDK is available on [PyPI](https://pypi.org/project/kaleido-sdk/) and [npm](https://www.npmjs.com/package/@kaleidoswap/sdk). Docs at [docs.kaleidoswap.com](https://docs.kaleidoswap.com).
+Added `SignetCustom` to the `BitcoinNetwork` enum. The RGB Lightning Node returns a `SignetCustom` network type that was previously absent. Other minor issues solved.
 
 ---
 
-## KaleidoCLI: Command Surface Expansion and Test Coverage
+## 🔧 Shipped
 
-KaleidoCLI had no formal versioned release in April, but merged ten PRs — the most of any month since launch. The additions include:
+**KaleidoSwap Desktop App**
 
-- Channel fee estimation parameters, giving users cost visibility before opening channels.
-- Improved LSP (Lightning Service Provider) channel order flow.
-- Enhanced market and swap commands with better protocol layer resolution.
-- First round of automated CLI test coverage.
-- Default node setup switched to Mutinynet, aligning CLI users with the testnet validation environment.
-- MIT license file and updated README with beta warning.
+- **[feat: Docker node backend support and UX improvements](https://github.com/kaleidoswap/desktop-app/pull/91)** — Introduced Docker-based node management with full container lifecycle support. Users can now spin up an RGB Lightning Node in a container directly from the app. `2026-04-16`
+- **[feat: channel order improvements and trading page refactor](https://github.com/kaleidoswap/desktop-app/pull/90)** — Reworked the channel purchase flow with richer payment states, improved summaries, and order restart handling. Trading page reorganized to separate market-maker and limit-order views. `2026-04-16`
+- **[feat: UI polish fixes & extensions](https://github.com/kaleidoswap/desktop-app/pull/103)** — Refined sidebar navigation, asset selection, channel management panel, account generation, and more. `2026-04-16`
 
-The CLI ships with KaleidoSDK and is the fastest way to run a full local RGB Lightning Node and execute swaps from the terminal. See the [demo on Rumble](https://rumble.com/v78a1pu-kaleido-cli-demo-atomic-swap-rgb-assets-on-lightning-from-the-command-line.html).
+**KaleidoCLI**
+
+- **[feat: enhance channel and market commands](https://github.com/kaleidoswap/kaleido-cli/pull/8)** — Extended channel and market command functionality. `2026-04-06`
+- **[feat: add channel fee estimation parameters](https://github.com/kaleidoswap/kaleido-cli/pull/9)** — Added channel fee estimation to CLI commands, giving users cost visibility before opening channels. `2026-04-07`
+- **[Improve LSP channel order flow](https://github.com/kaleidoswap/kaleido-cli/pull/10)** — Improved the LSP (Lightning Service Provider) channel ordering flow for more reliable channel setup. `2026-04-08`
+- **[Default CLI node setup to mutinynet](https://github.com/kaleidoswap/kaleido-cli/pull/12)** — Switched the default node configuration to Mutinynet to align with the testnet validation environment. `2026-04-08`
+
+**KaleidoSDK**
+
+- **[refactor: update API types and models](https://github.com/kaleidoswap/kaleido-sdk/pull/21)** — Updated API type definitions and data models to align with the current RLN and maker interfaces. `2026-04-08`
+- **[refactor: replace to_smallest_units and to_display_units with parse_rgb_amount](https://github.com/kaleidoswap/kaleido-sdk/pull/19)** — Unified asset amount handling with a single `parse_rgb_amount` function, removing ambiguity in unit conversion. `2026-04-08`
 
 ---
 
-## What's Next
+## 📋 Notable Changes
 
-May is the Browser Extension mainnet go-live. The HODL invoice integration currently in pre-release builds of the RGB Lightning Node is the remaining infrastructure dependency for trustless swap settlement at launch. Taproot Assets integration and KaleidoSDK v0.2 (agentic payments) are slated for June.
+**KaleidoSwap Desktop App**
 
-The full April release notes are on [GitHub](https://github.com/kaleidoswap).
+- [fix: always show backend selection when setting up local node](https://github.com/kaleidoswap/desktop-app/pull/93) — Ensured the node backend selection screen appears consistently on local node setup.
+- [fix: increase unlock retry timeout to ~1 hour](https://github.com/kaleidoswap/desktop-app/pull/89) — Extended the node unlock retry window to handle slow startup on lower-spec machines.
+
+**KaleidoCLI**
+
+- [Add CLI test coverage](https://github.com/kaleidoswap/kaleido-cli/pull/11) — First round of automated CLI tests, covering core command paths.
+- [Update CLI tests for kaleido-sdk 0.1.5 and fix CI](https://github.com/kaleidoswap/kaleido-cli/pull/14) — Kept test suite aligned with the SDK's rapid patch cycle.
+
+**KaleidoSDK**
+
+- [fix(ts-sdk): pin transitive security updates](https://github.com/kaleidoswap/kaleido-sdk/pull/20) — Pinned security-relevant transitive dependencies in the TypeScript SDK.
 
 ---
 
-**Sources**
+## 📊 By the Numbers
 
-- [Desktop App v0.4.0 release](https://github.com/kaleidoswap/desktop-app/releases/tag/v0.4.0)
-- [RGB Lightning Node releases](https://github.com/kaleidoswap/rgb-lightning-node/releases)
-- [KaleidoSDK releases](https://github.com/kaleidoswap/kaleido-sdk/releases)
-- [KaleidoCLI pull requests](https://github.com/kaleidoswap/kaleido-cli/pulls)
-- [KaleidoSwap docs](https://docs.kaleidoswap.com)
+| Commits | PRs merged | Issues closed | Releases | Repos active |
+|---------|------------|---------------|----------|--------------|
+| ~40+ | 26 | 2 | 8 | 5 |
+
+---
+
+*KaleidoSwap · [github.com/kaleidoswap](https://github.com/kaleidoswap) · Generated 2026-04-30*
