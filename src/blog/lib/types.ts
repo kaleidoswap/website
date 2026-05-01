@@ -5,7 +5,9 @@ export interface PostMeta {
   tags: string[]
   slug: string
   excerpt: string
-  coverImage?: string // optional — path relative to /public
+  coverImage?: string       // wide variant — desktop article hero (e.g. 8:3)
+  coverImageMobile?: string // portrait/tall variant — mobile article hero (e.g. 5:3)
+  coverImageCard?: string   // thumbnail variant — blog card grid (e.g. 5:2)
 }
 
 export interface Post extends PostMeta {

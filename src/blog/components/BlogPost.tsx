@@ -65,11 +65,16 @@ export function BlogPost() {
             <header className="mb-10">
               {post.coverImage && (
                 <div className="w-full rounded-2xl overflow-hidden mb-6">
-                  <img
-                    src={post.coverImage}
-                    alt={post.title}
-                    className="w-full object-cover h-72 block"
-                  />
+                  <picture>
+                    {post.coverImageMobile && (
+                      <source media="(max-width: 639px)" srcSet={post.coverImageMobile} />
+                    )}
+                    <img
+                      src={post.coverImage}
+                      alt={post.title}
+                      className="w-full h-auto block"
+                    />
+                  </picture>
                 </div>
               )}
 

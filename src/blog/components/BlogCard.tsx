@@ -10,9 +10,9 @@ export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link to={`/blog/${post.slug}`} className="block group">
       <article className="glass-card rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-300">
-        {post.coverImage && (
+        {(post.coverImageCard ?? post.coverImage) && (
           <img
-            src={post.coverImage}
+            src={post.coverImageCard ?? post.coverImage}
             alt={post.title}
             className="w-full h-32 object-cover"
           />
