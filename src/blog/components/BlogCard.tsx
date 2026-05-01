@@ -35,8 +35,6 @@ export function BlogCard({ post }: BlogCardProps) {
             {post.excerpt}
           </p>
           <div className="flex items-center gap-2 text-xs text-gray-500 mt-auto">
-            <span>{post.author}</span>
-            <span>·</span>
             <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString('en-US', {
                 year: 'numeric',

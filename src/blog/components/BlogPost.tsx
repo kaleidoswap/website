@@ -94,10 +94,8 @@ export function BlogPost() {
                 {post.title}
               </h1>
 
-              {/* Author · date · reading time */}
+              {/* Date · reading time */}
               <div className="flex items-center gap-3 text-sm text-gray-400 flex-wrap">
-                <span>{post.author}</span>
-                <span className="text-gray-600">·</span>
                 <time dateTime={post.date}>
                   {new Date(post.date).toLocaleDateString('en-US', {
                     year: 'numeric',

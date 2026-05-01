@@ -1,7 +1,7 @@
 export interface PostMeta {
   title: string
   date: string       // ISO string, e.g. "2026-04-29"
-  author: string
+  author?: string
   tags: string[]
   slug: string
   excerpt: string
