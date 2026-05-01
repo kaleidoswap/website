@@ -1,4 +1,5 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
+import { tagColor } from '../lib/tagColors'
 import { ChevronLeft, Clock } from 'lucide-react'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -77,7 +78,7 @@ export function BlogPost() {
                 {post.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="bg-primary-500/20 text-primary-300 border border-primary-400/40 rounded-full px-2.5 py-0.5 text-xs font-medium"
+                    className={`${tagColor(tag)} border rounded-full px-2.5 py-0.5 text-xs font-medium`}
                   >
                     {tag}
                   </span>

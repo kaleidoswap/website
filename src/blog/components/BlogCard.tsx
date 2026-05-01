@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { PostMeta } from '../lib/types'
+import { tagColor } from '../lib/tagColors'
 
 interface BlogCardProps {
   post: PostMeta
@@ -21,7 +22,7 @@ export function BlogCard({ post }: BlogCardProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="bg-primary-500/10 text-primary-400 border border-primary-500/20 rounded-full px-2.5 py-0.5 text-xs font-medium"
+                className={`${tagColor(tag)} border rounded-full px-2.5 py-0.5 text-xs font-medium`}
               >
                 {tag}
               </span>
