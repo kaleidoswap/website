@@ -6,6 +6,8 @@ tags: ["Announcement"]
 slug: "kaleidoswap-v020"
 excerpt: "KaleidoSwap v0.2.0 lands as RGB v0.11.1 goes live on Bitcoin mainnet — bringing advanced asset swaps, improved UX, and stronger Lightning infrastructure integration."
 coverImage: "/blog/images/kaleidoswap-v020/cover.png"
+coverImageMobile: "/blog/images/kaleidoswap-v020/cover-mobile.png"
+coverImageCard: "/blog/images/kaleidoswap-v020/cover-card.png"
 ---
 
 We're excited to announce the release of **KaleidoSwap v0.2.0**, our latest alpha version — and it arrives at a historic moment for Bitcoin's asset ecosystem.
