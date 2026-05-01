@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
 import { tagColor } from '../lib/tagColors'
-import { ChevronLeft, Clock } from 'lucide-react'
+import { ChevronLeft, ChevronDown, Clock } from 'lucide-react'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { SEO } from '@/components/common/SEO'
@@ -105,6 +105,19 @@ export function BlogPost() {
                   <Clock className="w-3.5 h-3.5" />
                   {post.readingTime} min read
                 </span>
+              </div>
+
+              {/* Mobile TOC — hidden on xl (where sidebar takes over) */}
+              <div className="xl:hidden mt-6 rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+                <details className="group">
+                  <summary className="flex items-center justify-between px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden hover:text-white transition-colors">
+                    Contents
+                    <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="px-4 pb-4">
+                    <TableOfContents content={post.content} />
+                  </div>
+                </details>
               </div>
             </header>
 
