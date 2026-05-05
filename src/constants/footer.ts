@@ -7,6 +7,7 @@ export const footerConfig: FooterProps = {
     {
       title: "Resources",
       links: [
+        { label: "Blog", href: "/blog" },
         { label: "Documentation", href: PRODUCTS.docs, external: true },
         { label: "GitHub Repository", href: GITHUB.orgUrl, external: true },
         { label: "RGB Protocol", href: EXTERNAL.rgbInfo, external: true },
