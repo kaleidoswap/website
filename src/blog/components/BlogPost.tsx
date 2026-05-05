@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
-import { ChevronLeft, Clock } from 'lucide-react'
+import { tagColor } from '../lib/tagColors'
+import { ChevronLeft, ChevronDown, Clock } from 'lucide-react'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { SEO } from '@/components/common/SEO'
@@ -9,7 +9,6 @@ import { getPostBySlug } from '../lib/posts'
 import { TableOfContents } from './TableOfContents'
 
 export function BlogPost() {
-  const { t } = useTranslation()
   const { slug } = useParams<{ slug: string }>()
   const post = slug ? getPostBySlug(slug) : null
 
@@ -47,7 +46,7 @@ export function BlogPost() {
           >
             <ChevronLeft className="w-3.5 h-3.5 shrink-0 group-hover/link:text-primary-400 transition-colors" />
             <span className="border-b border-slate-700 group-hover/link:border-primary-500 pb-0.5 transition-colors">
-              {t('Back to Blog')}
+              Back to Blog
             </span>
           </Link>
         </nav>
@@ -62,59 +61,71 @@ export function BlogPost() {
           {/* ── Main content ── */}
           <main className="flex-1 min-w-0 max-w-3xl mx-auto">
 
-            {/* Hero: cover image with title overlay */}
-            <header className="relative w-full rounded-2xl overflow-hidden mb-10">
-              {post.coverImage ? (
-                <>
-                  <img
-                    src={post.coverImage}
-                    alt={post.title}
-                    className="w-full object-cover h-72 block"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 via-[55%] to-transparent" />
-                </>
-              ) : (
-                <div className="w-full h-48 bg-gray-900/80" />
+            {/* Hero: cover image above title */}
+            <header className="mb-10">
+              {post.coverImage && (
+                <div className="w-full rounded-2xl overflow-hidden mb-6">
+                  <picture>
+                    {post.coverImageMobile && (
+                      <source media="(max-width: 639px)" srcSet={post.coverImageMobile} />
+                    )}
+                    <img
+                      src={post.coverImage}
+                      alt={post.title}
+                      className="w-full h-auto block"
+                    />
+                  </picture>
+                </div>
               )}
 
-              {/* Text overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-primary-500/20 text-primary-300 border border-primary-400/40 rounded-full px-2.5 py-0.5 text-xs font-medium backdrop-blur-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-2 drop-shadow-lg">
-                  {post.title}
-                </h1>
-
-                {/* Author · date · reading time */}
-                <div className="flex items-center gap-3 text-sm text-gray-300 drop-shadow flex-wrap">
-                  <span>{post.author}</span>
-                  <span className="text-gray-500">·</span>
-                  <time dateTime={post.date}>
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                  <span className="text-gray-500">·</span>
-                  <span className="inline-flex items-center gap-1 text-gray-300">
-                    <Clock className="w-3.5 h-3.5" />
-                    {t('{{count}} min read', { count: post.readingTime })}
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {post.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className={`${tagColor(tag)} border rounded-full px-2.5 py-0.5 text-xs font-medium`}
+                  >
+                    {tag}
                   </span>
-                </div>
+                ))}
+              </div>
+
+              <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-4">
+                {post.title}
+              </h1>
+
+              {/* Date · reading time */}
+              <div className="flex items-center gap-3 text-sm text-gray-400 flex-wrap">
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </time>
+                <span className="text-gray-600">·</span>
+                <span className="inline-flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5" />
+                  {post.readingTime} min read
+                </span>
+              </div>
+
+              {/* Mobile TOC — hidden on xl (where sidebar takes over) */}
+              <div className="xl:hidden mt-6 rounded-xl border border-white/10 bg-white/5 overflow-hidden">
+                <details className="group">
+                  <summary className="flex items-center justify-between px-4 py-3 text-xs font-semibold uppercase tracking-widest text-gray-400 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden hover:text-white transition-colors">
+                    Contents
+                    <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" />
+                  </summary>
+                  <div className="px-4 pb-4">
+                    <TableOfContents content={post.content} hideTitle />
+                  </div>
+                </details>
               </div>
             </header>
 
             <article
-              className="prose prose-invert prose-neutral max-w-none"
+              className="prose prose-invert prose-neutral max-w-none prose-a:text-white prose-a:decoration-white/50 prose-a:underline-offset-2 hover:prose-a:text-primary-300 hover:prose-a:decoration-primary-300/70"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </main>

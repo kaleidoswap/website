@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { PostMeta } from '../lib/types'
+import { tagColor } from '../lib/tagColors'
 
 interface BlogCardProps {
   post: PostMeta
@@ -9,9 +10,9 @@ export function BlogCard({ post }: BlogCardProps) {
   return (
     <Link to={`/blog/${post.slug}`} className="block group">
       <article className="glass-card rounded-2xl overflow-hidden h-full flex flex-col transition-all duration-300">
-        {post.coverImage && (
+        {(post.coverImageCard ?? post.coverImage) && (
           <img
-            src={post.coverImage}
+            src={post.coverImageCard ?? post.coverImage}
             alt={post.title}
             className="w-full h-32 object-cover"
           />
@@ -21,7 +22,7 @@ export function BlogCard({ post }: BlogCardProps) {
             {post.tags.map((tag) => (
               <span
                 key={tag}
-                className="bg-primary-500/10 text-primary-400 border border-primary-500/20 rounded-full px-2.5 py-0.5 text-xs font-medium"
+                className={`${tagColor(tag)} border rounded-full px-2.5 py-0.5 text-xs font-medium`}
               >
                 {tag}
               </span>
@@ -34,8 +35,6 @@ export function BlogCard({ post }: BlogCardProps) {
             {post.excerpt}
           </p>
           <div className="flex items-center gap-2 text-xs text-gray-500 mt-auto">
-            <span>{post.author}</span>
-            <span>·</span>
             <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString('en-US', {
                 year: 'numeric',
