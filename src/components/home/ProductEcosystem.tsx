@@ -1,4 +1,4 @@
-import { Globe, Monitor, Smartphone, Puzzle, Download, Clock, ArrowUpRight, Terminal, ChevronRight } from 'lucide-react'
+import { Globe, Monitor, Smartphone, Puzzle, Download, Clock, ArrowUpRight, Terminal, ChevronRight, LockOpen } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/common/Button'
 import { PRODUCTS, DOCS } from '@/constants/urls'
@@ -161,20 +161,40 @@ export const ProductEcosystem = () => {
             </motion.div>
           </AnimateIn>
 
-          {/* ── Web App ───────────────────────────────────────────────────── */}
+          {/* ── Extension ────────────────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={200} className="md:col-span-1 lg:col-span-2 h-full">
             <motion.div className={CARD_BASE} whileHover={CARD_HOVER} transition={SPRING}>
               <GlowOrb color="bg-primary-500/10" />
               <div className="p-6 relative z-10 flex flex-col h-full">
-                <CardIcon color="bg-primary-500/10 text-primary-400">
-                  <Globe className="w-5 h-5" />
-                </CardIcon>
-                <h3 className="text-base font-bold text-white mt-3 mb-1">{t('Web App')}</h3>
+                <div className="flex items-start justify-between mb-4">
+                  <CardIcon color="bg-primary-500/10 text-primary-400">
+                    <Puzzle className="w-5 h-5" />
+                  </CardIcon>
+                  <div className="flex gap-1.5 flex-wrap justify-end">
+                    <PlatformTag label="Mainnet" />
+                  </div>
+                </div>
+                <h3 className="text-base font-bold text-white mb-1.5">{t('Browser Extension')}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  {t('The fastest way to swap. No download required. Connect your wallet and go.')}
+                  {t('Seamless browser integration.')}
                 </p>
-                <div className="mt-auto pt-4">
-                  <ComingSoonBadge label={t('Coming Soon')} />
+                <div className="mt-auto pt-4 flex items-center gap-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {}}
+                    className="gap-2"
+                  >
+                    <LockOpen className="w-4 h-4" />
+                    {t('Get Early Access')}
+                  </Button>
+                  <button
+                    onClick={() => handleNavigation('https://kaleidoswap.com/products/extension', true)}
+                    className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
+                  >
+                    {t('Learn more')}
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -200,19 +220,18 @@ export const ProductEcosystem = () => {
             </motion.div>
           </AnimateIn>
 
-          {/* ── Extension — coming soon ───────────────────────────────────── */}
+          {/* ── Web App — coming soon ─────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={400} className="md:col-span-2 lg:col-span-2 h-full">
-            <motion.div
-              className={`${CARD_BASE} opacity-70 hover:opacity-100 transition-opacity duration-300`}
-              whileHover={CARD_HOVER}
-              transition={SPRING}
-            >
+            <motion.div className={CARD_BASE} whileHover={CARD_HOVER} transition={SPRING}>
+              <GlowOrb color="bg-primary-500/10" />
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <CardIcon color="bg-primary-500/10 text-primary-400">
-                  <Puzzle className="w-5 h-5" />
+                  <Globe className="w-5 h-5" />
                 </CardIcon>
-                <h3 className="text-base font-bold text-white mt-3 mb-1">{t('Extension')}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{t('Seamless browser integration.')}</p>
+                <h3 className="text-base font-bold text-white mt-3 mb-1">{t('Web App')}</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  {t('The fastest way to swap. No download required. Connect your wallet and go.')}
+                </p>
                 <div className="mt-auto pt-4">
                   <ComingSoonBadge label={t('Coming Soon')} />
                 </div>

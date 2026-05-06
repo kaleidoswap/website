@@ -43,6 +43,7 @@ export const SOCIALS = {
   telegram: 'https://t.me/kaleidoswap',
   github: GITHUB.orgUrl,
   medium: `https://${DOMAINS.blog}`,
+  rumble: 'https://rumble.com/user/kaleidoswap',
 } as const
 
 // Product URLs
