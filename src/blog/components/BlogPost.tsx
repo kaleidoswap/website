@@ -22,6 +22,7 @@ export function BlogPost() {
         url={`/blog/${post.slug}`}
         keywords={post.tags}
         type="article"
+        image={post.coverImagePreview ?? post.coverImage}
       />
 
       <div

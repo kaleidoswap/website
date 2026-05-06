@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import { Zap } from 'lucide-react'
+import kaleidoPictogram from '@/assets/kaleidoswap-pictogram.svg'
 import { protocols } from '@/constants/protocols'
 
 const OUTER_RADIUS = 118
@@ -193,49 +193,62 @@ export const MobileHeroAnimation = () => {
           </circle>
 
           {/* Hexagonal border */}
-          <path
-            d={hexPath(28)}
-            transform={`translate(${CENTER},${CENTER})`}
-            fill="none"
-            stroke="url(#mob-gp)"
-            strokeWidth="1.5"
-            opacity="0.4"
-            filter="url(#mob-glow)"
-          >
-            {anim && (
-              <>
-                <animate attributeName="opacity" values="0.3;0.65;0.3" dur="3s" repeatCount="indefinite" />
-                <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite" />
-              </>
-            )}
-          </path>
+          <g transform={`translate(${CENTER},${CENTER})`}>
+            <g>
+              {anim && (
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  from="0"
+                  to="360"
+                  dur="40s"
+                  repeatCount="indefinite"
+                  additive="sum"
+                />
+              )}
+              <path
+                d={hexPath(34)}
+                fill="none"
+                stroke="url(#mob-gp)"
+                strokeWidth="1.5"
+                opacity="0.4"
+                filter="url(#mob-glow)"
+              >
+                {anim && (
+                  <>
+                    <animate attributeName="opacity" values="0.3;0.65;0.3" dur="3s" repeatCount="indefinite" />
+                    <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite" />
+                  </>
+                )}
+              </path>
+            </g>
+          </g>
 
           {/* Inner hex fill */}
-          <path
-            d={hexPath(26)}
-            transform={`translate(${CENTER},${CENTER})`}
-            fill="rgba(10,15,30,0.75)"
-            stroke="rgba(255,255,255,0.08)"
-            strokeWidth="0.5"
-          />
-
-          {/* KaleidoSwap logo mark */}
-          <g transform={`translate(${CENTER - 19},${CENTER - 19}) scale(0.182)`}>
-            <path d="M69.7141 207.3H0.908203L35.3243 172.936L69.7141 207.3Z" fill="#6F32FF" />
-            <path d="M138.441 0.96106V69.767L104.078 35.3508L138.441 0.96106Z" fill="#17B581" />
-            <path d="M138.415 138.547V207.352L104.051 172.936L138.415 138.547Z" fill="#17B581" />
-            <path d="M138.441 69.7406V0.96106L172.804 35.3772L138.441 69.767V69.7406Z" fill="#17B581" />
-            <path d="M69.6614 138.494V69.6879L104.025 104.104L69.6614 138.494Z" fill="#15E99A" />
-            <path d="M69.6615 69.7142V138.52L35.2981 104.104L69.6615 69.7142Z" fill="#15E99A" />
-            <path d="M138.467 207.379V138.573L172.831 172.989L138.467 207.379Z" fill="#17B581" />
-            <path d="M0.908203 0.908325H69.7141L35.298 35.2718L0.908203 0.908325Z" fill="#6F32FF" />
-            <path d="M207.22 207.3H138.415L172.831 172.936L207.22 207.3Z" fill="#17B581" />
-            <path d="M138.415 0.987427H207.22L172.804 35.3509L138.415 0.987427Z" fill="#17B581" />
-            <path d="M138.467 69.7143H69.6614L104.078 35.3508L138.467 69.7143Z" fill="#17B581" />
-            <path d="M69.635 138.494H138.441L104.025 172.857L69.635 138.494Z" fill="#17B581" />
-            <path d="M138.415 138.494H69.635L104.025 104.157L138.388 138.494H138.415Z" fill="#15E99A" />
-            <path d="M138.415 69.7142L104.051 104.051L69.6614 69.7142H138.441H138.415Z" fill="#15E99A" />
+          <g transform={`translate(${CENTER},${CENTER})`}>
+            <g>
+              {anim && (
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  from="0"
+                  to="-360"
+                  dur="40s"
+                  repeatCount="indefinite"
+                  additive="sum"
+                />
+              )}
+              <path
+                d={hexPath(32)}
+                fill="rgba(10,15,30,0.75)"
+                stroke="rgba(255,255,255,0.08)"
+                strokeWidth="0.5"
+              />
+            </g>
           </g>
+
+          {/* KaleidoSwap pictogram */}
+          <image href={kaleidoPictogram} x={CENTER - 18} y={CENTER - 18} width={36} height={36} />
         </svg>
 
         {/* Orbiting protocol icons */}
@@ -264,15 +277,13 @@ export const MobileHeroAnimation = () => {
                   transition={counterSpinTransition}
                 >
                   <div className="w-full h-full rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
-                    {protocol.icon ? (
+                    {protocol.icon && (
                       <img
                         src={protocol.icon}
                         alt={protocol.name}
                         className="w-5 h-5 object-contain"
                       />
-                    ) : protocol.lucideIcon === Zap ? (
-                      <Zap className="w-5 h-5 text-yellow-500" />
-                    ) : null}
+                    )}
                   </div>
                 </motion.div>
               </motion.div>

@@ -1,13 +1,16 @@
 // src/components/animations/KaleidoScopeHeroAnimation.tsx
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 
+import kaleidoPictogram from '@/assets/kaleidoswap-pictogram.svg'
+
 // Protocol logos
 import bitcoinLogo from '@/assets/icons/bitcoin/bitcoin-logo.svg'
 import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
 import sparkAsterisk from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
 import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
 import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
-import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.png'
+import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.svg'
+import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
 
 interface KaleidoScopeHeroAnimationProps {
   /** @deprecated Use className with width/height instead */
@@ -20,12 +23,11 @@ interface Protocol {
   logo: string
   color: string
   glowColor: string
-  isLightning?: boolean
 }
 
 const protocols: Protocol[] = [
   { name: 'Bitcoin', logo: bitcoinLogo, color: '#F7931A', glowColor: 'rgba(247,147,26,0.5)' },
-  { name: 'Lightning', logo: '', color: '#fbbf24', glowColor: 'rgba(251,191,36,0.5)', isLightning: true },
+  { name: 'Lightning', logo: lightningLogo, color: '#fbbf24', glowColor: 'rgba(251,191,36,0.5)' },
   { name: 'RGB', logo: rgbLogo, color: '#EF4444', glowColor: 'rgba(239,68,68,0.5)' },
   { name: 'Spark', logo: sparkAsterisk, color: '#FFFFFF', glowColor: 'rgba(255,255,255,0.3)' },
   { name: 'Arkade', logo: arkadeLogo, color: '#8B5CF6', glowColor: 'rgba(139,92,246,0.5)' },
@@ -479,18 +481,11 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
                     />
 
                     {/* Protocol icon */}
-                    {proto.isLightning ? (
-                      <g transform={`translate(${-iconR * 0.42},${-iconR * 0.52}) scale(${iconR * 0.036})`}>
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-                          fill="#fbbf24" stroke="#fbbf24" strokeWidth="0.5" />
-                      </g>
-                    ) : (
-                      <image href={proto.logo}
-                        x={-iconR * 0.58} y={-iconR * 0.58}
-                        width={iconR * 1.16} height={iconR * 1.16}
-                        clipPath="url(#kh-icon-clip)"
-                      />
-                    )}
+                    <image href={proto.logo}
+                      x={-iconR * 0.58} y={-iconR * 0.58}
+                      width={iconR * 1.16} height={iconR * 1.16}
+                      clipPath="url(#kh-icon-clip)"
+                    />
 
                     {/* Network name label on hover */}
                     <g opacity={isHovered ? 1 : 0} style={{ transition: 'opacity 0.2s ease' }}>
@@ -646,40 +641,41 @@ export const KaleidoScopeHeroAnimation: React.FC<KaleidoScopeHeroAnimationProps>
             )}
           </circle>
 
-          {/* Hexagonal border — breathing */}
-          <path d={hexPath(50)} transform={`translate(${c},${c})`}
-            fill="none" stroke="url(#kh-gp)" strokeWidth="1.5" opacity="0.4" filter="url(#kh-glow)"
-          >
+          {/* Hexagonal border — rotating + breathing */}
+          <g transform={`translate(${c},${c})`}>
             {anim && (
-              <>
-                <animate attributeName="opacity" values="0.3;0.65;0.3" dur="3s" repeatCount="indefinite" />
-                <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite" />
-              </>
+              <animateTransform attributeName="transform" type="rotate"
+                from="0 0 0" to="360 0 0" dur="40s" repeatCount="indefinite" additive="sum" />
             )}
-          </path>
-
-          {/* Inner hex fill */}
-          <path d={hexPath(46)} transform={`translate(${c},${c})`}
-            fill="rgba(10,15,30,0.6)" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5"
-          />
-
-          {/* KaleidoSwap mark logo */}
-          <g transform={`translate(${c - 34},${c - 34}) scale(0.325)`}>
-            <path d="M69.7141 207.3H0.908203L35.3243 172.936L69.7141 207.3Z" fill="#6F32FF" />
-            <path d="M138.441 0.96106V69.767L104.078 35.3508L138.441 0.96106Z" fill="#17B581" />
-            <path d="M138.415 138.547V207.352L104.051 172.936L138.415 138.547Z" fill="#17B581" />
-            <path d="M138.441 69.7406V0.96106L172.804 35.3772L138.441 69.767V69.7406Z" fill="#17B581" />
-            <path d="M69.6614 138.494V69.6879L104.025 104.104L69.6614 138.494Z" fill="#15E99A" />
-            <path d="M69.6615 69.7142V138.52L35.2981 104.104L69.6615 69.7142Z" fill="#15E99A" />
-            <path d="M138.467 207.379V138.573L172.831 172.989L138.467 207.379Z" fill="#17B581" />
-            <path d="M0.908203 0.908325H69.7141L35.298 35.2718L0.908203 0.908325Z" fill="#6F32FF" />
-            <path d="M207.22 207.3H138.415L172.831 172.936L207.22 207.3Z" fill="#17B581" />
-            <path d="M138.415 0.987427H207.22L172.804 35.3509L138.415 0.987427Z" fill="#17B581" />
-            <path d="M138.467 69.7143H69.6614L104.078 35.3508L138.467 69.7143Z" fill="#17B581" />
-            <path d="M69.635 138.494H138.441L104.025 172.857L69.635 138.494Z" fill="#17B581" />
-            <path d="M138.415 138.494H69.635L104.025 104.157L138.388 138.494H138.415Z" fill="#15E99A" />
-            <path d="M138.415 69.7142L104.051 104.051L69.6614 69.7142H138.441H138.415Z" fill="#15E99A" />
+            <path d={hexPath(62)}
+              fill="none" stroke="url(#kh-gp)" strokeWidth="1.5" opacity="0.4" filter="url(#kh-glow)"
+            >
+              {anim && (
+                <>
+                  <animate attributeName="opacity" values="0.3;0.65;0.3" dur="3s" repeatCount="indefinite" />
+                  <animate attributeName="stroke-width" values="1.5;2.5;1.5" dur="3s" repeatCount="indefinite" />
+                </>
+              )}
+            </path>
           </g>
+
+          {/* Inner hex fill — counter-rotating */}
+          <g transform={`translate(${c},${c})`}>
+            {anim && (
+              <animateTransform attributeName="transform" type="rotate"
+                from="0 0 0" to="-360 0 0" dur="40s" repeatCount="indefinite" additive="sum" />
+            )}
+            <path d={hexPath(58)}
+              fill="rgba(10,15,30,0.6)" stroke="rgba(255,255,255,0.08)" strokeWidth="0.5"
+            />
+          </g>
+
+          {/* KaleidoSwap pictogram */}
+          <image
+            href={kaleidoPictogram}
+            x={c - 36} y={c - 36}
+            width={72} height={72}
+          />
         </g>
       </svg>
     </div>

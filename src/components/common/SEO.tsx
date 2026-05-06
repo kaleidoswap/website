@@ -13,7 +13,7 @@ interface SEOProps {
 const DEFAULT_TITLE = 'KaleidoSwap - Bitcoin L2 DEX'
 const DEFAULT_DESCRIPTION =
   'Trade BTC, USDT, and any RGB asset across Lightning, RGB, Spark, and Arkade. Atomic swaps with low fees and better privacy. No bridges. No custody. No tokens.'
-const DEFAULT_IMAGE = '/og-image.png'
+const DEFAULT_IMAGE = '/images/kaleido-full-logo-bg.png'
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://kaleidoswap.com'
 
 const organizationJsonLd = {
@@ -21,7 +21,7 @@ const organizationJsonLd = {
   '@type': 'Organization',
   name: 'KaleidoSwap',
   url: SITE_URL,
-  logo: `${SITE_URL}/logo.svg`,
+  logo: `${SITE_URL}/kaleidoswap-pictogram.svg`,
   sameAs: [
     'https://x.com/kaleidoswap',
     'https://t.me/kaleidoswap',
@@ -47,14 +47,17 @@ export const SEO = ({
   title,
   description = DEFAULT_DESCRIPTION,
   keywords = ['bitcoin', 'defi', 'rgb', 'lightning', 'atomic swaps', 'dex'],
-  image = DEFAULT_IMAGE,
+  image,
   url,
   type = 'website',
   noIndex = false,
 }: SEOProps) => {
   const fullTitle = title ? `${title} | KaleidoSwap` : DEFAULT_TITLE
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL
-  const fullImage = image.startsWith('http') ? image : `${SITE_URL}${image}`
+  const resolvedImage = image ?? (type === 'article' ? undefined : DEFAULT_IMAGE)
+  const fullImage = resolvedImage
+    ? resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`
+    : undefined
 
   return (
     <Helmet>
@@ -69,7 +72,7 @@ export const SEO = ({
       <meta property="og:url" content={fullUrl} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={fullImage} />
+      {fullImage && <meta property="og:image" content={fullImage} />}
       <meta property="og:site_name" content="KaleidoSwap" />
 
       {/* Twitter */}
@@ -77,7 +80,7 @@ export const SEO = ({
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullImage} />
+      {fullImage && <meta name="twitter:image" content={fullImage} />}
       <meta name="twitter:site" content="@kaleidoswap" />
 
       {/* Canonical URL */}

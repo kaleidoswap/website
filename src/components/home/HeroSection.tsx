@@ -12,9 +12,10 @@ import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
 import sparkAsterisk from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
 import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
 import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
-import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.png'
+import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.svg'
+import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
 
-const heroIconsToPreload = [bitcoinLogo, rgbLogo, sparkAsterisk, arkadeLogo, liquidLogo, taprootLogo]
+const heroIconsToPreload = [bitcoinLogo, rgbLogo, sparkAsterisk, arkadeLogo, liquidLogo, taprootLogo, lightningLogo]
 
 export const HeroSection = () => {
   const { t } = useTranslation()
