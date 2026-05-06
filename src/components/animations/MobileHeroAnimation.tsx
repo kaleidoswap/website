@@ -109,63 +109,6 @@ export const MobileHeroAnimation = () => {
             </filter>
           </defs>
 
-          {/* Connection lines — rotate in sync with icon orbit */}
-          <g>
-            {anim && (
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from={`0 ${CENTER} ${CENTER}`}
-                to={`360 ${CENTER} ${CENTER}`}
-                dur="20s"
-                repeatCount="indefinite"
-              />
-            )}
-            {protocols.map((protocol, index) => {
-              const angle = (index / protocols.length) * 360
-              const rad = (angle * Math.PI) / 180
-              const dx = Math.cos(rad)
-              const dy = Math.sin(rad)
-              const x1 = CENTER + dx * 28
-              const y1 = CENTER + dy * 28
-              const x2 = CENTER + dx * OUTER_RADIUS
-              const y2 = CENTER + dy * OUTER_RADIUS
-              const color = PROTOCOL_COLORS[protocol.name] ?? '#ffffff'
-              const dur = `${2 + index * 0.3}s`
-              return (
-                <g key={protocol.name}>
-                  {/* Colored dashed line */}
-                  <line
-                    x1={x1} y1={y1} x2={x2} y2={y2}
-                    stroke={color}
-                    strokeWidth="0.8"
-                    strokeDasharray="2 4"
-                    opacity="0.25"
-                  >
-                    {anim && (
-                      <animate
-                        attributeName="stroke-dashoffset"
-                        from="0" to="-12"
-                        dur={`${1.5 + index * 0.2}s`}
-                        repeatCount="indefinite"
-                      />
-                    )}
-                  </line>
-                  {/* Energy pulse dot */}
-                  <circle r="2" fill={color} opacity="0">
-                    {anim && (
-                      <>
-                        <animate attributeName="cx" values={`${x1};${x2}`} dur={dur} repeatCount="indefinite" />
-                        <animate attributeName="cy" values={`${y1};${y2}`} dur={dur} repeatCount="indefinite" />
-                        <animate attributeName="opacity" values="0;0.85;0" dur={dur} repeatCount="indefinite" />
-                        <animate attributeName="r" values="1.5;2.5;1.5" dur={dur} repeatCount="indefinite" />
-                      </>
-                    )}
-                  </circle>
-                </g>
-              )
-            })}
-          </g>
 
           {/* Ambient glow */}
           <circle cx={CENTER} cy={CENTER} r="42" fill="url(#mob-center-glow)">
@@ -251,17 +194,51 @@ export const MobileHeroAnimation = () => {
           <image href={kaleidoPictogram} x={CENTER - 18} y={CENTER - 18} width={36} height={36} />
         </svg>
 
-        {/* Orbiting protocol icons */}
+        {/* Orbiting protocol icons + connection lines (same rotating container = always in sync) */}
         <motion.div
           className="absolute inset-0"
           animate={shouldReduceMotion ? {} : { rotate: 360 }}
           transition={spinTransition}
         >
+          {/* Connection lines — no separate rotation needed, parent div handles it */}
+          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 280 280">
+            {protocols.map((protocol, index) => {
+              const angle = (index / protocols.length) * 360
+              const rad = (angle * Math.PI) / 180
+              const dx = Math.cos(rad)
+              const dy = Math.sin(rad)
+              const x1 = CENTER + dx * 36
+              const y1 = CENTER + dy * 36
+              const x2 = CENTER + dx * (OUTER_RADIUS - ICON_SIZE / 2)
+              const y2 = CENTER + dy * (OUTER_RADIUS - ICON_SIZE / 2)
+              const color = PROTOCOL_COLORS[protocol.name] ?? '#ffffff'
+              const dur = `${2 + index * 0.3}s`
+              return (
+                <g key={protocol.name}>
+                  <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="0.8" strokeDasharray="2 4" opacity="0.25">
+                    {anim && <animate attributeName="stroke-dashoffset" from="0" to="-12" dur={`${1.5 + index * 0.2}s`} repeatCount="indefinite" />}
+                  </line>
+                  <circle r="2" fill={color} opacity="0">
+                    {anim && (
+                      <>
+                        <animate attributeName="cx" values={`${x1};${x2}`} dur={dur} repeatCount="indefinite" />
+                        <animate attributeName="cy" values={`${y1};${y2}`} dur={dur} repeatCount="indefinite" />
+                        <animate attributeName="opacity" values="0;0.85;0" dur={dur} repeatCount="indefinite" />
+                        <animate attributeName="r" values="1.5;2.5;1.5" dur={dur} repeatCount="indefinite" />
+                      </>
+                    )}
+                  </circle>
+                </g>
+              )
+            })}
+          </svg>
+
           {protocols.map((protocol, index) => {
             const angle = (index / protocols.length) * 360
             const rad = (angle * Math.PI) / 180
             const x = 140 + Math.cos(rad) * OUTER_RADIUS - ICON_SIZE / 2
             const y = 140 + Math.sin(rad) * OUTER_RADIUS - ICON_SIZE / 2
+            const color = PROTOCOL_COLORS[protocol.name] ?? '#ffffff'
 
             return (
               <motion.div
@@ -276,7 +253,10 @@ export const MobileHeroAnimation = () => {
                   animate={shouldReduceMotion ? {} : { rotate: -360 }}
                   transition={counterSpinTransition}
                 >
-                  <div className="w-full h-full rounded-full bg-white/5 border border-white/10 backdrop-blur-sm flex items-center justify-center">
+                  <div
+                    className="w-full h-full rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center"
+                    style={{ border: `1px solid ${color}55` }}
+                  >
                     {protocol.icon && (
                       <img
                         src={protocol.icon}
