@@ -28,7 +28,7 @@ export const productItems = [
   },
   {
     label: 'Extension',
-    href: '/products/rate-extension',
+    href: '/products/extension',
     external: false,
     status: 'coming-soon' as const,
   },

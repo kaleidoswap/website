@@ -7,7 +7,10 @@ import {
   Key,
   BookOpen,
   LockOpen,
+  Zap,
+  AtSign,
 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -40,7 +43,16 @@ const features = [
   },
 ]
 
-const protocols = [
+type Protocol = {
+  name: string
+  description: string
+  color: string
+  border: string
+  logo?: string
+  icon?: LucideIcon
+}
+
+const protocols: Protocol[] = [
   {
     name: 'RGB',
     description: 'Smart contracts and token issuance on Bitcoin with client-side validation.',
@@ -53,7 +65,7 @@ const protocols = [
     description: 'Instant, low-fee Bitcoin payments over the Lightning Network.',
     color: 'text-yellow-400',
     border: 'hover:border-yellow-500/30',
-    logo: '/icons/lightning/lightning-logo.svg',
+    icon: Zap,
   },
   {
     name: 'Spark',
@@ -74,7 +86,7 @@ const protocols = [
     description: 'Decentralized identity and event signing via NIP-07 compatible interface.',
     color: 'text-[#7B50C2]',
     border: 'hover:border-[#7B50C2]/30',
-    logo: '/icons/nostr/nostr-logo.svg',
+    icon: AtSign,
   },
 ]
 
@@ -172,11 +184,47 @@ export const RateExtension = () => {
                     className="absolute inset-0 rounded-2xl blur-2xl opacity-60 group-hover:opacity-75 transition-opacity duration-500"
                     style={{ background: 'linear-gradient(135deg, rgba(34,197,94,0.55) 0%, rgba(99,102,241,0.35) 50%, rgba(168,85,247,0.45) 100%)' }}
                   />
-                  <img
-                    src="/images/extension-screenshot.png"
-                    alt="Rate Extension"
-                    className="relative w-full rounded-2xl shadow-2xl"
-                  />
+                  <div className="relative bg-[#0d1f14] rounded-2xl shadow-2xl border border-white/10 overflow-hidden p-5 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold tracking-widest text-white/80 uppercase">Rate · Kaleidoswap</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-green-400" />
+                        <span className="text-[9px] text-green-400 font-semibold uppercase tracking-wider">Live</span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-[9px] font-semibold tracking-widest text-slate-500 uppercase mb-1">Total Balance</p>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl font-bold text-white">531,124</span>
+                        <span className="text-[10px] font-semibold bg-white/10 text-white/70 px-1.5 py-0.5 rounded">SATS</span>
+                      </div>
+                      <p className="text-xs text-slate-500 mt-1">$432.37</p>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {['Deposit', 'Swap', 'Withdraw'].map((label) => (
+                        <div key={label} className="flex items-center justify-center bg-green-500/15 border border-green-500/25 rounded-xl py-2">
+                          <span className="text-[10px] font-semibold text-green-300">{t(label)}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="space-y-2">
+                      {[
+                        { name: 'Bitcoin', amount: '531,124', unit: 'SATS', color: 'bg-[#F7931A]', symbol: '₿' },
+                        { name: 'USDT', amount: '128.50', unit: 'USDT', color: 'bg-emerald-500', symbol: '₮' },
+                      ].map((asset) => (
+                        <div key={asset.name} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3">
+                          <div className="flex items-center gap-2">
+                            <div className={`w-8 h-8 rounded-full ${asset.color} flex items-center justify-center text-white text-sm font-bold`}>{asset.symbol}</div>
+                            <span className="text-sm font-semibold text-white">{asset.name}</span>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-sm font-bold text-white">{asset.amount}</p>
+                            <p className="text-[10px] text-slate-400">{asset.unit}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </AnimateIn>
@@ -215,7 +263,11 @@ export const RateExtension = () => {
                 key={protocol.name}
                 className={`glass-card p-6 rounded-xl text-center transition-colors ${protocol.border} last:col-span-2 last:max-w-[calc(50%-12px)] last:mx-auto md:last:col-span-1 md:last:max-w-none md:last:mx-0`}
               >
-                <img src={protocol.logo} alt={protocol.name} className="w-10 h-10 mx-auto mb-4 object-contain" />
+                {protocol.logo ? (
+                  <img src={protocol.logo} alt={protocol.name} className="w-10 h-10 mx-auto mb-4 object-contain" />
+                ) : protocol.icon ? (
+                  <protocol.icon className={`w-10 h-10 mx-auto mb-4 ${protocol.color}`} />
+                ) : null}
                 <h3 className={`text-lg font-bold mb-2 ${protocol.color}`}>{protocol.name}</h3>
                 <p className="text-slate-500 text-sm">{t(protocol.description)}</p>
               </div>
