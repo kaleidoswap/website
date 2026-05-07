@@ -62,7 +62,7 @@ const products = [
       'WebLN & Nostr built-in',
       'DApp connectivity',
     ],
-    href: '/products/rate-extension',
+    href: '/products/extension',
     color: 'purple',
   },
   {
