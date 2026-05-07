@@ -1,7 +1,7 @@
 import { Globe, Monitor, Smartphone, Puzzle, Download, Clock, ArrowUpRight, Terminal, ChevronRight, LockOpen } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/common/Button'
-import { PRODUCTS, DOCS } from '@/constants/urls'
+import { PRODUCTS, DOCS, SOCIALS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useAppNavigation } from '@/hooks/useNavigation'
 import { AnimateIn } from '@/components/animations/AnimateIn'
@@ -182,7 +182,7 @@ export const ProductEcosystem = () => {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => {}}
+                    onClick={() => handleNavigation(SOCIALS.telegram, true)}
                     className="gap-2"
                   >
                     <LockOpen className="w-4 h-4" />
