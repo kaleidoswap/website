@@ -9,6 +9,7 @@ coverImage: "/blog/images/first-rgb-swap-mainnet/cover.png"
 coverImageMobile: "/blog/images/first-rgb-swap-mainnet/cover-mobile.png"
 coverImageCard: "/blog/images/first-rgb-swap-mainnet/cover-card.png"
 coverImagePreview: "/blog/images/first-rgb-swap-mainnet/cover-preview.png"
+coverImagePreviewX: "/blog/images/first-rgb-swap-mainnet/cover-preview-x.png"
 ---
 
 We are excited to announce a **historic milestone for Bitcoin's Layer 2 ecosystem**: KaleidoSwap has executed the **first atomic swap of an RGB asset over the Lightning Network on mainnet.**

@@ -23,6 +23,7 @@ export function BlogPost() {
         keywords={post.tags}
         type="article"
         image={post.coverImagePreview ?? post.coverImage}
+        imageX={post.coverImagePreviewX}
       />
 
       <div

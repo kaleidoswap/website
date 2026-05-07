@@ -5,6 +5,7 @@ interface SEOProps {
   description?: string
   keywords?: string[]
   image?: string
+  imageX?: string
   url?: string
   type?: 'website' | 'article'
   noIndex?: boolean
@@ -48,6 +49,7 @@ export const SEO = ({
   description = DEFAULT_DESCRIPTION,
   keywords = ['bitcoin', 'defi', 'rgb', 'lightning', 'atomic swaps', 'dex'],
   image,
+  imageX,
   url,
   type = 'website',
   noIndex = false,
@@ -57,6 +59,10 @@ export const SEO = ({
   const resolvedImage = image ?? (type === 'article' ? undefined : DEFAULT_IMAGE)
   const fullImage = resolvedImage
     ? resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`
+    : undefined
+  const resolvedImageX = imageX ?? resolvedImage
+  const fullImageX = resolvedImageX
+    ? resolvedImageX.startsWith('http') ? resolvedImageX : `${SITE_URL}${resolvedImageX}`
     : undefined
 
   return (
@@ -80,7 +86,7 @@ export const SEO = ({
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      {fullImage && <meta name="twitter:image" content={fullImage} />}
+      {fullImageX && <meta name="twitter:image" content={fullImageX} />}
       <meta name="twitter:site" content="@kaleidoswap" />
 
       {/* Canonical URL */}

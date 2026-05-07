@@ -9,6 +9,7 @@ coverImage: "/blog/images/introducing-rate/cover.png"
 coverImageMobile: "/blog/images/introducing-rate/cover-mobile.png"
 coverImageCard: "/blog/images/introducing-rate/cover-card.png"
 coverImagePreview: "/blog/images/introducing-rate/cover-preview.png"
+coverImagePreviewX: "/blog/images/introducing-rate/cover-preview-x.png"
 ---
 
 > Winner of the Plan B Lugano Hackathon 2025 — The Future of Bitcoin Wallets is Here

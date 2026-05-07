@@ -9,6 +9,7 @@ coverImage: "/blog/images/kaleidoswap-v020/cover.png"
 coverImageMobile: "/blog/images/kaleidoswap-v020/cover-mobile.png"
 coverImageCard: "/blog/images/kaleidoswap-v020/cover-card.png"
 coverImagePreview: "/blog/images/kaleidoswap-v020/cover-preview.png"
+coverImagePreviewX: "/blog/images/kaleidoswap-v020/cover-preview-x.png"
 ---
 
 We're excited to announce the release of **KaleidoSwap v0.2.0**, our latest alpha version — and it arrives at a historic moment for Bitcoin's asset ecosystem.
