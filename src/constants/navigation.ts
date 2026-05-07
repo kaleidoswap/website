@@ -4,8 +4,8 @@ import { PRODUCTS, GITHUB, SOCIALS } from '@/constants/urls'
 export const productItems = [
   {
     label: 'Browser Extension',
-    href: 'https://kaleidoswap.com/products/extension',
-    external: true,
+    href: '/products/extension',
+    external: false,
     status: 'live' as const,
   },
   {

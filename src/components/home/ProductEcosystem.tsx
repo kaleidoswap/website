@@ -189,7 +189,7 @@ export const ProductEcosystem = () => {
                     {t('Get Early Access')}
                   </Button>
                   <button
-                    onClick={() => handleNavigation('https://kaleidoswap.com/products/extension', true)}
+                    onClick={() => handleNavigation('/products/extension')}
                     className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
                   >
                     {t('Learn more')}
