@@ -96,8 +96,8 @@ export const RateExtension = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
-        title="Extension"
-        description="Rate is a multi-protocol Bitcoin browser extension wallet for RGB Lightning, Spark, and Arkade. Manage assets, swap, and connect to dApps — all from your browser toolbar."
+        title="Browser Extension"
+        description="Rate is a multi-protocol Bitcoin browser extension wallet for RGB, Lightning, Spark, Arkade, and Nostr. Manage assets, swap, and connect to dApps — all from your browser toolbar."
         url="/products/extension"
       />
 
@@ -129,7 +129,7 @@ export const RateExtension = () => {
                     {t('Extension')}
                   </h1>
                   <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
-                    {t('A multi-protocol Bitcoin wallet, right in your browser. Connect to dApps and manage assets across RGB Lightning, Spark, and Arkade from a single extension.')}
+                    {t('A multi-protocol Bitcoin wallet, right in your browser. Connect to dApps and manage assets across RGB, Lightning, Spark, Arkade, and Nostr from a single extension.')}
                   </p>
                 </div>
               </AnimateIn>
@@ -157,20 +157,18 @@ export const RateExtension = () => {
               </AnimateIn>
 
               <AnimateIn variant="fade-up" delay={350}>
-                <div className="flex items-center gap-4 text-sm text-slate-500">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
                   <div className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span>{t('Non-custodial')}</span>
+                    <Check className="w-4 h-4 text-green-400 shrink-0" />
+                    <span className="whitespace-nowrap">{t('Non-custodial')}</span>
                   </div>
-                  <div className="w-1 h-1 bg-slate-700 rounded-full" />
                   <div className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span>{t('All Browsers')}</span>
+                    <Check className="w-4 h-4 text-green-400 shrink-0" />
+                    <span className="whitespace-nowrap">{t('All Browsers')}</span>
                   </div>
-                  <div className="w-1 h-1 bg-slate-700 rounded-full" />
                   <div className="flex items-center gap-1.5">
-                    <Check className="w-4 h-4 text-green-400" />
-                    <span>{t('WebLN & NIP-07')}</span>
+                    <Check className="w-4 h-4 text-green-400 shrink-0" />
+                    <span className="whitespace-nowrap">{t('WebLN & NIP-07')}</span>
                   </div>
                 </div>
               </AnimateIn>
