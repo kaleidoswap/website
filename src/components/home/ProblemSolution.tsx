@@ -26,11 +26,9 @@ export const ProblemSolution = () => {
                         rel="noopener noreferrer"
                         className="flex items-center gap-2.5 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl hover:bg-gray-800/50 hover:border-slate-600 hover:text-white transition-all duration-300"
                       >
-                        {protocol.icon ? (
+                        {protocol.icon && (
                           <img src={protocol.icon} alt={protocol.name} className="h-6 w-6 object-contain" />
-                        ) : protocol.lucideIcon ? (
-                          <protocol.lucideIcon className="w-6 h-6 text-yellow-500" />
-                        ) : null}
+                        )}
                         <span className="text-white font-medium">{protocol.name}</span>
                       </a>
                     ))}
