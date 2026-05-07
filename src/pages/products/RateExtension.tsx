@@ -97,7 +97,7 @@ export const RateExtension = () => {
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
         title="Browser Extension"
-        description="Rate is a multi-protocol Bitcoin browser extension wallet for RGB, Lightning, Spark, Arkade, and Nostr. Manage assets, swap, and connect to dApps — all from your browser toolbar."
+        description="The KaleidoSwap Extension is a multi-protocol Bitcoin browser wallet for RGB, Lightning, Spark, Arkade, and Nostr. Manage assets, swap, and connect to dApps — all from your browser toolbar."
         url="/products/extension"
       />
 
@@ -184,7 +184,7 @@ export const RateExtension = () => {
                   />
                   <div className="relative bg-[#0d1f14] rounded-2xl shadow-2xl border border-white/10 overflow-hidden p-5 space-y-4">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold tracking-widest text-white/80 uppercase">Rate · Kaleidoswap</span>
+                      <span className="text-[10px] font-bold tracking-widest text-white/80 uppercase">KaleidoSwap Extension</span>
                       <div className="flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-green-400" />
                         <span className="text-[9px] text-green-400 font-semibold uppercase tracking-wider">Live</span>
@@ -252,7 +252,7 @@ export const RateExtension = () => {
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-4">{t('Five Protocols, One Extension')}</h2>
           <p className="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
-            {t('Rate connects to RGB, Lightning, Spark, Arkade, and Nostr through a pluggable protocol adapter architecture. No switching between wallets.')}
+            {t('The KaleidoSwap Extension connects to RGB, Lightning, Spark, Arkade, and Nostr through a pluggable protocol adapter architecture. No switching between wallets.')}
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto">
@@ -282,7 +282,7 @@ export const RateExtension = () => {
               <div>
                 <h2 className="text-3xl font-bold mb-4">{t('Your keys. Your assets. Your network.')}</h2>
                 <p className="text-slate-400 mb-6">
-                  {t('Rate is self-custodial by design. Your seed never leaves the extension, your traffic never leaves your machine, and your funds never sit on our servers — because there are none.')}
+                  {t('The KaleidoSwap Extension is self-custodial by design. Your seed never leaves the extension, your traffic never leaves your machine, and your funds never sit on our servers — because there are none.')}
                 </p>
                 <ul className="space-y-3 mb-6">
                   {[
@@ -312,7 +312,7 @@ export const RateExtension = () => {
                     <Server className="w-6 h-6" />
                   </div>
                   <h3 className="text-lg font-bold mb-1">{t('Bring Your Own Node')}</h3>
-                  <p className="text-slate-400 text-sm">{t('Point Rate at your own RGB Lightning Node for full sovereignty over routing, channels, and asset issuance.')}</p>
+                  <p className="text-slate-400 text-sm">{t('Point the extension at your own RGB Lightning Node for full sovereignty over routing, channels, and asset issuance.')}</p>
                 </div>
               </div>
             </div>
