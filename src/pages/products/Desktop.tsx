@@ -8,6 +8,7 @@ import { footerConfig } from '@/constants/footer'
 import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { TiltCard } from '@/components/common/TiltCard'
 import { motion } from 'framer-motion'
 
 const features = [
@@ -138,28 +139,12 @@ export const Desktop = () => {
             </div>
 
             {/* Desktop App Screenshot */}
-            <AnimateIn variant="scale" delay={200} duration={800}>
-              <div className="relative group">
-                {/* Ambient glow */}
-                <div className="absolute -inset-6 bg-gradient-to-br from-secondary-500/20 to-primary-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
-
-                {/* App window frame */}
-                <div className="relative rounded-2xl border border-white/10 bg-[#0d1117] overflow-hidden shadow-[0_32px_64px_rgba(0,0,0,0.6)]">
-                  {/* Window chrome */}
-                  <div className="flex items-center gap-1.5 px-4 py-3 border-b border-white/5 bg-white/[0.03]">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
-                    <span className="ml-3 text-xs text-slate-600 font-mono">KaleidoSwap Desktop</span>
-                  </div>
-                  {/* Screenshot */}
-                  <img
-                    src="/images/desktop-app-screenshot-v2.png"
-                    alt={t('Desktop App Screenshot')}
-                    className="w-full block"
-                  />
-                </div>
-              </div>
+            <AnimateIn variant="scale" delay={200} duration={800} className="flex justify-center">
+              <TiltCard
+                src="/images/desktop-app-screenshot-v2.png"
+                alt={t('Desktop App Screenshot')}
+                className="w-full max-w-[520px]"
+              />
             </AnimateIn>
           </div>
         </div>

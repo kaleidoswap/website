@@ -16,6 +16,7 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { TiltCard } from '@/components/common/TiltCard'
 import { footerConfig } from '@/constants/footer'
 import { DOCS, SOCIALS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
@@ -174,57 +175,13 @@ export const RateExtension = () => {
               </AnimateIn>
             </div>
 
-            {/* Right — extension popup mockup */}
-            <AnimateIn variant="scale" delay={200} duration={800} className="min-w-0 mt-8 lg:mt-0">
-              <div className="relative group min-w-0">
-                <div className="relative max-w-[360px] mx-auto">
-                  <div
-                    className="absolute inset-0 rounded-2xl blur-2xl opacity-60 group-hover:opacity-75 transition-opacity duration-500"
-                    style={{ background: 'linear-gradient(135deg, rgba(34,197,94,0.55) 0%, rgba(99,102,241,0.35) 50%, rgba(168,85,247,0.45) 100%)' }}
-                  />
-                  <div className="relative bg-[#0d1f14] rounded-2xl shadow-2xl border border-white/10 overflow-hidden p-5 space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold tracking-widest text-white/80 uppercase">KaleidoSwap Extension</span>
-                      <div className="flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-green-400" />
-                        <span className="text-[9px] text-green-400 font-semibold uppercase tracking-wider">Live</span>
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-[9px] font-semibold tracking-widest text-slate-500 uppercase mb-1">Total Balance</p>
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-white">531,124</span>
-                        <span className="text-[10px] font-semibold bg-white/10 text-white/70 px-1.5 py-0.5 rounded">SATS</span>
-                      </div>
-                      <p className="text-xs text-slate-500 mt-1">$432.37</p>
-                    </div>
-                    <div className="grid grid-cols-3 gap-2">
-                      {['Deposit', 'Swap', 'Withdraw'].map((label) => (
-                        <div key={label} className="flex items-center justify-center bg-green-500/15 border border-green-500/25 rounded-xl py-2">
-                          <span className="text-[10px] font-semibold text-green-300">{t(label)}</span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="space-y-2">
-                      {[
-                        { name: 'Bitcoin', amount: '531,124', unit: 'SATS', color: 'bg-[#F7931A]', symbol: '₿' },
-                        { name: 'USDT', amount: '128.50', unit: 'USDT', color: 'bg-emerald-500', symbol: '₮' },
-                      ].map((asset) => (
-                        <div key={asset.name} className="flex items-center justify-between bg-white/5 border border-white/10 rounded-xl p-3">
-                          <div className="flex items-center gap-2">
-                            <div className={`w-8 h-8 rounded-full ${asset.color} flex items-center justify-center text-white text-sm font-bold`}>{asset.symbol}</div>
-                            <span className="text-sm font-semibold text-white">{asset.name}</span>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-sm font-bold text-white">{asset.amount}</p>
-                            <p className="text-[10px] text-slate-400">{asset.unit}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Right — extension screenshot with 3D tilt */}
+            <AnimateIn variant="scale" delay={200} duration={800} className="min-w-0 mt-8 lg:mt-0 flex justify-center">
+              <TiltCard
+                src="/images/extension-screenshot.png"
+                alt="KaleidoSwap Extension"
+                className="w-full max-w-[380px]"
+              />
             </AnimateIn>
           </div>
         </div>
@@ -280,7 +237,7 @@ export const RateExtension = () => {
           <div className="glass-card rounded-2xl p-8 md:p-12">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <h2 className="text-3xl font-bold mb-4">{t('Your keys. Your assets. Your network.')}</h2>
+                <h2 className="text-3xl font-bold mb-4">{t('Sovereignty First')}</h2>
                 <p className="text-slate-400 mb-6">
                   {t('The KaleidoSwap Extension is self-custodial by design. Your seed never leaves the extension, your traffic never leaves your machine, and your funds never sit on our servers — because there are none.')}
                 </p>
