@@ -8,6 +8,7 @@ excerpt: "April was a dense month of shipping. The Desktop App reached v0.4.0 wi
 coverImage: "/blog/images/april-2026-release-notes/cover.png"
 coverImageMobile: "/blog/images/april-2026-release-notes/cover-mobile.png"
 coverImageCard: "/blog/images/april-2026-release-notes/cover-card.png"
+coverImagePreview: "/blog/images/april-2026-release-notes/cover-preview.png"
 ---
 
 April was a dense month of shipping. The Desktop App reached v0.4.0 with a full set of trading automation features. The SDK went through six patch releases. KaleidoCLI received a significant expansion of its command surface. All of it is converging on the May mainnet launch.

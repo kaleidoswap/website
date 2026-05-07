@@ -1,4 +1,4 @@
----
+﻿---
 title: "KaleidoSwap Secures Pre-Seed Investment to Build the First RGB-Powered DEX on Bitcoin Lightning"
 date: "2025-09-08"
 author: "KaleidoSwap Team"
@@ -8,6 +8,7 @@ excerpt: "KaleidoSwap has secured a pre-seed investment from Bitfinex Ventures a
 coverImage: "/blog/images/pre-seed-investment/cover.png"
 coverImageMobile: "/blog/images/pre-seed-investment/cover-mobile.png"
 coverImageCard: "/blog/images/pre-seed-investment/cover-card.png"
+coverImagePreview: "/blog/images/pre-seed-investment/cover-preview.png"
 ---
 
 **Lugano, Switzerland — September 8, 2025**

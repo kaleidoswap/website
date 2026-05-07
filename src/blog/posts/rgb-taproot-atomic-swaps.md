@@ -1,4 +1,4 @@
----
+﻿---
 title: "RGB — TaprootAssets Lightning Atomic Swaps"
 date: "2025-03-26"
 author: "KaleidoSwap Team"
@@ -8,6 +8,7 @@ excerpt: "A simple protocol for trustless cross-protocol swaps between RGB20 and
 coverImage: "/blog/images/rgb-taproot-atomic-swaps/cover.png"
 coverImageMobile: "/blog/images/rgb-taproot-atomic-swaps/cover-mobile.png"
 coverImageCard: "/blog/images/rgb-taproot-atomic-swaps/cover-card.png"
+coverImagePreview: "/blog/images/rgb-taproot-atomic-swaps/cover-preview.png"
 ---
 
 ### Bridging RGB20 and Taproot Assets on Lightning Network

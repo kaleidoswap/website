@@ -8,7 +8,7 @@ import sparkAsterisk from '@/assets/icons/spark/Asterisk/Spark Asterisk White.sv
 import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
 import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
 import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.png'
-import kaleidoLogo from '@/assets/kaleidoswap-mark.svg'
+import kaleidoLogo from '@/assets/kaleidoswap-pictogram.svg'
 
 interface ProtocolOrbitAnimationProps {
   size?: number
