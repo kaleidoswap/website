@@ -44,7 +44,7 @@ const AnimatedRoutes = () => {
           <Route path="/products/web-app" element={<WebApp />} />
           <Route path="/products/desktop" element={<Desktop />} />
           <Route path="/products/sdk" element={<SDK />} />
-          <Route path="/products/rate-extension" element={<RateExtension />} />
+          <Route path="/products/extension" element={<RateExtension />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/downloads" element={<Downloads />} />

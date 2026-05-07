@@ -42,7 +42,7 @@ export const footerConfig: FooterProps = {
     },
     {
       platform: "Rumble",
-      href: "https://rumble.com/user/kaleidoswap?e9s=src_v1_cbl",
+      href: SOCIALS.rumble,
       icon: RumbleIcon
     },
     {
