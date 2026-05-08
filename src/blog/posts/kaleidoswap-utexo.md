@@ -9,6 +9,7 @@ coverImage: "/blog/images/kaleidoswap-utexo/cover.png"
 coverImageMobile: "/blog/images/kaleidoswap-utexo/cover-mobile.png"
 coverImageCard: "/blog/images/kaleidoswap-utexo/cover-card.png"
 coverImagePreview: "/blog/images/kaleidoswap-utexo/cover-preview.png"
+coverImagePreviewX: "/blog/images/kaleidoswap-utexo/cover-preview-x.png"
 ---
 
 Today, we're excited to announce a strategic integration with **UTEXO**, the team behind the first **RGB bridge** that brings stablecoins like **USD₮** from Ethereum onto Bitcoin via RGB. This partnership lets KaleidoSwap users access **fast, trustless BTC ⇄ USD₮ swaps** with the privacy and self-custody guarantees of Bitcoin's infrastructure.

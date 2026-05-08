@@ -9,6 +9,7 @@ coverImage: "/blog/images/pre-seed-investment/cover.png"
 coverImageMobile: "/blog/images/pre-seed-investment/cover-mobile.png"
 coverImageCard: "/blog/images/pre-seed-investment/cover-card.png"
 coverImagePreview: "/blog/images/pre-seed-investment/cover-preview.png"
+coverImagePreviewX: "/blog/images/pre-seed-investment/cover-preview-x.png"
 ---
 
 **Lugano, Switzerland — September 8, 2025**
