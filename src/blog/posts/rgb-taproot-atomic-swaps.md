@@ -9,6 +9,7 @@ coverImage: "/blog/images/rgb-taproot-atomic-swaps/cover.png"
 coverImageMobile: "/blog/images/rgb-taproot-atomic-swaps/cover-mobile.png"
 coverImageCard: "/blog/images/rgb-taproot-atomic-swaps/cover-card.png"
 coverImagePreview: "/blog/images/rgb-taproot-atomic-swaps/cover-preview.png"
+coverImagePreviewX: "/blog/images/rgb-taproot-atomic-swaps/cover-preview-x.png"
 ---
 
 ### Bridging RGB20 and Taproot Assets on Lightning Network

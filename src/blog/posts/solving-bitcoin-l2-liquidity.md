@@ -9,6 +9,7 @@ coverImage: "/blog/images/solving-bitcoin-l2-liquidity/cover.png"
 coverImageMobile: "/blog/images/solving-bitcoin-l2-liquidity/cover-mobile.png"
 coverImageCard: "/blog/images/solving-bitcoin-l2-liquidity/cover-card.png"
 coverImagePreview: "/blog/images/solving-bitcoin-l2-liquidity/cover-preview.png"
+coverImagePreviewX: "/blog/images/solving-bitcoin-l2-liquidity/cover-preview-x.png"
 ---
 
 > From single-protocol proof to a unified, multi-chain liquidity engine.

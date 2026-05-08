@@ -8,6 +8,8 @@ excerpt: "KaleidoAgent placed 1st in the Autonomous DeFi Agent track and 2nd ove
 coverImage: "/blog/images/kaleido-agent/cover.png"
 coverImageMobile: "/blog/images/kaleido-agent/cover-mobile.png"
 coverImageCard: "/blog/images/kaleido-agent/cover-card.png"
+coverImagePreview: "/blog/images/kaleido-agent/cover-preview.png"
+coverImagePreviewX: "/blog/images/kaleido-agent/cover-preview-x.png"
 ---
 
 We built an autonomous, non-custodial agent that runs portfolio strategies, manages Lightning channels, and executes atomic swaps on Bitcoin L2s. It just won two prizes at the WDK Hackathon.
