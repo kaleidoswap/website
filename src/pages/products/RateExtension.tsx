@@ -6,11 +6,13 @@ import {
   Layers,
   BookOpen,
   LockOpen,
-  Zap,
-  AtSign,
   Server,
 } from 'lucide-react'
-import type { LucideIcon } from 'lucide-react'
+import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
+import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
+import sparkLogo from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
+import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
+import nostrLogo from '@/assets/icons/nostr/nostr-logo.svg'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -49,8 +51,7 @@ type Protocol = {
   description: string
   color: string
   border: string
-  logo?: string
-  icon?: LucideIcon
+  logo: string
 }
 
 const protocols: Protocol[] = [
@@ -59,35 +60,35 @@ const protocols: Protocol[] = [
     description: 'Smart contracts and token issuance on Bitcoin with client-side validation.',
     color: 'text-red-400',
     border: 'hover:border-red-500/30',
-    logo: '/icons/rgb/rgb-logo.svg',
+    logo: rgbLogo,
   },
   {
     name: 'Lightning',
     description: 'Instant, low-fee Bitcoin payments over the Lightning Network.',
     color: 'text-yellow-400',
     border: 'hover:border-yellow-500/30',
-    icon: Zap,
+    logo: lightningLogo,
   },
   {
     name: 'Spark',
     description: 'Bitcoin payments via the Spark protocol with Flashnet integration.',
     color: 'text-white',
     border: 'hover:border-white/20',
-    logo: '/icons/spark/Asterisk/Spark Asterisk White.svg',
+    logo: sparkLogo,
   },
   {
     name: 'Arkade',
     description: 'Virtual UTXO-based Bitcoin transactions with automatic boarding.',
     color: 'text-violet-500',
     border: 'hover:border-violet-500/30',
-    logo: '/icons/arkade/arkade-icon.svg',
+    logo: arkadeLogo,
   },
   {
     name: 'Nostr',
     description: 'Decentralized identity and event signing via NIP-07 compatible interface.',
     color: 'text-[#7B50C2]',
     border: 'hover:border-[#7B50C2]/30',
-    icon: AtSign,
+    logo: nostrLogo,
   },
 ]
 
@@ -218,11 +219,7 @@ export const RateExtension = () => {
                 key={protocol.name}
                 className={`glass-card p-6 rounded-xl text-center transition-colors ${protocol.border} last:col-span-2 last:max-w-[calc(50%-12px)] last:mx-auto md:last:col-span-1 md:last:max-w-none md:last:mx-0`}
               >
-                {protocol.logo ? (
-                  <img src={protocol.logo} alt={protocol.name} className="w-10 h-10 mx-auto mb-4 object-contain" />
-                ) : protocol.icon ? (
-                  <protocol.icon className={`w-10 h-10 mx-auto mb-4 ${protocol.color}`} />
-                ) : null}
+                <img src={protocol.logo} alt={protocol.name} className="w-10 h-10 mx-auto mb-4 object-contain" />
                 <h3 className={`text-lg font-bold mb-2 ${protocol.color}`}>{protocol.name}</h3>
                 <p className="text-slate-500 text-sm">{t(protocol.description)}</p>
               </div>
