@@ -8,6 +8,7 @@ import {
   LockOpen,
   Server,
 } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
 import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
 import sparkLogo from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
@@ -20,7 +21,7 @@ import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { TiltCard } from '@/components/common/TiltCard'
 import { footerConfig } from '@/constants/footer'
-import { DOCS, SOCIALS } from '@/constants/urls'
+import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 
 const features = [
@@ -92,7 +93,7 @@ const protocols: Protocol[] = [
   },
 ]
 
-export const RateExtension = () => {
+export const Extension = () => {
   const { t } = useTranslation()
 
   return (
@@ -138,18 +139,19 @@ export const RateExtension = () => {
 
               <AnimateIn variant="fade-up" delay={250}>
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <Button
-                    size="lg"
-                    onClick={() => window.open(SOCIALS.telegram, '_blank')}
-                    className="bg-green-500 hover:bg-green-600 flex items-center justify-center gap-2 w-full sm:w-auto"
-                  >
-                    <LockOpen className="w-4 h-4" />
-                    {t('Get Early Access')}
-                  </Button>
+                  <Link to="/products/extension/beta" className="w-full sm:w-auto">
+                    <Button
+                      size="lg"
+                      className="bg-green-500 hover:bg-green-600 flex items-center justify-center gap-2 w-full"
+                    >
+                      <LockOpen className="w-4 h-4" />
+                      {t('Apply for Beta Access')}
+                    </Button>
+                  </Link>
                   <Button
                     variant="outline"
                     size="lg"
-                    onClick={() => window.open(DOCS.rateExtension, '_blank')}
+                    onClick={() => window.open(DOCS.extensionDocs, '_blank')}
                     className="flex items-center justify-center gap-2 w-full sm:w-auto"
                   >
                     <BookOpen className="w-4 h-4" />
@@ -297,14 +299,15 @@ export const RateExtension = () => {
           </div>
 
           <div className="flex justify-center mt-12">
-            <Button
-              size="lg"
-              onClick={() => window.open(SOCIALS.telegram, '_blank')}
-              className="bg-green-500 hover:bg-green-600 flex items-center gap-2"
-            >
-              <LockOpen className="w-4 h-4" />
-              {t('Get Early Access')}
-            </Button>
+            <Link to="/products/extension/beta">
+              <Button
+                size="lg"
+                className="bg-green-500 hover:bg-green-600 flex items-center gap-2"
+              >
+                <LockOpen className="w-4 h-4" />
+                {t('Apply for Beta Access')}
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

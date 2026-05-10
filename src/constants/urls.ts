@@ -60,7 +60,7 @@ export const DOCS = {
   verifyBinaries: `${PRODUCTS.docs}/desktop-app/getting-started/verify-binaries`,
   sdk: `${PRODUCTS.docs}/sdk/introduction`,
   desktop: `${PRODUCTS.docs}/desktop-app/getting-started/introduction`,
-  rateExtension: `${PRODUCTS.docs}/extensions/rate/introduction`,
+  extensionDocs: `${PRODUCTS.docs}/extensions/rate/introduction`,
   webApp: `${PRODUCTS.docs}/web-app/introduction`,
   apiReference: `${PRODUCTS.docs}/api-reference/introduction`,
 } as const
