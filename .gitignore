@@ -30,3 +30,9 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+# Wrangler local state
+.wrangler/
+
+# Local worktrees
+.claude/worktrees/
