@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import kaleidoPictogram from '@/assets/kaleidoswap-pictogram.svg'
+const kaleidoPictogram = '/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg'
 import { protocols } from '@/constants/protocols'
 
 const OUTER_RADIUS = 118

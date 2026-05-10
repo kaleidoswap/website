@@ -1,10 +1,10 @@
-import bitcoinLogo from '@/assets/icons/bitcoin/bitcoin-logo.svg'
-import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
-import sparkAsterisk from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
-import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
-import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
-import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
-import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.svg'
+const bitcoinLogo = '/logos/protocol-logos/bitcoin/bitcoin-logo-orange.svg'
+const rgbLogo = '/logos/protocol-logos/rgb/rbg-logo.svg'
+const sparkAsterisk = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
+const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
+const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
+const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
+const taprootLogo = '/logos/protocol-logos/taproot-assets/tapass-logo.svg'
 
 export interface Protocol {
   name: string
