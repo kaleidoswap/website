@@ -22,7 +22,7 @@ const features = [
   {
     icon: Wallet,
     title: 'WebLN Compatible',
-    description: 'Works with Alby, Bitmask, Rate Extension, Xverse, and other WebLN wallets.',
+    description: 'Works with Alby, Bitmask, KaleidoSwap Extension, Xverse, and other WebLN wallets.',
   },
   {
     icon: Globe,
@@ -34,7 +34,7 @@ const features = [
 const supportedWallets = [
   { name: 'Alby', status: 'supported' },
   { name: 'Bitmask', status: 'supported' },
-  { name: 'Rate Extension', status: 'supported' },
+  { name: 'KaleidoSwap Extension', status: 'supported' },
   { name: 'Xverse', status: 'supported' },
 ]
 
@@ -45,7 +45,7 @@ export const WebApp = () => {
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
         title="Web App"
-        description="Trade BTC, stablecoins, and RGB assets directly from your browser. No installation required. Connect your wallet and start swapping. Supports Alby, Bitmask, Rate Extension, and Xverse."
+        description="Trade BTC, stablecoins, and RGB assets directly from your browser. No installation required. Connect your wallet and start swapping. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse."
         url="/products/web-app"
       />
 
@@ -69,7 +69,7 @@ export const WebApp = () => {
                 {t('Web App')}
               </h1>
               <p className="text-xl text-slate-400 mb-8 leading-relaxed">
-                {t('The fastest way to swap. No download required. Connect your wallet and trade BTC, stablecoins, and RGB assets in seconds. Supports Alby, Bitmask, Rate Extension, and Xverse.')}
+                {t('The fastest way to swap. No download required. Connect your wallet and trade BTC, stablecoins, and RGB assets in seconds. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse.')}
               </p>
 
               <div className="flex flex-wrap gap-4 mb-8">
@@ -143,7 +143,7 @@ export const WebApp = () => {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { step: '01', title: 'Connect Wallet', desc: 'Link your wallet (Alby, Bitmask, Rate Extension, Xverse)' },
+              { step: '01', title: 'Connect Wallet', desc: 'Link your wallet (Alby, Bitmask, KaleidoSwap Extension, Xverse)' },
               { step: '02', title: 'Select Pair', desc: 'Choose assets to swap (BTC, USDT, RGB tokens)' },
               { step: '03', title: 'Execute Swap', desc: 'Confirm and execute atomically' },
             ].map((item) => (
