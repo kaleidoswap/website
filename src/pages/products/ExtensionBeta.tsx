@@ -139,7 +139,7 @@ export const ExtensionBeta = () => {
   }
 
   const inputClass =
-    'w-full bg-gray-900/60 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400/40 transition-colors'
+    'w-full bg-gray-900/60 border border-gray-700 rounded-lg px-4 py-3 text-base sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400/40 transition-colors'
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
@@ -152,51 +152,53 @@ export const ExtensionBeta = () => {
 
       <Navbar />
 
-      <section className="pt-32 pb-12 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-500/15 rounded-full blur-[120px] -z-10 opacity-40" />
-        <div className="max-w-3xl mx-auto px-6">
+      <section className="pt-24 pb-8 sm:pt-32 sm:pb-12 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-purple-500/15 rounded-full blur-[120px] -z-10 opacity-40" />
+        <div className="max-w-3xl mx-auto px-5 sm:px-6">
           <Link
             to="/products/extension"
-            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white mb-5 sm:mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to KaleidoSwap Extension
           </Link>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 mb-4 sm:mb-6">
             <span className="text-xs font-semibold text-purple-400 uppercase tracking-wider">Closed Beta</span>
           </div>
 
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4">Apply for KaleidoSwap Extension Beta access</h1>
-          <p className="text-slate-400 text-lg mb-2">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1] mb-3 sm:mb-4">
+            Apply for KaleidoSwap Extension Beta access
+          </h1>
+          <p className="text-slate-400 text-base sm:text-lg mb-2 leading-relaxed">
             Help us shape the multi-protocol browser wallet before public release.
           </p>
-          <p className="text-slate-500 text-sm mb-8">
+          <p className="text-slate-500 text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed">
             Beta covers mainnet (Spark, Arkade) and RLN testnets (regtest, mutinynet). We'll review your
             request and email you a Proton Drive link with the extension package and an install guide.
           </p>
         </div>
       </section>
 
-      <section className="pb-20">
-        <div className="max-w-3xl mx-auto px-6">
+      <section className="pb-14 sm:pb-20">
+        <div className="max-w-3xl mx-auto px-5 sm:px-6">
           {status.kind === 'success' ? (
-            <div className="glass-card rounded-2xl p-8 text-center">
+            <div className="glass-card rounded-2xl p-6 sm:p-8 text-center">
               <div className="w-14 h-14 rounded-full bg-purple-500/15 border border-purple-500/30 flex items-center justify-center mx-auto mb-4">
                 <Check className="w-7 h-7 text-purple-400" />
               </div>
-              <h2 className="text-2xl font-bold mb-2">You're on the list</h2>
-              <p className="text-slate-400 mb-6">
+              <h2 className="text-xl sm:text-2xl font-bold mb-2">You're on the list</h2>
+              <p className="text-slate-400 text-sm sm:text-base mb-5 sm:mb-6 leading-relaxed">
                 Thanks for applying. We'll review your request and email you a download link if you're selected
                 for the beta cohort.
               </p>
-              <Link to="/products/extension">
-                <Button variant="outline">Back to KaleidoSwap Extension</Button>
+              <Link to="/products/extension" className="inline-block w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto">Back to KaleidoSwap Extension</Button>
               </Link>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="glass-card rounded-2xl p-6 md:p-8 space-y-5">
-              <div className="grid md:grid-cols-2 gap-5">
+            <form onSubmit={onSubmit} className="glass-card rounded-2xl p-5 sm:p-6 md:p-8 space-y-4 sm:space-y-5">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-1.5">
                     Name <span className="text-purple-400">*</span>
@@ -260,7 +262,7 @@ export const ExtensionBeta = () => {
                 />
               </div>
 
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                 <div>
                   <label htmlFor="telegram" className="block text-sm font-medium text-slate-300 mb-1.5">
                     Telegram <span className="text-slate-500 font-normal">(optional)</span>
@@ -306,16 +308,16 @@ export const ExtensionBeta = () => {
                 </div>
               )}
 
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
-                <p className="text-xs text-slate-500 flex items-center gap-1.5">
-                  <Shield className="w-3.5 h-3.5 text-slate-500" />
-                  We only use your details to review and contact you about the beta.
+              <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4 pt-2">
+                <p className="text-xs text-slate-500 flex items-start sm:items-center gap-1.5">
+                  <Shield className="w-3.5 h-3.5 text-slate-500 shrink-0 mt-0.5 sm:mt-0" />
+                  <span>We only use your details to review and contact you about the beta.</span>
                 </p>
                 <Button
                   type="submit"
                   size="lg"
                   disabled={status.kind === 'submitting'}
-                  className="bg-purple-500 hover:bg-purple-600"
+                  className="bg-purple-500 hover:bg-purple-600 w-full sm:w-auto justify-center"
                 >
                   <Mail className="w-4 h-4 mr-2" />
                   {status.kind === 'submitting' ? 'Submitting…' : 'Apply for Beta'}
