@@ -8,7 +8,7 @@ import { footerConfig } from '@/constants/footer'
 import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
-import { TiltCard } from '@/components/common/TiltCard'
+import { MacbookMockup } from '@/components/common/MacbookMockup'
 import { motion } from 'framer-motion'
 
 const features = [
@@ -138,9 +138,9 @@ export const Desktop = () => {
               </AnimateIn>
             </div>
 
-            {/* Desktop App Screenshot */}
-            <AnimateIn variant="scale" delay={200} duration={800} className="flex justify-center">
-              <TiltCard
+            {/* Desktop App — MacBook mockup */}
+            <AnimateIn variant="fade-up" delay={150} duration={800} className="flex justify-center">
+              <MacbookMockup
                 src="/images/desktop-app-screenshot-v2.png"
                 alt={t('Desktop App Screenshot')}
                 className="w-full max-w-[520px]"
