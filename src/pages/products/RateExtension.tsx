@@ -8,11 +8,11 @@ import {
   LockOpen,
   Server,
 } from 'lucide-react'
-import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
-import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
-import sparkLogo from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
-import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
-import nostrLogo from '@/assets/icons/nostr/nostr-logo.svg'
+const rgbLogo = '/logos/protocol-logos/rgb/rbg-logo.svg'
+const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
+const sparkLogo = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
+const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
+const nostrLogo = '/logos/protocol-logos/nostr/nostr-logo.svg'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'

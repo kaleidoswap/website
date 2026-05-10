@@ -2,8 +2,8 @@
 import { Button } from '@/components/common/Button'
 import { Link } from 'react-router-dom'
 import type { FooterProps } from '@/types/footer'
-import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
-import kaleidoPictogram from '@/assets/kaleidoswap-pictogram.svg'
+const kaleidoFullLogo = '/logos/kaleidoswap-logos/kaleidoswap-full-logo.svg'
+const kaleidoPictogram = '/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg'
 import { useTranslation } from 'react-i18next'
 
 const currentYear = new Date().getFullYear()
