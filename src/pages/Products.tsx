@@ -52,8 +52,8 @@ const products = [
     color: 'green',
   },
   {
-    id: 'rate-extension',
-    name: 'Rate Extension',
+    id: 'extension',
+    name: 'KaleidoSwap Extension',
     icon: Puzzle,
     status: 'coming-soon' as const,
     description: 'Multi-protocol Chrome extension wallet. Bitcoin, Lightning, RGB, and more from your toolbar.',

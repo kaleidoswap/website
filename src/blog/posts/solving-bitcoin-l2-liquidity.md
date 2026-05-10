@@ -43,7 +43,7 @@ This traction didn't go unnoticed. We proudly announced strategic investments fr
 
 In July, we took our vision mobile and won the PlanB Hackathon. **Rate** is an innovative mobile app connecting directly to an RGB Lightning Node.
 
-- **The UX Leap:** Rate allows users to send/receive RGB payments over Lightning seamlessly.
+- **The UX Leap:** KaleidoSwap allows users to send/receive RGB payments over Lightning seamlessly.
 - **LSP Integration:** Built on top of the Kaleido LSP (Lightning Service Provider), we abstracted away the complexity of channel management.
 - **AI-Assisted Finance:** We integrated a local AI assistant capable of "Talk to Wallet" interactions. Instead of complex inputs, users can simply ask for suggestions on where to spend sats or stablecoins, or execute payments via natural language commands.
 
@@ -93,11 +93,11 @@ We are launching the **KaleidoSwap SDK** to democratize access to our routing en
 
 - **For Wallet Providers:** Easily implement atomic swaps across RGB, Taproot Assets, Spark and other L2 protocols without building the complex liquidity backend.
 - **For Market Makers:** Provide liquidity on KaleidoSwap and earn **revenue share** (more to come on this)
-- **For Developers:** We are already running a Telegram trading bot and the Rate app on this SDK. In 2026, we will host hackathons (with bitcoins as prizes!) to see what you can build.
+- **For Developers:** We are already running a Telegram trading bot and the KaleidoSwap app on this SDK. In 2026, we will host hackathons (with bitcoins as prizes!) to see what you can build.
 
 *If you are a partner interested in testing the SDK or a liquidity provider looking for yield, reach out to us at [collab@kaleidoswap.com](mailto:collab@kaleidoswap.com) | TG @Kaleidoswap*
 
-### 2. Rate Browser Extension
+### 2. KaleidoSwap Browser Extension
 
 Built with the KaleidoSwap SDK, this is the connector that allows users to link their own RGB Lightning node to the web. It is the new **Bitcoin Finance Gateway**, allowing seamless interaction with web apps without giving up custody.
 
@@ -105,7 +105,7 @@ Built with the KaleidoSwap SDK, this is the connector that allows users to link 
 
 Launching early 2026 on mainnet, this is the flagship interface for the financial revolution.
 
-- **Connect Any Wallet:** Support for BitMask, XVerse, Alby, and the Rate Extension.
+- **Connect Any Wallet:** Support for BitMask, XVerse, Alby, and the KaleidoSwap Extension.
 - **Beyond Swaps:** We aren't stopping at spot trading. We envision a future with **Prediction Markets, Synthetic Stocks, and Derivatives** — all on Bitcoin. We are ready to build the infra to unlock it all.
 
 ![KaleidoSwap WebApp Dashboard](/blog/images/solving-bitcoin-l2-liquidity/4.png)

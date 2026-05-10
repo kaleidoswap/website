@@ -19,7 +19,8 @@ const BlogPost = lazy(() => import('@/blog').then((m) => ({ default: m.BlogPost 
 const WebApp = lazy(() => import('@/pages/products/WebApp').then((m) => ({ default: m.WebApp })))
 const Desktop = lazy(() => import('@/pages/products/Desktop').then((m) => ({ default: m.Desktop })))
 const SDK = lazy(() => import('@/pages/products/SDK').then((m) => ({ default: m.SDK })))
-const RateExtension = lazy(() => import('@/pages/products/RateExtension').then((m) => ({ default: m.RateExtension })))
+const Extension = lazy(() => import('@/pages/products/Extension').then((m) => ({ default: m.Extension })))
+const ExtensionBeta = lazy(() => import('@/pages/products/ExtensionBeta').then((m) => ({ default: m.ExtensionBeta })))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -44,7 +45,8 @@ const AnimatedRoutes = () => {
           <Route path="/products/web-app" element={<WebApp />} />
           <Route path="/products/desktop" element={<Desktop />} />
           <Route path="/products/sdk" element={<SDK />} />
-          <Route path="/products/extension" element={<RateExtension />} />
+          <Route path="/products/extension" element={<Extension />} />
+          <Route path="/products/extension/beta" element={<ExtensionBeta />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/downloads" element={<Downloads />} />
