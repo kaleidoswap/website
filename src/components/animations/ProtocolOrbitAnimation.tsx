@@ -2,13 +2,13 @@
 import React from 'react'
 
 // Protocol logos
-import bitcoinLogo from '@/assets/icons/bitcoin/bitcoin-logo.svg'
-import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
-import sparkAsterisk from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
-import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
-import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
-import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.png'
-import kaleidoLogo from '@/assets/kaleidoswap-pictogram.svg'
+const bitcoinLogo = '/logos/protocol-logos/bitcoin/bitcoin-logo-orange.svg'
+const rgbLogo = '/logos/protocol-logos/rgb/rbg-logo.svg'
+const sparkAsterisk = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
+const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
+const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
+const taprootLogo = '/logos/protocol-logos/taproot-assets/tapass-logo.png'
+const kaleidoLogo = '/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg'
 
 interface ProtocolOrbitAnimationProps {
   size?: number
