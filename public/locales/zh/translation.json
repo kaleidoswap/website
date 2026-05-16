@@ -248,5 +248,21 @@
   "Your keys are encrypted and never leave the extension. KaleidoSwap is fully open-source, so you can verify every line of code yourself.": "你的密钥经过加密，永远不会离开扩展。KaleidoSwap 完全开源，你可以自行验证每一行代码。",
   "Your multi-network Bitcoin wallet, right in your browser. Manage Bitcoin, Lightning, RGB assets, and connect to DApps — all from one extension.": "你的多网络比特币钱包，就在浏览器中。管理 Bitcoin、Lightning、RGB 资产并连接 DApp——一切尽在一个扩展中。",
   "{{count}} min read": "阅读约 {{count}} 分钟",
-  "© {{year}} KaleidoSwap. All rights reserved.": "© {{year}} KaleidoSwap. 保留所有权利。"
+  "© {{year}} KaleidoSwap. All rights reserved.": "© {{year}} KaleidoSwap. 保留所有权利。",
+  "What is KaleidoSwap?": "KaleidoSwap 是什么？",
+  "KaleidoSwap is a decentralized exchange (DEX) that enables trustless, non-custodial swaps across Bitcoin layer 2 protocols. You can swap BTC, USDT, stablecoins, and other assets between Lightning, RGB, and Spark networks without intermediaries.": "KaleidoSwap 是一个去中心化交易所（DEX），可在比特币二层协议之间实现无需信任、非托管的兑换。你可以在 Lightning、RGB 和 Spark 网络之间兑换 BTC、USDT、稳定币及其他资产，无需任何中介。",
+  "How do atomic swaps work?": "原子兑换是如何运作的？",
+  "Atomic swaps use Hash Time-Locked Contracts (HTLCs) to ensure that either both parties receive their funds, or nobody does. This cryptographic mechanism eliminates counterparty risk. There is no way for one party to cheat the other.": "原子兑换使用哈希时间锁定合约（HTLC），确保双方要么都收到资金，要么都收不到。这种加密机制消除了对手方风险。任何一方都无法欺骗另一方。",
+  "Is KaleidoSwap custodial?": "KaleidoSwap 是托管式的吗？",
+  "No. KaleidoSwap is 100% non-custodial. Your private keys never leave your device, and we never take possession of your funds. You maintain full control throughout the entire swap process.": "不是。KaleidoSwap 是 100% 非托管的。你的私钥永远不会离开你的设备，我们也绝不会持有你的资金。在整个兑换过程中，你始终保持完全控制权。",
+  "Is KaleidoSwap available on mainnet?": "KaleidoSwap 已在主网上线了吗？",
+  "KaleidoSwap is currently live on Signet and Testnet. Mainnet launch is coming soon. Join our community channels to stay updated on the launch date.": "KaleidoSwap 目前已在 Signet 和测试网上线。主网即将推出。加入我们的社区频道，及时了解上线日期。",
+  "What fees does KaleidoSwap charge?": "KaleidoSwap 收取哪些费用？",
+  "KaleidoSwap charges a 1% protocol fee on successful swaps. There are no hidden fees. You also pay standard Lightning Network routing fees, which are typically a fraction of a cent. Failed swaps incur no fees at all.": "KaleidoSwap 对成功的兑换收取 1% 的协议费用。没有任何隐藏费用。你还需支付标准的闪电网络路由费，通常仅为几分钱的零头。兑换失败则完全不收取任何费用。",
+  "What assets can I swap?": "我可以兑换哪些资产？",
+  "You can swap BTC, USDT, and any RGB-issued asset on the Lightning Network. As new protocols are integrated — including Spark, Taproot Assets, Arkade, and the Liquid Network — the supported asset list will expand significantly.": "你可以在闪电网络上兑换 BTC、USDT 以及任何通过 RGB 发行的资产。随着 Spark、Taproot Assets、Arkade 和 Liquid Network 等新协议的集成，受支持的资产列表将大幅扩展。",
+  "Which Bitcoin layers does KaleidoSwap support?": "KaleidoSwap 支持哪些比特币层？",
+  "KaleidoSwap currently supports Lightning Network and RGB Protocol, with Spark already integrated. Support for Taproot Assets, Arkade, and Liquid Network is on the roadmap. The goal is to unify every major Bitcoin layer under a single swap interface.": "KaleidoSwap 目前支持闪电网络和 RGB 协议，并且已集成 Spark。对 Taproot Assets、Arkade 和 Liquid Network 的支持已列入路线图。目标是将所有主要的比特币层统一到单一的兑换界面下。",
+  "Do I need to run my own node?": "我需要运行自己的节点吗？",
+  "The Desktop App bundles a full RGB Lightning node, giving you maximum sovereignty and privacy. The Web App lets you connect without running your own node, making it ideal for getting started quickly. Both options are fully non-custodial.": "桌面应用内置了完整的 RGB Lightning 节点，为你提供最大程度的自主权和隐私保护。网页应用让你无需运行自己的节点即可连接，非常适合快速上手。两种方式都是完全非托管的。"
 }
