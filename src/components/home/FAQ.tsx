@@ -7,38 +7,14 @@ import { AnimateIn } from '@/components/animations/AnimateIn'
 // Static translation keys — defined outside any component so the array is
 // never recreated. `t()` is applied once inside the component via useMemo.
 const FAQ_KEYS = [
-  {
-    question: 'What is KaleidoSwap?',
-    answer: 'KaleidoSwap is a decentralized exchange (DEX) that enables trustless, non-custodial swaps across Bitcoin layer 2 protocols. You can swap BTC, USDT, stablecoins, and other assets between Lightning, RGB, and Spark networks without intermediaries.',
-  },
-  {
-    question: 'How do atomic swaps work?',
-    answer: 'Atomic swaps use Hash Time-Locked Contracts (HTLCs) to ensure that either both parties receive their funds, or nobody does. This cryptographic mechanism eliminates counterparty risk. There is no way for one party to cheat the other.',
-  },
-  {
-    question: 'Is KaleidoSwap custodial?',
-    answer: 'No. KaleidoSwap is 100% non-custodial. Your private keys never leave your device, and we never take possession of your funds. You maintain full control throughout the entire swap process.',
-  },
-  {
-    question: 'Is KaleidoSwap available on mainnet?',
-    answer: 'KaleidoSwap is currently live on Signet and Testnet. Mainnet launch is coming soon. Join our community channels to stay updated on the launch date.',
-  },
-  {
-    question: 'What fees does KaleidoSwap charge?',
-    answer: 'KaleidoSwap charges a 1% protocol fee on successful swaps. There are no hidden fees. You also pay standard Lightning Network routing fees, which are typically a fraction of a cent. Failed swaps incur no fees at all.',
-  },
-  {
-    question: 'What assets can I swap?',
-    answer: 'You can swap BTC, USDT, and any RGB-issued asset on the Lightning Network. As new protocols are integrated — including Spark, Taproot Assets, Arkade, and the Liquid Network — the supported asset list will expand significantly.',
-  },
-  {
-    question: 'Which Bitcoin layers does KaleidoSwap support?',
-    answer: 'KaleidoSwap currently supports Lightning Network and RGB Protocol, with Spark already integrated. Support for Taproot Assets, Arkade, and Liquid Network is on the roadmap. The goal is to unify every major Bitcoin layer under a single swap interface.',
-  },
-  {
-    question: 'Do I need to run my own node?',
-    answer: 'The Desktop App bundles a full RGB Lightning node, giving you maximum sovereignty and privacy. The Web App lets you connect without running your own node, making it ideal for getting started quickly. Both options are fully non-custodial.',
-  },
+  { question: 'faq.q1', answer: 'faq.a1' },
+  { question: 'faq.q2', answer: 'faq.a2' },
+  { question: 'faq.q3', answer: 'faq.a3' },
+  { question: 'faq.q4', answer: 'faq.a4' },
+  { question: 'faq.q5', answer: 'faq.a5' },
+  { question: 'faq.q6', answer: 'faq.a6' },
+  { question: 'faq.q7', answer: 'faq.a7' },
+  { question: 'faq.q8', answer: 'faq.a8' },
 ] as const
 
 // Passing `isOpen: boolean` instead of the full `openIndex` means React.memo
