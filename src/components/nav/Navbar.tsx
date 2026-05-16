@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 
 // Saved page-scroll position while the mobile menu is open (iOS needs position:fixed on body)
 let _savedScrollY = 0
@@ -315,12 +316,13 @@ export const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Navigation */}
-          {isOpen && (
+          {/* Mobile Navigation — portaled to body so `fixed` resolves against
+              the viewport, not a transformed ancestor (div.animate-fadeIn). */}
+          {isOpen && createPortal(
             <div
               ref={mobileMenuRef}
               id="mobile-menu"
-              className="md:hidden fixed inset-0 top-16 bg-gray-900/95 backdrop-blur-md z-40 overflow-y-auto overscroll-contain"
+              className="md:hidden fixed inset-x-0 top-16 h-[calc(100dvh-4rem)] bg-gray-900/95 backdrop-blur-md z-40 overflow-y-auto overscroll-contain"
               role="dialog"
               aria-modal="true"
               aria-label={t('Mobile navigation menu')}
@@ -422,7 +424,8 @@ export const Navbar = () => {
                   </Button>
                 </div>
               </div>
-            </div>
+            </div>,
+            document.body
           )}
         </div>
       </nav>
