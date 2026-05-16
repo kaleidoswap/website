@@ -24,6 +24,7 @@ export const LanguageSwitcher = ({ variant = 'default', dropdownPosition = 'abov
   const [isOpen, setIsOpen] = useState(false)
   const [focusedIndex, setFocusedIndex] = useState(-1)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const listboxRef = useRef<HTMLDivElement>(null)
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const currentLanguage = languages.find((lang) => lang.code === i18n.language) || languages[0]
@@ -93,6 +94,14 @@ export const LanguageSwitcher = ({ variant = 'default', dropdownPosition = 'abov
     }
   }, [focusedIndex])
 
+  // Bring the dropdown fully into view when it opens — inside the scrollable
+  // mobile menu it can otherwise render below the fold.
+  useEffect(() => {
+    if (isOpen) {
+      listboxRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    }
+  }, [isOpen])
+
   return (
     <div ref={dropdownRef} className={cn('relative', className)}>
       <button
@@ -127,6 +136,7 @@ export const LanguageSwitcher = ({ variant = 'default', dropdownPosition = 'abov
 
       {isOpen && (
         <div
+          ref={listboxRef}
           className={cn(
             'absolute left-0 min-w-[160px] bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden z-50',
             dropdownPosition === 'above' ? 'bottom-full mb-2' : 'top-full mt-2'
