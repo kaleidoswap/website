@@ -3,8 +3,8 @@ import { PRODUCTS, GITHUB, SOCIALS } from '@/constants/urls'
 
 export const productItems = [
   {
-    label: 'Browser Extension',
-    href: '/products/extension',
+    label: 'KaleidoSDK',
+    href: '/products/sdk',
     external: false,
     status: 'live' as const,
   },
@@ -15,14 +15,14 @@ export const productItems = [
     status: 'live' as const,
   },
   {
-    label: 'KaleidoSDK',
-    href: '/products/sdk',
+    label: 'Browser Extension',
+    href: '/products/extension',
     external: false,
     status: 'live' as const,
   },
   {
     label: 'Web App',
-    href: '/products/web-app',
+    href: '#',
     external: false,
     status: 'coming-soon' as const,
   },

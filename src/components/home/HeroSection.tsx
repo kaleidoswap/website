@@ -63,7 +63,7 @@ export const HeroSection = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
                 size="lg"
-                onClick={() => handleNavigation('https://docs.kaleidoswap.com/sdk/introduction', true)}
+                onClick={() => handleNavigation('/products/sdk', false)}
                 className="h-12 px-8 btn-glow flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 <Hammer className="w-5 h-5" />
@@ -75,8 +75,8 @@ export const HeroSection = () => {
                 onClick={() => handleNavigation('/downloads', false)}
                 className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex sm:hidden items-center justify-center gap-2 w-full"
               >
-                <Monitor className="w-5 h-5" />
-                {t('Test Desktop App')}
+                <Download className="w-5 h-5" />
+                {t('Download the Apps')}
               </Button>
               <Button
                 variant="outline"
@@ -85,7 +85,7 @@ export const HeroSection = () => {
                 className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 hidden sm:flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
-                {t('Download Desktop')}
+                {t('Download the Apps')}
               </Button>
             </div>
           </AnimateIn>
