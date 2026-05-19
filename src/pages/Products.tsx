@@ -143,11 +143,10 @@ export const Products = () => {
             {products.map((product) => {
               const Icon = product.icon
               const isLive = product.status === 'live'
-              const isTestnetSoon = product.status === 'testnet-soon'
               const hasPage = product.href !== '#'
               const cc = colorConfig[product.color] ?? colorConfig.gray
-              const chipClass = isLive ? cc.chip : isTestnetSoon ? 'bg-amber-500/20 text-amber-400' : cc.chip
-              const chipText = product.chipLabel ?? (isLive ? 'Live' : isTestnetSoon ? 'Testnet Soon' : 'Coming Soon')
+              const chipClass = cc.chip
+              const chipText = product.chipLabel ?? (isLive ? 'Live' : 'Coming Soon')
 
               return (
                 <div

@@ -1,4 +1,4 @@
-import { Check, Download, Hammer, Monitor } from 'lucide-react'
+import { Check, Download, Hammer } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { Button } from '@/components/common/Button'
 import { KaleidoScopeHeroAnimation } from '@/components/animations/KaleidoScopeHeroAnimation'
