@@ -72,7 +72,7 @@ export const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => handleNavigation('/downloads', false)}
+                onClick={() => handleNavigation('https://kaleidoswap.com/products', true)}
                 className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex sm:hidden items-center justify-center gap-2 w-full"
               >
                 <Download className="w-5 h-5" />
@@ -81,7 +81,7 @@ export const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => handleNavigation('/downloads', false)}
+                onClick={() => handleNavigation('https://kaleidoswap.com/products', true)}
                 className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 hidden sm:flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
