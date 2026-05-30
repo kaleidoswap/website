@@ -49,21 +49,6 @@ const products = [
     color: 'purple',
   },
   {
-    id: 'desktop',
-    name: 'Desktop App',
-    icon: Monitor,
-    status: 'live' as const,
-    chipLabel: 'Live on Testnet',
-    description: 'Full sovereignty. Bundles a complete RGB Lightning node. Your infrastructure, your rules.',
-    features: [
-      'Integrated RGB-LN node',
-      'macOS, Windows, Linux',
-      'Maximum privacy',
-    ],
-    href: '/products/desktop',
-    color: 'green',
-  },
-  {
     id: 'extension',
     name: 'Browser Extension',
     icon: Puzzle,
@@ -76,6 +61,21 @@ const products = [
       'DApp connectivity',
     ],
     href: '/products/extension',
+    color: 'green',
+  },
+  {
+    id: 'desktop',
+    name: 'Desktop App',
+    icon: Monitor,
+    status: 'live' as const,
+    chipLabel: 'Live on Testnet',
+    description: 'Full sovereignty. Bundles a complete RGB Lightning node. Your infrastructure, your rules.',
+    features: [
+      'Integrated RGB-LN node',
+      'macOS, Windows, Linux',
+      'Maximum privacy',
+    ],
+    href: '/products/desktop',
     color: 'green',
   },
   {
