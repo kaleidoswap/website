@@ -1,5 +1,5 @@
 ---
-title: "April 2026: Desktop v0.4.0, SDK fixes & CLI improvements"
+title: "April 2026: Desktop v0.4.0, SDK Fixes & CLI Improvements"
 date: "2026-04-30"
 author: "KaleidoSwap Team"
 tags: ["Release Notes"]
