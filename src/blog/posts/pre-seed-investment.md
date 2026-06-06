@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Announcement"]
 slug: "pre-seed-investment"
 excerpt: "KaleidoSwap has secured a pre-seed investment from Bitfinex Ventures and Fulgur Ventures to accelerate the development of the first RGB-based DEX on the Lightning Network."
-coverImage: "/blog/images/pre-seed-investment/cover.png"
-coverImageMobile: "/blog/images/pre-seed-investment/cover-mobile.png"
-coverImageCard: "/blog/images/pre-seed-investment/cover-card.png"
-coverImagePreview: "/blog/images/pre-seed-investment/cover-preview.png"
-coverImagePreviewX: "/blog/images/pre-seed-investment/cover-preview-x.png"
+coverImage: "/blog/images/pre-seed-investment/pre-seed-investment-cover.png"
+coverImageMobile: "/blog/images/pre-seed-investment/pre-seed-investment-cover-mobile.png"
+coverImageCard: "/blog/images/pre-seed-investment/pre-seed-investment-cover-card.png"
+coverImagePreview: "/blog/images/pre-seed-investment/pre-seed-investment-cover-preview.png"
+coverImagePreviewX: "/blog/images/pre-seed-investment/pre-seed-investment-cover-preview-x.png"
 ---
 
 **Lugano, Switzerland — September 8, 2025**
