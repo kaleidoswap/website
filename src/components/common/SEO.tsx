@@ -15,7 +15,7 @@ interface SEOProps {
 
 const DEFAULT_TITLE = 'KaleidoSwap — Trustless Swaps on Bitcoin L2s'
 const DEFAULT_DESCRIPTION =
-  'Non-custodial Bitcoin DEX for all Bitcoin L2s. Trustless atomic swaps between BTC, stablecoins, and RGB assets. Built for humans and AI agents alike.'
+  'Non-custodial Bitcoin DEX for all Bitcoin L2s. Trustless atomic swaps between BTC, stablecoins, and other assets across Lightning, RGB, Arkade, and Spark. Built for humans and AI agents alike.'
 const DEFAULT_IMAGE = '/images/kaleido-full-logo-bg.jpg'
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://kaleidoswap.com'
 
