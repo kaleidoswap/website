@@ -85,8 +85,8 @@ export function BlogList() {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
-        title="Blog"
-        description="Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK."
+        title="KaleidoSwap Blog"
+        description="Announcements, technical deep dives, and builder resources about KaleidoSwap product suite and Bitcoin L2s tech stack. Written for developers building on Bitcoin L2 and enabling Bitcoin payment for AI agents."
         url="/blog"
       />
       <Helmet>
@@ -94,7 +94,7 @@ export function BlogList() {
           '@context': 'https://schema.org',
           '@type': 'Blog',
           name: 'KaleidoSwap Blog',
-          description: 'Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK.',
+          description: 'Announcements, technical deep dives, and builder resources about KaleidoSwap product suite and Bitcoin L2s tech stack. Written for developers building on Bitcoin L2 and enabling Bitcoin payment for AI agents.',
           url: 'https://kaleidoswap.com/blog',
           publisher: {
             '@type': 'Organization',
