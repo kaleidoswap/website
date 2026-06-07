@@ -253,18 +253,18 @@ export const Downloads = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
-        title="Download"
-        description="Download KaleidoSwap for macOS, Linux, or Windows. Self-custody Bitcoin DEX with Lightning Network support and RGB asset trading."
+        title="KaleidoSwap Desktop Download"
+        description="Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets."
         url="/downloads"
       />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
-          name: 'KaleidoSwap Desktop',
+          name: 'KaleidoSwap Desktop Download',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'macOS, Windows, Linux',
-          description: 'Download KaleidoSwap for macOS, Linux, or Windows. Self-custody Bitcoin DEX with Lightning Network support and RGB asset trading.',
+          description: 'Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets.',
           url: 'https://kaleidoswap.com/downloads',
           downloadUrl: 'https://github.com/kaleidoswap/desktop-app/releases',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
