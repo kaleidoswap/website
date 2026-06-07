@@ -17,7 +17,7 @@ interface SEOProps {
 const DEFAULT_TITLE = 'KaleidoSwap - Bitcoin L2 DEX'
 const DEFAULT_DESCRIPTION =
   'Trade BTC, USDT, and any RGB asset across Lightning, RGB, Spark, and Arkade. Atomic swaps with low fees and better privacy. No bridges. No custody. No tokens.'
-const DEFAULT_IMAGE = '/images/kaleido-full-logo-bg.png'
+const DEFAULT_IMAGE = '/images/og-default.jpg'
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://kaleidoswap.com'
 
 const organizationJsonLd = {
