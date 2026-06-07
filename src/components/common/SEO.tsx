@@ -50,7 +50,7 @@ const softwareJsonLd = {
 export const SEO = ({
   title,
   description = DEFAULT_DESCRIPTION,
-  keywords = ['bitcoin', 'defi', 'rgb', 'lightning', 'atomic swaps', 'dex'],
+  keywords,
   image,
   imageX,
   url,
@@ -76,7 +76,7 @@ export const SEO = ({
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords.join(', ')} />
+      {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
       {noIndex && <meta name="robots" content="noindex, nofollow" />}
 
       {/* Open Graph / Facebook */}
