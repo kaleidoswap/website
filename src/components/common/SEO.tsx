@@ -38,7 +38,7 @@ const softwareJsonLd = {
   name: 'KaleidoSwap',
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'macOS, Linux, Windows, Web',
-  description: DEFAULT_DESCRIPTION,
+  description: 'Non-custodial atomic swap platform for Bitcoin Layer 2 protocols. Trade BTC, stablecoins, and other assets across Lightning Network, RGB, Spark, and Arkade — no wrapped tokens, trustless, open source.',
   offers: {
     '@type': 'Offer',
     price: '0',
