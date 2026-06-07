@@ -14,8 +14,8 @@
     "date": "2026-05-31"
   },
   "kaleidoagent-wdk-hackathon": {
-    "title": "KaleidoAgent: An Autonomous Agent for Bitcoin L2",
-    "description": "KaleidoAgent placed 1st in the Autonomous DeFi Agent track and 2nd overall at the WDK Hackathon, winning 6,000 USD₮. Here is how it works under the hood.",
+    "title": "KaleidoAgent: An Autonomous AI Agent for Bitcoin L2",
+    "description": "KaleidoAgent is an autonomous AI agent for Bitcoin L2, executing trustless atomic swaps via MCP servers. 1st place at the WDK Hackathon.",
     "image": "/blog/images/kaleido-agent/kaleido-agent-cover-preview.jpg",
     "imageX": "/blog/images/kaleido-agent/kaleido-agent-cover-preview-x.jpg",
     "date": "2026-05-06"
