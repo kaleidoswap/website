@@ -45,7 +45,7 @@ export const WebApp = () => {
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
         title="Web App"
-        description="Trade BTC, stablecoins, and RGB assets directly from your browser. No installation required. Connect your wallet and start swapping. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse."
+        description="Trustless Bitcoin swap in your browser — no download, no KYC. Trade BTC, USDT, and RGB assets across the Lightning Network. The fastest non-custodial Lightning DEX."
         url="/products/web-app"
       />
 

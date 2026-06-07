@@ -100,7 +100,7 @@ export const Extension = () => {
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
         title="Browser Extension"
-        description="The KaleidoSwap Extension is a multi-protocol Bitcoin browser wallet for RGB, Lightning, Spark, Arkade, and Nostr. Manage assets, swap, and connect to dApps — all from your browser toolbar."
+        description="Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and RGB assets from your browser."
         url="/products/extension"
       />
 
