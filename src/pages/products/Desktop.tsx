@@ -70,10 +70,10 @@ export const Desktop = () => {
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
-          name: 'KaleidoSwap Desktop',
+          name: 'KaleidoSwap Desktop App',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'macOS, Windows, Linux',
-          description: 'Full sovereignty multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node. Non-custodial Bitcoin swap with no KYC required.',
+          description: 'Full sovereignty, open source, multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node that runs locally. Non-custodial Bitcoin swap with no KYC required. macOS, Windows, Linux.',
           url: 'https://kaleidoswap.com/products/desktop',
           downloadUrl: 'https://kaleidoswap.com/downloads',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
