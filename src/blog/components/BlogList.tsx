@@ -87,7 +87,6 @@ export function BlogList() {
         title="Blog"
         description="Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK."
         url="/blog"
-        keywords={['blog', 'RGB', 'Lightning', 'Bitcoin', 'DEX', 'SDK', 'KaleidoSwap']}
       />
 
       <div

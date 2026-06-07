@@ -52,7 +52,6 @@ export const Terms = () => {
         title="Terms of Service"
         description="KaleidoSwap Terms of Service. Understand the terms and conditions for using our Bitcoin DEX platform."
         url="/terms"
-        keywords={['terms', 'service', 'conditions', 'legal', 'bitcoin', 'dex']}
       />
 
       <div className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none" aria-hidden="true" />

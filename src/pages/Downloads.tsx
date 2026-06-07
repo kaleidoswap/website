@@ -255,7 +255,6 @@ export const Downloads = () => {
         title="Download"
         description="Download KaleidoSwap for macOS, Linux, or Windows. Self-custody Bitcoin DEX with Lightning Network support and RGB asset trading."
         url="/downloads"
-        keywords={['download', 'bitcoin wallet', 'lightning', 'rgb', 'dex', 'macos', 'linux', 'windows']}
       />
 
       <Navbar />
