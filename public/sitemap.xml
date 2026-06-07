@@ -11,11 +11,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kaleidoswap.com/products/web-app</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://kaleidoswap.com/products/desktop</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

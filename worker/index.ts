@@ -44,10 +44,6 @@ const staticRoutes: Record<string, StaticMeta> = {
     title: 'Products | KaleidoSwap',
     description: 'KaleidoSwap products: Web App, Desktop App, SDK, Mobile App, and Browser Extension. Build and trade on Bitcoin\'s most connected swap protocol.',
   },
-  '/products/web-app': {
-    title: 'Web App | KaleidoSwap',
-    description: 'Trade BTC, stablecoins, and RGB assets directly from your browser. No installation required. Connect your wallet and start swapping. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse.',
-  },
   '/products/desktop': {
     title: 'Desktop App | KaleidoSwap',
     description: 'Full sovereignty with the KaleidoSwap Desktop App. Bundles a complete RGB Lightning node. Available for macOS, Windows, and Linux.',
@@ -242,6 +238,11 @@ export default {
 
     if (url.pathname === '/api/beta-signup') {
       return handleBetaSignup(request, env)
+    }
+
+    // Redirect removed pages
+    if (url.pathname === '/products/web-app' || url.pathname === '/products/web-app/') {
+      return Response.redirect(`${SITE_URL}/products`, 301)
     }
 
     // Pre-render all known routes with correct meta tags
