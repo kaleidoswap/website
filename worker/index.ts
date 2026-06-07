@@ -26,6 +26,53 @@ interface PostMeta {
 
 const SITE_URL = 'https://kaleidoswap.com'
 const DEFAULT_IMAGE = `${SITE_URL}/images/kaleido-full-logo-bg.jpg`
+const DEFAULT_TITLE = 'KaleidoSwap - Bitcoin L2 DEX'
+const DEFAULT_DESC = 'Trade BTC, USDT, and any RGB asset across Lightning, RGB, Spark, and Arkade. Atomic swaps with low fees and better privacy. No bridges. No custody. No tokens.'
+
+interface StaticMeta {
+  title: string
+  description: string
+  image?: string
+}
+
+const staticRoutes: Record<string, StaticMeta> = {
+  '/': {
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESC,
+  },
+  '/products': {
+    title: 'Products | KaleidoSwap',
+    description: 'KaleidoSwap products: Web App, Desktop App, SDK, Mobile App, and Browser Extension. Build and trade on Bitcoin\'s most connected swap protocol.',
+  },
+  '/products/web-app': {
+    title: 'Web App | KaleidoSwap',
+    description: 'Trade BTC, stablecoins, and RGB assets directly from your browser. No installation required. Connect your wallet and start swapping. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse.',
+  },
+  '/products/desktop': {
+    title: 'Desktop App | KaleidoSwap',
+    description: 'Full sovereignty with the KaleidoSwap Desktop App. Bundles a complete RGB Lightning node. Available for macOS, Windows, and Linux.',
+  },
+  '/products/sdk': {
+    title: 'Developer SDK | KaleidoSwap',
+    description: 'Integrate KaleidoSwap into your application. Rust, Python, and TypeScript SDKs with full documentation and examples.',
+  },
+  '/downloads': {
+    title: 'Download | KaleidoSwap',
+    description: 'Download KaleidoSwap for macOS, Linux, or Windows. Self-custody Bitcoin DEX with Lightning Network support and RGB asset trading.',
+  },
+  '/blog': {
+    title: 'Blog | KaleidoSwap',
+    description: 'Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK.',
+  },
+  '/privacy': {
+    title: 'Privacy Policy | KaleidoSwap',
+    description: 'KaleidoSwap Privacy Policy. Learn how we protect your data and maintain your privacy while using our Bitcoin DEX.',
+  },
+  '/terms': {
+    title: 'Terms of Service | KaleidoSwap',
+    description: 'KaleidoSwap Terms of Service. Understand the terms and conditions for using our Bitcoin DEX platform.',
+  },
+}
 
 const json = (data: unknown, status = 200): Response =>
   new Response(JSON.stringify(data), {
@@ -49,28 +96,30 @@ function resolveImage(path: string | null): string {
   return path.startsWith('http') ? path : `${SITE_URL}${path}`
 }
 
-function injectBlogMeta(html: string, post: PostMeta, slug: string): string {
-  const fullUrl = `${SITE_URL}/blog/${slug}`
-  const title = `${post.title} | KaleidoSwap`
-  const desc = post.description
-  const image = resolveImage(post.image)
-  const imageX = resolveImage(post.imageX ?? post.image)
-
+function injectMeta(html: string, opts: {
+  title: string
+  desc: string
+  fullUrl: string
+  image: string
+  imageX: string
+  type?: string
+}): string {
+  const { title, desc, fullUrl, image, imageX, type = 'website' } = opts
   return html
-    .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
-    .replace(/(<meta name="title"\s+content=")[^"]*(")/,                `$1${escapeHtml(title)}$2`)
-    .replace(/(<meta name="description"\s+content=")[^"]*(")/,          `$1${escapeHtml(desc)}$2`)
-    .replace(/(<meta property="og:type"\s+content=")[^"]*(")/,          `$1article$2`)
-    .replace(/(<meta property="og:url"\s+content=")[^"]*(")/,           `$1${fullUrl}$2`)
-    .replace(/(<meta property="og:title"\s+content=")[^"]*(")/,         `$1${escapeHtml(title)}$2`)
-    .replace(/(<meta property="og:description"\s+content=")[^"]*(")/,   `$1${escapeHtml(desc)}$2`)
-    .replace(/(<meta property="og:image"\s+content=")[^"]*(")/,         `$1${image}$2`)
-    .replace(/(<meta property="og:image:alt"\s+content=")[^"]*(")/,     `$1${escapeHtml(title)}$2`)
-    .replace(/(<meta name="twitter:url"\s+content=")[^"]*(")/,          `$1${fullUrl}$2`)
-    .replace(/(<meta name="twitter:title"\s+content=")[^"]*(")/,        `$1${escapeHtml(title)}$2`)
-    .replace(/(<meta name="twitter:description"\s+content=")[^"]*(")/,  `$1${escapeHtml(desc)}$2`)
-    .replace(/(<meta name="twitter:image"\s+content=")[^"]*(")/,        `$1${imageX}$2`)
-    .replace(/(<meta name="twitter:image:alt"\s+content=")[^"]*(")/,    `$1${escapeHtml(title)}$2`)
+    .replace(/<title>[^<]*<\/title>/,                                    `<title>${escapeHtml(title)}</title>`)
+    .replace(/(<meta name="title"\s+content=")[^"]*(")/,                 `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta name="description"\s+content=")[^"]*(")/,           `$1${escapeHtml(desc)}$2`)
+    .replace(/(<meta property="og:type"\s+content=")[^"]*(")/,           `$1${type}$2`)
+    .replace(/(<meta property="og:url"\s+content=")[^"]*(")/,            `$1${fullUrl}$2`)
+    .replace(/(<meta property="og:title"\s+content=")[^"]*(")/,          `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta property="og:description"\s+content=")[^"]*(")/,    `$1${escapeHtml(desc)}$2`)
+    .replace(/(<meta property="og:image"\s+content=")[^"]*(")/,          `$1${image}$2`)
+    .replace(/(<meta property="og:image:alt"\s+content=")[^"]*(")/,      `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta name="twitter:url"\s+content=")[^"]*(")/,           `$1${fullUrl}$2`)
+    .replace(/(<meta name="twitter:title"\s+content=")[^"]*(")/,         `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta name="twitter:description"\s+content=")[^"]*(")/,   `$1${escapeHtml(desc)}$2`)
+    .replace(/(<meta name="twitter:image"\s+content=")[^"]*(")/,         `$1${imageX}$2`)
+    .replace(/(<meta name="twitter:image:alt"\s+content=")[^"]*(")/,     `$1${escapeHtml(title)}$2`)
     .replace('</head>', `  <link rel="canonical" href="${fullUrl}" />\n</head>`)
 }
 
@@ -138,24 +187,53 @@ async function handleBetaSignup(request: Request, env: Env): Promise<Response> {
   return json({ ok: true })
 }
 
-async function handleBlogPost(request: Request, env: Env, slug: string): Promise<Response | null> {
-  const meta = (postsMeta as Record<string, PostMeta>)[slug]
-  if (!meta) return null
-
-  const indexReq = new Request(new URL('/', request.url).toString())
-  const indexRes = await env.ASSETS.fetch(indexReq)
+async function fetchIndexHtml(request: Request, env: Env): Promise<string | null> {
+  const indexRes = await env.ASSETS.fetch(new Request(new URL('/', request.url).toString()))
   if (!indexRes.ok) return null
+  return indexRes.text()
+}
 
-  const html = await indexRes.text()
-  const injected = injectBlogMeta(html, meta, slug)
-
-  return new Response(injected, {
+function htmlResponse(html: string): Response {
+  return new Response(html, {
     status: 200,
     headers: {
       'content-type': 'text/html;charset=UTF-8',
       'cache-control': 'public, max-age=3600, stale-while-revalidate=86400',
     },
   })
+}
+
+async function handleBlogPost(request: Request, env: Env, slug: string): Promise<Response | null> {
+  const meta = (postsMeta as Record<string, PostMeta>)[slug]
+  if (!meta) return null
+
+  const html = await fetchIndexHtml(request, env)
+  if (!html) return null
+
+  return htmlResponse(injectMeta(html, {
+    title: `${meta.title} | KaleidoSwap`,
+    desc: meta.description,
+    fullUrl: `${SITE_URL}/blog/${slug}`,
+    image: resolveImage(meta.image),
+    imageX: resolveImage(meta.imageX ?? meta.image),
+    type: 'article',
+  }))
+}
+
+async function handleStaticRoute(request: Request, env: Env, pathname: string): Promise<Response | null> {
+  const meta = staticRoutes[pathname]
+  if (!meta) return null
+
+  const html = await fetchIndexHtml(request, env)
+  if (!html) return null
+
+  return htmlResponse(injectMeta(html, {
+    title: meta.title,
+    desc: meta.description,
+    fullUrl: `${SITE_URL}${pathname}`,
+    image: resolveImage(meta.image ?? null),
+    imageX: resolveImage(meta.image ?? null),
+  }))
 }
 
 export default {
@@ -166,11 +244,13 @@ export default {
       return handleBetaSignup(request, env)
     }
 
-    // Pre-render blog posts with correct meta tags for social crawlers
+    // Pre-render all known routes with correct meta tags
     const blogMatch = url.pathname.match(/^\/blog\/([^/]+)\/?$/)
     if (blogMatch) {
-      const slug = blogMatch[1]
-      const prerendered = await handleBlogPost(request, env, slug)
+      const prerendered = await handleBlogPost(request, env, blogMatch[1])
+      if (prerendered) return prerendered
+    } else if (url.pathname in staticRoutes) {
+      const prerendered = await handleStaticRoute(request, env, url.pathname)
       if (prerendered) return prerendered
     }
 
