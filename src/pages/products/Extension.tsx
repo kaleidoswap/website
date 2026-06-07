@@ -100,8 +100,8 @@ export const Extension = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
-        title="Browser Extension"
-        description="Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and RGB assets from your browser."
+        title="KaleidoSwap Browser Extension"
+        description="Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser."
         url="/products/extension"
       />
       <Helmet>
@@ -111,7 +111,7 @@ export const Extension = () => {
           name: 'KaleidoSwap Extension',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'Chrome',
-          description: 'Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial.',
+          description: 'Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser.',
           url: 'https://kaleidoswap.com/products/extension',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           license: 'https://opensource.org/licenses/MIT',
