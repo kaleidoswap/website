@@ -232,7 +232,7 @@ export const SDK = () => {
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
         title="Developer SDK"
-        description="Integrate KaleidoSwap into your application. Rust, Python, and TypeScript SDKs with full documentation and examples."
+        description="The Bitcoin swap SDK for Lightning Network, RGB, Arkade, Spark and more. Integrate trustless atomic swaps into any wallet or app. TypeScript, Python, and Rust — the complete Bitcoin L2s SDK."
         url="/products/sdk"
       />
       <Helmet>

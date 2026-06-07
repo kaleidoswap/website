@@ -26,8 +26,8 @@ interface PostMeta {
 
 const SITE_URL = 'https://kaleidoswap.com'
 const DEFAULT_IMAGE = `${SITE_URL}/images/kaleido-full-logo-bg.jpg`
-const DEFAULT_TITLE = 'KaleidoSwap - Bitcoin L2 DEX'
-const DEFAULT_DESC = 'Trade BTC, USDT, and any RGB asset across Lightning, RGB, Spark, and Arkade. Atomic swaps with low fees and better privacy. No bridges. No custody. No tokens.'
+const DEFAULT_TITLE = 'KaleidoSwap — Trustless Swaps on Bitcoin L2s'
+const DEFAULT_DESC = 'Non-custodial Bitcoin DEX for all Bitcoin L2s. Trustless atomic swaps between BTC, stablecoins, and RGB assets. Built for humans and AI agents alike.'
 
 interface StaticMeta {
   title: string
