@@ -231,8 +231,8 @@ export const SDK = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
-        title="Developer SDK"
-        description="The Bitcoin swap SDK for Lightning Network, RGB, Arkade, Spark and more. Integrate trustless atomic swaps into any wallet or app. TypeScript, Python, and Rust — the complete Bitcoin L2s SDK."
+        title="KaleidoSDK"
+        description="The Bitcoin swap SDK for Lightning Network, RGB, Arkade, Spark and more. Integrate trustless atomic swaps into any wallet, AI agent or app. TypeScript, Python, and Rust — the most complete Bitcoin L2s SDK."
         url="/products/sdk"
       />
       <Helmet>
@@ -240,10 +240,10 @@ export const SDK = () => {
           {JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'SoftwareApplication',
-            name: 'KaleidoSwap SDK',
+            name: 'KaleidoSDK',
             applicationCategory: 'DeveloperApplication',
             operatingSystem: 'macOS, Linux, Windows',
-            description: 'TypeScript and Python SDKs for integrating KaleidoSwap. Auto-generated from OpenAPI specs with full type safety, real-time WebSocket streaming, and MIT license.',
+            description: 'The Bitcoin swap SDK for Lightning Network, RGB, Arkade, Spark and more. Integrate trustless atomic swaps into any wallet, AI agent or app. TypeScript, Python, and Rust — the most complete Bitcoin L2s SDK.',
             url: 'https://kaleidoswap.com/products/sdk',
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
             license: 'https://opensource.org/licenses/MIT',
