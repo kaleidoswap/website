@@ -3,7 +3,6 @@ import { Helmet } from 'react-helmet-async'
 interface SEOProps {
   title?: string
   description?: string
-  keywords?: string[]
   image?: string
   imageX?: string
   url?: string
@@ -50,7 +49,6 @@ const softwareJsonLd = {
 export const SEO = ({
   title,
   description = DEFAULT_DESCRIPTION,
-  keywords,
   image,
   imageX,
   url,
@@ -76,8 +74,7 @@ export const SEO = ({
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
