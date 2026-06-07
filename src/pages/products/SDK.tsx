@@ -1,5 +1,6 @@
 // src/pages/products/SDK.tsx
 import { Code, Package, BookOpen, Terminal, ArrowRight, ExternalLink, Check, Copy } from 'lucide-react'
+import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -234,6 +235,22 @@ export const SDK = () => {
         description="Integrate KaleidoSwap into your application. Rust, Python, and TypeScript SDKs with full documentation and examples."
         url="/products/sdk"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: 'KaleidoSwap SDK',
+            applicationCategory: 'DeveloperApplication',
+            operatingSystem: 'macOS, Linux, Windows',
+            description: 'TypeScript and Python SDKs for integrating KaleidoSwap. Auto-generated from OpenAPI specs with full type safety, real-time WebSocket streaming, and MIT license.',
+            url: 'https://kaleidoswap.com/products/sdk',
+            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+            license: 'https://opensource.org/licenses/MIT',
+            codeRepository: 'https://github.com/kaleidoswap',
+          })}
+        </script>
+      </Helmet>
 
       <Navbar />
 

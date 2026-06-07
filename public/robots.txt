@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /staging
+Disallow: /staging/
+Disallow: /*.test.*
+Disallow: /*.spec.*
 
 Sitemap: https://kaleidoswap.com/sitemap.xml

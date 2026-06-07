@@ -9,6 +9,9 @@ interface SEOProps {
   url?: string
   type?: 'website' | 'article'
   noIndex?: boolean
+  datePublished?: string
+  dateModified?: string
+  author?: string
 }
 
 const DEFAULT_TITLE = 'KaleidoSwap - Bitcoin L2 DEX'
@@ -53,6 +56,9 @@ export const SEO = ({
   url,
   type = 'website',
   noIndex = false,
+  datePublished,
+  dateModified,
+  author,
 }: SEOProps) => {
   const fullTitle = title ? `${title} | KaleidoSwap` : DEFAULT_TITLE
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL
@@ -99,6 +105,26 @@ export const SEO = ({
       <script type="application/ld+json">
         {JSON.stringify(softwareJsonLd)}
       </script>
+      {type === 'article' && title && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'TechArticle',
+            headline: title,
+            description,
+            url: fullUrl,
+            ...(fullImage ? { image: fullImage } : {}),
+            ...(datePublished ? { datePublished } : {}),
+            ...(dateModified ? { dateModified } : { ...(datePublished ? { dateModified: datePublished } : {}) }),
+            ...(author ? { author: { '@type': 'Person', name: author } } : { author: { '@type': 'Organization', name: 'KaleidoSwap' } }),
+            publisher: {
+              '@type': 'Organization',
+              name: 'KaleidoSwap',
+              logo: { '@type': 'ImageObject', url: `${SITE_URL}/kaleidoswap-pictogram.svg` },
+            },
+          })}
+        </script>
+      )}
     </Helmet>
   )
 }
