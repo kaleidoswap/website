@@ -1,3 +1,5 @@
+import postsMeta from './posts-meta.json'
+
 export interface Env {
   ASSETS: Fetcher
   DB: D1Database
@@ -14,6 +16,17 @@ interface SignupBody {
   turnstile_token?: string
 }
 
+interface PostMeta {
+  title: string
+  description: string
+  image: string | null
+  imageX: string | null
+  date: string | null
+}
+
+const SITE_URL = 'https://kaleidoswap.com'
+const DEFAULT_IMAGE = `${SITE_URL}/images/kaleido-full-logo-bg.jpg`
+
 const json = (data: unknown, status = 200): Response =>
   new Response(JSON.stringify(data), {
     status,
@@ -22,6 +35,44 @@ const json = (data: unknown, status = 200): Response =>
 
 const isValidEmail = (s: string): boolean =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) && s.length <= 254
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+}
+
+function resolveImage(path: string | null): string {
+  if (!path) return DEFAULT_IMAGE
+  return path.startsWith('http') ? path : `${SITE_URL}${path}`
+}
+
+function injectBlogMeta(html: string, post: PostMeta, slug: string): string {
+  const fullUrl = `${SITE_URL}/blog/${slug}`
+  const title = `${post.title} | KaleidoSwap`
+  const desc = post.description
+  const image = resolveImage(post.image)
+  const imageX = resolveImage(post.imageX ?? post.image)
+
+  return html
+    .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
+    .replace(/(<meta name="title"\s+content=")[^"]*(")/,                `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta name="description"\s+content=")[^"]*(")/,          `$1${escapeHtml(desc)}$2`)
+    .replace(/(<meta property="og:type"\s+content=")[^"]*(")/,          `$1article$2`)
+    .replace(/(<meta property="og:url"\s+content=")[^"]*(")/,           `$1${fullUrl}$2`)
+    .replace(/(<meta property="og:title"\s+content=")[^"]*(")/,         `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta property="og:description"\s+content=")[^"]*(")/,   `$1${escapeHtml(desc)}$2`)
+    .replace(/(<meta property="og:image"\s+content=")[^"]*(")/,         `$1${image}$2`)
+    .replace(/(<meta property="og:image:alt"\s+content=")[^"]*(")/,     `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta name="twitter:url"\s+content=")[^"]*(")/,          `$1${fullUrl}$2`)
+    .replace(/(<meta name="twitter:title"\s+content=")[^"]*(")/,        `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta name="twitter:description"\s+content=")[^"]*(")/,  `$1${escapeHtml(desc)}$2`)
+    .replace(/(<meta name="twitter:image"\s+content=")[^"]*(")/,        `$1${imageX}$2`)
+    .replace(/(<meta name="twitter:image:alt"\s+content=")[^"]*(")/,    `$1${escapeHtml(title)}$2`)
+    .replace('</head>', `  <link rel="canonical" href="${fullUrl}" />\n</head>`)
+}
 
 async function verifyTurnstile(token: string, secret: string, ip: string | null): Promise<boolean> {
   const body = new FormData()
@@ -87,12 +138,42 @@ async function handleBetaSignup(request: Request, env: Env): Promise<Response> {
   return json({ ok: true })
 }
 
+async function handleBlogPost(request: Request, env: Env, slug: string): Promise<Response | null> {
+  const meta = (postsMeta as Record<string, PostMeta>)[slug]
+  if (!meta) return null
+
+  const indexReq = new Request(new URL('/', request.url).toString())
+  const indexRes = await env.ASSETS.fetch(indexReq)
+  if (!indexRes.ok) return null
+
+  const html = await indexRes.text()
+  const injected = injectBlogMeta(html, meta, slug)
+
+  return new Response(injected, {
+    status: 200,
+    headers: {
+      'content-type': 'text/html;charset=UTF-8',
+      'cache-control': 'public, max-age=3600, stale-while-revalidate=86400',
+    },
+  })
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
+
     if (url.pathname === '/api/beta-signup') {
       return handleBetaSignup(request, env)
     }
+
+    // Pre-render blog posts with correct meta tags for social crawlers
+    const blogMatch = url.pathname.match(/^\/blog\/([^/]+)\/?$/)
+    if (blogMatch) {
+      const slug = blogMatch[1]
+      const prerendered = await handleBlogPost(request, env, slug)
+      if (prerendered) return prerendered
+    }
+
     return env.ASSETS.fetch(request)
   },
 } satisfies ExportedHandler<Env>

@@ -41,20 +41,20 @@ function extractFrontmatter(raw) {
 const postsDir = join(ROOT, 'src', 'blog', 'posts')
 const postFiles = readdirSync(postsDir).filter((f) => f.endsWith('.md'))
 
-const blogRoutes = postFiles
+const parsedPosts = postFiles
   .map((file) => {
     const raw = readFileSync(join(postsDir, file), 'utf-8')
-    const fm = extractFrontmatter(raw)
-    if (!fm.slug) return null
-    return {
-      path: `/blog/${fm.slug}`,
-      priority: '0.7',
-      changefreq: 'monthly',
-      lastmod: fm.date || null,
-    }
+    return extractFrontmatter(raw)
   })
-  .filter(Boolean)
-  .sort((a, b) => (b.lastmod || '').localeCompare(a.lastmod || ''))
+  .filter((fm) => fm.slug)
+  .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+
+const blogRoutes = parsedPosts.map((fm) => ({
+  path: `/blog/${fm.slug}`,
+  priority: '0.7',
+  changefreq: 'monthly',
+  lastmod: fm.date || null,
+}))
 
 const allRoutes = [...staticRoutes, ...blogRoutes]
 
@@ -77,3 +77,19 @@ ${urls.join('\n')}
 const outPath = join(ROOT, 'public', 'sitemap.xml')
 writeFileSync(outPath, xml, 'utf-8')
 console.log(`sitemap.xml written — ${allRoutes.length} URLs (${blogRoutes.length} blog posts)`)
+
+// Generate worker/posts-meta.json for Cloudflare Worker pre-rendering
+const postsMeta = {}
+for (const fm of parsedPosts) {
+  postsMeta[fm.slug] = {
+    title: fm.title || '',
+    description: fm.excerpt || '',
+    image: fm.coverImagePreview || fm.coverImage || null,
+    imageX: fm.coverImagePreviewX || null,
+    date: fm.date || null,
+  }
+}
+
+const metaPath = join(ROOT, 'worker', 'posts-meta.json')
+writeFileSync(metaPath, JSON.stringify(postsMeta, null, 2), 'utf-8')
+console.log(`posts-meta.json written — ${parsedPosts.length} posts`)
