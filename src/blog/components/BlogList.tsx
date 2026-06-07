@@ -2,6 +2,7 @@ import { useState, useMemo, useRef, useEffect } from 'react'
 import { SlidersHorizontal, ArrowUpDown, Check } from 'lucide-react'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
+import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { footerConfig } from '@/constants/footer'
 import { getAllPosts } from '../lib/posts'
@@ -88,6 +89,28 @@ export function BlogList() {
         description="Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK."
         url="/blog"
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Blog',
+          name: 'KaleidoSwap Blog',
+          description: 'Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK.',
+          url: 'https://kaleidoswap.com/blog',
+          publisher: {
+            '@type': 'Organization',
+            name: 'KaleidoSwap',
+            logo: { '@type': 'ImageObject', url: 'https://kaleidoswap.com/kaleidoswap-pictogram.svg' },
+          },
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kaleidoswap.com' },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://kaleidoswap.com/blog' },
+          ],
+        })}</script>
+      </Helmet>
 
       <div
         className="fixed inset-0 pointer-events-none"

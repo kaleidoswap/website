@@ -1,5 +1,6 @@
 // src/pages/products/Desktop.tsx
 import { Monitor, Shield, Server, Lock, Download, ArrowRight, Check, Terminal, BookOpen } from 'lucide-react'
+import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -65,6 +66,30 @@ export const Desktop = () => {
         description="Full sovereignty multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node. Non-custodial Bitcoin swap with no KYC required. macOS, Windows, Linux."
         url="/products/desktop"
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'KaleidoSwap Desktop',
+          applicationCategory: 'FinanceApplication',
+          operatingSystem: 'macOS, Windows, Linux',
+          description: 'Full sovereignty multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node. Non-custodial Bitcoin swap with no KYC required.',
+          url: 'https://kaleidoswap.com/products/desktop',
+          downloadUrl: 'https://kaleidoswap.com/downloads',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          license: 'https://opensource.org/licenses/MIT',
+          codeRepository: 'https://github.com/kaleidoswap',
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kaleidoswap.com' },
+            { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://kaleidoswap.com/products' },
+            { '@type': 'ListItem', position: 3, name: 'Desktop App', item: 'https://kaleidoswap.com/products/desktop' },
+          ],
+        })}</script>
+      </Helmet>
 
       <Navbar />
 
