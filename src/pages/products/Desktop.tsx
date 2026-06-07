@@ -62,8 +62,8 @@ export const Desktop = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
-        title="Desktop App"
-        description="Full sovereignty multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node. Non-custodial Bitcoin swap with no KYC required. macOS, Windows, Linux."
+        title="KaleidoSwap Desktop App"
+        description="Full sovereignty, open source, multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node that runs locally. Non-custodial Bitcoin swap with no KYC required. macOS, Windows, Linux."
         url="/products/desktop"
       />
       <Helmet>
