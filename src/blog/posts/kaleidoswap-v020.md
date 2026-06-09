@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Announcement"]
 slug: "kaleidoswap-v020"
 excerpt: "KaleidoSwap v0.2.0 lands as RGB v0.11.1 goes live on Bitcoin mainnet — bringing advanced asset swaps, improved UX, and stronger Lightning infrastructure integration."
-coverImage: "/blog/images/kaleidoswap-v020/cover.png"
-coverImageMobile: "/blog/images/kaleidoswap-v020/cover-mobile.png"
-coverImageCard: "/blog/images/kaleidoswap-v020/cover-card.png"
-coverImagePreview: "/blog/images/kaleidoswap-v020/cover-preview.png"
-coverImagePreviewX: "/blog/images/kaleidoswap-v020/cover-preview-x.png"
+coverImage: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover.png"
+coverImageMobile: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-mobile.png"
+coverImageCard: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-card.png"
+coverImagePreview: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-preview.png"
+coverImagePreviewX: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-preview-x.png"
 ---
 
 We're excited to announce the release of **KaleidoSwap v0.2.0**, our latest alpha version — and it arrives at a historic moment for Bitcoin's asset ecosystem.
@@ -20,7 +20,7 @@ From the same date, the **RGB Lightning Node (RLN)** also became mainnet-capable
 
 > *With v0.2.0, KaleidoSwap supports this evolving protocol stack — bringing advanced RGB asset swaps, improved UX, and stronger integration with Lightning infrastructure.*
 
-![KaleidoSwap v0.2.0](/blog/images/kaleidoswap-v020/cover.png)
+![KaleidoSwap v0.2.0](/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover.png)
 
 ---
 

@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Release Notes"]
 slug: "may-2026-release-notes"
 excerpt: "The browser extension shipped its first mainnet beta, our covenant DEX work took shape across three settlement rails, Liquid integration began, and the RGB Lightning Node reached v0.7.0."
-coverImage: "/blog/images/may-2026-release-notes/cover.png"
-coverImageMobile: "/blog/images/may-2026-release-notes/cover-mobile.png"
-coverImageCard: "/blog/images/may-2026-release-notes/cover-card.png"
-coverImagePreview: "/blog/images/may-2026-release-notes/cover-preview.png"
-coverImagePreviewX: "/blog/images/may-2026-release-notes/cover-preview-x.png"
+coverImage: "/blog/images/may-2026-release-notes/may-2026-release-notes-cover.png"
+coverImageMobile: "/blog/images/may-2026-release-notes/may-2026-release-notes-cover-mobile.png"
+coverImageCard: "/blog/images/may-2026-release-notes/may-2026-release-notes-cover-card.png"
+coverImagePreview: "/blog/images/may-2026-release-notes/may-2026-release-notes-cover-preview.png"
+coverImagePreviewX: "/blog/images/may-2026-release-notes/may-2026-release-notes-cover-preview-x.png"
 ---
 
 May was the month KaleidoSwap left the lab. The browser extension shipped its first mainnet beta, our covenant DEX work took shape across three settlement rails, and we started wiring Liquid in as a second venue.
