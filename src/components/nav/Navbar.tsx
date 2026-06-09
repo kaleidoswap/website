@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
 import { mainNavItems, productItems, developerItems } from '@/constants/navigation'
 import { cn, openExternalLink } from '@/lib/utils'
-import kaleidoFullLogo from '@/assets/kaleidoswap-full-logo.svg'
+const kaleidoFullLogo = '/logos/kaleidoswap-logos/kaleidoswap-full-logo.svg'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 

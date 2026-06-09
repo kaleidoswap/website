@@ -20,10 +20,11 @@ export function BlogPost() {
         title={post.title}
         description={post.excerpt}
         url={`/blog/${post.slug}`}
-        keywords={post.tags}
         type="article"
         image={post.coverImagePreview ?? post.coverImage}
         imageX={post.coverImagePreviewX}
+        datePublished={post.date}
+        author={post.author}
       />
 
       <div

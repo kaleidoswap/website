@@ -1,5 +1,6 @@
 // src/pages/products/WebApp.tsx
 import { Globe, Zap, Shield, Wallet, ArrowRight, ExternalLink, Check } from 'lucide-react'
+import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -45,9 +46,30 @@ export const WebApp = () => {
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
         title="Web App"
-        description="Trade BTC, stablecoins, and RGB assets directly from your browser. No installation required. Connect your wallet and start swapping. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse."
+        description="Trustless Bitcoin swap in your browser — no download, no KYC. Trade BTC, USDT, and RGB assets across the Lightning Network. The fastest non-custodial Lightning DEX."
         url="/products/web-app"
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: 'KaleidoSwap Web App',
+          applicationCategory: 'FinanceApplication',
+          browserRequirements: 'Requires JavaScript. Requires WebLN-compatible wallet.',
+          description: 'Trustless Bitcoin swap in your browser — no download, no KYC. Trade BTC, USDT, and RGB assets across the Lightning Network.',
+          url: 'https://app.kaleidoswap.com',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kaleidoswap.com' },
+            { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://kaleidoswap.com/products' },
+            { '@type': 'ListItem', position: 3, name: 'Web App', item: 'https://kaleidoswap.com/products/web-app' },
+          ],
+        })}</script>
+      </Helmet>
 
       <Navbar />
 

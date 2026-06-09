@@ -9,11 +9,12 @@ import {
   Server,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
-import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
-import sparkLogo from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
-import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
-import nostrLogo from '@/assets/icons/nostr/nostr-logo.svg'
+const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.png'
+const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
+const sparkLogo = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
+const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
+const nostrLogo = '/logos/protocol-logos/nostr/nostr-logo.svg'
+import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -99,10 +100,33 @@ export const Extension = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
       <SEO
-        title="Browser Extension"
-        description="The KaleidoSwap Extension is a multi-protocol Bitcoin browser wallet for RGB, Lightning, Spark, Arkade, and Nostr. Manage assets, swap, and connect to dApps — all from your browser toolbar."
+        title="KaleidoSwap Browser Extension"
+        description="Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser."
         url="/products/extension"
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'KaleidoSwap Extension',
+          applicationCategory: 'FinanceApplication',
+          operatingSystem: 'Chrome',
+          description: 'Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser.',
+          url: 'https://kaleidoswap.com/products/extension',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          license: 'https://opensource.org/licenses/MIT',
+          codeRepository: 'https://github.com/kaleidoswap',
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kaleidoswap.com' },
+            { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://kaleidoswap.com/products' },
+            { '@type': 'ListItem', position: 3, name: 'Browser Extension', item: 'https://kaleidoswap.com/products/extension' },
+          ],
+        })}</script>
+      </Helmet>
 
       <Navbar />
 

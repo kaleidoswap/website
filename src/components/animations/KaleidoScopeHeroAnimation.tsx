@@ -1,16 +1,16 @@
 // src/components/animations/KaleidoScopeHeroAnimation.tsx
 import React, { useRef, useEffect, useState, useCallback } from 'react'
 
-import kaleidoPictogram from '@/assets/kaleidoswap-pictogram.svg'
+const kaleidoPictogram = '/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg'
 
 // Protocol logos
-import bitcoinLogo from '@/assets/icons/bitcoin/bitcoin-logo.svg'
-import rgbLogo from '@/assets/icons/rgb/rgb-logo.svg'
-import sparkAsterisk from '@/assets/icons/spark/Asterisk/Spark Asterisk White.svg'
-import arkadeLogo from '@/assets/icons/arkade/arkade-icon.svg'
-import liquidLogo from '@/assets/icons/liquid/logo-liquid.svg'
-import taprootLogo from '@/assets/icons/taproot-assets/tapass-logo.svg'
-import lightningLogo from '@/assets/icons/lightning/lightning-logo.svg'
+const bitcoinLogo = '/logos/protocol-logos/bitcoin/bitcoin-logo-orange.svg'
+const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.png'
+const sparkAsterisk = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
+const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
+const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
+const taprootLogo = '/logos/protocol-logos/taproot-assets/tapass-logo.svg'
+const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
 
 interface KaleidoScopeHeroAnimationProps {
   /** @deprecated Use className with width/height instead */
