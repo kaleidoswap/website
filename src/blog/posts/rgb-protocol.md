@@ -187,4 +187,3 @@ The ecosystem is early. The infrastructure is production-ready. If you are build
 - First RGB atomic swap on Lightning mainnet, September 2025: [Atlas21](https://atlas21.com/kaleidoswap-completes-first-rgb-atomic-swap-on-lightning-mainnet/).
 - KaleidoSDK (TypeScript, Python, Rust forthcoming): [GitHub](https://github.com/kaleidoswap).
 - KaleidoSwap Desktop App: [releases](https://github.com/kaleidoswap/kaleidoswap-desktop/releases).
-
