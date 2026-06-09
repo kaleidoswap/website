@@ -163,16 +163,9 @@ export const ExtensionBeta = () => {
             Back to KaleidoSwap Extension
           </Link>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 mb-4 sm:mb-6">
-            <span className="text-xs font-semibold text-purple-400 uppercase tracking-wider">Closed Beta</span>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.1] mb-3 sm:mb-4">
             Apply for KaleidoSwap Extension Beta access
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg mb-2 leading-relaxed">
-            Help us shape the multi-protocol browser wallet before public release.
-          </p>
           <p className="text-slate-500 text-xs sm:text-sm mb-6 sm:mb-8 leading-relaxed">
             Beta covers mainnet (Spark, Arkade) and RLN testnets (regtest, mutinynet). We'll review your
             request and email you a Proton Drive link with the extension package and an install guide.
