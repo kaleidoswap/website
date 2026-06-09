@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
 slug: "first-rgb-swap-mainnet"
 excerpt: "KaleidoSwap has executed the first atomic swap of an RGB asset over the Lightning Network on mainnet — a historic milestone for Bitcoin's Layer 2 ecosystem."
-coverImage: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.png"
-coverImageMobile: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-mobile.png"
-coverImageCard: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-card.png"
-coverImagePreview: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview.png"
-coverImagePreviewX: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview-x.png"
+coverImage: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.jpg"
+coverImageMobile: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-mobile.jpg"
+coverImageCard: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-card.jpg"
+coverImagePreview: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview.jpg"
+coverImagePreviewX: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview-x.jpg"
 ---
 
 We are excited to announce a **historic milestone for Bitcoin's Layer 2 ecosystem**: KaleidoSwap has executed the **first atomic swap of an RGB asset over the Lightning Network on mainnet.**

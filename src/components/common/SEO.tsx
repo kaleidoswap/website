@@ -3,18 +3,20 @@ import { Helmet } from 'react-helmet-async'
 interface SEOProps {
   title?: string
   description?: string
-  keywords?: string[]
   image?: string
   imageX?: string
   url?: string
   type?: 'website' | 'article'
   noIndex?: boolean
+  datePublished?: string
+  dateModified?: string
+  author?: string
 }
 
-const DEFAULT_TITLE = 'KaleidoSwap - Bitcoin L2 DEX'
+const DEFAULT_TITLE = 'KaleidoSwap — Trustless Swaps on Bitcoin L2s'
 const DEFAULT_DESCRIPTION =
-  'Trade BTC, USDT, and any RGB asset across Lightning, RGB, Spark, and Arkade. Atomic swaps with low fees and better privacy. No bridges. No custody. No tokens.'
-const DEFAULT_IMAGE = '/images/kaleido-full-logo-bg.png'
+  'Non-custodial Bitcoin DEX for all Bitcoin L2s. Trustless atomic swaps between BTC, stablecoins, and other assets across Lightning, RGB, Arkade, and Spark. Built for humans and AI agents alike.'
+const DEFAULT_IMAGE = '/images/kaleido-full-logo-bg.jpg'
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://kaleidoswap.com'
 
 const organizationJsonLd = {
@@ -36,7 +38,7 @@ const softwareJsonLd = {
   name: 'KaleidoSwap',
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'macOS, Linux, Windows, Web',
-  description: DEFAULT_DESCRIPTION,
+  description: 'Non-custodial atomic swap platform for Bitcoin Layer 2 protocols. Trade BTC, stablecoins, and other assets across Lightning Network, RGB, Spark, and Arkade — no wrapped tokens, trustless, open source.',
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -47,12 +49,14 @@ const softwareJsonLd = {
 export const SEO = ({
   title,
   description = DEFAULT_DESCRIPTION,
-  keywords = ['bitcoin', 'defi', 'rgb', 'lightning', 'atomic swaps', 'dex'],
   image,
   imageX,
   url,
   type = 'website',
   noIndex = false,
+  datePublished,
+  dateModified,
+  author,
 }: SEOProps) => {
   const fullTitle = title ? `${title} | KaleidoSwap` : DEFAULT_TITLE
   const fullUrl = url ? `${SITE_URL}${url}` : SITE_URL
@@ -70,8 +74,7 @@ export const SEO = ({
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords.join(', ')} />
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
 
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
@@ -99,6 +102,26 @@ export const SEO = ({
       <script type="application/ld+json">
         {JSON.stringify(softwareJsonLd)}
       </script>
+      {type === 'article' && title && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'TechArticle',
+            headline: title,
+            description,
+            url: fullUrl,
+            ...(fullImage ? { image: fullImage } : {}),
+            ...(datePublished ? { datePublished } : {}),
+            ...(dateModified ? { dateModified } : { ...(datePublished ? { dateModified: datePublished } : {}) }),
+            ...(author ? { author: { '@type': 'Person', name: author } } : { author: { '@type': 'Organization', name: 'KaleidoSwap' } }),
+            publisher: {
+              '@type': 'Organization',
+              name: 'KaleidoSwap',
+              logo: { '@type': 'ImageObject', url: `${SITE_URL}/kaleidoswap-pictogram.svg` },
+            },
+          })}
+        </script>
+      )}
     </Helmet>
   )
 }

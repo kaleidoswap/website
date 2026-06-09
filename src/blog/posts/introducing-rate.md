@@ -5,11 +5,11 @@ author: "Walter"
 tags: ["Announcement"]
 slug: "introducing-rate"
 excerpt: "Rate, our AI-powered RGB Lightning wallet, just won the Plan B Hackathon in Lugano. Here's the story of how we built a Bitcoin assistant that makes Lightning, RGB assets, and social payments accessible to everyone."
-coverImage: "/blog/images/introducing-rate/introducing-rate-cover.png"
-coverImageMobile: "/blog/images/introducing-rate/introducing-rate-cover-mobile.png"
-coverImageCard: "/blog/images/introducing-rate/introducing-rate-cover-card.png"
-coverImagePreview: "/blog/images/introducing-rate/introducing-rate-cover-preview.png"
-coverImagePreviewX: "/blog/images/introducing-rate/introducing-rate-cover-preview-x.png"
+coverImage: "/blog/images/introducing-rate/introducing-rate-cover.jpg"
+coverImageMobile: "/blog/images/introducing-rate/introducing-rate-cover-mobile.jpg"
+coverImageCard: "/blog/images/introducing-rate/introducing-rate-cover-card.jpg"
+coverImagePreview: "/blog/images/introducing-rate/introducing-rate-cover-preview.jpg"
+coverImagePreviewX: "/blog/images/introducing-rate/introducing-rate-cover-preview-x.jpg"
 ---
 
 > Winner of the Plan B Lugano Hackathon 2025 — The Future of Bitcoin Wallets is Here

@@ -1,0 +1,54 @@
+# KaleidoSwap
+
+> Trustless atomic swap protocol built natively on Bitcoin. Built for humans and AI agents alike.
+
+KaleidoSwap is an infrastructure layer enabling trustless atomic swaps across multiple Bitcoin Layer 2 protocols, including Lightning Network, RGB, Arkade, and Spark. The RFQ (Request for Quote) model lets market makers compete on spread, providing best-execution pricing for users and integrators. Non-custodial, open source, and private by design.
+
+---
+
+## Products
+
+- [KaleidoSDK](https://docs.kaleidoswap.com/sdk/introduction.md): Multi-language SDK (Rust core, TypeScript and Python bindings). MCP-compatible. For wallet builders, multi-L2 wallet builders, neobanks, and AI agent developers.
+- [Kaleido CLI](https://docs.kaleidoswap.com/cli/introduction.md): Command-line tool for managing local RGB Lightning nodes and executing swaps directly from the terminal. Ships with KaleidoSDK.
+- [Desktop App](https://docs.kaleidoswap.com/desktop-app/getting-started/introduction.md): Tauri-based (Rust + web frontend). Full self-hosted RGB Lightning node. Non-custodial. Available on macOS, Linux, and Windows.
+- [Browser Extension](https://docs.kaleidoswap.com/extensions/kaleidoswap-extension/introduction.md): Multi-network Multi-Protocol Bitcoin wallet extension. RGB Lightning Node and DApp connectivity.
+- KaleidoAgent: Autonomous AI agent built on KaleidoSDK. Manages Lightning wallets, executes swaps, handles DCA and rebalancing autonomously.
+- KaleidoMaker: Production-grade market-maker infrastructure. RFQ engine, turnkey LP stack, FastAPI with Prometheus/Grafana/Loki observability. Launching Q4 2026.
+
+---
+
+## Supported Protocols
+
+- Bitcoin (onchain)
+- Lightning Network
+- RGB Protocol on Lightning (RGB20 assets: USDT, XAUT, and others)
+- Spark (statechains, USDB stablecoin)
+- Arkade / Ark (virtual UTXOs)
+- Liquid Network (planned Q2 2026)
+- Taproot Assets (planned Q3 2026)
+- Fedimint (planned Q4 2026)
+
+---
+
+## Documentation
+
+- [Full Documentation Index](https://docs.kaleidoswap.com/llms.txt)
+- [Introduction](https://docs.kaleidoswap.com/whats-kaleidoswap/introduction.md)
+- [Architecture Overview](https://docs.kaleidoswap.com/whats-kaleidoswap/architecture.md)
+- [How It Works](https://docs.kaleidoswap.com/whats-kaleidoswap/background.md)
+- [Glossary](https://docs.kaleidoswap.com/whats-kaleidoswap/glossary.md)
+- [SDK Getting Started](https://docs.kaleidoswap.com/sdk/getting-started.md)
+- [API Reference](https://docs.kaleidoswap.com/api-reference/introduction.md)
+- [Desktop App Installation](https://docs.kaleidoswap.com/desktop-app/getting-started/installation.md)
+- [CLI Getting Started](https://docs.kaleidoswap.com/cli/getting-started.md)
+
+---
+
+## Links
+
+- Website: https://kaleidoswap.com
+- Documentation: https://docs.kaleidoswap.com
+- GitHub: https://github.com/kaleidoswap
+- X/Twitter: https://x.com/kaleidoswap
+- LinkedIn: https://www.linkedin.com/company/kaleidoswap/
+- Telegram: https://t.me/kaleidoswap

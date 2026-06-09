@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { Download, ExternalLink, Shield, Terminal, Loader2, Key } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
@@ -252,11 +253,33 @@ export const Downloads = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
       <SEO
-        title="Download"
-        description="Download KaleidoSwap for macOS, Linux, or Windows. Self-custody Bitcoin DEX with Lightning Network support and RGB asset trading."
+        title="KaleidoSwap Desktop Download"
+        description="Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets."
         url="/downloads"
-        keywords={['download', 'bitcoin wallet', 'lightning', 'rgb', 'dex', 'macos', 'linux', 'windows']}
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'KaleidoSwap Desktop Download',
+          applicationCategory: 'FinanceApplication',
+          operatingSystem: 'macOS, Windows, Linux',
+          description: 'Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets.',
+          url: 'https://kaleidoswap.com/downloads',
+          downloadUrl: 'https://github.com/kaleidoswap/desktop-app/releases',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+          license: 'https://opensource.org/licenses/MIT',
+          codeRepository: 'https://github.com/kaleidoswap',
+        })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kaleidoswap.com' },
+            { '@type': 'ListItem', position: 2, name: 'Downloads', item: 'https://kaleidoswap.com/downloads' },
+          ],
+        })}</script>
+      </Helmet>
 
       <Navbar />
 
