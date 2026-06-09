@@ -1,6 +1,13 @@
 import fm from 'front-matter'
-import { marked } from 'marked'
+import { marked, Renderer } from 'marked'
 import type { Post, PostMeta } from './types'
+
+const renderer = new Renderer()
+renderer.link = ({ href, title, tokens }) => {
+  const text = tokens.map(t => ('raw' in t ? t.raw : '')).join('')
+  const titleAttr = title ? ` title="${title}"` : ''
+  return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`
+}
 
 // Vite loads all .md files under posts/ as raw strings at build time.
 const modules = import.meta.glob('../posts/*.md', {
@@ -45,7 +52,7 @@ export function getPostBySlug(slug: string): Post | null {
   )
   if (!entry) return null
   const { attributes, body } = fm<PostMeta>(entry[1])
-  const rawHtml = marked(body) as string
+  const rawHtml = marked(body, { renderer }) as string
   return {
     ...attributes,
     content: addHeadingIds(rawHtml),

@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
 slug: "first-rgb-swap-mainnet"
 excerpt: "KaleidoSwap has executed the first atomic swap of an RGB asset over the Lightning Network on mainnet — a historic milestone for Bitcoin's Layer 2 ecosystem."
-coverImage: "/blog/images/first-rgb-swap-mainnet/cover.png"
-coverImageMobile: "/blog/images/first-rgb-swap-mainnet/cover-mobile.png"
-coverImageCard: "/blog/images/first-rgb-swap-mainnet/cover-card.png"
-coverImagePreview: "/blog/images/first-rgb-swap-mainnet/cover-preview.png"
-coverImagePreviewX: "/blog/images/first-rgb-swap-mainnet/cover-preview-x.png"
+coverImage: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.jpg"
+coverImageMobile: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-mobile.jpg"
+coverImageCard: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-card.jpg"
+coverImagePreview: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview.jpg"
+coverImagePreviewX: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview-x.jpg"
 ---
 
 We are excited to announce a **historic milestone for Bitcoin's Layer 2 ecosystem**: KaleidoSwap has executed the **first atomic swap of an RGB asset over the Lightning Network on mainnet.**
@@ -43,7 +43,7 @@ RGB extends Lightning to carry **assets beyond BTC**. With RGB-enabled Lightning
 3. No frontrunning (nothing shows up in mempool)
 4. Superior privacy & price certainty vs. AMM DEXes
 
-![RGB Atomic swap on Lightning](/blog/images/first-rgb-swap-mainnet/2.jpg)
+![RGB Atomic swap on Lightning](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-2.jpg)
 
 **KaleidoSwap's model:**
 
@@ -51,7 +51,7 @@ RGB extends Lightning to carry **assets beyond BTC**. With RGB-enabled Lightning
 - Bob (maker/LSP) replies with a price.
 - If Alice accepts, the swap executes instantly and trustlessly over Lightning.
 
-![Market Maker trading on KaleidoSwap desktop app](/blog/images/first-rgb-swap-mainnet/3.png)
+![Market Maker trading on KaleidoSwap desktop app](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-3.png)
 
 We covered the mechanics — now let's look at the specific asset we used for the first swap.
 
@@ -111,7 +111,7 @@ This transaction shows the RGB asset being spent with an **OP\_RETURN commitment
 
 Alice could now use her sats to **buy assets off-chain from Bob**, privately and instantly, through the **KaleidoSwap desktop app**.
 
-![Channel balances in KaleidoSwap](/blog/images/first-rgb-swap-mainnet/4.png)
+![Channel balances in KaleidoSwap](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-4.png)
 
 ---
 
@@ -125,13 +125,13 @@ With the channel funded and balances confirmed, Alice was able to execute the **
 
 The execution was **instant**, fully private, and cost only a few sats in fees.
 
-![First RGB Atomic Swap on Lightning Network Mainnet](/blog/images/first-rgb-swap-mainnet/cover.png)
+![First RGB Atomic Swap on Lightning Network Mainnet](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.png)
 
-![Response of the /listswaps endpoint of RLN](/blog/images/first-rgb-swap-mainnet/6.png)
+![Response of the /listswaps endpoint of RLN](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-6.png)
 
 This marks the **first time a valuable RGB asset has been exchanged trustlessly on Lightning mainnet** — between an everyday user (Alice) and a market maker (Bob).
 
-![Swap completion confirmation](/blog/images/first-rgb-swap-mainnet/7.png)
+![Swap completion confirmation](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-7.png)
 
 ---
 

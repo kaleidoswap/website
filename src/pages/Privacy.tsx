@@ -39,7 +39,6 @@ export const Privacy = () => {
         title="Privacy Policy"
         description="KaleidoSwap Privacy Policy. Learn how we protect your data and maintain your privacy while using our Bitcoin DEX."
         url="/privacy"
-        keywords={['privacy', 'policy', 'data protection', 'bitcoin', 'dex']}
       />
 
       <div className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none" aria-hidden="true" />
