@@ -3,7 +3,7 @@ import React from 'react'
 
 // Protocol logos
 const bitcoinLogo = '/logos/protocol-logos/bitcoin/bitcoin-logo-orange.svg'
-const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.png'
+const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.svg'
 const sparkAsterisk = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
 const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
 const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
