@@ -4,7 +4,6 @@ interface SEOProps {
   title?: string
   description?: string
   image?: string
-  imageX?: string
   url?: string
   type?: 'website' | 'article'
   noIndex?: boolean
@@ -50,7 +49,6 @@ export const SEO = ({
   title,
   description = DEFAULT_DESCRIPTION,
   image,
-  imageX,
   url,
   type = 'website',
   noIndex = false,
@@ -64,11 +62,6 @@ export const SEO = ({
   const fullImage = resolvedImage
     ? resolvedImage.startsWith('http') ? resolvedImage : `${SITE_URL}${resolvedImage}`
     : undefined
-  const resolvedImageX = imageX ?? resolvedImage
-  const fullImageX = resolvedImageX
-    ? resolvedImageX.startsWith('http') ? resolvedImageX : `${SITE_URL}${resolvedImageX}`
-    : undefined
-
   return (
     <Helmet>
       {/* Basic Meta Tags */}
@@ -89,7 +82,7 @@ export const SEO = ({
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      {fullImageX && <meta name="twitter:image" content={fullImageX} />}
+      {fullImage && <meta name="twitter:image" content={fullImage} />}
       <meta name="twitter:site" content="@kaleidoswap" />
 
       {/* Canonical URL */}

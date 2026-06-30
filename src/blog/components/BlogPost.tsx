@@ -22,7 +22,6 @@ export function BlogPost() {
         url={`/blog/${post.slug}`}
         type="article"
         image={post.coverImagePreview ?? post.coverImage}
-        imageX={post.coverImagePreviewX}
         datePublished={post.date}
         author={post.author}
       />

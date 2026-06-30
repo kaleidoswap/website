@@ -1,5 +1,5 @@
 ﻿---
-title: "KaleidoSwap Secures Pre-Seed Investment to Build the First RGB-Powered DEX on Bitcoin Lightning"
+title: "KaleidoSwap Secures Pre-Seed Investment to Build the First RGB-Powered DEX"
 date: "2025-09-08"
 author: "KaleidoSwap Team"
 tags: ["Announcement"]
