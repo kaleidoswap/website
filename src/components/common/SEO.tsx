@@ -89,7 +89,7 @@ export const SEO = ({
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      {fullImageX && <meta name="twitter:image" content={fullImageX} />}
+      {fullImage && <meta name="twitter:image" content={fullImage} />}
       <meta name="twitter:site" content="@kaleidoswap" />
 
       {/* Canonical URL */}
