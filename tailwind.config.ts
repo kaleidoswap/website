@@ -107,22 +107,155 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            maxWidth: '65ch',
-            color: 'white',
-            h1: {
-              color: 'white',
+            // ── measure & body rhythm ──
+            maxWidth: '68ch',
+            fontSize: '1.0625rem', // 17px
+            lineHeight: '1.75',
+            color: 'rgb(226 232 240)', // slate-200: softer than pure white for long-form
+            p: {
+              marginTop: '1.25em',
+              marginBottom: '1.25em',
             },
+            // gentle lede: the opening paragraph reads slightly larger
+            '> p:first-of-type': {
+              fontSize: '1.125em',
+              lineHeight: '1.7',
+              color: 'rgb(203 213 225)', // slate-300
+            },
+
+            // ── headings: tight tracking, room above, anchor offset ──
+            'h2, h3, h4': {
+              color: 'white',
+              scrollMarginTop: '7rem', // TOC anchor jumps clear the fixed navbar
+            },
+            h1: { color: 'white' },
             h2: {
-              color: 'white',
+              fontSize: '1.5em',
+              fontWeight: '700',
+              letterSpacing: '-0.02em',
+              lineHeight: '1.3',
+              marginTop: '2.4em',
+              marginBottom: '0.9em',
+              paddingBottom: '0.4em',
+              borderBottomWidth: '1px',
+              borderBottomColor: 'rgba(255,255,255,0.08)',
             },
-            strong: {
-              color: 'white',
+            h3: {
+              fontSize: '1.2em',
+              fontWeight: '600',
+              letterSpacing: '-0.01em',
+              marginTop: '2em',
+              marginBottom: '0.75em',
             },
+            strong: { color: 'white' },
+
+            // ── links: brand green, visible but calm ──
             a: {
-              color: 'rgb(56, 182, 255)',
+              color: 'rgb(74 222 128)', // primary-400
+              fontWeight: '500',
+              textDecoration: 'underline',
+              textDecorationColor: 'rgba(74,222,128,0.35)',
+              textUnderlineOffset: '3px',
+              transition: 'color 150ms, text-decoration-color 150ms',
               '&:hover': {
-                color: 'rgb(14, 157, 255)',
+                color: 'rgb(134 239 172)', // primary-300
+                textDecorationColor: 'rgba(134,239,172,0.7)',
               },
+            },
+
+            // ── inline code: chip, no decorative backticks ──
+            'code::before': { content: 'none' },
+            'code::after': { content: 'none' },
+            code: {
+              color: 'rgb(134 239 172)', // primary-300
+              backgroundColor: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '0.375rem',
+              padding: '0.125em 0.375em',
+              fontSize: '0.875em',
+              fontWeight: '500',
+            },
+
+            // ── code blocks: panel, scroll contained ──
+            pre: {
+              backgroundColor: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              borderRadius: '0.75rem',
+              padding: '1.25rem 1.5rem',
+              fontSize: '0.875em',
+              lineHeight: '1.7',
+              marginTop: '1.75em',
+              marginBottom: '1.75em',
+            },
+            'pre code': {
+              backgroundColor: 'transparent',
+              border: 'none',
+              borderRadius: '0',
+              padding: '0',
+              color: 'rgb(226 232 240)',
+              fontSize: '1em',
+              fontWeight: '400',
+            },
+
+            // ── lists: brand markers, breathing room ──
+            'ul > li::marker': { color: 'rgb(74 222 128)' },
+            'ol > li::marker': { color: 'rgb(148 163 184)' },
+            li: {
+              marginTop: '0.5em',
+              marginBottom: '0.5em',
+            },
+
+            // ── blockquote: green spine, quiet tint ──
+            blockquote: {
+              fontStyle: 'normal',
+              fontWeight: '400',
+              color: 'rgb(203 213 225)',
+              borderLeftWidth: '3px',
+              borderLeftColor: 'rgb(74 222 128)',
+              backgroundColor: 'rgba(74,222,128,0.05)',
+              borderRadius: '0 0.5rem 0.5rem 0',
+              padding: '0.75em 1.25em',
+              quotes: 'none',
+            },
+
+            // ── images & captions ──
+            img: {
+              borderRadius: '0.75rem',
+              border: '1px solid rgba(255,255,255,0.08)',
+              marginTop: '2em',
+              marginBottom: '0.75em',
+            },
+            // an <em> sharing a paragraph with an image = its caption
+            'p:has(> img) > em': {
+              display: 'block',
+              textAlign: 'center',
+              fontSize: '0.8125em',
+              lineHeight: '1.6',
+              color: 'rgb(148 163 184)', // slate-400
+              marginTop: '0.875em',
+            },
+            // caption authored as its own italic paragraph after the image
+            'p:has(> img) + p:has(> em:only-child)': {
+              textAlign: 'center',
+              fontSize: '0.8125em',
+              lineHeight: '1.6',
+              color: 'rgb(148 163 184)',
+              marginTop: '0',
+              marginBottom: '2.5em',
+            },
+
+            // ── misc ──
+            hr: {
+              borderColor: 'rgba(255,255,255,0.1)',
+              marginTop: '3em',
+              marginBottom: '3em',
+            },
+            thead: {
+              borderBottomColor: 'rgba(255,255,255,0.15)',
+            },
+            'thead th': { color: 'white' },
+            'tbody tr': {
+              borderBottomColor: 'rgba(255,255,255,0.08)',
             },
           },
         },
