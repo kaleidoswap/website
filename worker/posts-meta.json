@@ -1,7 +1,21 @@
 {
+  "june-2026-release-notes": {
+    "title": "June 2026: AI Agent, New Swaps Engine & Nostr Relay",
+    "description": "We built KaleidoMind, an on-device AI agent, and previewed it on desktop and a mobile alpha. We started rebuilding the swap engine in Rust. The node got more capable, and we launched our own Nostr relay.",
+    "image": "/blog/images/june-2026-release-notes/june-2026-release-notes-cover-preview.jpg",
+    "imageX": "/blog/images/june-2026-release-notes/june-2026-release-notes-cover-preview-x.jpg",
+    "date": "2026-06-30"
+  },
+  "nostr-relay-launch": {
+    "title": "KaleidoSwap Now Runs Its Own Nostr Relay",
+    "description": "KaleidoSwap launched wss://relay.kaleidoswap.com, an open Nostr relay that powers wallet identity, app connections, and order discovery.",
+    "image": "/blog/images/nostr-launch/nostr-launch-cover-preview.jpg",
+    "imageX": "/blog/images/nostr-launch/nostr-launch-cover-preview-x.jpg",
+    "date": "2026-06-18"
+  },
   "rgb-protocol": {
-    "title": "RGB Protocol on Bitcoin: The Infrastructure Behind KaleidoSwap",
-    "description": "How RGB Protocol v0.11.1 issues and transfers digital assets natively on Bitcoin and Lightning — no sidechains, no bridges, client-side validation by design.",
+    "title": "RGB Protocol on Bitcoin: History, Architecture, and How KaleidoSwap Fits in The Ecosystem",
+    "description": "The history, architecture, and ecosystem of RGB Protocol on Bitcoin v0.11.1 — and what KaleidoSwap is building on top of it.",
     "image": "/blog/images/rgb-protocol/rgb-protocol-cover-preview.jpg",
     "imageX": "/blog/images/rgb-protocol/rgb-protocol-cover-preview-x.jpg",
     "date": "2026-06-06"
@@ -14,8 +28,8 @@
     "date": "2026-05-31"
   },
   "kaleidoagent-wdk-hackathon": {
-    "title": "KaleidoAgent: An Autonomous AI Agent for Bitcoin L2",
-    "description": "KaleidoAgent is an autonomous AI agent for Bitcoin L2, executing trustless atomic swaps via MCP servers. 1st place at the WDK Hackathon.",
+    "title": "KaleidoAgent: An Autonomous AI Agent for Bitcoin L2 via MCP",
+    "description": "KaleidoAgent executes Bitcoin and Lightning payments for AI agents via MCP servers. Trustless atomic swaps on Bitcoin L2 introduced in agentic payments.",
     "image": "/blog/images/kaleido-agent/kaleido-agent-cover-preview.jpg",
     "imageX": "/blog/images/kaleido-agent/kaleido-agent-cover-preview-x.jpg",
     "date": "2026-05-06"
@@ -28,52 +42,52 @@
     "date": "2026-04-30"
   },
   "solving-bitcoin-l2-liquidity": {
-    "title": "Solving Bitcoin's L2 Liquidity Problem: KaleidoSwap's Multi-Protocol DEX Layer",
-    "description": "2025 was the year of RGB. Now, as we head into 2026, KaleidoSwap is evolving from a single-protocol proof into a unified multi-protocol liquidity engine for the entire Bitcoin L2 ecosystem.",
+    "title": "Solving Bitcoin L2 Interoperability: A Multi-Protocol Lightning DEX",
+    "description": "KaleidoSwap unifies Bitcoin L2 liquidity with trustless atomic swaps across RGB, Taproot Assets, Liquid, Spark, and Arkade. One Lightning DEX for every protocol.",
     "image": "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview.jpg",
     "imageX": "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview-x.jpg",
     "date": "2026-01-15"
   },
   "first-rgb-swap-mainnet": {
-    "title": "The First Ever RGB Asset Swap on Lightning Mainnet",
-    "description": "KaleidoSwap has executed the first atomic swap of an RGB asset over the Lightning Network on mainnet — a historic milestone for Bitcoin's Layer 2 ecosystem.",
+    "title": "The First Bitcoin Atomic Swap of an RGB Asset on Lightning",
+    "description": "KaleidoSwap executed the first Bitcoin atomic swap of an RGB asset on the Lightning Network, proving private, non-custodial trading on Bitcoin is real.",
     "image": "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview.jpg",
     "imageX": "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview-x.jpg",
     "date": "2025-09-30"
   },
   "kaleidoswap-utexo": {
-    "title": "KaleidoSwap × UTEXO: Bringing RGB-native USD₮ Swaps to Lightning",
-    "description": "KaleidoSwap integrates with UTEXO, the team behind the first RGB bridge, to bring fast, trustless BTC ⇄ USD₮ swaps with the privacy and self-custody guarantees of Bitcoin's infrastructure.",
+    "title": "KaleidoSwap × UTEXO: USDT-BTC Swaps via RGB Lightning",
+    "description": "KaleidoSwap integrates with UTEXO, the team behind the first RGB bridge, to bring fast, trustless BTC-USDT swaps with the privacy and self-custody guarantees of Bitcoin's infrastructure.",
     "image": "/blog/images/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview.jpg",
     "imageX": "/blog/images/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview-x.jpg",
     "date": "2025-09-23"
   },
   "pre-seed-investment": {
-    "title": "KaleidoSwap Secures Pre-Seed Investment to Build the First RGB-Powered DEX on Bitcoin Lightning",
+    "title": "KaleidoSwap Raises Pre-Seed for the First RGB-powered Lightning DEX",
     "description": "KaleidoSwap has secured a pre-seed investment from Bitfinex Ventures and Fulgur Ventures to accelerate the development of the first RGB-based DEX on the Lightning Network.",
     "image": "/blog/images/pre-seed-investment/pre-seed-investment-cover-preview.jpg",
     "imageX": "/blog/images/pre-seed-investment/pre-seed-investment-cover-preview-x.jpg",
     "date": "2025-09-08"
   },
   "introducing-rate": {
-    "title": "Introducing Rate: AI-Powered Self-Sovereign RGB Lightning Wallet",
-    "description": "Rate, our AI-powered RGB Lightning wallet, just won the Plan B Hackathon in Lugano. Here's the story of how we built a Bitcoin assistant that makes Lightning, RGB assets, and social payments accessible to everyone.",
+    "title": "Introducing Rate: AI-Powered Self-Custodial RGB Lightning Wallet",
+    "description": "Rate brings multi-protocol Bitcoin payments through an AI-powered wallet engine. Users can interact with an AI agent to move sats and RGB assets via natural language or voice.",
     "image": "/blog/images/introducing-rate/introducing-rate-cover-preview.jpg",
     "imageX": "/blog/images/introducing-rate/introducing-rate-cover-preview-x.jpg",
     "date": "2025-07-30"
   },
   "kaleidoswap-v020": {
-    "title": "KaleidoSwap v0.2.0 — RGB Is Now Live on Mainnet",
-    "description": "KaleidoSwap v0.2.0 lands as RGB v0.11.1 goes live on Bitcoin mainnet — bringing advanced asset swaps, improved UX, and stronger Lightning infrastructure integration.",
+    "title": "KaleidoSwap v0.2.0: Non-Custodial RGB Swaps Live on Mainnet",
+    "description": "Non-custodial Bitcoin swaps with RGB assets: KaleidoSwap v0.2.0 ships as RGB v0.11.1 goes live on mainnet, offering a stronger Lightning infrastructure integration",
     "image": "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-preview.jpg",
     "imageX": "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-preview-x.jpg",
     "date": "2025-07-23"
   },
   "rgb-taproot-atomic-swaps": {
-    "title": "RGB — TaprootAssets Lightning Atomic Swaps",
-    "description": "A simple protocol for trustless cross-protocol swaps between RGB20 and Taproot Assets over the Lightning Network.",
-    "image": "/blog/images/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview.jpg",
-    "imageX": "/blog/images/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview-x.jpg",
+    "title": "RGB–TaprootAssets Lightning Atomic Swaps",
+    "description": "A simple protocol for Bitcoin atomic swaps between RGB and Taproot Assets over the Lightning Network, enabling cross-L2 interoperability",
+    "image": "/blog/images/rgb-tapas-atomic-swaps/rgb-tapas-atomic-swaps-cover-preview.jpg",
+    "imageX": "/blog/images/rgb-tapas-atomic-swaps/rgb-tapas-atomic-swaps-cover-preview-x.jpg",
     "date": "2025-03-26"
   }
 }

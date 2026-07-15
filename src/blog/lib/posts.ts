@@ -6,7 +6,9 @@ const renderer = new Renderer()
 renderer.link = ({ href, title, tokens }) => {
   const text = tokens.map(t => ('raw' in t ? t.raw : '')).join('')
   const titleAttr = title ? ` title="${title}"` : ''
-  return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`
+  const isInternal = href.startsWith('/') || href.startsWith('#')
+  const externalAttrs = isInternal ? '' : ' target="_blank" rel="noopener noreferrer"'
+  return `<a href="${href}"${titleAttr}${externalAttrs}>${text}</a>`
 }
 
 // Vite loads all .md files under posts/ as raw strings at build time.

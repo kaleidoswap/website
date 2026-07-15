@@ -1,7 +1,6 @@
 ---
 title: "June 2026: AI Agent, New Swaps Engine & Nostr Relay"
 date: "2026-06-30"
-author: "KaleidoSwap Team"
 tags: ["Release Notes"]
 slug: "june-2026-release-notes"
 excerpt: "We built KaleidoMind, an on-device AI agent, and previewed it on desktop and a mobile alpha. We started rebuilding the swap engine in Rust. The node got more capable, and we launched our own Nostr relay."
@@ -83,5 +82,5 @@ You can follow the work on [GitHub](https://github.com/kaleidoswap).
 * [KaleidoSDK docs](https://docs.kaleidoswap.com)
 * [KaleidoMind — QVAC "Unleash Edge AI" hackathon submission](https://kaleidoswap.github.io/kaleido-mind)
 * [rgb-lib WASM by utexo](https://github.com/UTEXO-Protocol/rgb-lib-wasm)
-* [KaleidoSwap Extension beta](https://kaleidoswap.com/products/extension/beta)
+* [KaleidoSwap Extension beta](/products/extension/beta)
 * [KaleidoSwap on GitHub](https://github.com/kaleidoswap)
