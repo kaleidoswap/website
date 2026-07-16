@@ -1,14 +1,15 @@
 ﻿---
-title: "KaleidoSwap v0.2.0: Non-Custodial RGB Swaps Live on Mainnet"
+title: "KaleidoSwap v0.2.0 — RGB Is Now Live on Mainnet"
 date: "2025-07-23"
+author: "KaleidoSwap Team"
 tags: ["Announcement"]
 slug: "kaleidoswap-v020"
-excerpt: "Non-custodial Bitcoin swaps with RGB assets: KaleidoSwap v0.2.0 ships as RGB v0.11.1 goes live on mainnet, offering a stronger Lightning infrastructure integration"
-coverImage: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover.jpg"
-coverImageMobile: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-mobile.jpg"
-coverImageCard: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-card.jpg"
-coverImagePreview: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/kaleidoswap-v020/kaleidoswap-v020-cover-preview-x.jpg"
+excerpt: "KaleidoSwap v0.2.0 lands as RGB v0.11.1 goes live on Bitcoin mainnet — bringing advanced asset swaps, improved UX, and stronger Lightning infrastructure integration."
+coverImage: "/blog/kaleidoswap-v020/kaleidoswap-v020-cover.jpg"
+coverImageMobile: "/blog/kaleidoswap-v020/kaleidoswap-v020-cover-mobile.jpg"
+coverImageCard: "/blog/kaleidoswap-v020/kaleidoswap-v020-cover-card.jpg"
+coverImagePreview: "/blog/kaleidoswap-v020/kaleidoswap-v020-cover-preview.jpg"
+coverImagePreviewX: "/blog/kaleidoswap-v020/kaleidoswap-v020-cover-preview-x.jpg"
 ---
 
 We released **KaleidoSwap v0.2.0**, our latest alpha version, arriving at a historic moment for Bitcoin's asset ecosystem.

@@ -6,6 +6,7 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
@@ -115,23 +116,20 @@ export const Products = () => {
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="Products"
-        description="KaleidoSwap products: Web App, Desktop App, SDK, Mobile App, and Browser Extension. Build and trade on Bitcoin's most connected swap protocol."
-        url="/products"
-      />
+      <SEO {...STATIC_PAGE_META['/products']} url="/products" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ItemList',
           name: 'KaleidoSwap Products',
-          description: 'KaleidoSwap products: Web App, Desktop App, SDK, and Browser Extension. Build and trade on Bitcoin\'s most connected swap protocol.',
+          description: 'KaleidoSwap products: Web App, Desktop App, SDK, Mobile App, and Browser Extension. Build and trade on Bitcoin\'s most connected swap protocol.',
           url: 'https://kaleidoswap.com/products',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Web App', url: 'https://kaleidoswap.com/products/web-app' },
             { '@type': 'ListItem', position: 2, name: 'Desktop App', url: 'https://kaleidoswap.com/products/desktop' },
             { '@type': 'ListItem', position: 3, name: 'KaleidoSDK', url: 'https://kaleidoswap.com/products/sdk' },
             { '@type': 'ListItem', position: 4, name: 'Browser Extension', url: 'https://kaleidoswap.com/products/extension' },
+            { '@type': 'ListItem', position: 5, name: 'Mobile App', url: 'https://kaleidoswap.com/products/mobile' },
           ],
         })}</script>
         <script type="application/ld+json">{JSON.stringify({

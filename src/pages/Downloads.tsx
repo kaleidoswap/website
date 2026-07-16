@@ -12,6 +12,7 @@ import {
   type DownloadConfig,
   type GithubReleaseAsset
 } from '@/constants/downloads'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { stripVersionTag } from '@/constants/versions'
 import { GITHUB } from '@/constants/urls'
 import { footerConfig } from '@/constants/footer'
@@ -252,11 +253,7 @@ export const Downloads = () => {
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="KaleidoSwap Desktop Download"
-        description="Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets."
-        url="/downloads"
-      />
+      <SEO {...STATIC_PAGE_META['/downloads']} url="/downloads" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -264,7 +261,7 @@ export const Downloads = () => {
           name: 'KaleidoSwap Desktop Download',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'macOS, Windows, Linux',
-          description: 'Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets.',
+          description: 'Download the KaleidoSwap Desktop App. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and enable atomic swaps of Bitcoin L2s assets.',
           url: 'https://kaleidoswap.com/downloads',
           downloadUrl: 'https://github.com/kaleidoswap/desktop-app/releases',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },

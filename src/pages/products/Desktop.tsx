@@ -6,6 +6,7 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
@@ -61,11 +62,7 @@ export const Desktop = () => {
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="KaleidoSwap Desktop App"
-        description="Full sovereignty, open source, multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node that runs locally. Non-custodial Bitcoin swap with no KYC required. macOS, Windows, Linux."
-        url="/products/desktop"
-      />
+      <SEO {...STATIC_PAGE_META['/products/desktop']} url="/products/desktop" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -73,7 +70,7 @@ export const Desktop = () => {
           name: 'KaleidoSwap Desktop App',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'macOS, Windows, Linux',
-          description: 'Full sovereignty, open source, multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node that runs locally. Non-custodial Bitcoin swap with no KYC required. macOS, Windows, Linux.',
+          description: 'Full sovereignty, multi-protocol wallet for Bitcoin. Bundles a complete RGB Lightning node and local AI brain. Non-custodial Bitcoin swaps across Bitcoin L2s.',
           url: 'https://kaleidoswap.com/products/desktop',
           downloadUrl: 'https://kaleidoswap.com/downloads',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },

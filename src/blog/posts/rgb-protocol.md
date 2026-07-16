@@ -4,11 +4,11 @@ date: "2026-06-06"
 tags: ["Deep Dive"]
 slug: "rgb-protocol"
 excerpt: "The history, architecture, and ecosystem of RGB Protocol on Bitcoin v0.11.1 — and what KaleidoSwap is building on top of it."
-coverImage: "/blog/images/rgb-protocol/rgb-protocol-cover.jpg"
-coverImageMobile: "/blog/images/rgb-protocol/rgb-protocol-cover-mobile.jpg"
-coverImageCard: "/blog/images/rgb-protocol/rgb-protocol-cover-card.jpg"
-coverImagePreview: "/blog/images/rgb-protocol/rgb-protocol-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/rgb-protocol/rgb-protocol-cover-preview-x.jpg"
+coverImage: "/blog/rgb-protocol/rgb-protocol-cover.jpg"
+coverImageMobile: "/blog/rgb-protocol/rgb-protocol-cover-mobile.jpg"
+coverImageCard: "/blog/rgb-protocol/rgb-protocol-cover-card.jpg"
+coverImagePreview: "/blog/rgb-protocol/rgb-protocol-cover-preview.jpg"
+coverImagePreviewX: "/blog/rgb-protocol/rgb-protocol-cover-preview-x.jpg"
 ---
 
 **Quick summary**

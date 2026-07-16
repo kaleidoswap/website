@@ -1,14 +1,15 @@
 ﻿---
-title: "Solving Bitcoin L2 Interoperability: A Multi-Protocol Lightning DEX"
+title: "Solving Bitcoin's L2 Liquidity Problem: KaleidoSwap's Multi-Protocol DEX Layer"
 date: "2026-01-15"
+author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
-slug: "solving-bitcoin-l2-liquidity"
-excerpt: "KaleidoSwap unifies Bitcoin L2 liquidity with trustless atomic swaps across RGB, Taproot Assets, Liquid, Spark, and Arkade. One Lightning DEX for every protocol."
-coverImage: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover.jpg"
-coverImageMobile: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-mobile.jpg"
-coverImageCard: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-card.jpg"
-coverImagePreview: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview-x.jpg"
+slug: "bitcoin-l2-interoperability"
+excerpt: "2025 was the year of RGB. Now, as we head into 2026, KaleidoSwap is evolving from a single-protocol proof into a unified multi-protocol liquidity engine for the entire Bitcoin L2 ecosystem."
+coverImage: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover.jpg"
+coverImageMobile: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-mobile.jpg"
+coverImageCard: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-card.jpg"
+coverImagePreview: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview.jpg"
+coverImagePreviewX: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview-x.jpg"
 ---
 
 > From single-protocol proof to a unified, multi-chain liquidity engine.
@@ -32,7 +33,7 @@ We launched the KaleidoSwap Desktop App, a seamless environment where users coul
 - Users could manage their own nodes and liquidity.
 - They experienced a "futuristic" DeFi UX native to Bitcoin. No bridges, no wrappers.
 
-![KaleidoSwap Desktop Application](/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-2.png)
+![KaleidoSwap Desktop Application](/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-2.png)
 
 This traction didn't go unnoticed. We proudly [announced](https://en.cryptonomist.ch/2025/09/12/kaleidoswap-the-first-dex-on-bitcoin-lightning-receives-a-pre-seed-investment/) strategic investments from [Bitfinex Ventures](https://www.bitfinex.com/) and [Fulgur Ventures](https://fulgur.ventures/). This wasn't just funding; it was a mandate to bootstrap trustless trading infrastructure for digital assets backed by the Lightning Network.
 
@@ -44,7 +45,7 @@ In July, we took our vision mobile and won the PlanB Hackathon. **Rate** is an i
 - **LSP Integration** — Built on top of the KaleidoSwap [LSP](https://docs.lightning.engineering/the-lightning-network/liquidity/lightning-service-provider) (Lightning Service Provider), we abstracted away the complexity of channel management.
 - **AI-Assisted Finance** — We integrated a local AI assistant capable of "Talk to Wallet" interactions. Instead of complex inputs, users can simply ask for suggestions on where to spend sats or stablecoins, or execute payments via natural language commands.
 
-![Rate mobile app](/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-3.png)
+![Rate mobile app](/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-3.png)
 
 [Check out](https://kaleidoswap.com/blog/introducing-rate) more on the dedicated article.
 
@@ -97,7 +98,7 @@ Launching early 2026 on mainnet, this is the flagship interface for the financia
 - **Connect Any Wallet** — Support for [BitMask](https://bitmask.app/), [XVerse](https://www.xverse.app/), [Alby](https://getalby.com/), and the KaleidoSwap Extension.
 - **Beyond Swaps** — We aren't stopping at spot trading. We envision a future with Prediction Markets, Synthetic Stocks, and Derivatives, all on Bitcoin. We are ready to build the infra to unlock it all.
 
-![KaleidoSwap WebApp Dashboard](/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-4.png)
+![KaleidoSwap WebApp Dashboard](/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-4.png)
 
 ## Why a Bitcoin L2 DEX Matters Now
 

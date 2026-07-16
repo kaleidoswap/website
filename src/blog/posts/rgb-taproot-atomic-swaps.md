@@ -1,14 +1,15 @@
 ﻿---
-title: "RGB–TaprootAssets Lightning Atomic Swaps"
+title: "RGB — TaprootAssets Lightning Atomic Swaps"
 date: "2025-03-26"
+author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
 slug: "rgb-taproot-atomic-swaps"
-excerpt: "A simple protocol for Bitcoin atomic swaps between RGB and Taproot Assets over the Lightning Network, enabling cross-L2 interoperability"
-coverImage: "/blog/images/rgb-tapas-atomic-swaps/rgb-tapas-atomic-swaps-cover.jpg"
-coverImageMobile: "/blog/images/rgb-tapas-atomic-swaps/rgb-tapas-atomic-swaps-cover-mobile.jpg"
-coverImageCard: "/blog/images/rgb-tapas-atomic-swaps/rgb-tapas-atomic-swaps-cover-card.jpg"
-coverImagePreview: "/blog/images/rgb-tapas-atomic-swaps/rgb-tapas-atomic-swaps-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/rgb-tapas-atomic-swaps/rgb-tapas-atomic-swaps-cover-preview-x.jpg"
+excerpt: "A simple protocol for trustless cross-protocol swaps between RGB20 and Taproot Assets over the Lightning Network."
+coverImage: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover.jpg"
+coverImageMobile: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-mobile.jpg"
+coverImageCard: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-card.jpg"
+coverImagePreview: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview.jpg"
+coverImagePreviewX: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview-x.jpg"
 ---
 
 ### Bridging RGB20 and Taproot Assets on Lightning Network

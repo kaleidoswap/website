@@ -1,14 +1,15 @@
 ﻿---
-title: "The First Bitcoin Atomic Swap of an RGB Asset on Lightning"
+title: "The First Ever RGB Asset Swap on Lightning Mainnet"
 date: "2025-09-30"
+author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
 slug: "first-rgb-swap-mainnet"
-excerpt: "KaleidoSwap executed the first Bitcoin atomic swap of an RGB asset on the Lightning Network, proving private, non-custodial trading on Bitcoin is real."
-coverImage: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.jpg"
-coverImageMobile: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-mobile.jpg"
-coverImageCard: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-card.jpg"
-coverImagePreview: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview-x.jpg"
+excerpt: "KaleidoSwap has executed the first atomic swap of an RGB asset over the Lightning Network on mainnet — a historic milestone for Bitcoin's Layer 2 ecosystem."
+coverImage: "/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.jpg"
+coverImageMobile: "/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-mobile.jpg"
+coverImageCard: "/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-card.jpg"
+coverImagePreview: "/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview.jpg"
+coverImagePreviewX: "/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover-preview-x.jpg"
 ---
 
 We are excited to announce a historic milestone for Bitcoin's Layer 2 ecosystem: KaleidoSwap has executed the first atomic swap of an [RGB](https://rgb.info) asset over the [Lightning Network](https://lightning.network/).
@@ -41,7 +42,7 @@ This brings some important advantages:
 - No frontrunning (nothing shows up in mempool)
 - Superior privacy & price certainty vs. [AMM](https://www.investopedia.com/terms/a/automated-market-maker-amm.asp) DEXs
 
-![RGB Atomic swap on Lightning](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-2.jpg)
+![RGB Atomic swap on Lightning](/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-2.jpg)
 
 Translating it on the **KaleidoSwap's model**:
 
@@ -49,7 +50,7 @@ Translating it on the **KaleidoSwap's model**:
 - Bob (maker/[LSP](https://docs.lightning.engineering/the-lightning-network/liquidity/lightning-service-provider)) replies with a price.
 - If Alice accepts, the swap executes instantly and trustlessly over Lightning.
 
-![Market Maker trading on KaleidoSwap desktop app](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-3.png)
+![Market Maker trading on KaleidoSwap desktop app](/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-3.png)
 
 For a beginner-friendly primer, check out The Bitcoin Manual's ["What Are RGB Asset Swaps?"](https://thebitcoinmanual.com/articles/rgb-asset-swaps/) article.
 
@@ -103,7 +104,7 @@ After 6 confirmations, the channel balances will be:
 
 Alice could now use her sats to buy assets off-chain from Bob, privately and instantly, through the KaleidoSwap Desktop App.
 
-![Channel balances in KaleidoSwap](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-4.png)
+![Channel balances in KaleidoSwap](/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-4.png)
 
 ---
 
@@ -117,13 +118,13 @@ With the channel funded and balances confirmed, Alice was able to execute the **
 
 The **execution was instant**, fully private, and cost only a few sats in fees.
 
-![First RGB Atomic Swap on Lightning Network Mainnet](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.jpg)
+![First RGB Atomic Swap on Lightning Network Mainnet](/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-cover.jpg)
 
-![Response of the /listswaps endpoint of RLN](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-6.png)
+![Response of the /listswaps endpoint of RLN](/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-6.png)
 
 This marks the first time a valuable RGB asset has been exchanged trustlessly on Lightning mainnet between an everyday user (Alice) and a market maker (Bob).
 
-![Swap completion confirmation](/blog/images/first-rgb-swap-mainnet/first-rgb-swap-mainnet-7.png)
+![Swap completion confirmation](/blog/first-rgb-swap-mainnet/first-rgb-swap-mainnet-7.png)
 
 ---
 

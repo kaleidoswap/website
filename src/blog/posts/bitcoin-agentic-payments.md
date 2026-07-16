@@ -1,14 +1,15 @@
 ---
-title: "KaleidoAgent: An Autonomous AI Agent for Bitcoin L2 via MCP"
+title: "KaleidoAgent: An Autonomous AI Agent for Bitcoin L2"
 date: "2026-05-06"
+author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
-slug: "kaleidoagent-wdk-hackathon"
-excerpt: "KaleidoAgent executes Bitcoin and Lightning payments for AI agents via MCP servers. Trustless atomic swaps on Bitcoin L2 introduced in agentic payments."
-coverImage: "/blog/images/kaleido-agent/kaleido-agent-cover.jpg"
-coverImageMobile: "/blog/images/kaleido-agent/kaleido-agent-cover-mobile.jpg"
-coverImageCard: "/blog/images/kaleido-agent/kaleido-agent-cover-card.jpg"
-coverImagePreview: "/blog/images/kaleido-agent/kaleido-agent-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/kaleido-agent/kaleido-agent-cover-preview-x.jpg"
+slug: "bitcoin-agentic-payments"
+excerpt: "KaleidoAgent is an autonomous AI agent for Bitcoin L2, executing trustless atomic swaps via MCP servers. 1st place at the WDK Hackathon."
+coverImage: "/blog/kaleido-agent/kaleido-agent-cover.jpg"
+coverImageMobile: "/blog/kaleido-agent/kaleido-agent-cover-mobile.jpg"
+coverImageCard: "/blog/kaleido-agent/kaleido-agent-cover-card.jpg"
+coverImagePreview: "/blog/kaleido-agent/kaleido-agent-cover-preview.jpg"
+coverImagePreviewX: "/blog/kaleido-agent/kaleido-agent-cover-preview-x.jpg"
 ---
 
 We built an autonomous AI agent for Bitcoin L2, running portfolio strategies, managing Lightning channels, and executing trustless atomic swaps. It uses [MCP servers](https://modelcontextprotocol.io/) to expose every swap and wallet action as a typed tool for the model. It just [won two prizes](https://x.com/WDK_tether/status/2052402785899917812?s=20) at the [WDK Hackathon](https://dorahacks.io/hackathon/hackathon-galactica-wdk-2026-01/buidl).

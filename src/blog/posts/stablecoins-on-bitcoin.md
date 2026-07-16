@@ -1,14 +1,15 @@
 ﻿---
-title: "KaleidoSwap × UTEXO: USDT-BTC Swaps via RGB Lightning"
+title: "KaleidoSwap × UTEXO: Bringing RGB-native USDT Swaps to Lightning"
 date: "2025-09-23"
+author: "KaleidoSwap Team"
 tags: ["Partnership"]
-slug: "kaleidoswap-utexo"
-excerpt: "KaleidoSwap integrates with UTEXO, the team behind the first RGB bridge, to bring fast, trustless BTC-USDT swaps with the privacy and self-custody guarantees of Bitcoin's infrastructure."
-coverImage: "/blog/images/kaleidoswap-utexo/kaleidoswap-utexo-cover.jpg"
-coverImageMobile: "/blog/images/kaleidoswap-utexo/kaleidoswap-utexo-cover-mobile.jpg"
-coverImageCard: "/blog/images/kaleidoswap-utexo/kaleidoswap-utexo-cover-card.jpg"
-coverImagePreview: "/blog/images/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview-x.jpg"
+slug: "stablecoins-on-bitcoin"
+excerpt: "KaleidoSwap integrates with UTEXO, the team behind the first RGB bridge, to bring fast, trustless BTC ⇄ USDT swaps with the privacy and self-custody guarantees of Bitcoin's infrastructure."
+coverImage: "/blog/kaleidoswap-utexo/kaleidoswap-utexo-cover.jpg"
+coverImageMobile: "/blog/kaleidoswap-utexo/kaleidoswap-utexo-cover-mobile.jpg"
+coverImageCard: "/blog/kaleidoswap-utexo/kaleidoswap-utexo-cover-card.jpg"
+coverImagePreview: "/blog/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview.jpg"
+coverImagePreviewX: "/blog/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview-x.jpg"
 ---
 
 Today, we're excited to announce a strategic integration with [UTEXO](https://www.utexo.com/), the team behind the first RGB bridge that brings stablecoins like [USDT](https://tether.to/en/) from other blockchains onto Bitcoin via [RGB](https://rgb.info/). This partnership lets KaleidoSwap users access fast, trustless BTC-USDT swaps, with the privacy and self-custody guarantees of Bitcoin and [Lightning Network](https://lightning.network/)'s infrastructure.

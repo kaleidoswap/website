@@ -1,14 +1,15 @@
 ﻿---
-title: "Introducing Rate: AI-Powered Self-Custodial RGB Lightning Wallet"
+title: "Introducing Rate: AI-Powered Self-Sovereign RGB Lightning Wallet"
 date: "2025-07-30"
+author: "Walter"
 tags: ["Announcement"]
 slug: "introducing-rate"
-excerpt: "Rate brings multi-protocol Bitcoin payments through an AI-powered wallet engine. Users can interact with an AI agent to move sats and RGB assets via natural language or voice."
-coverImage: "/blog/images/introducing-rate/introducing-rate-cover.jpg"
-coverImageMobile: "/blog/images/introducing-rate/introducing-rate-cover-mobile.jpg"
-coverImageCard: "/blog/images/introducing-rate/introducing-rate-cover-card.jpg"
-coverImagePreview: "/blog/images/introducing-rate/introducing-rate-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/introducing-rate/introducing-rate-cover-preview-x.jpg"
+excerpt: "Rate, our AI-powered RGB Lightning wallet, just won the Plan B Hackathon in Lugano. Here's the story of how we built a Bitcoin assistant that makes Lightning, RGB assets, and social payments accessible to everyone."
+coverImage: "/blog/introducing-rate/introducing-rate-cover.jpg"
+coverImageMobile: "/blog/introducing-rate/introducing-rate-cover-mobile.jpg"
+coverImageCard: "/blog/introducing-rate/introducing-rate-cover-card.jpg"
+coverImagePreview: "/blog/introducing-rate/introducing-rate-cover-preview.jpg"
+coverImagePreviewX: "/blog/introducing-rate/introducing-rate-cover-preview-x.jpg"
 ---
 
 Rate just won the [Plan B Hackathon](https://planbhackathon.xyz/) in Lugano on July 28–29, 2025. We built this AI-powered [RGB](https://rgb.info/) [Lightning](https://lightning.network/) wallet to fulfill the hackathon’s vision of combining Bitcoin, AI, and real-world utility for Lugano. We see strong potential in this combination, and it’s going to be more than just a hackathon project.
@@ -41,7 +42,7 @@ We watched brilliant innovations like RGB assets and Lightning Network struggle 
 
 Rate is your personal Bitcoin assistant that handles all the complexity while you focus on what matters: sending and receiving value. We've built a complete ecosystem that seamlessly integrates Bitcoin, Lightning, RGB assets, social payments, and AI into one intuitive experience.
 
-![Rate app interface](/blog/images/introducing-rate/introducing-rate-2.jpg)
+![Rate app interface](/blog/introducing-rate/introducing-rate-2.jpg)
 
 It uses an RGB Lightning node running remotely on cloud infrastructure powered by [Thunderstack.org](https://thunderstack.org/). This innovative approach removes the complexity of handling a node locally while maintaining it completely non-custodial. Users always have full control on their keys.
 
@@ -62,7 +63,7 @@ We integrated [Nostr](https://nostr.com/) because we believe it's the best proto
 - **Seamless Payments** — Pay your social network with one tap
 - **Decentralized** — No central servers, pure peer-to-peer social payments
 
-![Nostr social integration in Rate](/blog/images/introducing-rate/introducing-rate-3.jpg)
+![Nostr social integration in Rate](/blog/introducing-rate/introducing-rate-3.jpg)
 
 The [BTC Map](https://btcmap.org/) is integrated directly into the app as well, making it useful to search for places that accept Bitcoin. This bridges the gap between digital assets and physical commerce, especially valuable in Bitcoin-friendly Lugano.
 
@@ -73,7 +74,7 @@ The [BTC Map](https://btcmap.org/) is integrated directly into the app as well, 
 - **Lugano Focus** — Perfect for navigating the city's crypto-friendly landscape
 - **Real-world Utility** — Turn your Bitcoin into coffee, pizza, and shopping
 
-![BTC Map integration](/blog/images/introducing-rate/introducing-rate-4.jpg)
+![BTC Map integration](/blog/introducing-rate/introducing-rate-4.jpg)
 
 ### AI Agent for Bitcoin Payments and More
 
@@ -96,7 +97,7 @@ The user can send requests to the AI agent using voice commands. For example:
 
 The voice interface provides an even better user experience, allowing users to interact with their Bitcoin wallet completely hands-free.
 
-![AI chatbot in Rate](/blog/images/introducing-rate/introducing-rate-5.jpg)
+![AI chatbot in Rate](/blog/introducing-rate/introducing-rate-5.jpg)
 
 ### Built for the Future: Agentic Payments, RGB Integration, and Cross-Protocol Swaps
 

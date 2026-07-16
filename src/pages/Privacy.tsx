@@ -4,6 +4,7 @@ import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { GITHUB } from '@/constants/urls'
 import { Shield, Lock, Eye, FileText, Mail, ChevronLeft } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -35,11 +36,7 @@ export const Privacy = () => {
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="Privacy Policy"
-        description="KaleidoSwap Privacy Policy. Learn how we protect your data and maintain your privacy while using our Bitcoin DEX."
-        url="/privacy"
-      />
+      <SEO {...STATIC_PAGE_META['/privacy']} url="/privacy" />
 
       <div className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none" aria-hidden="true" />
 

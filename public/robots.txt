@@ -4,7 +4,6 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /staging
 Disallow: /staging/
-Disallow: /products/web-app
 Disallow: /*.test.*
 Disallow: /*.spec.*
 
