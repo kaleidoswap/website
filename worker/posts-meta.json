@@ -1,7 +1,7 @@
 {
   "rgb-on-liquid": {
     "title": "RGB Meets Simplicity: Programmable Seals on Liquid",
-    "description": "We anchored RGB assets on Liquid, swapped them across Bitcoin and Liquid with no custodian, and made the chain itself enforce RGB anchoring with a Simplicity covenant — a reproducible proof of concept.",
+    "description": "We anchored RGB assets on Liquid, swapped across Bitcoin and Liquid with no custodian, and made the chain enforce RGB anchoring with a Simplicity covenant",
     "image": "/blog/rgb-liquid/rgb-liquid-cover-preview.jpg",
     "imageX": "/blog/rgb-liquid/rgb-liquid-cover-preview-x.jpg",
     "date": "2026-07-13"
