@@ -1,7 +1,6 @@
 ---
 title: "May 2026: Extension Mainnet Beta, Covenant DEX Rails, and Partner Admin Panel"
 date: "2026-05-31"
-author: "KaleidoSwap Team"
 tags: ["Release Notes"]
 slug: "may-2026-release-notes"
 excerpt: "The browser extension shipped its first mainnet beta, our covenant DEX work took shape across three settlement rails, Liquid integration began, and the RGB Lightning Node reached v0.7.0."
@@ -39,7 +38,7 @@ Passkey wallet unlock is built and queued for **v0.2**, shipping soon.
 
 ## Mosaik: A Covenant DEX Across Three Rails
 
-[Mosaik](https://kaleidoswap.com/blog/mosaik-tessera-covenant-dex) started as a hackathon project and is becoming a new set of rails for KaleidoSwap. It is a new way to swap, one that sits alongside decentralized order books and RFQ rather than replacing them. Instead of a matching engine holding the trade, a **covenant enforces the trade itself**: the order is a coin that keeps its own word.
+[Mosaik](/blog/mosaik-tessera-covenant-dex) started as a hackathon project and is becoming a new set of rails for KaleidoSwap. It is a new way to swap, one that sits alongside decentralized order books and RFQ rather than replacing them. Instead of a matching engine holding the trade, a **covenant enforces the trade itself**: the order is a coin that keeps its own word.
 
 We see three rails to get there, and we are building toward all of them:
 
@@ -95,14 +94,14 @@ For the extension, v0.2 brings passkey unlock and further hardening, followed by
 
 On the protocol side, the Liquid backend deepens toward production, the three covenant rails mature, and the Mosaik design write-up is on its way.
 
-Want early access? Join the [KaleidoSwap Extension beta](https://kaleidoswap.com/products/extension/beta), and follow the build on [GitHub](https://github.com/kaleidoswap).
+Want early access? Join the [KaleidoSwap Extension beta](/products/extension/beta), and follow the build on [GitHub](https://github.com/kaleidoswap).
 
 ---
 
 📚 **Sources**
 
 - [KaleidoSwap Extension changelog (v0.1.0-beta.1)](https://github.com/kaleidoswap)
-- [Mosaik: The Order That Is a Coin](https://kaleidoswap.com/blog/mosaik-tessera-covenant-dex)
+- [Mosaik: The Order That Is a Coin](/blog/mosaik-tessera-covenant-dex)
 - [banco for Liquid](https://github.com/vulpemventures/banco)
 - [banco for Arkade](https://github.com/arkade-os/banco)
 - [RGB Lightning Node releases](https://github.com/kaleidoswap/rgb-lightning-node/releases)

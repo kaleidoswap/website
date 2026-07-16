@@ -63,8 +63,8 @@
     "date": "2025-09-30"
   },
   "stablecoins-on-bitcoin": {
-    "title": "KaleidoSwap × UTEXO: Bringing RGB-native USD₮ Swaps to Lightning",
-    "description": "KaleidoSwap integrates with UTEXO, the team behind the first RGB bridge, to bring fast, trustless BTC ⇄ USD₮ swaps with the privacy and self-custody guarantees of Bitcoin's infrastructure.",
+    "title": "KaleidoSwap × UTEXO: Bringing RGB-native USDT Swaps to Lightning",
+    "description": "KaleidoSwap integrates with UTEXO, the team behind the first RGB bridge, to bring fast, trustless BTC ⇄ USDT swaps with the privacy and self-custody guarantees of Bitcoin's infrastructure.",
     "image": "/blog/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview.jpg",
     "imageX": "/blog/kaleidoswap-utexo/kaleidoswap-utexo-cover-preview-x.jpg",
     "date": "2025-09-23"
