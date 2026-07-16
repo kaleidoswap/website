@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Announcement"]
 slug: "nostr-relay-launch"
 excerpt: "KaleidoSwap launched wss://relay.kaleidoswap.com, an open Nostr relay that powers wallet identity, app connections, and order discovery."
-coverImage: "/blog/images/nostr-launch/nostr-launch-cover.jpg"
-coverImageMobile: "/blog/images/nostr-launch/nostr-launch-cover-mobile.jpg"
-coverImageCard: "/blog/images/nostr-launch/nostr-launch-cover-card.jpg"
-coverImagePreview: "/blog/images/nostr-launch/nostr-launch-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/nostr-launch/nostr-launch-cover-preview-x.jpg"
+coverImage: "/blog/nostr-launch/nostr-launch-cover.jpg"
+coverImageMobile: "/blog/nostr-launch/nostr-launch-cover-mobile.jpg"
+coverImageCard: "/blog/nostr-launch/nostr-launch-cover-card.jpg"
+coverImagePreview: "/blog/nostr-launch/nostr-launch-cover-preview.jpg"
+coverImagePreviewX: "/blog/nostr-launch/nostr-launch-cover-preview-x.jpg"
 ---
 
 KaleidoSwap is live with its own Nostr relay at `wss://relay.kaleidoswap.com`. It is public, open, and free for anyone to use.

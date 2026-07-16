@@ -5,11 +5,11 @@ author: "Walter"
 tags: ["Announcement"]
 slug: "introducing-rate"
 excerpt: "Rate, our AI-powered RGB Lightning wallet, just won the Plan B Hackathon in Lugano. Here's the story of how we built a Bitcoin assistant that makes Lightning, RGB assets, and social payments accessible to everyone."
-coverImage: "/blog/images/introducing-rate/introducing-rate-cover.jpg"
-coverImageMobile: "/blog/images/introducing-rate/introducing-rate-cover-mobile.jpg"
-coverImageCard: "/blog/images/introducing-rate/introducing-rate-cover-card.jpg"
-coverImagePreview: "/blog/images/introducing-rate/introducing-rate-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/introducing-rate/introducing-rate-cover-preview-x.jpg"
+coverImage: "/blog/introducing-rate/introducing-rate-cover.jpg"
+coverImageMobile: "/blog/introducing-rate/introducing-rate-cover-mobile.jpg"
+coverImageCard: "/blog/introducing-rate/introducing-rate-cover-card.jpg"
+coverImagePreview: "/blog/introducing-rate/introducing-rate-cover-preview.jpg"
+coverImagePreviewX: "/blog/introducing-rate/introducing-rate-cover-preview-x.jpg"
 ---
 
 > Winner of the Plan B Lugano Hackathon 2025 — The Future of Bitcoin Wallets is Here
@@ -50,7 +50,7 @@ We watched brilliant innovations like RGB assets and Lightning Network struggle 
 
 Rate isn't just another wallet — it's your personal Bitcoin assistant that handles all the complexity while you focus on what matters: sending and receiving value. We've built a complete ecosystem that seamlessly integrates Bitcoin, Lightning, RGB assets, social payments, and AI into one intuitive experience.
 
-![Rate app interface](/blog/images/introducing-rate/introducing-rate-2.png)
+![Rate app interface](/blog/introducing-rate/introducing-rate-2.png)
 
 ### RGB Lightning Node on Cloud
 
@@ -73,7 +73,7 @@ We integrated Nostr because we believe it's the best protocol for social interac
 - **Seamless Payments:** Pay your social network with one tap
 - **Decentralized:** No central servers, pure peer-to-peer social payments
 
-![Nostr social integration in Rate](/blog/images/introducing-rate/introducing-rate-3.png)
+![Nostr social integration in Rate](/blog/introducing-rate/introducing-rate-3.png)
 
 ### BTC Map Integration
 
@@ -86,7 +86,7 @@ The BTC Map is integrated directly into the app, making it useful to search for 
 - **Lugano Focus:** Perfect for navigating the city's crypto-friendly landscape
 - **Real-world Utility:** Turn your Bitcoin into coffee, pizza, and shopping
 
-![BTC Map integration](/blog/images/introducing-rate/introducing-rate-4.png)
+![BTC Map integration](/blog/introducing-rate/introducing-rate-4.png)
 
 ### AI Chatbot: The Real Innovation
 
@@ -109,7 +109,7 @@ The AI chatbot is our real innovation. Using PremAI with advanced function calli
 
 The voice interface provides an even better UX, allowing users to interact with their Bitcoin wallet completely hands-free — perfect for when you're walking around Lugano discovering Bitcoin businesses or need to make a quick payment while your hands are busy.
 
-![AI chatbot in Rate](/blog/images/introducing-rate/introducing-rate-5.jpg)
+![AI chatbot in Rate](/blog/introducing-rate/introducing-rate-5.jpg)
 
 ---
 

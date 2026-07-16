@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Release Notes"]
 slug: "june-2026-release-notes"
 excerpt: "We built KaleidoMind, an on-device AI agent, and previewed it on desktop and a mobile alpha. We started rebuilding the swap engine in Rust. The node got more capable, and we launched our own Nostr relay."
-coverImage: "/blog/images/june-2026-release-notes/june-2026-release-notes-cover.jpg"
-coverImageMobile: "/blog/images/june-2026-release-notes/june-2026-release-notes-cover-mobile.jpg"
-coverImageCard: "/blog/images/june-2026-release-notes/june-2026-release-notes-cover-card.jpg"
-coverImagePreview: "/blog/images/june-2026-release-notes/june-2026-release-notes-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/june-2026-release-notes/june-2026-release-notes-cover-preview-x.jpg"
+coverImage: "/blog/june-2026-release-notes/june-2026-release-notes-cover.jpg"
+coverImageMobile: "/blog/june-2026-release-notes/june-2026-release-notes-cover-mobile.jpg"
+coverImageCard: "/blog/june-2026-release-notes/june-2026-release-notes-cover-card.jpg"
+coverImagePreview: "/blog/june-2026-release-notes/june-2026-release-notes-cover-preview.jpg"
+coverImagePreviewX: "/blog/june-2026-release-notes/june-2026-release-notes-cover-preview-x.jpg"
 ---
 
 Last month we put a self-custodial wallet in real hands. June was a build month. We taught the wallet to think and we started rebuilding the engine that powers it. KaleidoMind, an AI agent that runs on your own device, was built for a hackathon and previewed on desktop and mobile. And we began a fresh, ground-up version of our trading engine, designed for trustless swaps across Liquid, Lightning, and Arkade.

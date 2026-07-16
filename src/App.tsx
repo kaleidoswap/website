@@ -17,6 +17,7 @@ const BlogPost = lazy(() => import('@/blog').then((m) => ({ default: m.BlogPost 
 
 // Product pages
 const WebApp = lazy(() => import('@/pages/products/WebApp').then((m) => ({ default: m.WebApp })))
+const Mobile = lazy(() => import('@/pages/products/Mobile').then((m) => ({ default: m.Mobile })))
 const Desktop = lazy(() => import('@/pages/products/Desktop').then((m) => ({ default: m.Desktop })))
 const SDK = lazy(() => import('@/pages/products/SDK').then((m) => ({ default: m.SDK })))
 const Extension = lazy(() => import('@/pages/products/Extension').then((m) => ({ default: m.Extension })))
@@ -43,6 +44,7 @@ const AnimatedRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/web-app" element={<WebApp />} />
+          <Route path="/products/mobile" element={<Mobile />} />
           <Route path="/products/desktop" element={<Desktop />} />
           <Route path="/products/sdk" element={<SDK />} />
           <Route path="/products/extension" element={<Extension />} />

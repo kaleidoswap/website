@@ -1,61 +1,54 @@
-// src/pages/products/WebApp.tsx
-import { Globe, Zap, Shield, Wallet, ArrowRight, ExternalLink, Bell, Check } from 'lucide-react'
+// src/pages/products/Mobile.tsx
+import { Smartphone, Fingerprint, Bell, Shield, ArrowRight, Check } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { footerConfig } from '@/constants/footer'
-import { PRODUCTS, DOCS, SOCIALS } from '@/constants/urls'
+import { SOCIALS } from '@/constants/urls'
 import { STATIC_PAGE_META } from '@/constants/pageMeta'
-import { WEB_APP_LIVE } from '@/constants/productStatus'
+import { MOBILE_APP_LIVE } from '@/constants/productStatus'
 import { useTranslation } from 'react-i18next'
 
 const features = [
   {
-    icon: Zap,
-    title: 'Instant Swaps',
-    description: 'Execute trades in seconds with Lightning-fast settlement.',
+    icon: Smartphone,
+    title: 'Native iOS & Android',
+    description: 'Built for mobile from the ground up, not a wrapped web view.',
   },
   {
     icon: Shield,
     title: 'Non-Custodial',
-    description: 'Connect your wallet and trade. We never hold your keys.',
+    description: 'Your keys, your coins. We never hold your funds.',
   },
   {
-    icon: Wallet,
-    title: 'WebLN Compatible',
-    description: 'Works with Alby, Bitmask, KaleidoSwap Extension, Xverse, and other WebLN wallets.',
+    icon: Fingerprint,
+    title: 'Biometric Security',
+    description: 'Unlock and confirm swaps with Face ID or fingerprint.',
   },
   {
-    icon: Globe,
-    title: 'No Installation',
-    description: 'Access from any browser, any device. Just connect and swap.',
+    icon: Bell,
+    title: 'Push Notifications',
+    description: 'Get notified the instant your swap settles.',
   },
 ]
 
-const supportedWallets = [
-  { name: 'Alby', status: 'supported' },
-  { name: 'Bitmask', status: 'supported' },
-  { name: 'KaleidoSwap Extension', status: 'supported' },
-  { name: 'Xverse', status: 'supported' },
-]
-
-export const WebApp = () => {
+export const Mobile = () => {
   const { t } = useTranslation()
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO {...STATIC_PAGE_META['/products/web-app']} url="/products/web-app" />
+      <SEO {...STATIC_PAGE_META['/products/mobile']} url="/products/mobile" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
-          '@type': 'WebApplication',
-          name: 'KaleidoSwap Web App',
+          '@type': 'MobileApplication',
+          name: 'KaleidoSwap Mobile App',
           applicationCategory: 'FinanceApplication',
-          browserRequirements: 'Requires JavaScript. Requires WebLN-compatible wallet.',
-          description: 'Trustless Bitcoin swap in your browser — no download, no KYC. Trade BTC, USDT, and RGB assets across the Lightning Network.',
-          url: 'https://app.kaleidoswap.com',
+          operatingSystem: 'iOS, Android',
+          description: 'Trade Bitcoin, stablecoins, and RGB assets across the Lightning Network from your phone. Non-custodial, biometric security.',
+          url: 'https://kaleidoswap.com/products/mobile',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         })}</script>
         <script type="application/ld+json">{JSON.stringify({
@@ -64,7 +57,7 @@ export const WebApp = () => {
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://kaleidoswap.com' },
             { '@type': 'ListItem', position: 2, name: 'Products', item: 'https://kaleidoswap.com/products' },
-            { '@type': 'ListItem', position: 3, name: 'Web App', item: 'https://kaleidoswap.com/products/web-app' },
+            { '@type': 'ListItem', position: 3, name: 'Mobile App', item: 'https://kaleidoswap.com/products/mobile' },
           ],
         })}</script>
       </Helmet>
@@ -76,35 +69,35 @@ export const WebApp = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary-500/20 rounded-full blur-[120px] -z-10 opacity-40" />
 
         <div className="max-w-7xl mx-auto px-6">
-          <div className={`grid gap-12 items-center ${WEB_APP_LIVE ? 'lg:grid-cols-2' : ''}`}>
-            <div className={WEB_APP_LIVE ? '' : 'max-w-2xl mx-auto text-center'}>
+          <div className={`grid gap-12 items-center ${MOBILE_APP_LIVE ? 'lg:grid-cols-2' : ''}`}>
+            <div className={MOBILE_APP_LIVE ? '' : 'max-w-2xl mx-auto text-center'}>
               <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border mb-6 ${
-                WEB_APP_LIVE ? 'border-primary-500/30 bg-primary-500/10' : 'border-slate-600 bg-slate-800/50 mx-auto'
+                MOBILE_APP_LIVE ? 'border-primary-500/30 bg-primary-500/10' : 'border-slate-600 bg-slate-800/50 mx-auto'
               }`}>
-                <span className={`w-2 h-2 rounded-full ${WEB_APP_LIVE ? 'bg-green-500' : 'bg-slate-500'}`} />
+                <span className={`w-2 h-2 rounded-full ${MOBILE_APP_LIVE ? 'bg-green-500' : 'bg-slate-500'}`} />
                 <span className={`text-xs font-semibold uppercase tracking-wider ${
-                  WEB_APP_LIVE ? 'text-primary-400' : 'text-slate-400'
+                  MOBILE_APP_LIVE ? 'text-primary-400' : 'text-slate-400'
                 }`}>
-                  {WEB_APP_LIVE ? t('Live on Testnet') : t('Coming Soon')}
+                  {t('Coming Soon')}
                 </span>
               </div>
 
               <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-                {t('Web App')}
+                {t('Mobile App')}
               </h1>
               <p className="text-xl text-slate-400 mb-8 leading-relaxed">
-                {t('The fastest way to swap. No download required. Connect your wallet and trade BTC, stablecoins, and RGB assets in seconds. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse.')}
+                {t('Swap on the go. Native iOS and Android apps with the same non-custodial security as the rest of KaleidoSwap. Trade BTC, stablecoins, and RGB assets across the Lightning Network from your pocket.')}
               </p>
 
-              <div className={`flex flex-wrap gap-4 mb-8 ${WEB_APP_LIVE ? '' : 'justify-center'}`}>
-                {WEB_APP_LIVE ? (
+              <div className={`flex flex-wrap gap-4 mb-8 ${MOBILE_APP_LIVE ? '' : 'justify-center'}`}>
+                {MOBILE_APP_LIVE ? (
                   <Button
                     size="lg"
-                    onClick={() => window.open(PRODUCTS.app, '_blank')}
+                    onClick={() => window.location.href = '/downloads'}
                     className="btn-glow"
                   >
-                    {t('Launch Web App')}
-                    <ExternalLink className="w-4 h-4 ml-2" />
+                    {t('Get the App')}
+                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 ) : (
                   <Button
@@ -116,16 +109,9 @@ export const WebApp = () => {
                     <Bell className="w-4 h-4 ml-2" />
                   </Button>
                 )}
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={() => window.open(DOCS.webApp, '_blank')}
-                >
-                  {t('View Documentation')}
-                </Button>
               </div>
 
-              <div className={`flex items-center gap-4 text-sm text-slate-500 ${WEB_APP_LIVE ? '' : 'justify-center'}`}>
+              <div className={`flex items-center gap-4 text-sm text-slate-500 ${MOBILE_APP_LIVE ? '' : 'justify-center'}`}>
                 <div className="flex items-center gap-1">
                   <Check className="w-4 h-4 text-primary-500" />
                   <span>{t('No registration')}</span>
@@ -138,16 +124,13 @@ export const WebApp = () => {
               </div>
             </div>
 
-            {/* Web App Screenshot — only shown once the product is actually live */}
-            {WEB_APP_LIVE && (
-              <div className="relative group">
+            {/* Mobile App visual — only shown once the product is actually live */}
+            {MOBILE_APP_LIVE && (
+              <div className="relative group flex justify-center">
                 <div className="absolute -inset-8 bg-gradient-to-r from-primary-500/30 to-secondary-500/30 rounded-3xl blur-3xl opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
-                <div className="absolute -inset-4 bg-gradient-to-br from-primary-500/10 via-transparent to-secondary-500/10 rounded-2xl" />
-                <img
-                  src="/images/webapp-screenshot.png"
-                  alt={t('Web App Screenshot')}
-                  className="relative w-full rounded-xl drop-shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
-                />
+                <div className="relative w-full max-w-[280px] aspect-[9/18] rounded-[2.5rem] border border-white/10 bg-gray-900/80 shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex items-center justify-center">
+                  <Smartphone className="w-20 h-20 text-primary-400/60" />
+                </div>
               </div>
             )}
           </div>
@@ -155,7 +138,7 @@ export const WebApp = () => {
       </section>
 
       {/* Product detail sections — describe live functionality, so only shown once launched */}
-      {WEB_APP_LIVE && (
+      {MOBILE_APP_LIVE && (
         <>
           {/* Features */}
           <section className="py-20 bg-gray-950/50">
@@ -199,41 +182,19 @@ export const WebApp = () => {
             </div>
           </section>
 
-          {/* Supported Wallets */}
-          <section className="py-20 bg-gray-950/50">
-            <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-3xl font-bold text-center mb-12">{t('Supported Wallets')}</h2>
-              <div className="flex flex-wrap justify-center gap-6">
-                {supportedWallets.map((wallet) => (
-                  <div
-                    key={wallet.name}
-                    className={`glass-card px-8 py-4 rounded-xl flex items-center gap-3 ${
-                      wallet.status === 'coming-soon' ? 'opacity-50' : ''
-                    }`}
-                  >
-                    <span className="text-lg font-bold">{wallet.name}</span>
-                    {wallet.status === 'coming-soon' && (
-                      <span className="text-xs text-slate-500">{t('Soon')}</span>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
           {/* CTA */}
           <section className="py-20">
             <div className="max-w-4xl mx-auto px-6 text-center">
-              <h2 className="text-3xl font-bold mb-4">{t('Ready to Swap?')}</h2>
+              <h2 className="text-3xl font-bold mb-4">{t('Get the App')}</h2>
               <p className="text-slate-400 mb-8">
-                {t('Connect your wallet and start trading in seconds.')}
+                {t('Available now for iOS and Android.')}
               </p>
               <Button
                 size="lg"
-                onClick={() => window.open(PRODUCTS.app, '_blank')}
+                onClick={() => window.location.href = '/downloads'}
                 className="btn-glow"
               >
-                {t('Launch Web App')}
+                {t('Get the App')}
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </div>

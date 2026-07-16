@@ -1,4 +1,5 @@
 import postsMeta from './posts-meta.json'
+import { STATIC_PAGE_META } from '../src/constants/pageMeta'
 
 export interface Env {
   ASSETS: Fetcher
@@ -26,8 +27,6 @@ interface PostMeta {
 
 const SITE_URL = 'https://kaleidoswap.com'
 const DEFAULT_IMAGE = `${SITE_URL}/images/kaleido-full-logo-bg.jpg`
-const DEFAULT_TITLE = 'KaleidoSwap — Trustless Swaps on Bitcoin L2s'
-const DEFAULT_DESC = 'Non-custodial Bitcoin DEX for all Bitcoin L2s. Trustless atomic swaps between BTC, stablecoins, and RGB assets. Built for humans and AI agents alike.'
 
 interface StaticMeta {
   title: string
@@ -35,40 +34,19 @@ interface StaticMeta {
   image?: string
 }
 
-const staticRoutes: Record<string, StaticMeta> = {
-  '/': {
-    title: DEFAULT_TITLE,
-    description: DEFAULT_DESC,
-  },
-  '/products': {
-    title: 'Products | KaleidoSwap',
-    description: 'KaleidoSwap products: Web App, Desktop App, SDK, Mobile App, and Browser Extension. Build and trade on Bitcoin\'s most connected swap protocol.',
-  },
-  '/products/desktop': {
-    title: 'Desktop App | KaleidoSwap',
-    description: 'Full sovereignty with the KaleidoSwap Desktop App. Bundles a complete RGB Lightning node. Available for macOS, Windows, and Linux.',
-  },
-  '/products/sdk': {
-    title: 'Developer SDK | KaleidoSwap',
-    description: 'Integrate KaleidoSwap into your application. Rust, Python, and TypeScript SDKs with full documentation and examples.',
-  },
-  '/downloads': {
-    title: 'Download | KaleidoSwap',
-    description: 'Download KaleidoSwap for macOS, Linux, or Windows. Self-custody Bitcoin DEX with Lightning Network support and RGB asset trading.',
-  },
-  '/blog': {
-    title: 'Blog | KaleidoSwap',
-    description: 'Insights, tutorials, and updates from the KaleidoSwap team. Learn about RGB protocol, Lightning Network swaps, and the KaleidoSDK.',
-  },
-  '/privacy': {
-    title: 'Privacy Policy | KaleidoSwap',
-    description: 'KaleidoSwap Privacy Policy. Learn how we protect your data and maintain your privacy while using our Bitcoin DEX.',
-  },
-  '/terms': {
-    title: 'Terms of Service | KaleidoSwap',
-    description: 'KaleidoSwap Terms of Service. Understand the terms and conditions for using our Bitcoin DEX platform.',
-  },
-}
+// Derived from the same STATIC_PAGE_META the React pages render from, so the
+// worker's pre-rendered <title>/<meta description> can never drift from what
+// the client actually displays. '/' keeps its full title as-is; every other
+// route gets the " | KaleidoSwap" suffix that SEO.tsx also applies client-side.
+const staticRoutes: Record<string, StaticMeta> = Object.fromEntries(
+  Object.entries(STATIC_PAGE_META).map(([path, meta]) => [
+    path,
+    {
+      title: path === '/' ? meta.title : `${meta.title} | KaleidoSwap`,
+      description: meta.description,
+    },
+  ])
+)
 
 const json = (data: unknown, status = 200): Response =>
   new Response(JSON.stringify(data), {
@@ -232,6 +210,12 @@ async function handleStaticRoute(request: Request, env: Env, pathname: string): 
   }))
 }
 
+// React routes that only ever render client-side (no worker pre-render entry
+// in staticRoutes or the blog matcher below), so they must be exempted from
+// the soft-404 check — otherwise a legitimate SPA-shell response for them
+// would get incorrectly downgraded to a 404.
+const KNOWN_SPA_ONLY_ROUTES = new Set(['/products/extension/beta'])
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
@@ -240,9 +224,19 @@ export default {
       return handleBetaSignup(request, env)
     }
 
-    // Redirect removed pages
-    if (url.pathname === '/products/web-app' || url.pathname === '/products/web-app/') {
-      return Response.redirect(`${SITE_URL}/products`, 301)
+    // NOTE: /products/web-app used to redirect to /products here. The page
+    // is back (see STATIC_PAGE_META, App.tsx, robots.txt) and is now handled
+    // like any other static route below — no special-case needed.
+
+    // Redirect renamed blog slugs (evergreen posts moved to keyword-first URLs)
+    const renamedBlogSlugs: Record<string, string> = {
+      '/blog/kaleidoswap-utexo': '/blog/stablecoins-on-bitcoin',
+      '/blog/solving-bitcoin-l2-liquidity': '/blog/bitcoin-l2-interoperability',
+      '/blog/kaleidoagent-wdk-hackathon': '/blog/bitcoin-agentic-payments',
+    }
+    const renamedTarget = renamedBlogSlugs[url.pathname.replace(/\/$/, '')]
+    if (renamedTarget) {
+      return Response.redirect(`${SITE_URL}${renamedTarget}`, 301)
     }
 
     // Pre-render all known routes with correct meta tags
@@ -250,11 +244,33 @@ export default {
     if (blogMatch) {
       const prerendered = await handleBlogPost(request, env, blogMatch[1])
       if (prerendered) return prerendered
-    } else if (url.pathname in staticRoutes) {
+      // Shape matches /blog/:slug but the slug doesn't exist: serve the SPA
+      // shell (BlogPost.tsx redirects unknown slugs to /blog) with a real
+      // 404 status instead of the soft-200 the asset binding would give it.
+      return notFound(request, env)
+    }
+
+    if (url.pathname in staticRoutes) {
       const prerendered = await handleStaticRoute(request, env, url.pathname)
       if (prerendered) return prerendered
     }
 
-    return env.ASSETS.fetch(request)
+    const assetResponse = await env.ASSETS.fetch(request)
+
+    // `not_found_handling: "single-page-application"` in wrangler.jsonc makes
+    // the asset binding serve index.html with a 200 for any path that isn't a
+    // real file — including typos and made-up routes. Real static files never
+    // come back as text/html, so this only catches genuine soft-404s.
+    const isHtmlFallback = (assetResponse.headers.get('content-type') ?? '').includes('text/html')
+    if (assetResponse.status === 200 && isHtmlFallback && !KNOWN_SPA_ONLY_ROUTES.has(url.pathname)) {
+      return new Response(assetResponse.body, { status: 404, headers: assetResponse.headers })
+    }
+
+    return assetResponse
   },
 } satisfies ExportedHandler<Env>
+
+async function notFound(request: Request, env: Env): Promise<Response> {
+  const assetResponse = await env.ASSETS.fetch(request)
+  return new Response(assetResponse.body, { status: 404, headers: assetResponse.headers })
+}
