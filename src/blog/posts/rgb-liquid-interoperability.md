@@ -3,45 +3,47 @@ title: "RGB Meets Simplicity: Programmable Seals on Liquid"
 date: "2026-07-13"
 author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
-slug: "rgb-on-liquid"
-excerpt: "We ran RGB assets natively on the Liquid sidechain with a 207-line non-breaking patch, swapped them across chains with no custodian, and built the first Simplicity covenant that makes the chain itself enforce RGB anchoring."
-coverImage: "/blog/images/rgb-on-liquid/hero-rgb-on-liquid.svg"
-coverImageMobile: "/blog/images/rgb-on-liquid/hero-rgb-on-liquid.svg"
-coverImageCard: "/blog/images/rgb-on-liquid/hero-rgb-on-liquid.svg"
-coverImagePreview: "/blog/images/rgb-on-liquid/rgb-on-liquid-cover-preview.png"
-coverImagePreviewX: "/blog/images/rgb-on-liquid/rgb-on-liquid-cover-preview-x.png"
+slug: "rgb-liquid-interoperability"
+excerpt: "RGB assets now run natively on Liquid, swapped across chains with no custodian at all, in a reproducible step toward real Bitcoin L2 interoperability today."
+coverImage: "/blog/rgb-liquid/rgb-liquid-cover.jpg"
+coverImageMobile: "/blog/rgb-liquid/rgb-liquid-cover-mobile.jpg"
+coverImageCard: "/blog/rgb-liquid/rgb-liquid-cover-card.jpg"
+coverImagePreview: "/blog/rgb-liquid/rgb-liquid-cover-preview.jpg"
+coverImagePreviewX: "/blog/rgb-liquid/rgb-liquid-cover-preview-x.jpg"
 ---
 
 *RGB keeps an asset's contracts and state with its holders; the chain only carries a small commitment inside an ordinary transaction. We took that portability to Liquid, looking for two things: interoperable assets across Bitcoin's layers, and the programmability that Simplicity can give RGB tokens. Here is what we built, and where it leads.*
 
-RGB lets you issue and move assets on Bitcoin without changing Bitcoin itself. The asset's history stays off-chain, held and validated by the people who own it, while only a tiny fingerprint touches the blockchain. It is private by default, it scales well, and it keeps users in full self-custody. KaleidoSwap already builds on RGB for Bitcoin and Lightning.
+[RGB](https://rgb.info/) lets you issue and move assets on Bitcoin without changing Bitcoin itself. The asset's history stays off-chain, held and validated by the people who own it, while only a tiny fingerprint touches the blockchain. It is private by default, it scales well, and it keeps users in full self-custody. KaleidoSwap already builds on RGB for Bitcoin and the [Lightning Network](https://lightning.network/).
 
 The protocol asks very little of the chain underneath: a coin to serve as a seal, and a place to put a 32-byte commitment. Nothing about that is Bitcoin-specific. Any chain with a UTXO model can, in principle, anchor RGB assets.
 
-Liquid is the natural first candidate. It is a Bitcoin sidechain with one-minute blocks, confidential transactions that hide amounts, and a federated peg. It also carries something Bitcoin's base layer does not: [Simplicity](https://blog.blockstream.com/simplicity-launches-on-liquid-mainnet/), a formally verifiable smart-contract language, live on mainnet since July 2025. Anchoring RGB there connects the same asset technology across base chain, Lightning, and sidechain, with atomic swaps as the glue. And since whatever the chain can express becomes a spending condition on the seal, Simplicity opens the door to RGB tokens with rules that neither Bitcoin Script nor Lightning can enforce today.
+[Liquid](https://liquid.net/) is the natural first candidate. It is a Bitcoin sidechain with one-minute blocks, confidential transactions that hide amounts, and a federated peg. It also carries something Bitcoin's base layer does not: [Simplicity](https://blog.blockstream.com/simplicity-launches-on-liquid-mainnet/), a formally verifiable smart-contract language, live on mainnet since July 2025. Anchoring RGB there connects the same asset technology across base chain, Lightning, and sidechain, with atomic swaps as the glue. And since whatever the chain can express becomes a spending condition on the seal, Simplicity opens the door to RGB tokens with rules that neither Bitcoin Script nor Lightning can enforce today.
 
 So we built a reproducible proof of concept to answer one question: can RGB assets live natively on Liquid, with no bridges, no wrapped tokens, and no parallel protocol? The answer is yes. The patch needed upstream is 207 lines, every existing test still passes, and the rest of the production RGB stack consumes it unchanged.
 
 Everything in this article, from the patch to the steps that reproduce each claim, is open source at [github.com/kaleidoswap/rgb-on-liquid-spike](https://github.com/kaleidoswap/rgb-on-liquid-spike).
 
-## Why the chain underneath matters at all
+## Why interoperability across Bitcoin's layers starts at the chain
 
 An RGB asset has two layers, and only one of them is the subject here.
 
-The first is **client-side validation**: the asset's history, who issued it, who sent what to whom, the rules it follows. This lives off-chain and is checked by each receiver. It does not depend on any particular blockchain.
+The first is [client-side validation](https://docs.rgb.info/distributed-computing-concepts/client-side-validation): the asset's history, who issued it, who sent what to whom, the rules it follows. This lives off-chain and is checked by each receiver. It does not depend on any particular blockchain.
 
-The second is the **anchor**. To prevent double-spending, every transfer is bound to a real on-chain transaction through a **single-use seal**: a coin that can be spent exactly once. Spending that coin in a transaction that carries a commitment to the transfer settles it permanently. This is the layer that touches real transactions, so this is where chain-specific assumptions can hide.
+The second is the **anchor**. To prevent double-spending, every transfer is bound to a real on-chain transaction through a [single-use seal](https://docs.rgb.info/distributed-computing-concepts/single-use-seals
+): a coin that can be spent exactly once. Spending that coin in a transaction that carries a commitment to the transfer settles it permanently. This is the layer that touches real transactions, so this is where chain-specific assumptions can hide.
 
-Two consequences of the design matter later in this article. First, a contract is bound to one chain by its genesis: an asset issued for Bitcoin and a nominally identical asset issued for Liquid are, to the protocol, two separate contracts. Second, because a seal is an ordinary coin, **the spending conditions of the underlying chain become spending conditions on the asset**. On Bitcoin that means Bitcoin Script. On Liquid, it now means Simplicity.
+Two consequences of the design matter later in this article. First, a contract is bound to one chain by its genesis: an asset issued for Bitcoin and a nominally identical asset issued for Liquid are, to the protocol, two separate contracts. Second, because a seal is an ordinary coin, **the spending conditions of the underlying chain become spending conditions on the asset**. On Bitcoin that means [Bitcoin Script](https://en.bitcoin.it/wiki/Script). On Liquid, it now means Simplicity.
 
-![RGB's two layers: an off-chain constellation of contract state above, the on-chain anchor layer below, joined by a single seal](/blog/images/rgb-on-liquid/rgb-two-layers.svg)
+![RGB's two layers: an off-chain constellation of contract state above, the on-chain anchor layer below, joined by a single seal](/blog/rgb-liquid/rgb-two-layers.svg)
 *The two layers of an RGB asset. Everything above the line is validated by the holders; the chain sees one coin being spent and one 32-byte commitment.*
 
-## Liquid is already half-supported upstream
+## RGB Support for Liquid Already Exists Upstream
 
 The first thing we found, reading the RGB code that production wallets actually use, is that it already names Liquid. The `Layer1` enum has a `Liquid` variant. The network list includes `LiquidMainnet` and `LiquidTestnet`. A contract's genesis already records which chain it belongs to. The slot is reserved; it has simply never been wired to the code that checks transactions.
 
-The second thing we found is that the cryptography already works. RGB hides its commitment inside an ordinary-looking Taproot output, and the byte format of that output is identical on Bitcoin and Liquid, because both chains follow [BIP-341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki). We checked this directly: the standard RGB verifier, with no modifications, accepted an output in a confirmed Liquid transaction as carrying a valid RGB commitment.
+The second thing we found is that the cryptography already works. RGB hides its commitment inside an ordinary-looking [Taproot](https://bitcoinops.org/en/topics/taproot/
+) output, and the byte format of that output is identical on Bitcoin and Liquid, because both chains follow [BIP-341](https://github.com/bitcoin/bips/blob/master/bip-0341.mediawiki). We checked this directly: the standard RGB verifier, with no modifications, accepted an output in a confirmed Liquid transaction as carrying a valid RGB commitment.
 
 So most of the work was already done. The missing piece was the code that reads a finished transaction, which was written for Bitcoin transactions and not Liquid ones.
 
@@ -71,16 +73,16 @@ The whole change is 207 lines across seven files. Three things are worth stating
 
 That last point is the strongest result. The standing worry with any change to a consensus library is downstream breakage. Here, the entire production ecosystem consumed the patched library without noticing.
 
-![The WitnessTx trait connecting the RGB verification path to both bitcoin::Transaction and elements::Transaction](/blog/images/rgb-on-liquid/witnesstx-bridge.svg)
+![The WitnessTx trait connecting the RGB verification path to both bitcoin::Transaction and elements::Transaction](/blog/rgb-liquid/witnesstx-bridge.svg)
 *The whole gap, in one picture: three verification call sites, three trait methods, two chains on the same path.*
 
-The trait also says something about the future. Nothing in those three methods is specific to Liquid. Any Bitcoin layer with a UTXO-shaped model could implement them: Arkade's virtual UTXOs, Spark's statechain leaves, or whatever comes next. That is the direction this work points toward: portable, client-side assets across Bitcoin's layers, with peer-to-peer atomic swaps as the router between them.
+The trait also says something about the future. Nothing in those three methods is specific to Liquid. Any Bitcoin layer with a UTXO-shaped model could implement them: [Arkade](https://arkadeos.com)'s virtual UTXOs, [Spark](https://www.spark.money)'s statechain leaves, or whatever comes next. That is the direction this work points toward: portable, client-side assets across Bitcoin's layers, with peer-to-peer atomic swaps as the router between them.
 
-With the change in place, we issued a real RGB20 asset on Liquid. Not a simplified mock: the actual asset schema and the actual builder tools that wallets use for Bitcoin RGB transfers, pointed at Liquid instead. A real contract id, a real transfer from one holder to another with change, anchored on a Liquid transaction and verified end to end. The proposed upstream change is written up as an [RFC](https://github.com/kaleidoswap/rgb-on-liquid-spike/blob/main/RFC.md) for the maintainers, submitted as [rgb-consensus#12](https://github.com/rgb-protocol/rgb-consensus/issues/12).
+With the change in place, we issued a real [RGB20](https://docs.rgb.info/rgb-contract-implementation/schema/non-inflatable-fungible-asset-schema) asset on Liquid. Not a simplified mock: the actual asset schema and the actual builder tools that wallets use for Bitcoin RGB transfers, pointed at Liquid instead. A real contract id, a real transfer from one holder to another with change, anchored on a Liquid transaction and verified end to end. The proposed upstream change is written up as an [RFC](https://github.com/kaleidoswap/rgb-on-liquid-spike/blob/main/RFC.md) for the maintainers, submitted as [rgb-consensus#12](https://github.com/rgb-protocol/rgb-consensus/issues/12).
 
 ## Swapping RGB assets across chains, without a custodian
 
-Because an RGB contract is tied to one chain, you cannot simply move a single asset from Bitcoin to Liquid and back. There is a practical alternative that works today, and it needs no trusted third party: a counterparty takes the other side, but the protocol never lets them hold both.
+Because an RGB contract is tied to one chain, you cannot simply move a single asset from Bitcoin to Liquid and back. There is a practical alternative that works today, and it needs no third party.
 
 You can **atomically swap** an RGB asset on Bitcoin for an RGB asset on Liquid. Atomic means the trade either completes for both sides or does not happen at all. At no moment can one party walk away with both assets.
 
@@ -89,23 +91,23 @@ We demonstrated it on Bitcoin and Liquid regtest: a real RGB token on each chain
 We then hardened the mechanism into its production shape, all reproducible in the same repository:
 
 - **A full Hash Time-Locked Contract** on both chains, with the claim branch bound to the claimer's key and a refund branch behind a relative timeout. The same script bytes work on Bitcoin and Liquid, and every failure path was tested against consensus: a wrong preimage is rejected, an early refund is rejected, a refund after the timeout goes through.
-- **Confidential transfers.** The same RGB20 transfer with the closed seal, the new seal, and the change all blinded. The commitment sits in the scriptPubKey, which Elements never blinds, so the unchanged verifiers accepted the anchor with no unblinding data. This was the load-bearing assumption of RGB-on-Liquid, and it is now confirmed experimentally.
-- **The RGB-wrapped claim.** The HTLC output *is* the RGB seal, so a single transaction reveals the swap secret, closes the seal, and anchors the transition that re-seats the asset on an output the claimer fully controls. Swap settlement and asset re-anchoring, atomically, in one transaction.
+- **Confidential transfers.** The same RGB20 transfer with the closed seal, the new seal, and the change all blinded. The commitment sits in the [scriptPubKey](https://learnmeabitcoin.com/technical/transaction/output/scriptpubkey/), which Elements never blinds, so the unchanged verifiers accepted the anchor with no unblinding data. This was the load-bearing assumption of RGB-on-Liquid, and it is now confirmed experimentally.
+- **The RGB-wrapped claim.** The [HTLC](https://bitcoinops.org/en/topics/htlc/) output *is* the RGB seal, so a single transaction reveals the swap secret, closes the seal, and anchors the transition that re-seats the asset on an output the claimer fully controls. Swap settlement and asset re-anchoring, atomically, in one transaction.
 
-![The RGB-wrapped claim: one transaction spends the HTLC, carries the tapret commitment, and creates the asset's new seal](/blog/images/rgb-on-liquid/rgb-wrapped-claim.svg)
+![The RGB-wrapped claim: one transaction spends the HTLC, carries the tapret commitment, and creates the asset's new seal](/blog/rgb-liquid/rgb-wrapped-claim.svg)
 *The RGB-wrapped claim. The hashlocked coin is the seal, so claiming the swap and re-anchoring the asset are the same act.*
 
 And it is exactly here that Liquid's scripting capabilities start to matter.
 
-## Simplicity is live. What does it change for RGB?
+## What Simplicity Changes for RGB
 
-Simplicity [activated on Liquid mainnet at the end of July 2025](https://blog.blockstream.com/simplicity-launches-on-liquid-mainnet/), after unanimous signaling by the network's functionaries, and it is being used in production. Blockstream ran a [post-quantum signature verifier on Liquid mainnet in March 2026](https://blog.blockstream.com/blockstream-research-demonstrates-quantum-resistant-transaction-signing-on-liquid-using-simplicity-smart-contracts/): arbitrary, novel cryptography verified by an on-chain program. Swiss financial institutions began [piloting collateralized lending contracts built on it in mid-2026](https://blog.blockstream.com/blockstream-quarterly-update-q2-2026/). The tooling has matured too: [SimplicityHL](https://github.com/BlockstreamResearch/SimplicityHL), a Rust-like high-level language, compiles to Simplicity, and programs deploy as ordinary Taproot leaves that coexist with normal key-path spends in the same output.
+Simplicity [activated on Liquid mainnet](https://blog.blockstream.com/simplicity-launches-on-liquid-mainnet/) at the end of July 2025, after unanimous signaling by the network's functionaries, and it is being used in production. [Blockstream](https://blockstream.com/) ran a [post-quantum signature verifier on Liquid mainnet](https://blog.blockstream.com/blockstream-research-demonstrates-quantum-resistant-transaction-signing-on-liquid-using-simplicity-smart-contracts/) in March 2026: arbitrary, novel cryptography verified by an on-chain program. Swiss financial institutions began [piloting collateralized lending contracts](https://blog.blockstream.com/blockstream-quarterly-update-q2-2026/) built on it in mid-2026. The tooling has matured too: [SimplicityHL](https://github.com/BlockstreamResearch/SimplicityHL), a Rust-like high-level language, compiles to Simplicity, and programs deploy as ordinary Taproot leaves that coexist with normal key-path spends in the same output.
 
 To be precise about what is new here: Liquid has had transaction introspection and covenants since its Taproot upgrade, with [over thirty introspection opcodes](https://blog.blockstream.com/tapscript-new-opcodes-reduced-limits-and-covenants/) that let a script examine the transaction spending it, already used in production by [Blockstream's options contracts](https://blog.blockstream.com/fully-collateralized-options-contracts-on-liquid/). Simplicity adds a different class of capability on top: **formally verified semantics** (the language and its standard operations carry machine-checked correctness proofs), **arbitrary finite computation** (any verification algorithm you can express, as the post-quantum demo showed), programmable sighashes, delegation, and complex multi-condition programs without Script's size and opcode contortions.
 
 Now recall the structural fact from earlier: an RGB seal is just a coin. RGB never asks the chain to understand the asset, and the chain never needs to see it. The two systems therefore compose cleanly. **A Simplicity program constrains the container; client-side validation constrains the contents.** Neither interferes with the other. To our knowledge, nobody had combined client-side validation with Simplicity covenants on seal UTXOs before, so we did. Six patterns stand out, and the first is no longer a proposal.
 
-![The Simplicity covenant: every spend must prove the preimage and an anchor-shaped output; a spend without the anchor is rejected by consensus](/blog/images/rgb-on-liquid/simplicity-covenant.svg)
+![The Simplicity covenant: every spend must prove the preimage and an anchor-shaped output; a spend without the anchor is rejected by consensus](/blog/rgb-liquid/simplicity-covenant.svg)
 *The covenant, as consensus sees it. The wallet's opinion is irrelevant: a spend that does not carry the anchor never enters a block.*
 
 **Swaps the chain itself enforces (demonstrated).** We wrote a Simplicity covenant in SimplicityHL, deployed as a Taproot leaf on a Simplicity-active Elements node, that locks an RGB seal under two simultaneous conditions: the spender must reveal the preimage of a hash, and the spending transaction must carry, at output 0, an output shaped exactly like an RGB commitment (`OP_RETURN` followed by a 32-byte payload). Script cannot see sibling outputs; Simplicity's introspection can. The decisive test: we satisfied the program against a compliant transaction, then stripped the commitment output and rebroadcast. **Consensus rejected it.** The rule that spending this seal requires anchoring an RGB transition is enforced by the chain, not by our tooling, and it runs today on regtest. One design note from the exercise: a `tapret` commitment tweaks the output key with a value not known in advance, which makes it hard for a covenant to pin down, while the `opret` carrier is a plain data output that is easy to constrain by shape. That is why the covenant targets `opret`. From here, the production version adds a claimer signature and a timeout branch, the same HTLC structure we already run in Script, plus PTLC variants built on Schnorr adaptor signatures.
@@ -120,7 +122,7 @@ Now recall the structural fact from earlier: an RGB seal is just a coin. RGB nev
 
 **Covenant logic without giving up asset privacy.** On Liquid, a covenant that needs to check amounts generally requires those amounts to be explicit rather than blinded, because introspection sees a cryptographic commitment rather than the value inside. For ordinary Liquid assets, that forces a choice between programmability and confidentiality. RGB dissolves the choice: the asset amounts are not on-chain at all. The covenant constrains an ordinary L-BTC container while the actual asset ledger stays off-chain, private, and validated client-side. Programmable spending rules and asset-level confidentiality at the same time, something neither system offers alone.
 
-![Six capabilities unlocked by programmable seals: chain-enforced swaps, lending on RGB collateral, trustless dollar issuance, vault custody, protected maker inventory, and privacy with programmability](/blog/images/rgb-on-liquid/features-unlocked.svg)
+![Six capabilities unlocked by programmable seals: chain-enforced swaps, lending on RGB collateral, trustless dollar issuance, vault custody, protected maker inventory, and privacy with programmability](/blog/rgb-liquid/features-unlocked.svg)
 *What programmable seals unlock. One pattern is running code; the rest are designs the same primitives make possible.*
 
 There is a pleasing symmetry here. Early RGB designs imagined Simplicity *inside* RGB, as the language for client-side contract logic, a role since taken by RGB's own virtual machine. Simplicity instead arrived *underneath* RGB: on the chain, guarding the seals. That turns out to be the more powerful combination. The chain enforces possession and settlement rules it can actually verify, and the client-side layer keeps everything else private.
@@ -136,7 +138,7 @@ This was a proof of concept on test networks, not a product. To get to something
 
 None of these are research problems.
 
-## Where this lands
+## Where RGB on Liquid Goes From Here
 
 The hard question, whether RGB assets can run natively on Liquid, is answered. They can. The cryptographic core already supports it, the consensus layer already names it, and the gap is a small, well-scoped, non-breaking change.
 
