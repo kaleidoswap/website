@@ -1,0 +1,126 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" font-family="Satoshi, system-ui, sans-serif" role="img" aria-label="RGB's two layers: client-side validation off-chain, and the anchor layer on-chain, connected by a single seal">
+  <defs>
+    <linearGradient id="gv" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15E99A"/>
+      <stop offset="1" stop-color="#6F32FF"/>
+    </linearGradient>
+    <linearGradient id="strip" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="6">
+      <stop offset="0" stop-color="#15E99A"/>
+      <stop offset="1" stop-color="#6F32FF"/>
+    </linearGradient>
+    <linearGradient id="beam" gradientUnits="userSpaceOnUse" x1="610" y1="230" x2="610" y2="470">
+      <stop offset="0" stop-color="#6F32FF"/>
+      <stop offset="1" stop-color="#15E99A"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#FFFFFF" opacity="0.035"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="#0D1813"/>
+  <rect width="1200" height="675" fill="url(#dots)"/>
+  <rect x="0" y="0" width="1200" height="5" fill="url(#strip)"/>
+
+  <!-- ══════════ eyebrow chip: off-chain ══════════ -->
+  <rect x="80" y="58" width="428" height="34" rx="17" fill="#111110" stroke="#3D3D3A"/>
+  <circle cx="102" cy="75" r="4" fill="#6F32FF"/>
+  <text x="118" y="80" fill="#A48AFF" font-size="13.5" font-weight="500" letter-spacing="2.5">CLIENT-SIDE VALIDATION · OFF-CHAIN</text>
+  <text x="530" y="80" fill="#9A9A94" font-size="14">contracts · transitions · consignments, checked by the holders</text>
+
+  <!-- ══════════ upper plane ══════════ -->
+  <rect x="80" y="112" width="1040" height="212" rx="14" fill="#111110" stroke="#3D3D3A" stroke-width="1"/>
+  <rect x="80" y="112" width="1040" height="212" rx="14" fill="none" stroke="#6F32FF" stroke-width="1" opacity="0.18"/>
+
+  <!-- constellation edges -->
+  <g stroke="#6F32FF" stroke-width="1.5" opacity="0.45">
+    <line x1="190" y1="238" x2="330" y2="188"/>
+    <line x1="330" y1="188" x2="470" y2="262"/>
+    <line x1="470" y1="262" x2="610" y2="202"/>
+    <line x1="610" y1="202" x2="750" y2="252"/>
+    <line x1="750" y1="252" x2="890" y2="192"/>
+    <line x1="890" y1="192" x2="1010" y2="256"/>
+    <line x1="330" y1="188" x2="610" y2="202"/>
+    <line x1="470" y1="262" x2="750" y2="252"/>
+  </g>
+  <!-- constellation nodes: rotated squares, varied sizes -->
+  <g fill="#0D1813" stroke="#6F32FF" stroke-width="2">
+    <rect x="177" y="225" width="26" height="26" transform="rotate(45 190 238)"/>
+    <rect x="314" y="172" width="32" height="32" transform="rotate(45 330 188)"/>
+    <rect x="456" y="248" width="28" height="28" transform="rotate(45 470 262)"/>
+    <rect x="736" y="238" width="28" height="28" transform="rotate(45 750 252)"/>
+    <rect x="874" y="176" width="32" height="32" transform="rotate(45 890 192)"/>
+    <rect x="998" y="244" width="24" height="24" transform="rotate(45 1010 256)"/>
+  </g>
+  <g fill="#6F32FF" opacity="0.9">
+    <circle cx="190" cy="238" r="2"/>
+    <circle cx="330" cy="188" r="2"/>
+    <circle cx="470" cy="262" r="2"/>
+    <circle cx="750" cy="252" r="2"/>
+    <circle cx="890" cy="192" r="2"/>
+    <circle cx="1010" cy="256" r="2"/>
+  </g>
+  <!-- the seal-bound node, highlighted -->
+  <g filter="url(#soft)">
+    <rect x="588" y="180" width="44" height="44" transform="rotate(45 610 202)" fill="#0D1813" stroke="url(#gv)" stroke-width="2.5"/>
+  </g>
+  <circle cx="610" cy="202" r="3" fill="#15E99A"/>
+  <rect x="536" y="140" width="148" height="26" rx="13" fill="#0D1813" stroke="#3D3D3A"/>
+  <text x="610" y="157" fill="#FFFFFF" font-size="13" text-anchor="middle" font-weight="500">state transition</text>
+
+  <!-- ══════════ the single point of contact ══════════ -->
+  <line x1="610" y1="230" x2="610" y2="460" stroke="url(#beam)" stroke-width="2.5"/>
+  <polygon points="610,470 602,455 618,455" fill="#15E99A"/>
+  <!-- tick marks along the beam -->
+  <g stroke="#9A9A94" stroke-width="1.5" opacity="0.5">
+    <line x1="604" y1="352" x2="616" y2="352"/>
+  </g>
+  <!-- seal callout -->
+  <rect x="652" y="362" width="256" height="60" rx="10" fill="#111110" stroke="#3D3D3A"/>
+  <rect x="652" y="362" width="3.5" height="60" rx="1.75" fill="url(#gv)"/>
+  <line x1="610" y1="392" x2="652" y2="392" stroke="#3D3D3A" stroke-width="1.5"/>
+  <text x="672" y="387" fill="#FFFFFF" font-size="15" font-weight="500">single-use seal</text>
+  <text x="672" y="408" fill="#9A9A94" font-size="13.5">one UTXO, spent exactly once</text>
+
+  <!-- ══════════ lower plane ══════════ -->
+  <rect x="80" y="460" width="1040" height="118" rx="14" fill="#111110" stroke="#3D3D3A" stroke-width="1"/>
+  <rect x="80" y="460" width="1040" height="118" rx="14" fill="none" stroke="#15E99A" stroke-width="1" opacity="0.18"/>
+
+  <!-- chain of blocks -->
+  <g fill="#0D1813" stroke="#15E99A" stroke-width="2" opacity="0.7">
+    <rect x="130" y="489" width="120" height="60" rx="8"/>
+    <rect x="286" y="489" width="120" height="60" rx="8"/>
+    <rect x="442" y="489" width="120" height="60" rx="8"/>
+    <rect x="754" y="489" width="120" height="60" rx="8"/>
+    <rect x="910" y="489" width="120" height="60" rx="8"/>
+  </g>
+  <!-- faint block innards -->
+  <g stroke="#15E99A" stroke-width="1" opacity="0.22">
+    <line x1="146" y1="507" x2="234" y2="507"/><line x1="146" y1="521" x2="214" y2="521"/><line x1="146" y1="535" x2="226" y2="535"/>
+    <line x1="302" y1="507" x2="390" y2="507"/><line x1="302" y1="521" x2="370" y2="521"/><line x1="302" y1="535" x2="382" y2="535"/>
+    <line x1="458" y1="507" x2="546" y2="507"/><line x1="458" y1="521" x2="526" y2="521"/><line x1="458" y1="535" x2="538" y2="535"/>
+    <line x1="770" y1="507" x2="858" y2="507"/><line x1="770" y1="521" x2="838" y2="521"/><line x1="770" y1="535" x2="850" y2="535"/>
+    <line x1="926" y1="507" x2="1014" y2="507"/><line x1="926" y1="521" x2="994" y2="521"/><line x1="926" y1="535" x2="1006" y2="535"/>
+  </g>
+  <!-- the anchoring block, highlighted -->
+  <rect x="598" y="489" width="120" height="60" rx="8" fill="#0D1813" stroke="url(#gv)" stroke-width="2.5" filter="url(#soft)"/>
+  <rect x="649" y="508" width="22" height="22" transform="rotate(45 660 519)" fill="none" stroke="#15E99A" stroke-width="1.5"/>
+  <text x="658" y="524" fill="#15E99A" font-size="11" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">32B</text>
+  <text x="658" y="571" fill="#FFFFFF" font-size="13" text-anchor="middle" font-weight="500">witness tx · carries the commitment</text>
+  <g stroke="#15E99A" stroke-width="1.5" opacity="0.55">
+    <line x1="250" y1="519" x2="286" y2="519"/>
+    <line x1="406" y1="519" x2="442" y2="519"/>
+    <line x1="562" y1="519" x2="598" y2="519"/>
+    <line x1="718" y1="519" x2="754" y2="519"/>
+    <line x1="874" y1="519" x2="910" y2="519"/>
+  </g>
+
+  <!-- ══════════ eyebrow chip: on-chain ══════════ -->
+  <rect x="80" y="606" width="308" height="34" rx="17" fill="#111110" stroke="#3D3D3A"/>
+  <circle cx="102" cy="623" r="4" fill="#15E99A"/>
+  <text x="118" y="628" fill="#6EEDC0" font-size="13.5" font-weight="500" letter-spacing="2.5">ANCHOR LAYER · ON-CHAIN</text>
+  <text x="410" y="628" fill="#9A9A94" font-size="14">Bitcoin, or Liquid with a 207-line patch. The only layer that touches a transaction.</text>
+</svg>

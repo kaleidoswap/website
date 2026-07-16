@@ -1,4 +1,11 @@
 {
+  "rgb-on-liquid": {
+    "title": "RGB Meets Simplicity: Programmable Seals on Liquid",
+    "description": "We ran RGB assets natively on the Liquid sidechain with a 207-line non-breaking patch, swapped them across chains with no custodian, and built the first Simplicity covenant that makes the chain itself enforce RGB anchoring.",
+    "image": "/blog/images/rgb-on-liquid/rgb-on-liquid-cover-preview.png",
+    "imageX": "/blog/images/rgb-on-liquid/rgb-on-liquid-cover-preview-x.png",
+    "date": "2026-07-13"
+  },
   "rgb-protocol": {
     "title": "RGB Protocol on Bitcoin: The Infrastructure Behind KaleidoSwap",
     "description": "How RGB Protocol v0.11.1 issues and transfers digital assets natively on Bitcoin and Lightning — no sidechains, no bridges, client-side validation by design.",
