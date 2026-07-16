@@ -239,6 +239,16 @@ export default {
       return Response.redirect(`${SITE_URL}${renamedTarget}`, 301)
     }
 
+    // Redirect old blog image paths: assets moved from /blog/images/<post>/
+    // to /blog/<post>/, but the old URLs live on in social-card caches and
+    // Google's image index.
+    if (url.pathname.startsWith('/blog/images/')) {
+      return Response.redirect(
+        `${SITE_URL}/blog/${url.pathname.slice('/blog/images/'.length)}`,
+        301
+      )
+    }
+
     // Pre-render all known routes with correct meta tags
     const blogMatch = url.pathname.match(/^\/blog\/([^/]+)\/?$/)
     if (blogMatch) {
