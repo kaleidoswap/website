@@ -4,7 +4,7 @@ date: "2026-07-13"
 author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
 slug: "rgb-on-liquid"
-excerpt: "We anchored RGB assets on Liquid, swapped them across Bitcoin and Liquid with no custodian, and made the chain itself enforce RGB anchoring with a Simplicity covenant — a reproducible proof of concept."
+excerpt: "RGB assets anchored on Liquid, swapped across chains with no custodian, and a Simplicity covenant enforcing RGB anchoring — a reproducible proof of concept."
 coverImage: "/blog/rgb-liquid/rgb-liquid-cover.jpg"
 coverImageMobile: "/blog/rgb-liquid/rgb-liquid-cover-mobile.jpg"
 coverImageCard: "/blog/rgb-liquid/rgb-liquid-cover-card.jpg"
