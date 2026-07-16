@@ -1,4 +1,11 @@
 {
+  "rgb-liquid-interoperability": {
+    "title": "RGB Meets Simplicity: Programmable Seals on Liquid",
+    "description": "RGB assets now run natively on Liquid, swapped across chains with no custodian at all, in a reproducible step toward real Bitcoin L2 interoperability today.",
+    "image": "/blog/rgb-liquid/rgb-liquid-cover-preview.jpg",
+    "imageX": "/blog/rgb-liquid/rgb-liquid-cover-preview-x.jpg",
+    "date": "2026-07-13"
+  },
   "june-2026-release-notes": {
     "title": "June 2026: AI Agent, New Swaps Engine & Nostr Relay",
     "description": "We built KaleidoMind, an on-device AI agent, and previewed it on desktop and a mobile alpha. We started rebuilding the swap engine in Rust. The node got more capable, and we launched our own Nostr relay.",

@@ -1,0 +1,118 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" font-family="Satoshi, system-ui, sans-serif" role="img" aria-label="The Simplicity covenant: spending the seal requires revealing the preimage and carrying an RGB-anchor-shaped output; consensus rejects a spend without the anchor">
+  <defs>
+    <linearGradient id="gv" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15E99A"/>
+      <stop offset="1" stop-color="#6F32FF"/>
+    </linearGradient>
+    <linearGradient id="strip" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="6">
+      <stop offset="0" stop-color="#15E99A"/>
+      <stop offset="1" stop-color="#6F32FF"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#FFFFFF" opacity="0.035"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="#0D1813"/>
+  <rect width="1200" height="675" fill="url(#dots)"/>
+  <rect x="0" y="0" width="1200" height="5" fill="url(#strip)"/>
+
+  <!-- eyebrow chip -->
+  <rect x="80" y="58" width="284" height="34" rx="17" fill="#111110" stroke="#3D3D3A"/>
+  <circle cx="102" cy="75" r="4" fill="#6F32FF"/>
+  <text x="118" y="80" fill="#A48AFF" font-size="13.5" font-weight="500" letter-spacing="2.5">SIMPLICITY COVENANT</text>
+  <text x="386" y="80" fill="#9A9A94" font-size="14">preimage(H) ∧ anchor-shaped output · Elements 23.3 · tapleaf 0xbe</text>
+
+  <!-- ══════ left: the vaulted seal ══════ -->
+  <!-- vault frame with corner ticks -->
+  <g stroke="#6F32FF" stroke-width="2" opacity="0.8">
+    <path d="M 96 200 L 96 170 L 126 170" fill="none"/>
+    <path d="M 296 170 L 326 170 L 326 200" fill="none"/>
+    <path d="M 326 380 L 326 410 L 296 410" fill="none"/>
+    <path d="M 126 410 L 96 410 L 96 380" fill="none"/>
+  </g>
+  <!-- rule beams -->
+  <g stroke="#6F32FF" stroke-width="1.5" opacity="0.35">
+    <line x1="104" y1="230" x2="318" y2="230"/>
+    <line x1="104" y1="290" x2="318" y2="290"/>
+    <line x1="104" y1="350" x2="318" y2="350"/>
+    <line x1="141" y1="178" x2="141" y2="402"/>
+    <line x1="211" y1="178" x2="211" y2="402"/>
+    <line x1="281" y1="178" x2="281" y2="402"/>
+  </g>
+  <!-- the seal coin -->
+  <g filter="url(#soft)">
+    <polygon points="211,238 259,266 259,314 211,342 163,314 163,266" fill="#111110" stroke="#15E99A" stroke-width="2"/>
+  </g>
+  <polygon points="211,262 238,278 238,302 211,318 184,302 184,278" fill="none" stroke="#15E99A" stroke-width="1" opacity="0.4"/>
+  <text x="211" y="285" fill="#FFFFFF" font-size="14.5" font-weight="500" text-anchor="middle">RGB seal</text>
+  <text x="211" y="305" fill="#9A9A94" font-size="12.5" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">UTXO</text>
+
+  <rect x="96" y="432" width="230" height="26" rx="13" fill="#111110" stroke="#3D3D3A"/>
+  <text x="211" y="449" fill="#A48AFF" font-size="12.5" text-anchor="middle" font-weight="500">locked by a Simplicity program</text>
+  <text x="211" y="482" fill="#9A9A94" font-size="12.5" text-anchor="middle">CMR in a taproot leaf · NUMS key</text>
+
+  <line x1="326" y1="290" x2="412" y2="290" stroke="#6F32FF" stroke-width="2.5"/>
+  <polygon points="422,290 408,283 408,297" fill="#6F32FF"/>
+
+  <!-- ══════ center: the program ══════ -->
+  <g filter="url(#soft)">
+    <rect x="422" y="140" width="356" height="310" rx="14" fill="#111110" stroke="url(#gv)" stroke-width="2.5"/>
+  </g>
+  <rect x="424.5" y="142.5" width="351" height="48" rx="12" fill="#0D1813"/>
+  <rect x="448" y="158" width="15" height="15" transform="rotate(45 455.5 165.5)" fill="none" stroke="url(#gv)" stroke-width="2"/>
+  <text x="478" y="172" fill="#FFFFFF" font-size="17" font-weight="700" letter-spacing="-0.3">every spend must prove</text>
+  <line x1="424" y1="190.5" x2="777" y2="190.5" stroke="#3D3D3A" stroke-width="1"/>
+
+  <!-- check 1 -->
+  <rect x="446" y="212" width="308" height="58" rx="10" fill="#0D1813" stroke="#3D3D3A"/>
+  <rect x="462" y="230" width="22" height="22" rx="6" fill="#0D1813" stroke="#15E99A" stroke-width="1.5"/>
+  <path d="M 467 241 L 472 246 L 480 235" stroke="#15E99A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="500" y="247" fill="#6EEDC0" font-size="14" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">SHA256(preimage) == H</text>
+
+  <!-- AND divider -->
+  <line x1="446" y1="296" x2="576" y2="296" stroke="#3D3D3A" stroke-width="1"/>
+  <text x="600" y="301" fill="#9A9A94" font-size="13.5" text-anchor="middle" font-weight="500" letter-spacing="1.5">AND</text>
+  <line x1="624" y1="296" x2="754" y2="296" stroke="#3D3D3A" stroke-width="1"/>
+
+  <!-- check 2 -->
+  <rect x="446" y="322" width="308" height="76" rx="10" fill="#0D1813" stroke="#3D3D3A"/>
+  <rect x="462" y="349" width="22" height="22" rx="6" fill="#0D1813" stroke="#15E99A" stroke-width="1.5"/>
+  <path d="M 467 360 L 472 365 L 480 354" stroke="#15E99A" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="500" y="354" fill="#6EEDC0" font-size="14" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">output[0].spk ==</text>
+  <text x="500" y="376" fill="#6EEDC0" font-size="14" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">OP_RETURN ‖ PUSH32 ‖ root</text>
+
+  <text x="600" y="480" fill="#9A9A94" font-size="13.5" text-anchor="middle">Script cannot see sibling outputs. <tspan fill="#FFFFFF" font-weight="500">Simplicity's introspection jets can.</tspan></text>
+
+  <!-- ══════ right: the two outcomes ══════ -->
+  <!-- accepted -->
+  <path d="M 778 240 C 840 240, 820 204, 876 204" stroke="#15E99A" stroke-width="2.5" fill="none"/>
+  <polygon points="886,204 872,197 872,211" fill="#15E99A"/>
+  <rect x="886" y="150" width="234" height="122" rx="12" fill="#111110" stroke="#15E99A" stroke-width="2"/>
+  <rect x="910" y="170" width="118" height="26" rx="13" fill="#15E99A"/>
+  <text x="969" y="188" fill="#0D1813" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="1">✓ ACCEPTED</text>
+  <text x="910" y="222" fill="#FFFFFF" font-size="13.5">compliant claim: preimage</text>
+  <text x="910" y="241" fill="#FFFFFF" font-size="13.5">revealed, anchor at <tspan font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#6EEDC0">vout[0]</tspan></text>
+  <text x="910" y="260" fill="#9A9A94" font-size="13">mined on the next block</text>
+
+  <!-- rejected -->
+  <path d="M 778 352 C 840 352, 820 420, 876 420" stroke="#EF4444" stroke-width="2.5" fill="none" stroke-dasharray="7 5"/>
+  <polygon points="886,420 872,413 872,427" fill="#EF4444"/>
+  <rect x="886" y="366" width="234" height="140" rx="12" fill="#111110" stroke="#EF4444" stroke-width="2"/>
+  <rect x="910" y="386" width="114" height="26" rx="13" fill="#EF4444"/>
+  <text x="967" y="404" fill="#FFFFFF" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="1">✗ REJECTED</text>
+  <text x="910" y="438" fill="#FFFFFF" font-size="13.5">same witness, anchor output</text>
+  <text x="910" y="457" fill="#FFFFFF" font-size="13.5">stripped after satisfaction:</text>
+  <text x="910" y="479" fill="#EF4444" font-size="13.5" font-weight="500">refused by consensus,</text>
+  <text x="910" y="497" fill="#9A9A94" font-size="13.5">not by tooling</text>
+
+  <!-- footer bar -->
+  <rect x="80" y="576" width="1040" height="62" rx="12" fill="#111110" stroke="#3D3D3A"/>
+  <rect x="80" y="576" width="4" height="62" rx="2" fill="url(#gv)"/>
+  <text x="108" y="602" fill="#9A9A94" font-size="14.5">The rule lives in the chain's validators, not in the wallet:</text>
+  <text x="108" y="624" fill="#FFFFFF" font-size="14.5" font-weight="500">spending this seal requires anchoring an RGB transition.</text>
+</svg>
