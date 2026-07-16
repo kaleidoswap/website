@@ -1,7 +1,7 @@
 {
-  "rgb-liquid-interoperability": {
+  "rgb-on-liquid": {
     "title": "RGB Meets Simplicity: Programmable Seals on Liquid",
-    "description": "RGB assets now run natively on Liquid, swapped across chains with no custodian at all, in a reproducible step toward real Bitcoin L2 interoperability today.",
+    "description": "We anchored RGB assets on Liquid, swapped them across Bitcoin and Liquid with no custodian, and made the chain itself enforce RGB anchoring with a Simplicity covenant — a reproducible proof of concept.",
     "image": "/blog/rgb-liquid/rgb-liquid-cover-preview.jpg",
     "imageX": "/blog/rgb-liquid/rgb-liquid-cover-preview-x.jpg",
     "date": "2026-07-13"
