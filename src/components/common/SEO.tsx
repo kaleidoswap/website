@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 
 interface SEOProps {
   title?: string
@@ -12,9 +13,8 @@ interface SEOProps {
   author?: string
 }
 
-const DEFAULT_TITLE = 'KaleidoSwap — Trustless Swaps on Bitcoin L2s'
-const DEFAULT_DESCRIPTION =
-  'Non-custodial Bitcoin DEX for all Bitcoin L2s. Trustless atomic swaps between BTC, stablecoins, and other assets across Lightning, RGB, Arkade, and Spark. Built for humans and AI agents alike.'
+const DEFAULT_TITLE = STATIC_PAGE_META['/'].title
+const DEFAULT_DESCRIPTION = STATIC_PAGE_META['/'].description
 const DEFAULT_IMAGE = '/images/kaleido-full-logo-bg.jpg'
 const SITE_URL = import.meta.env.VITE_SITE_URL || 'https://kaleidoswap.com'
 
@@ -37,7 +37,7 @@ const softwareJsonLd = {
   name: 'KaleidoSwap',
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'macOS, Linux, Windows, Web',
-  description: 'Non-custodial atomic swap platform for Bitcoin Layer 2 protocols. Trade BTC, stablecoins, and other assets across Lightning Network, RGB, Spark, and Arkade — no wrapped tokens, trustless, open source.',
+  description: 'Non-custodial Bitcoin DEX for Bitcoin L2s. Bitcoin and stablecoin atomic swaps on Lightning, RGB, Arkade, Liquid, and Spark. Ready for agentic payments.',
   offers: {
     '@type': 'Offer',
     price: '0',

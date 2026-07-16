@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Release Notes"]
 slug: "april-2026-release-notes"
 excerpt: "April was a dense month of shipping. The Desktop App reached v0.4.0 with trading automation features. The SDK went through six patch releases. KaleidoCLI received a significant expansion of its command surface."
-coverImage: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover.jpg"
-coverImageMobile: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-mobile.jpg"
-coverImageCard: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-card.jpg"
-coverImagePreview: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-preview-x.jpg"
+coverImage: "/blog/april-2026-release-notes/april-2026-release-notes-cover.jpg"
+coverImageMobile: "/blog/april-2026-release-notes/april-2026-release-notes-cover-mobile.jpg"
+coverImageCard: "/blog/april-2026-release-notes/april-2026-release-notes-cover-card.jpg"
+coverImagePreview: "/blog/april-2026-release-notes/april-2026-release-notes-cover-preview.jpg"
+coverImagePreviewX: "/blog/april-2026-release-notes/april-2026-release-notes-cover-preview-x.jpg"
 ---
 
 April was a dense month of shipping. The Desktop App reached v0.4.0 with a full set of trading automation features. The SDK went through six patch releases. KaleidoCLI received a significant expansion of its command surface. All of it is converging on the May mainnet launch.

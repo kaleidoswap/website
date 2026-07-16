@@ -7,6 +7,7 @@ import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { FinalCTA } from '@/components/home/FinalCTA'
 import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
@@ -230,11 +231,7 @@ export const SDK = () => {
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
-      <SEO
-        title="KaleidoSDK"
-        description="The Bitcoin swap SDK for Lightning Network, RGB, Arkade, Spark and more. Integrate trustless atomic swaps into any wallet, AI agent or app. TypeScript, Python, and Rust — the most complete Bitcoin L2s SDK."
-        url="/products/sdk"
-      />
+      <SEO {...STATIC_PAGE_META['/products/sdk']} url="/products/sdk" />
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify({
@@ -243,7 +240,7 @@ export const SDK = () => {
             name: 'KaleidoSDK',
             applicationCategory: 'DeveloperApplication',
             operatingSystem: 'macOS, Linux, Windows',
-            description: 'The Bitcoin swap SDK for Lightning Network, RGB, Arkade, Spark and more. Integrate trustless atomic swaps into any wallet, AI agent or app. TypeScript, Python, and Rust — the most complete Bitcoin L2s SDK.',
+            description: 'The Bitcoin atomic swap SDK for Lightning Network, RGB, Arkade, Liquid, Spark and more. Integrate trustless atomic swaps into any wallet, AI agent or app.',
             url: 'https://kaleidoswap.com/products/sdk',
             offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
             license: 'https://opensource.org/licenses/MIT',

@@ -40,7 +40,7 @@ export const HeroSection = () => {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-500/30 bg-primary-500/10 w-fit">
               <span className="w-2 h-2 rounded-full bg-primary-500 animate-pulse" />
               <span className="text-xs font-semibold text-primary-400 uppercase tracking-wider">
-                {t('Live on Testnet')}
+                {t('Live on Mainnet')}
               </span>
             </div>
           </AnimateIn>
@@ -53,7 +53,7 @@ export const HeroSection = () => {
                 <span className="text-gradient">{t('Bitcoin Layers')}</span>
               </h1>
               <p className="text-base sm:text-xl text-slate-400 max-w-xl leading-relaxed">
-                {t('The DEX for Bitcoin\'s multi-layer future. Swap BTC, USDT, stablecoins, and real-world assets across Lightning, RGB, and Spark. Sovereign by design.')}
+                {t('The multi-protocol Lightning DEX for atomic swaps between bitcoin, stablecoins, and real-world assets. Sovereign by design.')}
               </p>
             </div>
           </AnimateIn>

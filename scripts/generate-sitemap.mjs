@@ -14,9 +14,11 @@ const SITE_URL = 'https://kaleidoswap.com'
 const staticRoutes = [
   { path: '/',                    priority: '1.0', changefreq: 'weekly' },
   { path: '/products',            priority: '0.8', changefreq: 'weekly' },
+  { path: '/products/web-app',    priority: '0.8', changefreq: 'weekly' },
 { path: '/products/desktop',    priority: '0.8', changefreq: 'weekly' },
   { path: '/products/sdk',        priority: '0.7', changefreq: 'weekly' },
   { path: '/products/extension',  priority: '0.5', changefreq: 'monthly' },
+  { path: '/products/mobile',     priority: '0.6', changefreq: 'weekly' },
   { path: '/downloads',           priority: '0.9', changefreq: 'weekly' },
   { path: '/blog',                priority: '0.8', changefreq: 'weekly' },
   { path: '/privacy',             priority: '0.3', changefreq: 'monthly' },

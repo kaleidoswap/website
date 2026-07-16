@@ -5,11 +5,11 @@ author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
 slug: "rgb-taproot-atomic-swaps"
 excerpt: "A simple protocol for trustless cross-protocol swaps between RGB20 and Taproot Assets over the Lightning Network."
-coverImage: "/blog/images/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover.jpg"
-coverImageMobile: "/blog/images/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-mobile.jpg"
-coverImageCard: "/blog/images/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-card.jpg"
-coverImagePreview: "/blog/images/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview-x.jpg"
+coverImage: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover.jpg"
+coverImageMobile: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-mobile.jpg"
+coverImageCard: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-card.jpg"
+coverImagePreview: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview.jpg"
+coverImagePreviewX: "/blog/rgb-taproot-atomic-swaps/rgb-taproot-atomic-swaps-cover-preview-x.jpg"
 ---
 
 ### Bridging RGB20 and Taproot Assets on Lightning Network
