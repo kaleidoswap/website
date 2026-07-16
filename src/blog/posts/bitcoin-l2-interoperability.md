@@ -3,13 +3,13 @@ title: "Solving Bitcoin's L2 Liquidity Problem: KaleidoSwap's Multi-Protocol DEX
 date: "2026-01-15"
 author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
-slug: "solving-bitcoin-l2-liquidity"
+slug: "bitcoin-l2-interoperability"
 excerpt: "2025 was the year of RGB. Now, as we head into 2026, KaleidoSwap is evolving from a single-protocol proof into a unified multi-protocol liquidity engine for the entire Bitcoin L2 ecosystem."
-coverImage: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover.jpg"
-coverImageMobile: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-mobile.jpg"
-coverImageCard: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-card.jpg"
-coverImagePreview: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview-x.jpg"
+coverImage: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover.jpg"
+coverImageMobile: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-mobile.jpg"
+coverImageCard: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-card.jpg"
+coverImagePreview: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview.jpg"
+coverImagePreviewX: "/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-cover-preview-x.jpg"
 ---
 
 > From single-protocol proof to a unified, multi-chain liquidity engine.
@@ -32,7 +32,7 @@ This year was defined by shipping code, winning hackathons, and proving that you
 
 We launched the **KaleidoSwap Desktop App**, a seamless environment where users could finally test non-custodial trading of RGB assets on the Lightning Network.
 
-![KaleidoSwap Desktop Application](/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-2.png)
+![KaleidoSwap Desktop Application](/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-2.png)
 
 - Users could manage their own nodes and liquidity.
 - They experienced a "futuristic" DeFi UX native to Bitcoin — no bridges, no wrappers.
@@ -47,7 +47,7 @@ In July, we took our vision mobile and won the PlanB Hackathon. **Rate** is an i
 - **LSP Integration:** Built on top of the Kaleido LSP (Lightning Service Provider), we abstracted away the complexity of channel management.
 - **AI-Assisted Finance:** We integrated a local AI assistant capable of "Talk to Wallet" interactions. Instead of complex inputs, users can simply ask for suggestions on where to spend sats or stablecoins, or execute payments via natural language commands.
 
-![Rate mobile app](/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-3.png)
+![Rate mobile app](/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-3.png)
 
 ### 3. The First RGB Lightning Atomic Swap
 
@@ -108,7 +108,7 @@ Launching early 2026 on mainnet, this is the flagship interface for the financia
 - **Connect Any Wallet:** Support for BitMask, XVerse, Alby, and the KaleidoSwap Extension.
 - **Beyond Swaps:** We aren't stopping at spot trading. We envision a future with **Prediction Markets, Synthetic Stocks, and Derivatives** — all on Bitcoin. We are ready to build the infra to unlock it all.
 
-![KaleidoSwap WebApp Dashboard](/blog/images/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-4.png)
+![KaleidoSwap WebApp Dashboard](/blog/solving-bitcoin-l2-liquidity/solving-bitcoin-l2-liquidity-4.png)
 
 ---
 

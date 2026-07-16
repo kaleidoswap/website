@@ -22,6 +22,7 @@ import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { TiltCard } from '@/components/common/TiltCard'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 
@@ -99,11 +100,7 @@ export const Extension = () => {
 
   return (
     <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
-      <SEO
-        title="KaleidoSwap Browser Extension"
-        description="Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser."
-        url="/products/extension"
-      />
+      <SEO {...STATIC_PAGE_META['/products/extension']} url="/products/extension" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -111,7 +108,7 @@ export const Extension = () => {
           name: 'KaleidoSwap Extension',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'Chrome',
-          description: 'Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser.',
+          description: 'Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, Liquid and Arkade. Private, non-custodial Bitcoin swaps. Manage Bitcoin L2s assets from the browser.',
           url: 'https://kaleidoswap.com/products/extension',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           license: 'https://opensource.org/licenses/MIT',
