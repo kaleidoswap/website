@@ -1,0 +1,114 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" font-family="Satoshi, system-ui, sans-serif" role="img" aria-label="The WitnessTx trait: a small abstraction connecting the RGB verification path to both Bitcoin and Liquid transactions">
+  <defs>
+    <linearGradient id="gv" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15E99A"/>
+      <stop offset="1" stop-color="#6F32FF"/>
+    </linearGradient>
+    <linearGradient id="strip" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="1200" y2="6">
+      <stop offset="0" stop-color="#15E99A"/>
+      <stop offset="1" stop-color="#6F32FF"/>
+    </linearGradient>
+    <linearGradient id="hbeam" gradientUnits="userSpaceOnUse" x1="440" y1="0" x2="540" y2="0">
+      <stop offset="0" stop-color="#15E99A"/>
+      <stop offset="1" stop-color="#6EEDC0"/>
+    </linearGradient>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#FFFFFF" opacity="0.035"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="675" fill="#0D1813"/>
+  <rect width="1200" height="675" fill="url(#dots)"/>
+  <rect x="0" y="0" width="1200" height="5" fill="url(#strip)"/>
+
+  <!-- eyebrow chip -->
+  <rect x="80" y="58" width="404" height="34" rx="17" fill="#111110" stroke="#3D3D3A"/>
+  <circle cx="102" cy="75" r="4" fill="#15E99A"/>
+  <text x="118" y="80" fill="#6EEDC0" font-size="13.5" font-weight="500" letter-spacing="2.5">RGB CONSENSUS · VERIFICATION PATH</text>
+  <text x="506" y="80" fill="#9A9A94" font-size="14">the only place the chain type appears, and the whole patch</text>
+
+  <!-- ══════ left: the three call sites ══════ -->
+  <rect x="80" y="120" width="340" height="392" rx="14" fill="#111110" stroke="#3D3D3A"/>
+  <g font-size="16" fill="#FFFFFF">
+    <rect x="104" y="152" width="292" height="76" rx="10" fill="#0D1813" stroke="#3D3D3A"/>
+    <rect x="104" y="152" width="3.5" height="76" rx="1.75" fill="#15E99A"/>
+    <text x="124" y="184" font-weight="500" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">dbc::Proof::verify</text>
+    <text x="124" y="208" fill="#9A9A94" font-size="13.5">tapret / opret recovery</text>
+
+    <rect x="104" y="248" width="292" height="76" rx="10" fill="#0D1813" stroke="#3D3D3A"/>
+    <rect x="104" y="248" width="3.5" height="76" rx="1.75" fill="#15E99A"/>
+    <text x="124" y="280" font-weight="500" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">Anchor::verify</text>
+    <text x="124" y="304" fill="#9A9A94" font-size="13.5">MPC inclusion + commitment</text>
+
+    <rect x="104" y="344" width="292" height="76" rx="10" fill="#0D1813" stroke="#3D3D3A"/>
+    <rect x="104" y="344" width="3.5" height="76" rx="1.75" fill="#15E99A"/>
+    <text x="124" y="376" font-weight="500" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">seals · Witness&lt;D&gt;</text>
+    <text x="124" y="400" fill="#9A9A94" font-size="13.5">seal outpoint ∈ inputs</text>
+  </g>
+  <line x1="104" y1="448" x2="396" y2="448" stroke="#3D3D3A" stroke-width="1"/>
+  <text x="124" y="478" fill="#9A9A94" font-size="13.5">everything else in the stack is</text>
+  <text x="124" y="497" fill="#6EEDC0" font-size="13.5" font-weight="500">already chain-agnostic</text>
+
+  <!-- convergence: three call sites → one beam -->
+  <g stroke="#15E99A" stroke-width="2" fill="none" opacity="0.85">
+    <path d="M 396 190 C 448 190, 448 316, 476 316"/>
+    <path d="M 396 286 C 440 286, 440 316, 476 316"/>
+    <path d="M 396 382 C 448 382, 448 316, 476 316"/>
+  </g>
+  <circle cx="480" cy="316" r="4" fill="#15E99A"/>
+  <line x1="484" y1="316" x2="540" y2="316" stroke="url(#hbeam)" stroke-width="2.5"/>
+
+  <!-- ══════ center: trait WitnessTx ══════ -->
+  <g filter="url(#soft)">
+    <rect x="540" y="212" width="260" height="208" rx="12" fill="#111110" stroke="url(#gv)" stroke-width="2.5"/>
+  </g>
+  <rect x="542.5" y="214.5" width="255" height="46" rx="10" fill="#0D1813"/>
+  <rect x="564" y="230" width="15" height="15" transform="rotate(45 571.5 237.5)" fill="none" stroke="url(#gv)" stroke-width="2"/>
+  <text x="594" y="243" fill="#FFFFFF" font-size="17" font-weight="700" letter-spacing="-0.3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">trait WitnessTx</text>
+  <line x1="542" y1="260.5" x2="797" y2="260.5" stroke="#3D3D3A" stroke-width="1"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13.5" fill="#6EEDC0">
+    <text x="566" y="291">witness_txid()</text>
+    <text x="566" y="321">input_outpoints()</text>
+    <text x="566" y="351">output_script_pubkeys()</text>
+  </g>
+  <g stroke="#3D3D3A" stroke-width="1" opacity="0.6">
+    <line x1="566" y1="302" x2="774" y2="302"/>
+    <line x1="566" y1="332" x2="774" y2="332"/>
+  </g>
+  <!-- badges -->
+  <rect x="566" y="372" width="92" height="26" rx="13" fill="#0D1813" stroke="#15E99A" stroke-width="1" opacity="0.9"/>
+  <text x="612" y="389" fill="#6EEDC0" font-size="12" text-anchor="middle" font-weight="500">207 lines</text>
+  <rect x="666" y="372" width="112" height="26" rx="13" fill="#0D1813" stroke="#3D3D3A" stroke-width="1"/>
+  <text x="722" y="389" fill="#9A9A94" font-size="12" text-anchor="middle" font-weight="500">non-breaking</text>
+
+  <!-- beams: trait → the two transaction types -->
+  <path d="M 800 264 C 850 264, 830 210, 876 210" stroke="#15E99A" stroke-width="2.5" fill="none"/>
+  <circle cx="880" cy="210" r="4" fill="#15E99A"/>
+  <path d="M 800 368 C 850 368, 830 462, 876 462" stroke="#6F32FF" stroke-width="2.5" fill="none"/>
+  <circle cx="880" cy="462" r="4" fill="#6F32FF"/>
+
+  <!-- ══════ right: the two chains ══════ -->
+  <rect x="880" y="150" width="240" height="120" rx="12" fill="#111110" stroke="#15E99A" stroke-width="2"/>
+  <circle cx="908" cy="184" r="5" fill="#15E99A"/>
+  <text x="924" y="190" fill="#FFFFFF" font-size="16" font-weight="500" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">bitcoin::Tx</text>
+  <line x1="904" y1="206" x2="1096" y2="206" stroke="#3D3D3A" stroke-width="1"/>
+  <text x="904" y="230" fill="#9A9A94" font-size="13.5">existing callers, unchanged</text>
+  <text x="904" y="252" fill="#6EEDC0" font-size="13.5" font-weight="500">45/45 upstream tests pass</text>
+
+  <rect x="880" y="402" width="240" height="120" rx="12" fill="#111110" stroke="#6F32FF" stroke-width="2"/>
+  <circle cx="908" cy="436" r="5" fill="#6F32FF"/>
+  <text x="924" y="442" fill="#FFFFFF" font-size="16" font-weight="500" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">elements::Tx</text>
+  <line x1="904" y1="458" x2="1096" y2="458" stroke="#3D3D3A" stroke-width="1"/>
+  <text x="904" y="482" fill="#9A9A94" font-size="13.5">Liquid joins the same</text>
+  <text x="904" y="504" fill="#A48AFF" font-size="13.5" font-weight="500">verification path · ~30 LOC</text>
+
+  <!-- footer bar -->
+  <rect x="80" y="560" width="1040" height="64" rx="12" fill="#111110" stroke="#3D3D3A"/>
+  <rect x="80" y="560" width="4" height="64" rx="2" fill="url(#gv)"/>
+  <text x="108" y="587" fill="#9A9A94" font-size="14.5">The verification path needs three projections of a transaction, nothing else. No witness data, no fees, no signatures.</text>
+  <text x="108" y="610" fill="#FFFFFF" font-size="14.5" font-weight="500">Any chain that can answer three questions can anchor RGB.</text>
+</svg>
