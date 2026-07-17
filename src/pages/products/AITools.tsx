@@ -660,7 +660,7 @@ export const AITools = () => {
             </AnimateIn>
 
             <AnimateIn variant="fade-up" className="order-1 lg:order-2">
-              <SectionEyebrow label={t('Local AI')} color="violet" />
+              <SectionEyebrow label={t('Sovereign AI')} color="violet" />
               <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary-400 to-secondary-600 flex items-center justify-center text-white shadow-lg shadow-secondary-500/30 shrink-0">
                   <Brain className="w-6 h-6" />
