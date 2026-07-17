@@ -344,10 +344,10 @@ const HeroChat = () => {
             <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
             <div className="w-3 h-3 rounded-full bg-green-500/70" />
           </div>
-          <span className="text-xs text-slate-500 font-mono">kaleido-agent</span>
+          <span className="text-xs text-slate-500 font-mono">kaleidoswap</span>
           <span className="flex items-center gap-1.5 text-xs px-2 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20 font-mono">
-            <Bot className="w-3 h-3" />
-            {t('Local AI')}
+            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+            {t('running')}
           </span>
         </div>
         <div className="p-5 h-[280px] sm:h-[300px] flex flex-col justify-end gap-3 text-sm overflow-hidden">
