@@ -22,6 +22,7 @@ const Desktop = lazy(() => import('@/pages/products/Desktop').then((m) => ({ def
 const SDK = lazy(() => import('@/pages/products/SDK').then((m) => ({ default: m.SDK })))
 const Extension = lazy(() => import('@/pages/products/Extension').then((m) => ({ default: m.Extension })))
 const ExtensionBeta = lazy(() => import('@/pages/products/ExtensionBeta').then((m) => ({ default: m.ExtensionBeta })))
+const AITools = lazy(() => import('@/pages/products/AITools').then((m) => ({ default: m.AITools })))
 
 // Loading fallback component
 const PageLoader = () => (
@@ -49,6 +50,7 @@ const AnimatedRoutes = () => {
           <Route path="/products/sdk" element={<SDK />} />
           <Route path="/products/extension" element={<Extension />} />
           <Route path="/products/extension/beta" element={<ExtensionBeta />} />
+          <Route path="/products/ai-tools" element={<AITools />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/downloads" element={<Downloads />} />

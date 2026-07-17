@@ -1,5 +1,5 @@
 // src/pages/Products.tsx
-import { Globe, Monitor, Smartphone, Puzzle, Code, ArrowRight, Check } from 'lucide-react'
+import { Globe, Monitor, Smartphone, Puzzle, Code, Bot, ArrowRight, Check } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
@@ -36,21 +36,6 @@ const colorConfig: Record<string, { icon: string; title: string; border: string;
 
 const products = [
   {
-    id: 'sdk',
-    name: 'Developer SDK',
-    icon: Code,
-    status: 'live' as const,
-    chipLabel: 'Ready to Integrate',
-    description: 'Build on KaleidoSwap. TypeScript and Rust SDKs with full documentation.',
-    features: [
-      'Full API documentation',
-      'Code examples',
-      'Market maker tools',
-    ],
-    href: '/products/sdk',
-    color: 'purple',
-  },
-  {
     id: 'extension',
     name: 'Browser Extension',
     icon: Puzzle,
@@ -79,6 +64,36 @@ const products = [
     ],
     href: '/products/desktop',
     color: 'green',
+  },
+  {
+    id: 'sdk',
+    name: 'Developer SDK',
+    icon: Code,
+    status: 'live' as const,
+    chipLabel: 'Ready to Integrate',
+    description: 'Build on KaleidoSwap. TypeScript and Rust SDKs with full documentation.',
+    features: [
+      'Full API documentation',
+      'Code examples',
+      'Market maker tools',
+    ],
+    href: '/products/sdk',
+    color: 'purple',
+  },
+  {
+    id: 'ai-tools',
+    name: 'AI Tools',
+    icon: Bot,
+    status: 'live' as const,
+    chipLabel: 'Ready to Integrate',
+    description: 'Autonomous agents, on-device AI assistance, and open MCP servers for AI on Bitcoin, Lightning, RGB and Spark.',
+    features: [
+      'Non-custodial trading agent',
+      'MCP servers for Claude & OpenAI',
+      'On-device AI assistant',
+    ],
+    href: '/products/ai-tools',
+    color: 'purple',
   },
   {
     id: 'web-app',
@@ -130,6 +145,7 @@ export const Products = () => {
             { '@type': 'ListItem', position: 3, name: 'KaleidoSDK', url: 'https://kaleidoswap.com/products/sdk' },
             { '@type': 'ListItem', position: 4, name: 'Browser Extension', url: 'https://kaleidoswap.com/products/extension' },
             { '@type': 'ListItem', position: 5, name: 'Mobile App', url: 'https://kaleidoswap.com/products/mobile' },
+            { '@type': 'ListItem', position: 6, name: 'AI Tools', url: 'https://kaleidoswap.com/products/ai-tools' },
           ],
         })}</script>
         <script type="application/ld+json">{JSON.stringify({
