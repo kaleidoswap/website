@@ -115,7 +115,7 @@ export const Products = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO {...STATIC_PAGE_META['/products']} url="/products" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
@@ -148,13 +148,10 @@ export const Products = () => {
       <section className="pt-32 pb-16 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary-500/10 rounded-full blur-[120px] -z-10" />
 
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        <div className="max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl font-bold text-white">
             {t('Our Products')}
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            {t("Build and trade on Bitcoin's most connected swap protocol. Choose your platform.")}
-          </p>
         </div>
       </section>
 
@@ -220,10 +217,7 @@ export const Products = () => {
                         {t(chipText)}
                       </span>
                       {hasPage && (
-                        <Button
-                          variant="outline"
-                          className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200"
-                        >
+                        <Button variant="outline">
                           {t('Learn More')}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>

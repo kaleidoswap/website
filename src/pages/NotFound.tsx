@@ -12,7 +12,7 @@ export const NotFound = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <Navbar />
 
       <section className="min-h-[80vh] flex items-center justify-center relative overflow-hidden pt-24">
@@ -27,7 +27,7 @@ export const NotFound = () => {
               404
             </h1>
 
-            <p className="text-lg text-slate-400 mb-10">
+            <p className="text-base sm:text-lg text-slate-400 mb-10">
               {t("The page you're looking for doesn't exist or has been moved.")}
             </p>
 
@@ -37,7 +37,7 @@ export const NotFound = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => navigate(-1)}
-                className="border-slate-600 hover:border-slate-500 hover:text-gray-200 flex items-center gap-2"
+                className="flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 {t('Go Back')}

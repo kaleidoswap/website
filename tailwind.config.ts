@@ -28,7 +28,7 @@ export default {
           800: '#166534',
           900: '#14532d',
         },
-        'background-dark': '#0d1117',
+        'background-dark': '#0a1120',
         'surface-dark': '#161b22',
         teal: {
           50: '#f0fdfa',
@@ -134,11 +134,11 @@ export default {
               fontWeight: '700',
               letterSpacing: '-0.02em',
               lineHeight: '1.3',
-              marginTop: '2.4em',
+              marginTop: '2.8em',
               marginBottom: '0.9em',
-              paddingBottom: '0.4em',
-              borderBottomWidth: '1px',
-              borderBottomColor: 'rgba(255,255,255,0.08)',
+              paddingTop: '1.6em',
+              borderTopWidth: '1px',
+              borderTopColor: 'rgba(255,255,255,0.08)',
             },
             h3: {
               fontSize: '1.2em',
@@ -246,9 +246,7 @@ export default {
 
             // ── misc ──
             hr: {
-              borderColor: 'rgba(255,255,255,0.1)',
-              marginTop: '3em',
-              marginBottom: '3em',
+              display: 'none',
             },
             thead: {
               borderBottomColor: 'rgba(255,255,255,0.15)',

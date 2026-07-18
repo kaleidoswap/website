@@ -10,10 +10,10 @@ export const FinalCTA = () => {
   const { handleNavigation } = useAppNavigation()
 
   return (
-    <section className="py-16 bg-gradient-to-br from-primary-500/10 to-secondary-500/10 border-t border-white/5">
+    <section className="py-16 bg-gradient-to-br from-primary-500/5 to-secondary-500/5">
       <AnimateIn variant="scale" className="max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight mb-4">{t('Build on KaleidoSwap')}</h2>
-        <p className="text-base sm:text-xl text-slate-400 leading-relaxed mb-10">
+        <p className="text-base sm:text-lg text-slate-400 leading-relaxed mb-10">
           {t('Join other builders shaping the future of Bitcoin-based finance. Live on Mutinynet and Regtest, Mainnet Q2 2026.')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -29,7 +29,7 @@ export const FinalCTA = () => {
             variant="outline"
             size="lg"
             onClick={() => handleNavigation(SOCIALS.telegram, true)}
-            className="h-12 px-8 border-slate-600 hover:border-slate-500 flex items-center gap-2"
+            className="h-12 px-8 flex items-center gap-2"
           >
             <Send className="w-5 h-5" />
             {t('Join Telegram Community')}

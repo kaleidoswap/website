@@ -84,7 +84,7 @@ export function BlogList() {
   }, [allPosts, selectedCategory, sort])
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO {...STATIC_PAGE_META['/blog']} url="/blog" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({

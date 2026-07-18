@@ -61,7 +61,7 @@ export const Desktop = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO {...STATIC_PAGE_META['/products/desktop']} url="/products/desktop" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
@@ -112,7 +112,7 @@ export const Desktop = () => {
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
                     {t('Desktop App')}
                   </h1>
-                  <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
+                  <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
                     {t('Full sovereignty. Run your own RGB Lightning node. Manage channels, control liquidity, and trade with maximum privacy.')}
                   </p>
                 </div>
@@ -132,7 +132,7 @@ export const Desktop = () => {
                     variant="outline"
                     size="lg"
                     onClick={() => window.open(DOCS.desktop, '_blank')}
-                    className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex items-center justify-center gap-2 w-full sm:w-auto"
+                    className="flex items-center justify-center gap-2 w-full sm:w-auto"
                   >
                     <BookOpen className="w-4 h-4" />
                     {t('Read the Docs')}
@@ -173,11 +173,11 @@ export const Desktop = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20 bg-gray-950/50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up" className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Built for Sovereignty')}</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">{t('Everything you need to trade sovereignly, built into one application.')}</p>
+            <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">{t('Everything you need to trade sovereignly, built into one application.')}</p>
           </AnimateIn>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
@@ -247,7 +247,7 @@ export const Desktop = () => {
       </section>
 
       {/* RGB Lightning Node */}
-      <section className="pt-20 pb-32 bg-gray-950/50">
+      <section className="pt-20 pb-32">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <div className="glass-card rounded-2xl p-8 md:p-12">
@@ -293,10 +293,10 @@ export const Desktop = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-secondary-500/10 to-primary-500/10 border-t border-white/5">
+      <section className="py-20 bg-gradient-to-br from-secondary-500/5 to-primary-500/5">
         <AnimateIn variant="scale" className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Take Full Control')}</h2>
-          <p className="text-slate-400 mb-8 text-lg">
+          <p className="text-slate-400 mb-8 text-base sm:text-lg">
             {t('Download the desktop app and run your own sovereign trading infrastructure.')}
           </p>
           <Button

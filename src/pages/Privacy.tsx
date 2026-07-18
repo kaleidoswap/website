@@ -35,7 +35,7 @@ export const Privacy = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO {...STATIC_PAGE_META['/privacy']} url="/privacy" />
 
       <div className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none" aria-hidden="true" />

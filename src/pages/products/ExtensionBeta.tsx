@@ -142,7 +142,7 @@ export const ExtensionBeta = () => {
     'w-full bg-gray-900/60 border border-gray-700 rounded-lg px-4 py-3 text-base sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400/40 transition-colors'
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO
         title="KaleidoSwap Extension — Beta Access"
         description="Apply for early access to the KaleidoSwap browser extension beta. Multi-protocol Bitcoin wallet for Chrome — mainnet (Spark, Arkade) and RLN testnets."

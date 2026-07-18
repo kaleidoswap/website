@@ -52,7 +52,7 @@ export const HeroSection = () => {
                 {t('Trustless Swaps on')}{' '}
                 <span className="text-gradient">{t('Bitcoin Layers')}</span>
               </h1>
-              <p className="text-base sm:text-xl text-slate-400 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-400 max-w-xl leading-relaxed">
                 {t('The multi-protocol Lightning DEX for atomic swaps between bitcoin, stablecoins, and real-world assets. Sovereign by design.')}
               </p>
             </div>
@@ -73,7 +73,7 @@ export const HeroSection = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => handleNavigation('https://kaleidoswap.com/products', true)}
-                className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 flex sm:hidden items-center justify-center gap-2 w-full"
+                className="h-12 px-8 flex sm:hidden items-center justify-center gap-2 w-full"
               >
                 <Download className="w-5 h-5" />
                 {t('Download the Apps')}
@@ -82,7 +82,7 @@ export const HeroSection = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => handleNavigation('https://kaleidoswap.com/products', true)}
-                className="h-12 px-8 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200 hidden sm:flex items-center gap-2"
+                className="h-12 px-8 hidden sm:flex items-center gap-2"
               >
                 <Download className="w-5 h-5" />
                 {t('Download the Apps')}

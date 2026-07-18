@@ -38,7 +38,7 @@ export const Mobile = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO {...STATIC_PAGE_META['/products/mobile']} url="/products/mobile" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
@@ -85,7 +85,7 @@ export const Mobile = () => {
               <h1 className="text-4xl lg:text-6xl font-bold mb-6">
                 {t('Mobile App')}
               </h1>
-              <p className="text-xl text-slate-400 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-400 mb-8 leading-relaxed">
                 {t('Swap on the go. Native iOS and Android apps with the same non-custodial security as the rest of KaleidoSwap. Trade BTC, stablecoins, and RGB assets across the Lightning Network from your pocket.')}
               </p>
 
@@ -141,7 +141,7 @@ export const Mobile = () => {
       {MOBILE_APP_LIVE && (
         <>
           {/* Features */}
-          <section className="py-20 bg-gray-950/50">
+          <section className="py-20">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center mb-12">{t('Key Features')}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -160,7 +160,7 @@ export const Mobile = () => {
           <section className="py-20">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center mb-4">{t('How It Works')}</h2>
-              <p className="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-slate-400 text-center mb-12 max-w-2xl mx-auto">
                 {t('Three simple steps to start trading')}
               </p>
 
@@ -186,7 +186,7 @@ export const Mobile = () => {
           <section className="py-20">
             <div className="max-w-4xl mx-auto px-6 text-center">
               <h2 className="text-3xl font-bold mb-4">{t('Get the App')}</h2>
-              <p className="text-slate-400 mb-8">
+              <p className="text-base sm:text-lg text-slate-400 mb-8">
                 {t('Available now for iOS and Android.')}
               </p>
               <Button

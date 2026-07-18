@@ -417,7 +417,7 @@ export const Navbar = () => {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full justify-center border-gray-600 text-gray-300"
+                    className="w-full justify-center"
                     onClick={() => handleNavigation('/downloads')}
                   >
                     {t('Download Desktop')}

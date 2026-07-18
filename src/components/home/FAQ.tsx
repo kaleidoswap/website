@@ -55,7 +55,7 @@ const FaqItem = memo(({
       }`}
     >
       <div className="overflow-hidden">
-        <p className="px-6 pb-5 text-slate-400 leading-relaxed">
+        <p className="px-6 pt-5 pb-5 text-slate-400 leading-relaxed">
           {item.answer}
         </p>
       </div>
