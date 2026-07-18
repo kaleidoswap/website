@@ -27,10 +27,27 @@ const heroAnchors = [
   { label: 'Skills', href: '#skills', icon: Sparkles },
 ]
 
-const agentPoints = [
-  { icon: ArrowLeftRight, text: 'Sends funds, swap assets, runs DCA, and places limit orders' },
-  { icon: Zap, text: 'Rebalances and manages Lightning channel liquidity' },
-  { icon: Lock, text: 'Pays for tools and APIs calls using L402 protocol' },
+const agentFeatures = [
+  {
+    icon: ArrowLeftRight,
+    title: 'Trade & Transfer',
+    text: 'Sends funds, swaps assets, runs DCA, and places limit orders.',
+  },
+  {
+    icon: Sliders,
+    title: 'Manage Liquidity',
+    text: 'Rebalances and manages Lightning channel liquidity automatically.',
+  },
+  {
+    icon: Zap,
+    title: 'Pay for Tools',
+    text: 'Pays for tools and API calls using the L402 protocol.',
+  },
+  {
+    icon: Lock,
+    title: 'Non-Custodial',
+    text: 'Acts on your behalf without ever taking custody.',
+  },
 ]
 
 const mindPoints = [
@@ -520,74 +537,44 @@ export const AITools = () => {
       {/* KaleidoAgent */}
       <section id="kaleido-agent" className="py-20 bg-gray-950/50 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <AnimateIn variant="fade-up">
-              <SectionEyebrow label={t('Autonomous Agent')} color="green" />
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 shrink-0">
-                  <Bot className="w-6 h-6" />
-                </div>
-                <h2 className="text-3xl md:text-4xl font-bold">{t('KaleidoAgent')}</h2>
+          <AnimateIn variant="fade-up" className="text-center">
+            <SectionEyebrow label={t('Autonomous Agent')} color="green" />
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 shrink-0">
+                <Bot className="w-6 h-6" />
               </div>
-              <p className="text-slate-400 mb-8 leading-relaxed">
-                {t("AI portfolio manager and wallet operator. Monitors allocations and manages assets, acting on the user's behalf without ever taking custody.")}
-              </p>
-              <ul className="space-y-4 mb-8">
-                {agentPoints.map((point) => (
-                  <li key={point.text} className="flex items-start gap-3 text-slate-300">
-                    <span className="w-8 h-8 rounded-lg bg-green-500/10 text-green-400 flex items-center justify-center shrink-0">
-                      <point.icon className="w-4 h-4" />
-                    </span>
-                    <span className="pt-1.5">{t(point.text)}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button
-                size="lg"
-                onClick={() => window.open(KALEIDO_AGENT_REPO, '_blank')}
-                className="bg-green-500 hover:bg-green-600 flex items-center justify-center gap-2 w-fit"
-              >
-                <Github className="w-4 h-4" />
-                {t('View on GitHub')}
-                <ExternalLink className="w-4 h-4" />
-              </Button>
-            </AnimateIn>
+              <h2 className="text-3xl md:text-4xl font-bold">{t('KaleidoAgent')}</h2>
+            </div>
+            <p className="text-slate-400 mb-12 leading-relaxed max-w-2xl mx-auto">
+              {t("AI portfolio manager and wallet operator. Monitors allocations and manages assets, acting on the user's behalf without ever taking custody.")}
+            </p>
+          </AnimateIn>
 
-            {/* Agent activity terminal */}
-            <AnimateIn variant="scale" delay={200} duration={800} className="min-w-0">
-              <div className="relative group min-w-0">
-                <div className="absolute -inset-4 bg-gradient-to-br from-green-500/20 to-secondary-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
-                <div className="relative bg-gray-900 rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
-                  <div className="flex items-center justify-between px-4 py-3 bg-gray-950/80 border-b border-white/5">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                      <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                    </div>
-                    <span className="text-xs text-slate-500 font-mono">kaleido-agent</span>
-                    <span className="flex items-center gap-1.5 text-xs px-2 py-0.5 rounded bg-green-500/10 text-green-400 border border-green-500/20 font-mono">
-                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                      {t('running')}
-                    </span>
-                  </div>
-                  <div className="p-5 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto whitespace-nowrap">
-                    <div className="text-slate-500">$ kaleido-agent start --skill portfolio-manager</div>
-                    <div className="mt-2 text-slate-300"><span className="text-green-400">✓</span> wallet connected — <span className="text-secondary-300">local signer (WDK)</span></div>
-                    <div className="text-slate-400">watching portfolio · BTC 61% · USDT 24% · LN 15%</div>
-                    <div className="mt-3 text-slate-300"><span className="text-bitcoin-400">!</span> BTC allocation drifted <span className="text-bitcoin-400">+4.2%</span> above target</div>
-                    <div className="text-slate-400">→ rebalancing <span className="text-white">0.018 BTC → USDT</span> via atomic swap</div>
-                    <div className="text-slate-300"><span className="text-green-400">✓</span> swap settled — HTLC claimed, <span className="text-green-400">no custody</span></div>
-                    <div className="mt-3 text-slate-400">→ inbound liquidity low — ordering channel via <span className="text-secondary-300">LSPS1</span></div>
-                    <div className="text-slate-300"><span className="text-green-400">✓</span> channel opened · <span className="text-white">2.0M sats</span> inbound</div>
-                    <div className="mt-3 flex items-center gap-1">
-                      <span className="text-slate-600">{'>'}</span>
-                      <span className="w-2 h-[1.1em] bg-green-400/70 animate-pulse ml-1 inline-block" />
-                    </div>
-                  </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+            {agentFeatures.map((feature, index) => (
+              <AnimateIn key={feature.title} variant="fade-up" delay={index * 80}>
+                <div className="glass-card rounded-xl p-6 h-full flex flex-col items-center text-center">
+                  <span className="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center shrink-0 mb-4">
+                    <feature.icon className="w-6 h-6" />
+                  </span>
+                  <h3 className="font-bold text-white mb-2">{t(feature.title)}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{t(feature.text)}</p>
                 </div>
-              </div>
-            </AnimateIn>
+              </AnimateIn>
+            ))}
           </div>
+
+          <AnimateIn variant="fade-up" className="flex justify-center">
+            <Button
+              size="lg"
+              onClick={() => window.open(KALEIDO_AGENT_REPO, '_blank')}
+              className="bg-green-500 hover:bg-green-600 flex items-center justify-center gap-2 w-fit"
+            >
+              <Github className="w-4 h-4" />
+              {t('View on GitHub')}
+              <ExternalLink className="w-4 h-4" />
+            </Button>
+          </AnimateIn>
         </div>
       </section>
 
