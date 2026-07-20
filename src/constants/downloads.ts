@@ -168,6 +168,18 @@ const buildPlatforms = (
       secondaryDownloads: macSecondary.length ? macSecondary : undefined
     },
     {
+      platform: 'windows',
+      icon: WindowsIcon,
+      title: 'Windows',
+      architecture: ['x64'],
+      downloadUrl:
+        windowsExeAsset?.browser_download_url ?? getWindowsDownload(version),
+      signatureUrl:
+        windowsExeSignature?.browser_download_url ??
+        getSignatureUrl('win-installer', version),
+      secondaryDownloads: windowsSecondary.length ? windowsSecondary : undefined
+    },
+    {
       platform: 'linux',
       icon: LinuxIcon,
       title: 'Linux',
@@ -181,18 +193,6 @@ const buildPlatforms = (
       signatureUrl:
         linuxSignatureAsset?.browser_download_url ?? getSignatureUrl('linux', version),
       secondaryDownloads: linuxSecondary.length ? linuxSecondary : undefined
-    },
-    {
-      platform: 'windows',
-      icon: WindowsIcon,
-      title: 'Windows',
-      architecture: ['x64'],
-      downloadUrl:
-        windowsExeAsset?.browser_download_url ?? getWindowsDownload(version),
-      signatureUrl:
-        windowsExeSignature?.browser_download_url ??
-        getSignatureUrl('win-installer', version),
-      secondaryDownloads: windowsSecondary.length ? windowsSecondary : undefined
     }
   ]
 }

@@ -1,5 +1,5 @@
 // src/pages/products/Desktop.tsx
-import { Monitor, Shield, Server, Lock, Download, ArrowRight, Check, Terminal, BookOpen } from 'lucide-react'
+import { Shield, Server, Lock, Download, ArrowRight, Check, Terminal, BookOpen } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
@@ -11,7 +11,9 @@ import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { MacbookMockup } from '@/components/common/MacbookMockup'
+import { ReleaseNotes } from '@/components/common/ReleaseNotes'
 import { motion } from 'framer-motion'
+import { AppleIcon, WindowsIcon, LinuxIcon } from '@/components/icons/PlatformIcons'
 
 const features = [
   {
@@ -44,10 +46,10 @@ const features = [
   },
 ]
 
-const platforms: { name: string; icon: typeof Monitor; arch: string; disabled?: boolean }[] = [
-  { name: 'macOS', icon: Monitor, arch: 'Apple Silicon & Intel' },
-  { name: 'Windows', icon: Monitor, arch: 'x64' },
-  { name: 'Linux', icon: Terminal, arch: 'x64 / AppImage' },
+const platforms: { name: string; icon: typeof AppleIcon; arch: string; disabled?: boolean }[] = [
+  { name: 'macOS', icon: AppleIcon, arch: 'Apple Silicon & Intel' },
+  { name: 'Windows', icon: WindowsIcon, arch: 'x64' },
+  { name: 'Linux', icon: LinuxIcon, arch: 'x64 / AppImage' },
 ]
 
 const nodeFeatures = [
@@ -245,6 +247,9 @@ export const Desktop = () => {
           </AnimateIn>
         </div>
       </section>
+
+      {/* Release Notes — latest release fetched from GitHub */}
+      <ReleaseNotes />
 
       {/* RGB Lightning Node */}
       <section className="pt-20 pb-32">

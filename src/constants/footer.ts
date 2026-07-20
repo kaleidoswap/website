@@ -9,7 +9,6 @@ export const footerConfig: FooterProps = {
       links: [
         { label: "Blog", href: "/blog" },
         { label: "Documentation", href: PRODUCTS.docs, external: true },
-        { label: "GitHub Repository", href: GITHUB.orgUrl, external: true },
         { label: "RGB Protocol", href: EXTERNAL.rgbInfo, external: true },
         { label: "Lightning Network", href: EXTERNAL.lightningNetwork, external: true },
         { label: "Bitcoin Whitepaper", href: EXTERNAL.bitcoinWhitepaper, external: true }

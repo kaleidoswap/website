@@ -13,11 +13,11 @@ export const BuiltInPublic = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
             {/* Backed By */}
-            <div className="flex flex-col items-center">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6 text-center">
+            <div className="flex flex-col items-start">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
                 {t('Backed By')}
               </p>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-5">
                 {backers.map((backer) => (
                   <a
                     key={backer.name}
@@ -44,16 +44,16 @@ export const BuiltInPublic = () => {
             </div>
 
             {/* Accomplishments */}
-            <div className="flex flex-col items-center">
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6 text-center">
+            <div className="flex flex-col items-start">
+              <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
                 {t('Accomplishments')}
               </p>
-              <div className="flex flex-col gap-3 w-full">
+              <div className="flex flex-col gap-5 w-full">
                 <a
                   href="https://kaleidoswap.medium.com/%EF%B8%8F-the-first-ever-rgb-asset-swap-on-lightning-mainnet-1b940dcd0efd"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-slate-300 glass-card px-6 py-4 rounded-xl hover:border-white/20 hover:text-white transition-colors group w-full"
+                  className="flex items-center gap-4 text-slate-300 glass-card px-6 py-4 min-h-16 rounded-xl hover:border-white/20 hover:text-white transition-colors group w-full"
                 >
                   <Zap className="w-5 h-5 shrink-0 text-primary-400 group-hover:text-white transition-colors" />
                   <span>{t('Pioneer — First RGB swap on Lightning')}</span>
@@ -63,7 +63,7 @@ export const BuiltInPublic = () => {
                   href="https://www.rgbprotocol.org/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-slate-300 glass-card px-6 py-4 rounded-xl hover:border-white/20 hover:text-white transition-colors group w-full"
+                  className="flex items-center gap-4 text-slate-300 glass-card px-6 py-4 min-h-16 rounded-xl hover:border-white/20 hover:text-white transition-colors group w-full"
                 >
                   <Handshake className="w-5 h-5 shrink-0 text-primary-400 group-hover:text-white transition-colors" />
                   <span>{t('Founding Partner — RGB Protocol Association')}</span>
@@ -73,7 +73,7 @@ export const BuiltInPublic = () => {
                   href="https://x.com/kaleidoswap/status/2027780906757276109"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 text-slate-300 glass-card px-6 py-4 rounded-xl hover:border-white/20 hover:text-white transition-colors group w-full"
+                  className="flex items-center gap-4 text-slate-300 glass-card px-6 py-4 min-h-16 rounded-xl hover:border-white/20 hover:text-white transition-colors group w-full"
                 >
                   <Medal className="w-5 h-5 shrink-0 text-primary-400 group-hover:text-white transition-colors" />
                   <span>{t('Winner — CypherTank 1st Edition')}</span>

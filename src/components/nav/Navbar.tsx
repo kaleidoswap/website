@@ -3,10 +3,10 @@ import { createPortal } from 'react-dom'
 
 // Saved page-scroll position while the mobile menu is open (iOS needs position:fixed on body)
 let _savedScrollY = 0
-import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react'
+import { Menu, X, ChevronDown, ExternalLink, ArrowRight } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/common/Button'
-import { mainNavItems, productItems, developerItems } from '@/constants/navigation'
+import { mainNavItems, productItems, resourceItems } from '@/constants/navigation'
 import { cn, openExternalLink } from '@/lib/utils'
 const kaleidoFullLogo = '/logos/kaleidoswap-logos/kaleidoswap-full-logo.svg'
 import { useTranslation } from 'react-i18next'
@@ -15,9 +15,9 @@ import { LanguageSwitcher } from '@/components/common/LanguageSwitcher'
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [productsOpen, setProductsOpen] = useState(false)
-  const [developersOpen, setDevelopersOpen] = useState(false)
+  const [resourcesOpen, setResourcesOpen] = useState(false)
   const productsRef = useRef<HTMLDivElement>(null)
-  const developersRef = useRef<HTMLDivElement>(null)
+  const resourcesRef = useRef<HTMLDivElement>(null)
   const mobileMenuRef = useRef<HTMLDivElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const location = useLocation()
@@ -27,7 +27,7 @@ export const Navbar = () => {
   useEffect(() => {
     setIsOpen(false)
     setProductsOpen(false)
-    setDevelopersOpen(false)
+    setResourcesOpen(false)
   }, [location.pathname])
 
   useEffect(() => {
@@ -59,8 +59,8 @@ export const Navbar = () => {
       if (productsRef.current && !productsRef.current.contains(event.target as Node)) {
         setProductsOpen(false)
       }
-      if (developersRef.current && !developersRef.current.contains(event.target as Node)) {
-        setDevelopersOpen(false)
+      if (resourcesRef.current && !resourcesRef.current.contains(event.target as Node)) {
+        setResourcesOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -73,8 +73,8 @@ export const Navbar = () => {
       if (e.key === 'Escape') {
         if (productsOpen) {
           setProductsOpen(false)
-        } else if (developersOpen) {
-          setDevelopersOpen(false)
+        } else if (resourcesOpen) {
+          setResourcesOpen(false)
         } else if (isOpen) {
           setIsOpen(false)
           menuButtonRef.current?.focus()
@@ -83,7 +83,7 @@ export const Navbar = () => {
     }
     document.addEventListener('keydown', handleKeyDown)
     return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [productsOpen, developersOpen, isOpen])
+  }, [productsOpen, resourcesOpen, isOpen])
 
   // Focus trap for mobile menu
   useEffect(() => {
@@ -122,7 +122,7 @@ export const Navbar = () => {
     }
     setIsOpen(false)
     setProductsOpen(false)
-    setDevelopersOpen(false)
+    setResourcesOpen(false)
   }
 
   return (
@@ -159,7 +159,7 @@ export const Navbar = () => {
             </a>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-4">
               {/* Products Dropdown */}
               <div ref={productsRef} className="relative">
                 <button
@@ -201,10 +201,8 @@ export const Navbar = () => {
                           )}
                         >
                           <span>{t(item.label)}</span>
-                          {item.status === 'coming-soon' ? (
+                          {item.status === 'coming-soon' && (
                             <span className="text-xs text-gray-500">Soon</span>
-                          ) : (
-                            <ExternalLink className="w-3 h-3 text-gray-500" />
                           )}
                         </button>
                       )
@@ -213,29 +211,29 @@ export const Navbar = () => {
                 )}
               </div>
 
-              {/* Developers Dropdown */}
-              <div ref={developersRef} className="relative">
+              {/* Resources Dropdown */}
+              <div ref={resourcesRef} className="relative">
                 <button
-                  onClick={() => setDevelopersOpen(!developersOpen)}
-                  aria-expanded={developersOpen}
+                  onClick={() => setResourcesOpen(!resourcesOpen)}
+                  aria-expanded={resourcesOpen}
                   aria-haspopup="true"
                   className={cn(
                     'flex items-center gap-1 text-gray-300 hover:text-white transition-colors py-1',
-                    developersOpen && 'text-white'
+                    resourcesOpen && 'text-white'
                   )}
                 >
-                  {t('Developers')}
+                  {t('Resources')}
                   <ChevronDown
                     className={cn(
                       'w-4 h-4 transition-transform',
-                      developersOpen && 'rotate-180'
+                      resourcesOpen && 'rotate-180'
                     )}
                   />
                 </button>
 
-                {developersOpen && (
+                {resourcesOpen && (
                   <div className="absolute top-full left-0 mt-2 w-64 bg-gray-800 border border-gray-700 rounded-xl shadow-xl overflow-hidden" role="menu">
-                    {developerItems.map((item) => (
+                    {resourceItems.map((item) => (
                       <a
                         key={item.label}
                         href={item.href}
@@ -252,24 +250,11 @@ export const Navbar = () => {
                           </div>
                           <p className="text-xs text-gray-500 mt-0.5">{t(item.description)}</p>
                         </div>
-                        <ExternalLink className="w-3 h-3 text-gray-500 group-hover:text-gray-300 shrink-0" />
                       </a>
                     ))}
                   </div>
                 )}
               </div>
-
-              {/* Blog link */}
-              <a
-                href="/blog"
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavigation('/blog')
-                }}
-                className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors py-1"
-              >
-                {t('Blog')}
-              </a>
 
               {/* Other nav items */}
               {mainNavItems
@@ -292,14 +277,22 @@ export const Navbar = () => {
               {/* Language Switcher */}
               <LanguageSwitcher variant="compact" dropdownPosition="below" />
 
-              {/* CTA */}
+              {/* CTAs */}
+              <Button
+                variant="outline"
+                size="default"
+                onClick={() => window.open('https://forms.gle/e1RR26RURF8qwGou5', '_blank')}
+                className="flex items-center gap-2"
+              >
+                {t('Get Support')}
+              </Button>
               <Button
                 variant="default"
                 size="default"
-                onClick={() => window.open('https://forms.gle/e1RR26RURF8qwGou5', '_blank')}
-                className="ml-4 flex items-center gap-2"
+                onClick={() => handleNavigation('/products')}
+                className="flex items-center gap-2"
               >
-                {t('Get Support')}
+                {t('Download')}
               </Button>
             </div>
 
@@ -361,12 +354,12 @@ export const Navbar = () => {
                   })}
                 </div>
 
-                {/* Developers section */}
+                {/* Resources section */}
                 <div className="border-t border-gray-800 pt-6 mb-6">
                   <p className="text-xs uppercase tracking-wide text-gray-500 mb-3 px-4">
-                    {t('Developers')}
+                    {t('Resources')}
                   </p>
-                  {developerItems.map((item) => (
+                  {resourceItems.map((item) => (
                     <a
                       key={item.label}
                       href={item.href}
@@ -377,26 +370,13 @@ export const Navbar = () => {
                       className="flex items-center justify-between py-3 px-4 text-lg rounded-lg text-gray-200 hover:text-white hover:bg-gray-700/50 my-1"
                     >
                       <span>{t(item.label)}</span>
-                      <ExternalLink className="w-3 h-3 text-gray-500" />
+                      {item.external ? (
+                        <ExternalLink className="w-3 h-3 text-gray-500" />
+                      ) : (
+                        <ArrowRight className="w-3 h-3 text-gray-500" />
+                      )}
                     </a>
                   ))}
-                </div>
-
-                {/* Blog section */}
-                <div className="border-t border-gray-800 pt-6 mb-6">
-                  <p className="text-xs uppercase tracking-wide text-gray-500 mb-3 px-4">
-                    {t('Blog')}
-                  </p>
-                  <a
-                    href="/blog"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      handleNavigation('/blog')
-                    }}
-                    className="flex items-center py-3 px-4 text-lg rounded-lg text-gray-200 hover:text-white hover:bg-gray-700/50 my-1"
-                  >
-                    {t('Latest posts')}
-                  </a>
                 </div>
 
                 {/* Language Switcher */}
@@ -410,17 +390,17 @@ export const Navbar = () => {
                     variant="default"
                     size="lg"
                     className="w-full justify-center flex items-center gap-2"
-                    onClick={() => window.open('https://forms.gle/e1RR26RURF8qwGou5', '_blank')}
+                    onClick={() => handleNavigation('/products')}
                   >
-                    {t('Get Support')}
+                    {t('Download')}
                   </Button>
                   <Button
                     variant="outline"
                     size="lg"
                     className="w-full justify-center"
-                    onClick={() => handleNavigation('/downloads')}
+                    onClick={() => window.open('https://forms.gle/e1RR26RURF8qwGou5', '_blank')}
                   >
-                    {t('Download Desktop')}
+                    {t('Get Support')}
                   </Button>
                 </div>
               </div>
