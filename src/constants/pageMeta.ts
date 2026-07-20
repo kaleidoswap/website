@@ -46,6 +46,11 @@ export const STATIC_PAGE_META: Record<string, PageMeta> = {
     description:
       'KaleidoSwap Mobile — trade Bitcoin, stablecoins, and RGB assets across the Lightning Network from your phone. Non-custodial, biometric security. Native iOS and Android apps, coming soon.',
   },
+  '/products/ai-tools': {
+    title: 'AI Tools',
+    description:
+      'Autonomous agents, on-device AI assistance, and open source tools that bring AI to Bitcoin apps and enable agentic payments.',
+  },
   '/downloads': {
     title: 'Download',
     description:
