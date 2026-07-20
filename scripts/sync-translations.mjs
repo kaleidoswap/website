@@ -91,11 +91,13 @@ function syncTranslations() {
   const keys = extractAllKeys()
   console.log(`📝 Found ${keys.length} unique translation keys\n`)
 
+  const extractedSet = new Set(keys)
+  let orphans = []
+
   for (const lang of LANGUAGES) {
     const existing = loadTranslations(lang)
     const updated = {}
     let added = 0
-    let removed = 0
 
     // Add all extracted keys
     for (const key of keys) {
@@ -109,15 +111,24 @@ function syncTranslations() {
       }
     }
 
-    // Count removed keys
-    for (const key of Object.keys(existing)) {
-      if (!keys.includes(key)) {
-        removed++
+    // Keep keys the extractor didn't find: dynamic usages like
+    // t(FAQ_KEYS[i].question) are invisible to static extraction,
+    // so deleting unmatched keys would break them.
+    for (const key of Object.keys(existing).sort()) {
+      if (!extractedSet.has(key)) {
+        updated[key] = existing[key]
+        if (lang === 'en') orphans.push(key)
       }
     }
 
     saveTranslations(lang, updated)
-    console.log(`✅ ${lang}: ${Object.keys(updated).length} keys (${added} added, ${removed} removed)`)
+    console.log(`✅ ${lang}: ${Object.keys(updated).length} keys (${added} added, ${orphans.length} kept but not statically referenced)`)
+  }
+
+  if (orphans.length > 0) {
+    console.log(`\n⚠️  ${orphans.length} keys are not statically referenced (dynamic t() usage or unused).`)
+    console.log('   They were KEPT. Remove manually only if you are sure they are dead:')
+    console.log(`   ${orphans.slice(0, 10).join(', ')}${orphans.length > 10 ? ', …' : ''}`)
   }
 
   console.log('\n✨ Translation sync complete!')

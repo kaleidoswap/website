@@ -45,7 +45,7 @@ export const WebApp = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO {...STATIC_PAGE_META['/products/web-app']} url="/products/web-app" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
@@ -92,7 +92,7 @@ export const WebApp = () => {
               <h1 className="text-4xl lg:text-6xl font-bold mb-6">
                 {t('Web App')}
               </h1>
-              <p className="text-xl text-slate-400 mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-400 mb-8 leading-relaxed">
                 {t('The fastest way to swap. No download required. Connect your wallet and trade BTC, stablecoins, and RGB assets in seconds. Supports Alby, Bitmask, KaleidoSwap Extension, and Xverse.')}
               </p>
 
@@ -158,7 +158,7 @@ export const WebApp = () => {
       {WEB_APP_LIVE && (
         <>
           {/* Features */}
-          <section className="py-20 bg-gray-950/50">
+          <section className="py-20">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center mb-12">{t('Key Features')}</h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -177,7 +177,7 @@ export const WebApp = () => {
           <section className="py-20">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center mb-4">{t('How It Works')}</h2>
-              <p className="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+              <p className="text-base sm:text-lg text-slate-400 text-center mb-12 max-w-2xl mx-auto">
                 {t('Three simple steps to start trading')}
               </p>
 
@@ -200,7 +200,7 @@ export const WebApp = () => {
           </section>
 
           {/* Supported Wallets */}
-          <section className="py-20 bg-gray-950/50">
+          <section className="py-20">
             <div className="max-w-7xl mx-auto px-6">
               <h2 className="text-3xl font-bold text-center mb-12">{t('Supported Wallets')}</h2>
               <div className="flex flex-wrap justify-center gap-6">
@@ -225,7 +225,7 @@ export const WebApp = () => {
           <section className="py-20">
             <div className="max-w-4xl mx-auto px-6 text-center">
               <h2 className="text-3xl font-bold mb-4">{t('Ready to Swap?')}</h2>
-              <p className="text-slate-400 mb-8">
+              <p className="text-base sm:text-lg text-slate-400 mb-8">
                 {t('Connect your wallet and start trading in seconds.')}
               </p>
               <Button

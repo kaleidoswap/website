@@ -12,7 +12,7 @@ import { FinalCTA } from '@/components/home/FinalCTA'
 
 export const Home = () => {
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden selection:bg-primary-500 selection:text-white">
+    <div className="min-h-screen bg-transparent text-white font-display overflow-x-hidden selection:bg-primary-500 selection:text-white">
       <SEO url="/" />
       <Navbar />
       <main id="main-content">

@@ -13,8 +13,8 @@ export const CoreFeatures = () => {
 
       <div className="max-w-7xl mx-auto px-6">
         <AnimateIn variant="fade-up" className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Core Protocol Features')}</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">{t('Built for sovereigns who demand security, speed, and privacy.')}</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Trade Bitcoin Assets Privately')}</h2>
+          <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">{t('Built for sovereigns who demand security, speed, and privacy.')}</p>
         </AnimateIn>
 
         <div className="grid md:grid-cols-3 gap-6">

@@ -6,7 +6,7 @@ export const ProblemSolution = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="py-16 bg-gray-950/50 relative">
+    <section className="py-16 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Visual */}
@@ -80,7 +80,7 @@ export const ProblemSolution = () => {
             </AnimateIn>
 
             <AnimateIn variant="fade-left" delay={150}>
-              <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
                 {t('Swap BTC, USDT, and any other asset across Lightning, RGB, Arkade, Liquid, Spark, and beyond. Instantly, non-custodially, without intermediaries.')}
               </p>
             </AnimateIn>

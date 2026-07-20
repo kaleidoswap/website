@@ -19,8 +19,9 @@ export const protocols: Protocol[] = [
   { name: 'RGB', icon: rgbLogo, status: 'live', url: 'https://rgb.info' },
   { name: 'Spark', icon: sparkAsterisk, status: 'live', url: 'https://www.spark.money' },
   { name: 'Arkade', icon: arkadeLogo, status: 'live', url: 'https://arkade.money' },
-  { name: 'Liquid', icon: liquidLogo, status: 'coming-soon', url: 'https://liquid.net' },
+  { name: 'Liquid', icon: liquidLogo, status: 'live', url: 'https://liquid.net' },
   { name: 'Taproot Assets', icon: taprootLogo, status: 'coming-soon', url: 'https://docs.lightning.engineering/the-lightning-network/taproot-assets' },
+  { name: 'Ecash', icon: null, status: 'coming-soon', url: 'https://cashu.space' },
 ]
 
 export const liveProtocols = protocols.filter(p => p.status === 'live')

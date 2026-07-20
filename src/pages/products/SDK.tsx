@@ -230,7 +230,7 @@ export const SDK = () => {
   const [activeCase, setActiveCase] = useState(0)
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-white font-display overflow-x-hidden">
       <SEO {...STATIC_PAGE_META['/products/sdk']} url="/products/sdk" />
       <Helmet>
         <script type="application/ld+json">
@@ -275,7 +275,7 @@ export const SDK = () => {
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
                     {t('KaleidoSDK')}
                   </h1>
-                  <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
+                  <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
                     {t('Integrate atomic swaps into your wallet, exchange, or application. TypeScript and Python SDKs auto-generated from the OpenAPI spec.')}
                   </p>
                 </div>
@@ -423,7 +423,7 @@ export const SDK = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20 bg-gray-950/50">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature) => (
@@ -497,7 +497,7 @@ export const SDK = () => {
       </section>
 
       {/* API Reference */}
-      <section className="py-32 bg-gray-950/50">
+      <section className="py-32">
         <div className="max-w-7xl mx-auto px-6">
           <div className="glass-card rounded-2xl p-8 md:p-12 overflow-hidden">
             <div className="grid md:grid-cols-2 gap-8 items-center min-w-0">
