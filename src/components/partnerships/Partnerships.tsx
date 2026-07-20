@@ -11,7 +11,7 @@ export const Partnerships = ({
   const { t } = useTranslation()
 
   return (
-    <section className="py-12 md:py-16 relative overflow-hidden bg-gray-950/30">
+    <section className="py-12 md:py-16 relative overflow-hidden">
       {/* Aurora Background */}
       <Aurora
         className="absolute inset-0 opacity-20"
@@ -33,7 +33,7 @@ export const Partnerships = ({
               {t(title)}
             </h2>
             {description && (
-              <p className="text-lg text-gray-400 mb-6">
+              <p className="text-base sm:text-lg text-gray-400 mb-6">
                 {t(description)}
               </p>
             )}

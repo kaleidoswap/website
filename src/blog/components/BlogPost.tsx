@@ -15,7 +15,7 @@ export function BlogPost() {
   if (!post) return <Navigate to="/blog" replace />
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
+    <div className="min-h-screen bg-transparent text-white font-display">
       <SEO
         title={post.title}
         description={post.excerpt}

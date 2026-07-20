@@ -5,6 +5,7 @@ import { Footer } from '@/components/footer/Footer'
 import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { getAllPosts } from '../lib/posts'
 import { BlogCard } from './BlogCard'
 
@@ -83,18 +84,14 @@ export function BlogList() {
   }, [allPosts, selectedCategory, sort])
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="KaleidoSwap Blog"
-        description="Announcements, technical deep dives, and builder resources about KaleidoSwap product suite and Bitcoin L2s tech stack. Written for developers building on Bitcoin L2 and enabling Bitcoin payment for AI agents."
-        url="/blog"
-      />
+    <div className="min-h-screen bg-transparent text-white font-display">
+      <SEO {...STATIC_PAGE_META['/blog']} url="/blog" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'Blog',
           name: 'KaleidoSwap Blog',
-          description: 'Announcements, technical deep dives, and builder resources about KaleidoSwap product suite and Bitcoin L2s tech stack. Written for developers building on Bitcoin L2 and enabling Bitcoin payment for AI agents.',
+          description: 'Announcements, deep dives, and builder resources about KaleidoSwap products and Bitcoin L2s. Written for Bitcoin wallet and agentic payments builders.',
           url: 'https://kaleidoswap.com/blog',
           publisher: {
             '@type': 'Organization',

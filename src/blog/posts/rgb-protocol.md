@@ -1,15 +1,14 @@
 ---
 title: "RGB Protocol on Bitcoin: History, Architecture, and How KaleidoSwap Fits in The Ecosystem"
 date: "2026-06-06"
-author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
 slug: "rgb-protocol"
 excerpt: "The history, architecture, and ecosystem of RGB Protocol on Bitcoin v0.11.1 — and what KaleidoSwap is building on top of it."
-coverImage: "/blog/images/rgb-protocol/rgb-protocol-cover.jpg"
-coverImageMobile: "/blog/images/rgb-protocol/rgb-protocol-cover-mobile.jpg"
-coverImageCard: "/blog/images/rgb-protocol/rgb-protocol-cover-card.jpg"
-coverImagePreview: "/blog/images/rgb-protocol/rgb-protocol-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/rgb-protocol/rgb-protocol-cover-preview-x.jpg"
+coverImage: "/blog/rgb-protocol/rgb-protocol-cover.jpg"
+coverImageMobile: "/blog/rgb-protocol/rgb-protocol-cover-mobile.jpg"
+coverImageCard: "/blog/rgb-protocol/rgb-protocol-cover-card.jpg"
+coverImagePreview: "/blog/rgb-protocol/rgb-protocol-cover-preview.jpg"
+coverImagePreviewX: "/blog/rgb-protocol/rgb-protocol-cover-preview-x.jpg"
 ---
 
 **Quick summary**
@@ -96,7 +95,7 @@ RGB defines asset behavior through [schemas](https://docs.rgb.info/rgb-contract-
 
 In August 2025, Tether officially [announced](https://tether.io/news/tether-to-launch-usdt-on-rgb-expanding-native-bitcoin-stablecoin-support/) plans to bring USDT to RGB Protocol on Bitcoin v0.11.1. Paolo Ardoino, Tether's CEO, stated:
 
-> "Bitcoin deserves a stablecoin that feels truly native, lightweight, private, and scalable. With RGB, USD₮ gains a powerful new pathway on Bitcoin, reinforcing our belief in Bitcoin as the foundation of a freer financial future."
+> "Bitcoin deserves a stablecoin that feels truly native, lightweight, private, and scalable. With RGB, USDT gains a powerful new pathway on Bitcoin, reinforcing our belief in Bitcoin as the foundation of a freer financial future."
 
 USDT on RGB will be a Bitcoin-native stablecoin: dollar-pegged, Lightning-transferable, privately validated, with no sidechains or custodial bridges involved.
 
@@ -133,7 +132,7 @@ Besides KaleidoSwap, a growing set of projects are live on RGB Protocol on Bitco
 - [Utexo](https://utexo.com/) — B2B settlement infrastructure for USDT payments over RGB and Lightning
 - [Orbis1](https://orbis1.io/) — infrastructure for USDT on Bitcoin using RGB and Lightning SDKs
 
-KaleidoSwap provides the liquidity, swap, and connectivity layer that wallets, exchanges, and applications can integrate directly, without building their own RGB trading infrastructure. Through the [KaleidoSDK](https://kaleidoswap.com/products/sdk), available today in TypeScript and Python, with Rust on the way, wallets and applications add non-custodial RGB asset trading and atomic swaps across Bitcoin L2s.
+KaleidoSwap provides the liquidity, swap, and connectivity layer that wallets, exchanges, and applications can integrate directly, without building their own RGB trading infrastructure. Through the [KaleidoSDK](/products/sdk), available today in TypeScript and Python, with Rust on the way, wallets and applications add non-custodial RGB asset trading and atomic swaps across Bitcoin L2s.
 
 ---
 
@@ -143,7 +142,7 @@ The KaleidoSwap Desktop App is the primary interface for managing an RGB Lightni
 
 At the core of the stack is the RGB Lightning Node (RLN), an open-source implementation of a Lightning node with native RGB support. RLN can be accessed directly through APIs or remotely via Nostr Wallet Connect (NWC), enabling a flexible architecture where multiple clients can interact with the same node.
 
-[KaleidoSDK](https://kaleidoswap.com/products/sdk) is the developer platform built on top of RLN and the KaleidoSwap Maker infrastructure. It provides high-level abstractions for RGB asset management, channel operations, liquidity provisioning, and atomic swap execution, exposing TypeScript and Python SDKs that simplify integration for developers.
+[KaleidoSDK](/products/sdk) is the developer platform built on top of RLN and the KaleidoSwap Maker infrastructure. It provides high-level abstractions for RGB asset management, channel operations, liquidity provisioning, and atomic swap execution, exposing TypeScript and Python SDKs that simplify integration for developers.
 
 The KaleidoSwap Maker acts as the liquidity and routing layer, providing LSP services, atomic swap infrastructure, and client connectivity.
 

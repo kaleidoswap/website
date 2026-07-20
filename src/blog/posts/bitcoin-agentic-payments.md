@@ -3,53 +3,53 @@ title: "KaleidoAgent: An Autonomous AI Agent for Bitcoin L2"
 date: "2026-05-06"
 author: "KaleidoSwap Team"
 tags: ["Deep Dive"]
-slug: "kaleidoagent-wdk-hackathon"
+slug: "bitcoin-agentic-payments"
 excerpt: "KaleidoAgent is an autonomous AI agent for Bitcoin L2, executing trustless atomic swaps via MCP servers. 1st place at the WDK Hackathon."
-coverImage: "/blog/images/kaleido-agent/kaleido-agent-cover.jpg"
-coverImageMobile: "/blog/images/kaleido-agent/kaleido-agent-cover-mobile.jpg"
-coverImageCard: "/blog/images/kaleido-agent/kaleido-agent-cover-card.jpg"
-coverImagePreview: "/blog/images/kaleido-agent/kaleido-agent-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/kaleido-agent/kaleido-agent-cover-preview-x.jpg"
+coverImage: "/blog/kaleido-agent/kaleido-agent-cover.jpg"
+coverImageMobile: "/blog/kaleido-agent/kaleido-agent-cover-mobile.jpg"
+coverImageCard: "/blog/kaleido-agent/kaleido-agent-cover-card.jpg"
+coverImagePreview: "/blog/kaleido-agent/kaleido-agent-cover-preview.jpg"
+coverImagePreviewX: "/blog/kaleido-agent/kaleido-agent-cover-preview-x.jpg"
 ---
 
-We built an autonomous AI agent for Bitcoin L2, running portfolio strategies, managing Lightning channels, and executing trustless atomic swaps. It uses MCP servers to expose every swap and wallet action as a typed tool for the model. It just won two prizes at the WDK Hackathon.
+We built an autonomous AI agent for Bitcoin L2, running portfolio strategies, managing Lightning channels, and executing trustless atomic swaps. It uses [MCP servers](https://modelcontextprotocol.io/) to expose every swap and wallet action as a typed tool for the model. It just [won two prizes](https://x.com/WDK_tether/status/2052402785899917812?s=20) at the [WDK Hackathon](https://dorahacks.io/hackathon/hackathon-galactica-wdk-2026-01/buidl).
 
-KaleidoAgent placed **1st in the Autonomous DeFi Agent track** and **2nd in Best Projects Overall**, for a total award of **6,000 USD₮**. The full demo is on [YouTube](https://www.youtube.com/watch?v=uzc8mBULXu8).
+KaleidoAgent placed **1st in the Autonomous DeFi Agent track** and **2nd in Best Projects Overall**, for a total award of **6,000 USDT**. The full demo is on [YouTube](https://www.youtube.com/watch?v=uzc8mBULXu8).
 
 This article walks through what the AI agent does, how it is structured, and why an LLM-driven runtime is a reasonable fit for the messy reality of operating a Bitcoin L2 stack.
 
-## What We Actually Shipped
+## What We Shipped: MCP Servers for Bitcoin L2s
 
 The hackathon submission is not a single repository. It is a set of components that interlock, each one independently useful and each one open source.
 
 - **[kaleido-agent](https://github.com/kaleidoswap/kaleido-agent)** — the AI agent runtime itself: Nanobot manager, scheduler, Telegram gateway, React dashboard, status server, and the SKILL.md library that defines the autonomous behaviors.
-- **[wdk-wallet-rln](https://github.com/kaleidoswap/wdk-wallet-rln)** — a WDK wallet implementation for the **RGB Lightning Node**. It wraps an RLN HTTP daemon as a `WalletManager` and exposes Lightning, on-chain, and RGB asset operations through the standard WDK interface, including atomic swap primitives.
+- **[wdk-wallet-rln](https://github.com/kaleidoswap/wdk-wallet-rln)** — a [WDK](https://wdk.tether.io) wallet implementation for the **RGB Lightning Node**. It wraps an RLN HTTP daemon as a `WalletManager` and exposes Lightning, on-chain, and RGB asset operations through the standard WDK interface, including atomic swap primitives.
 - **[wdk-protocol-swap-kaleidoswap](https://github.com/kaleidoswap/wdk-protocol-swap-kaleidoswap)** — the KaleidoSwap implementation of the WDK `SwapProtocol`. Any WDK-based wallet can plug it in and get quoting and order placement against the KaleidoSwap maker network without writing protocol code.
-- **[kaleido-mcp](https://github.com/kaleidoswap/kaleido-mcp)** — an MCP server that exposes the KaleidoSwap maker, atomic swap, and LSPS1 endpoints as 15 typed tools, including the full `atomic_init` / `atomic_execute` / `atomic_status` lifecycle.
+- **[kaleido-mcp](https://github.com/kaleidoswap/kaleido-mcp)** — an MCP server that exposes the KaleidoSwap maker, atomic swap, and [LSPS1](https://github.com/BitcoinAndLightningLayerSpecs/lsp/tree/main/LSPS1) endpoints as 15 typed tools, including the full `atomic_init` / `atomic_execute` / `atomic_status` lifecycle.
 - **[wdk-wallet-mcp](https://github.com/kaleidoswap/wdk-wallet-mcp)** — an MCP server over the RLN-backed WDK wallet. Eighteen tools covering balances, invoices, payments, channels, atomic taker flows, and MPP-paid Lightning calls.
-- **[wdk-wallet-spark-mcp](https://github.com/kaleidoswap/wdk-wallet-spark-mcp)** — the same idea for **Spark L2**: a thirteen-tool MCP server wrapping `@tetherto/wdk-wallet-spark`, so the AI agent can move funds between Spark, Lightning, and on-chain inside a single reasoning loop.
+- **[wdk-wallet-spark-mcp](https://github.com/kaleidoswap/wdk-wallet-spark-mcp)** — the same idea for [Spark](https://www.spark.money/): a thirteen-tool MCP server wrapping `@tetherto/wdk-wallet-spark`, so the AI agent can move funds between Spark, the [Lightning Network](https://lightning.network/), and on-chain inside a single reasoning loop.
 
 On top of those, the AI agent ships a library of **Skills** as Markdown files. Each skill, portfolio manager, channel manager, DCA, wallet assistant, cross-L2 operator, is a self-contained system prompt with a defined trigger surface and a defined tool surface. Skills are the unit of behavior we iterate on, and they are loaded directly at runtime so a contributor can add a new role without touching the runtime code.
 
 The pattern matters. WDK gives us the wallet abstraction. The protocol package and the RLN wallet plug new capabilities into that abstraction. The MCP servers expose the result to any LLM client. The AI agent composes those pieces with a scheduler and a set of skills. Each layer is replaceable, and each layer is useful on its own.
 
-## What KaleidoAgent Is
+## KaleidoAgent: AI Assistant for Bitcoin Wallets
 
-KaleidoAgent is a 24/7 portfolio manager and wallet operator for users who hold bitcoin and RGB assets across Lightning, Spark, and on-chain. It is non-custodial: the AI agent never deposits funds on an exchange, and it signs every operation locally using [WDK](https://wdk.network) primitives.
+KaleidoAgent is a 24/7 portfolio manager and wallet operator for users who hold bitcoin and RGB assets across Lightning, Spark, and on-chain. It is non-custodial: the AI agent never deposits funds on an exchange, and it signs every operation locally using WDK primitives.
 
-The runtime pairs a large language model, Claude or OpenAI, with a set of MCP servers that expose the [`kaleido`](https://github.com/kaleidoswap) CLI and KaleidoSwap APIs as tools. The model handles reasoning and orchestration. The MCP servers handle execution.
+The runtime pairs a large language model, such as [Claude](https://claude.com/) or [ChatGPT](https://chatgpt.com/), with a set of MCP servers that expose the [`kaleido`](https://github.com/kaleidoswap) CLI and KaleidoSwap APIs as tools. The model handles reasoning and orchestration. The MCP servers handle execution.
 
-The result is an operator that can be told, in plain English or via a config file, to keep a portfolio within target allocations, top up Lightning liquidity before it runs out, or DCA into XAUT every Friday, and then go do it.
+The result is an operator that can be told, in plain English or via a config file, to keep a portfolio within target allocations, top up Lightning liquidity before it runs out, DCA into [USDT](https://tether.to/en/) or [XAUT](https://gold.tether.to/) every Friday, and then go do it.
 
-## Core Capabilities
+## What a Bitcoin-native AI Agent can do
 
 The AI agent's logic is split into discrete **Skills**. Each skill is a self-contained role with its own system prompt, triggers, and tool surface.
 
 ### Portfolio Manager
-Tracks allocations across Bitcoin, the Lightning Network, Spark, and RGB assets such as USDT and PAX Gold. When an allocation drifts past a user-defined threshold, the AI agent executes a **trustless HTLC atomic swap** on the KaleidoSwap DEX to rebalance. No deposits, no wrapped tokens, no bridge.
+Tracks allocations across Bitcoin, the Lightning Network, Spark, and RGB assets such as USDT and XAUT. When an allocation drifts past a user-defined threshold, the AI agent executes a trustless [HTLC atomic swap](https://bitcoinops.org/en/topics/htlc/) on the KaleidoSwap DEX to rebalance. No deposits, no wrapped tokens, no bridge.
 
 ### Channel Manager
-Watches Lightning node health and channel liquidity continuously. It flushes stuck RGB transfers, cleans up stale orders, and, when outbound liquidity drops below a configured floor, negotiates and purchases a new inbound channel through **LSPS1**.
+Watches Lightning node health and channel liquidity continuously. It flushes stuck RGB transfers, cleans up stale orders, and, when outbound liquidity drops below a configured floor, negotiates and purchases a new inbound channel through LSPS1.
 
 ### Dollar Cost Averaging
 Runs scheduled, fixed-size purchases of target assets. The strategy is price-aware: skip a buy on a local pump, double down on a dip, all bounded by hard caps the operator sets in advance.
@@ -58,9 +58,9 @@ Runs scheduled, fixed-size purchases of target assets. The strategy is price-awa
 A conversational interface for the everyday actions: check balances, generate invoices, send a payment, swap one asset for another. The same skills the autonomous loops use are available to the human at the keyboard.
 
 ### Cross-L2 Operations and MPP Data
-Moves funds between Spark, Lightning, and on-chain Bitcoin without leaving the AI agent. It also speaks **L402** and the **MPP gateway** protocol, which means it can pay for premium market data using Lightning micropayments before it reasons over that data.
+Moves funds between Spark, Lightning, and on-chain Bitcoin without leaving the AI agent. It also speaks [L402](https://docs.lightning.engineering/the-lightning-network/l402) and the [MPP gateway protocol](https://mpp.dev/overview), which means it can pay for premium market data using Lightning micropayments before it reasons over that data.
 
-## Architecture
+## How to Architect an AI Agent for Bitcoin L2
 
 KaleidoAgent runs as a multi-tier system. Each tier has one job and a clean interface to the next.
 
@@ -74,7 +74,7 @@ KaleidoAgent runs as a multi-tier system. Each tier has one job and a clean inte
 
 This separation matters. The model can be swapped, the MCP servers can be replaced or extended, and the wallet primitives stay the same. Each layer fails independently.
 
-## How It Operates
+## How It Operates: Skills and MCP Servers for Bitcoin payments
 
 The AI agent runs in one of two **modes**:
 
@@ -82,8 +82,6 @@ The AI agent runs in one of two **modes**:
 - **`mcp` mode.** The AI agent connects directly to the MCP servers and gains access to over 60 sub-tools. More expressive, more tokens, more ways to be creative.
 
 Operators pick the mode that matches their risk appetite and the complexity of the task at hand.
-
-### Operational Loops
 
 Three default autonomous loops drive most of the work:
 
@@ -93,7 +91,7 @@ Three default autonomous loops drive most of the work:
 
 Each loop is a small, observable unit. If one fails, the others keep running.
 
-## Why This Matters
+## Why Agentic Payments on Bitcoin/Lightning
 
 For a long time, the standard story was that financial automation needed a general-purpose smart contract chain. That story is overdue for a rewrite. Most so-called decentralized chains are operationally centralized: a single sequencer, a single foundation, a permissioned validator set, an upgrade key. The "DeFi" running on top inherits all of it. Smart-contract risk, bridge risk, and custodial risk get rebranded as features.
 
@@ -111,7 +109,7 @@ KaleidoAgent does that in three concrete ways:
 
 **Deep risk controls.** Operators can set a `dry_run` mode for observation only, a strict `max_swap_usd`, concurrent order limits, and `stop_loss` thresholds that halt all operations automatically. The AI agent is allowed to be confident only inside the box the operator drew.
 
-## What Comes Next
+## What Comes Next: Lightning Payments for AI Agents
 
 The hackathon submission is the first version of something we have been planning to build for a long time. WDK on RLN, the KaleidoSwap swap protocol plugin, and the MCP layer are the foundation for a **next-generation wallet** powered by Lightning-native swaps and Bitcoin-native asset protocols. A wallet where the human is in the loop when they want to be, and the machine handles the rest.
 
@@ -121,13 +119,13 @@ The next step is **L402 and agentic payments at scale**. Your AI agent already p
 
 This is the beginning of KaleidoSwap's work on **agentic payments**, not the end of it. The hackathon was a useful forcing function, but AI × KaleidoSwap was never a hackathon project. It is the natural intersection of what we are already building, a non-custodial DEX on Bitcoin L2, and what we believe finance is going to look like next. The ideals line up: self-custody, permissionless settlement, sound money, software that works for the user instead of the platform.
 
-If you want to explore the AI agent, the demo video is the fastest way in. If you want to build with the same primitives, every component is open source: the AI agent runtime in [kaleido-agent](https://github.com/kaleidoswap/kaleido-agent), the RLN wallet in [wdk-wallet-rln](https://github.com/kaleidoswap/wdk-wallet-rln), the swap protocol plugin in [wdk-protocol-swap-kaleidoswap](https://github.com/kaleidoswap/wdk-protocol-swap-kaleidoswap), and the three MCP servers ([kaleido-mcp](https://github.com/kaleidoswap/kaleido-mcp), [wdk-wallet-mcp](https://github.com/kaleidoswap/wdk-wallet-mcp), [wdk-wallet-spark-mcp](https://github.com/kaleidoswap/wdk-wallet-spark-mcp)). The protocol [docs](https://docs.kaleidoswap.com) cover the rest.
+If you want to explore the AI agent, the demo video is the fastest way in. If you want to build with the same primitives, every component is open source: the AI agent runtime in [kaleido-agent](https://github.com/kaleidoswap/kaleido-agent), the RLN wallet in [wdk-wallet-rln](https://github.com/kaleidoswap/wdk-wallet-rln), the swap protocol plugin in [wdk-protocol-swap-kaleidoswap](https://github.com/kaleidoswap/wdk-protocol-swap-kaleidoswap), and the three MCP servers.
 
 The Bitcoin L2 stack is finally rich enough that an AI agent can do useful work inside it. KaleidoAgent is one demonstration of what that looks like in practice. The next ones are already in motion.
 
 ---
 
-## Sources
+### Sources
 
 - WDK Hackathon results (organizer announcement).
 - Project demo video: https://www.youtube.com/watch?v=uzc8mBULXu8

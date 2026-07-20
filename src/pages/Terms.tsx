@@ -4,6 +4,7 @@ import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { GITHUB } from '@/constants/urls'
 import { Scale, AlertTriangle, Server, Shield, FileText, Mail, Code, ChevronLeft } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -47,12 +48,8 @@ export const Terms = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="Terms of Service"
-        description="KaleidoSwap Terms of Service. Understand the terms and conditions for using our Bitcoin DEX platform."
-        url="/terms"
-      />
+    <div className="min-h-screen bg-transparent text-white font-display">
+      <SEO {...STATIC_PAGE_META['/terms']} url="/terms" />
 
       <div className="fixed inset-0 bg-gradient-to-br from-primary-500/5 via-secondary-500/5 to-transparent pointer-events-none" aria-hidden="true" />
 

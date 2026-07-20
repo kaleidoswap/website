@@ -1,11 +1,12 @@
 // src/pages/Products.tsx
-import { Globe, Monitor, Smartphone, Puzzle, Code, ArrowRight, Check } from 'lucide-react'
+import { Globe, Monitor, Smartphone, Puzzle, Code, Bot, ArrowRight, Check } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
@@ -35,21 +36,6 @@ const colorConfig: Record<string, { icon: string; title: string; border: string;
 
 const products = [
   {
-    id: 'sdk',
-    name: 'Developer SDK',
-    icon: Code,
-    status: 'live' as const,
-    chipLabel: 'Ready to Integrate',
-    description: 'Build on KaleidoSwap. TypeScript and Rust SDKs with full documentation.',
-    features: [
-      'Full API documentation',
-      'Code examples',
-      'Market maker tools',
-    ],
-    href: '/products/sdk',
-    color: 'purple',
-  },
-  {
     id: 'extension',
     name: 'Browser Extension',
     icon: Puzzle,
@@ -78,6 +64,36 @@ const products = [
     ],
     href: '/products/desktop',
     color: 'green',
+  },
+  {
+    id: 'sdk',
+    name: 'Developer SDK',
+    icon: Code,
+    status: 'live' as const,
+    chipLabel: 'Ready to Integrate',
+    description: 'Build on KaleidoSwap. TypeScript and Rust SDKs with full documentation.',
+    features: [
+      'Full API documentation',
+      'Code examples',
+      'Market maker tools',
+    ],
+    href: '/products/sdk',
+    color: 'purple',
+  },
+  {
+    id: 'ai-tools',
+    name: 'AI Tools',
+    icon: Bot,
+    status: 'live' as const,
+    chipLabel: 'Ready to Integrate',
+    description: 'Autonomous agents, on-device AI assistance, and open MCP servers for AI on Bitcoin, Lightning, RGB and Spark.',
+    features: [
+      'Non-custodial trading agent',
+      'MCP servers for Claude & OpenAI',
+      'On-device AI assistant',
+    ],
+    href: '/products/ai-tools',
+    color: 'purple',
   },
   {
     id: 'web-app',
@@ -114,24 +130,22 @@ export const Products = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="Products"
-        description="KaleidoSwap products: Web App, Desktop App, SDK, Mobile App, and Browser Extension. Build and trade on Bitcoin's most connected swap protocol."
-        url="/products"
-      />
+    <div className="min-h-screen bg-transparent text-white font-display">
+      <SEO {...STATIC_PAGE_META['/products']} url="/products" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'ItemList',
           name: 'KaleidoSwap Products',
-          description: 'KaleidoSwap products: Web App, Desktop App, SDK, and Browser Extension. Build and trade on Bitcoin\'s most connected swap protocol.',
+          description: 'KaleidoSwap products: Web App, Desktop App, SDK, Mobile App, and Browser Extension. Build and trade on Bitcoin\'s most connected swap protocol.',
           url: 'https://kaleidoswap.com/products',
           itemListElement: [
             { '@type': 'ListItem', position: 1, name: 'Web App', url: 'https://kaleidoswap.com/products/web-app' },
             { '@type': 'ListItem', position: 2, name: 'Desktop App', url: 'https://kaleidoswap.com/products/desktop' },
             { '@type': 'ListItem', position: 3, name: 'KaleidoSDK', url: 'https://kaleidoswap.com/products/sdk' },
             { '@type': 'ListItem', position: 4, name: 'Browser Extension', url: 'https://kaleidoswap.com/products/extension' },
+            { '@type': 'ListItem', position: 5, name: 'Mobile App', url: 'https://kaleidoswap.com/products/mobile' },
+            { '@type': 'ListItem', position: 6, name: 'AI Tools', url: 'https://kaleidoswap.com/products/ai-tools' },
           ],
         })}</script>
         <script type="application/ld+json">{JSON.stringify({
@@ -150,13 +164,10 @@ export const Products = () => {
       <section className="pt-32 pb-16 relative overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary-500/10 rounded-full blur-[120px] -z-10" />
 
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        <div className="max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl font-bold text-white">
             {t('Our Products')}
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            {t("Build and trade on Bitcoin's most connected swap protocol. Choose your platform.")}
-          </p>
         </div>
       </section>
 
@@ -222,10 +233,7 @@ export const Products = () => {
                         {t(chipText)}
                       </span>
                       {hasPage && (
-                        <Button
-                          variant="outline"
-                          className="border-slate-600 hover:border-slate-500 text-slate-300 hover:text-gray-200"
-                        >
+                        <Button variant="outline">
                           {t('Learn More')}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>

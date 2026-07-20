@@ -1,15 +1,14 @@
 ---
 title: "April 2026: Desktop v0.4.0, SDK Fixes & CLI Improvements"
 date: "2026-04-30"
-author: "KaleidoSwap Team"
 tags: ["Release Notes"]
 slug: "april-2026-release-notes"
 excerpt: "April was a dense month of shipping. The Desktop App reached v0.4.0 with trading automation features. The SDK went through six patch releases. KaleidoCLI received a significant expansion of its command surface."
-coverImage: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover.jpg"
-coverImageMobile: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-mobile.jpg"
-coverImageCard: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-card.jpg"
-coverImagePreview: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-preview.jpg"
-coverImagePreviewX: "/blog/images/april-2026-release-notes/april-2026-release-notes-cover-preview-x.jpg"
+coverImage: "/blog/april-2026-release-notes/april-2026-release-notes-cover.jpg"
+coverImageMobile: "/blog/april-2026-release-notes/april-2026-release-notes-cover-mobile.jpg"
+coverImageCard: "/blog/april-2026-release-notes/april-2026-release-notes-cover-card.jpg"
+coverImagePreview: "/blog/april-2026-release-notes/april-2026-release-notes-cover-preview.jpg"
+coverImagePreviewX: "/blog/april-2026-release-notes/april-2026-release-notes-cover-preview-x.jpg"
 ---
 
 April was a dense month of shipping. The Desktop App reached v0.4.0 with a full set of trading automation features. The SDK went through six patch releases. KaleidoCLI received a significant expansion of its command surface. All of it is converging on the May mainnet launch.
@@ -33,7 +32,7 @@ Other additions in v0.4.0:
 
 Under the hood: trading page initialization was parallelized to reduce load time; Docker Smart Resume skips container restart when switching accounts; security vulnerabilities were patched alongside two reported bugs (#95, #96).
 
-The full release notes are on [GitHub](https://github.com/kaleidoswap/desktop-app/releases/tag/v0.4.0). The download is at [kaleidoswap.com/downloads](https://kaleidoswap.com/downloads).
+The full release notes are on [GitHub](https://github.com/kaleidoswap/desktop-app/releases/tag/v0.4.0). The download is at [kaleidoswap.com/downloads](/downloads).
 
 ---
 

@@ -6,7 +6,7 @@ export const ProblemSolution = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="py-16 bg-gray-950/50 relative">
+    <section className="py-16 relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Visual */}
@@ -71,17 +71,17 @@ export const ProblemSolution = () => {
           {/* Content */}
           <div className="order-1 lg:order-2 flex flex-col gap-6">
             <AnimateIn variant="fade-left">
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight text-primary-400">
                 {t('Private Bitcoin Swaps.')}
               </h2>
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight text-primary-400 mt-1">
-                {t('The Way It Should Have Always Been.')}
+              <h2 className="text-3xl md:text-4xl font-bold leading-tight mt-1">
+                {t('As It Should Have Always Been.')}
               </h2>
             </AnimateIn>
 
             <AnimateIn variant="fade-left" delay={150}>
-              <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
-                {t('Swap BTC, USDT, and any asset across Lightning, RGB, Spark, and beyond — instantly, non-custodially, without intermediaries. No bridges. No trust required.')}
+              <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+                {t('Swap BTC, USDT, and any other asset across Lightning, RGB, Arkade, Liquid, Spark, and beyond. Instantly, non-custodially, without intermediaries.')}
               </p>
             </AnimateIn>
 
@@ -105,7 +105,7 @@ export const ProblemSolution = () => {
                   <span className="material-symbols-outlined text-primary-400 mt-1">swap_horiz</span>
                   <div>
                     <h4 className="font-bold text-white">{t('Any Asset, Any Layer')}</h4>
-                    <p className="text-sm text-slate-400">{t('Swap BTC, stablecoins, and RGB assets across Lightning, Spark, Liquid, and beyond.')}</p>
+                    <p className="text-sm text-slate-400">{t('Swap bitcoin, stablecoins, and real-world assets across Bitcoin L2s')}</p>
                   </div>
                 </li>
               </ul>

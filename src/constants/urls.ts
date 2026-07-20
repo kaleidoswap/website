@@ -22,6 +22,9 @@ export const GITHUB = {
   get repoUrl() {
     return `https://github.com/${this.org}/${this.repo}`
   },
+  get agentRepoUrl() {
+    return `https://github.com/${this.org}/kaleido-agent`
+  },
   get issuesUrl() {
     return `${this.repoUrl}/issues`
   },

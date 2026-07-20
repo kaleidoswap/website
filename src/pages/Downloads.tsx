@@ -12,6 +12,7 @@ import {
   type DownloadConfig,
   type GithubReleaseAsset
 } from '@/constants/downloads'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { stripVersionTag } from '@/constants/versions'
 import { GITHUB } from '@/constants/urls'
 import { footerConfig } from '@/constants/footer'
@@ -251,12 +252,8 @@ export const Downloads = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display">
-      <SEO
-        title="KaleidoSwap Desktop Download"
-        description="Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets."
-        url="/downloads"
-      />
+    <div className="min-h-screen bg-transparent text-white font-display">
+      <SEO {...STATIC_PAGE_META['/downloads']} url="/downloads" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -264,7 +261,7 @@ export const Downloads = () => {
           name: 'KaleidoSwap Desktop Download',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'macOS, Windows, Linux',
-          description: 'Download the KaleidoSwap Desktop App for macOS, Linux, or Windows. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and gives full control over all Bitcoin L2s assets.',
+          description: 'Download the KaleidoSwap Desktop App. Self-custody Bitcoin DEX that bundles RGB Lightning Network node and enable atomic swaps of Bitcoin L2s assets.',
           url: 'https://kaleidoswap.com/downloads',
           downloadUrl: 'https://github.com/kaleidoswap/desktop-app/releases',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -301,7 +298,7 @@ export const Downloads = () => {
               {t('Download')}{' '}
               <span className="text-gradient">{t('KaleidoSwap')}</span>
             </h1>
-            <p className="text-base sm:text-xl text-slate-400 leading-relaxed mb-8">
+            <p className="text-base sm:text-lg text-slate-400 leading-relaxed mb-8">
               {t('Get started with the first Bitcoin-native DEX. Available for macOS, Linux, and Windows.')}
             </p>
 
@@ -343,11 +340,11 @@ export const Downloads = () => {
       </section>
 
       {/* Verification Section */}
-      <section className="pt-8 pb-16 relative overflow-hidden bg-gray-950/50">
+      <section className="pt-8 pb-16 relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-6">
           <AnimateIn variant="fade-up" className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Verify Your Download')}</h2>
-            <p className="text-slate-400 text-lg leading-relaxed">
+            <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
               {t('Every release binary is individually GPG-signed. Verify before installing.')}
             </p>
           </AnimateIn>
@@ -436,7 +433,7 @@ export const Downloads = () => {
                 </a>
                 <a
                   href={verificationGuideUrl}
-                  className="inline-flex items-center gap-1.5 h-7 px-3 text-xs rounded-xl font-semibold border-2 border-gray-600/80 text-gray-300 hover:border-gray-500 hover:bg-gray-800/50 hover:text-white transition-all duration-300"
+                  className="inline-flex items-center gap-1.5 h-7 px-3 text-xs rounded-xl font-semibold border-2 border-slate-600 text-slate-300 hover:border-slate-500 hover:bg-gray-800/50 hover:text-gray-200 active:border active:scale-95 transition-all duration-300"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

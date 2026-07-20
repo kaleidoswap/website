@@ -22,6 +22,7 @@ import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { TiltCard } from '@/components/common/TiltCard'
 import { footerConfig } from '@/constants/footer'
+import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 
@@ -98,12 +99,8 @@ export const Extension = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
-      <SEO
-        title="KaleidoSwap Browser Extension"
-        description="Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser."
-        url="/products/extension"
-      />
+    <div className="min-h-screen bg-transparent text-white font-display overflow-x-hidden">
+      <SEO {...STATIC_PAGE_META['/products/extension']} url="/products/extension" />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
@@ -111,7 +108,7 @@ export const Extension = () => {
           name: 'KaleidoSwap Extension',
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'Chrome',
-          description: 'Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, and Arkade. Private Bitcoin swaps, no KYC, non-custodial. Manage BTC, stablecoins, and other assets from your browser.',
+          description: 'Multi-protocol Bitcoin wallet for Lightning, RGB, Spark, Liquid and Arkade. Private, non-custodial Bitcoin swaps. Manage Bitcoin L2s assets from the browser.',
           url: 'https://kaleidoswap.com/products/extension',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
           license: 'https://opensource.org/licenses/MIT',
@@ -155,7 +152,7 @@ export const Extension = () => {
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
                     {t('Extension')}
                   </h1>
-                  <p className="text-base sm:text-xl text-slate-400 leading-relaxed">
+                  <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
                     {t('A multi-protocol Bitcoin wallet, right in your browser. Connect to dApps and manage assets across RGB, Lightning, Spark, Arkade, and Nostr from a single extension.')}
                   </p>
                 </div>
@@ -215,7 +212,7 @@ export const Extension = () => {
       </section>
 
       {/* Features */}
-      <section className="py-14 sm:py-20 bg-gray-950/50">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {features.map((feature) => (
@@ -235,7 +232,7 @@ export const Extension = () => {
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">{t('Five Protocols, One Extension')}</h2>
-          <p className="text-slate-400 text-sm sm:text-base text-center mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-400 text-base sm:text-lg text-center mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
             {t('The KaleidoSwap Extension connects to RGB, Lightning, Spark, Arkade, and Nostr through a pluggable protocol adapter architecture. No switching between wallets.')}
           </p>
 
@@ -255,7 +252,7 @@ export const Extension = () => {
       </section>
 
       {/* Sovereignty */}
-      <section className="py-14 sm:py-20 bg-gray-950/50">
+      <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="glass-card rounded-2xl p-6 sm:p-8 md:p-12">
             <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
