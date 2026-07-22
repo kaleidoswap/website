@@ -1,6 +1,12 @@
 import fm from 'front-matter'
 import { marked, Renderer } from 'marked'
 import type { Post, PostMeta } from './types'
+import { audioManifest } from './audio-manifest'
+
+/** Narration audio URL for a slug, if one has been generated. */
+function audioFor(slug: string): string | undefined {
+  return (audioManifest as unknown as Record<string, { src: string }>)[slug]?.src
+}
 
 const renderer = new Renderer()
 renderer.link = ({ href, title, tokens }) => {
@@ -44,7 +50,10 @@ export function readingTime(text: string): number {
 
 export function getAllPosts(): PostMeta[] {
   return Object.entries(modules)
-    .map(([, raw]) => fm<PostMeta>(raw).attributes)
+    .map(([, raw]) => {
+      const attributes = fm<PostMeta>(raw).attributes
+      return { ...attributes, audioSrc: audioFor(attributes.slug) }
+    })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
@@ -57,6 +66,7 @@ export function getPostBySlug(slug: string): Post | null {
   const rawHtml = marked(body, { renderer }) as string
   return {
     ...attributes,
+    audioSrc: audioFor(attributes.slug),
     content: addHeadingIds(rawHtml),
     readingTime: readingTime(body),
   }
