@@ -16,7 +16,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "i18n:sync": "node scripts/sync-translations.mjs"
+    "i18n:sync": "node scripts/sync-translations.mjs",
+    "blog:audio": "node scripts/gen-blog-audio.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
