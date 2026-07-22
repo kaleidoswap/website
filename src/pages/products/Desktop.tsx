@@ -1,5 +1,5 @@
 // src/pages/products/Desktop.tsx
-import { Shield, Server, Lock, Download, ArrowRight, Check, Terminal, BookOpen } from 'lucide-react'
+import { Shield, Server, Lock, Download, ArrowRight, Check, Terminal, BookOpen, Monitor } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
@@ -11,7 +11,6 @@ import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { MacbookMockup } from '@/components/common/MacbookMockup'
-import { ReleaseNotes } from '@/components/common/ReleaseNotes'
 import { motion } from 'framer-motion'
 import { AppleIcon, WindowsIcon, LinuxIcon } from '@/components/icons/PlatformIcons'
 
@@ -102,9 +101,9 @@ export const Desktop = () => {
             <div>
               <AnimateIn variant="fade-down" duration={500}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6 w-fit">
-                  <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <Monitor className="w-3.5 h-3.5 text-green-400 shrink-0" />
                   <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">
-                    {t('Available Now')}
+                    {t('Desktop App')}
                   </span>
                 </div>
               </AnimateIn>
@@ -248,14 +247,11 @@ export const Desktop = () => {
         </div>
       </section>
 
-      {/* Release Notes — latest release fetched from GitHub */}
-      <ReleaseNotes />
-
       {/* RGB Lightning Node */}
       <section className="pt-20 pb-32">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
-            <div className="glass-card rounded-2xl p-8 md:p-12">
+            <div className="glass-card glass-card-static rounded-2xl p-8 md:p-12">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                   <h2 className="text-3xl font-bold mb-4">{t('Powered by RGB Lightning Node')}</h2>

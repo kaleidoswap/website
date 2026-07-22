@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next'
 import HttpBackend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 
-const supportedLanguages = ['en', 'es', 'it', 'zh', 'de', 'fr', 'ja'] as const
+const supportedLanguages = ['en', 'es', 'it', 'zh', 'de', 'fr', 'ja', 'ko'] as const
 const fallbackLng = 'en'
 const storageKey = 'kaleidoswap_locale'
 

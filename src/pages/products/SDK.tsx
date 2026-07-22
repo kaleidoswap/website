@@ -263,9 +263,9 @@ export const SDK = () => {
             <div className="min-w-0">
               <AnimateIn variant="fade-down" duration={500}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6 w-fit">
-                  <Code className="w-4 h-4 text-green-400" />
+                  <Terminal className="w-4 h-4 text-green-400" />
                   <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">
-                    {t('Developer Tools')}
+                    {t('KaleidoSDK')}
                   </span>
                 </div>
               </AnimateIn>
@@ -273,9 +273,9 @@ export const SDK = () => {
               <AnimateIn variant="fade-up" delay={100}>
                 <div className="space-y-4 mb-8">
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
-                    {t('KaleidoSDK')}
+                    {t('One SDK, every Bitcoin Layer')}
                   </h1>
-                  <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+                  <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-lg">
                     {t('Integrate atomic swaps into your wallet, exchange, or application. TypeScript and Python SDKs auto-generated from the OpenAPI spec.')}
                   </p>
                 </div>
@@ -304,7 +304,7 @@ export const SDK = () => {
               </AnimateIn>
 
               {/* Install commands */}
-              <AnimateIn variant="fade-up" delay={350}>
+              <AnimateIn variant="fade-up" delay={350} className="block max-w-lg">
                 <InstallTabs />
               </AnimateIn>
             </div>
