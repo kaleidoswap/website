@@ -7,6 +7,7 @@ import { SEO } from '@/components/common/SEO'
 import { footerConfig } from '@/constants/footer'
 import { getPostBySlug } from '../lib/posts'
 import { TableOfContents } from './TableOfContents'
+import { AudioPlayer } from './AudioPlayer'
 
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>()
@@ -111,6 +112,9 @@ export function BlogPost() {
                   {post.readingTime} min read
                 </span>
               </div>
+
+              {/* Narration player — only when audio has been generated for this post */}
+              {post.audioSrc && <AudioPlayer src={post.audioSrc} />}
 
               {/* Mobile TOC — hidden on xl (where sidebar takes over) */}
               <div className="xl:hidden mt-6 rounded-xl border border-white/10 bg-white/5 overflow-hidden">

@@ -10,6 +10,7 @@ export interface PostMeta {
   coverImageCard?: string    // thumbnail variant — blog card grid (e.g. 5:2)
   coverImagePreview?: string  // 2:1 image for OG/social link previews (all platforms)
   coverImagePreviewX?: string // 1:1 image for X (Twitter) card preview
+  audioSrc?: string           // narration MP3, set from audio-manifest.ts when present
 }
 
 export interface Post extends PostMeta {
