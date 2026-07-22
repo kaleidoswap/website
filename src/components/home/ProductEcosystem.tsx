@@ -7,7 +7,7 @@ import { useAppNavigation } from '@/hooks/useNavigation'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 
 // ─── Shared token ────────────────────────────────────────────────────────────
-const CARD_BASE = 'rounded-2xl border border-white/[0.06] bg-gray-900 relative overflow-hidden group h-full'
+const CARD_BASE = 'glass-card rounded-2xl relative overflow-hidden group h-full'
 const CARD_HOVER = { y: -3 } as const
 const SPRING = { type: 'spring', stiffness: 300, damping: 20 } as const
 
@@ -20,7 +20,7 @@ const CardIcon = ({ children, color }: { children: React.ReactNode; color: strin
 
 // Ambient glow orb — top-right on every "active" card
 const GlowOrb = ({ color }: { color: string }) => (
-  <div className={`absolute -top-12 -right-12 w-52 h-52 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 opacity-60 group-hover:opacity-100 ${color}`} />
+  <div className={`absolute -top-12 -right-12 w-56 h-56 rounded-full blur-[70px] pointer-events-none transition-all duration-500 opacity-30 group-hover:opacity-100 group-hover:scale-110 ${color}`} />
 )
 
 // Unified "Coming Soon" badge
@@ -79,8 +79,8 @@ export const ProductEcosystem = () => {
               transition={SPRING}
             >
               {/* Richer layered glow for the hero */}
-              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary-500/20 rounded-full blur-[100px] pointer-events-none" />
-              <div className="absolute top-1/3 right-0 w-40 h-40 bg-secondary-400/10 rounded-full blur-[60px] pointer-events-none" />
+              <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-secondary-500/30 rounded-full blur-[100px] pointer-events-none transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-110" />
+              <div className="absolute top-1/3 right-0 w-40 h-40 bg-secondary-400/20 rounded-full blur-[60px] pointer-events-none transition-all duration-500 opacity-60 group-hover:opacity-100 group-hover:scale-110" />
 
               {/* Decorative watermark */}
               <div className="absolute right-8 bottom-8 flex items-center pointer-events-none select-none">
@@ -125,7 +125,7 @@ export const ProductEcosystem = () => {
           {/* ── Extension ────────────────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={100} className="md:col-span-1 lg:col-span-2 h-full">
             <motion.div className={CARD_BASE} whileHover={CARD_HOVER} transition={SPRING}>
-              <GlowOrb color="bg-primary-500/10" />
+              <GlowOrb color="bg-primary-500/25" />
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-4">
                   <CardIcon color="bg-gradient-to-br from-primary-400 to-primary-600 text-white shadow-lg shadow-primary-500/30">
@@ -161,7 +161,7 @@ export const ProductEcosystem = () => {
           {/* ── Desktop ──────────────────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={200} className="md:col-span-1 lg:col-span-2 h-full">
             <motion.div className={CARD_BASE} whileHover={CARD_HOVER} transition={SPRING}>
-              <GlowOrb color="bg-primary-500/10" />
+              <GlowOrb color="bg-primary-500/25" />
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-4">
                   <CardIcon color="bg-primary-500/10 text-primary-400">
@@ -198,7 +198,7 @@ export const ProductEcosystem = () => {
           {/* ── AI Tools ──────────────────────────────────────────────────── */}
           <AnimateIn variant="fade-up" delay={300} className="md:col-span-1 lg:col-span-2 h-full">
             <motion.div className={CARD_BASE} whileHover={CARD_HOVER} transition={SPRING}>
-              <GlowOrb color="bg-secondary-500/10" />
+              <GlowOrb color="bg-secondary-500/25" />
               <div className="p-6 relative z-10 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-4">
                   <CardIcon color="bg-secondary-500/10 text-secondary-400">

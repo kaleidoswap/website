@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useLayoutEffect, useMemo } from 'react'
 import { Download, ExternalLink, Shield, Terminal, Loader2, Key } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
@@ -6,31 +6,32 @@ import { SEO } from '@/components/common/SEO'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
-import {
-  createDownloadConfig,
-  verificationGuideUrl,
-  type DownloadConfig,
-  type GithubReleaseAsset
-} from '@/constants/downloads'
+import { createDownloadConfig, verificationGuideUrl } from '@/constants/downloads'
 import { STATIC_PAGE_META } from '@/constants/pageMeta'
-import { stripVersionTag } from '@/constants/versions'
 import { GITHUB } from '@/constants/urls'
 import { footerConfig } from '@/constants/footer'
 import type { PlatformDownload } from '@/types/downloads'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
-
-type GithubRelease = {
-  tag_name?: string
-  published_at?: string
-  html_url?: string
-  assets?: GithubReleaseAsset[]
-}
+import { useLatestRelease } from '@/hooks/useLatestRelease'
 
 export const Downloads = () => {
-  const [downloadConfig, setDownloadConfig] = useState<DownloadConfig | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const { release, isLoading } = useLatestRelease()
   const { t } = useTranslation()
+
+  const downloadConfig = useMemo(
+    () =>
+      release
+        ? createDownloadConfig({
+            version: release.version,
+            date: release.date,
+            notesUrl: release.notesUrl,
+            assets: release.assets
+          })
+        : null,
+    [release]
+  )
+
   const currentVersion = downloadConfig?.currentVersion ?? { version: '', date: '', notes: '' }
   const platforms = downloadConfig?.platforms ?? []
 
@@ -42,104 +43,6 @@ export const Downloads = () => {
   useLayoutEffect(() => {
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-    }
-  }, [])
-
-  useEffect(() => {
-    let isMounted = true
-    const controller = new AbortController()
-    const CACHE_KEY = 'kaleidoswap_release_cache'
-    const CACHE_TTL = 10 * 60 * 1000 // 10 minutes
-
-    const fetchLatestRelease = async () => {
-      try {
-        setIsLoading(true)
-
-        // Check sessionStorage cache first
-        const cached = sessionStorage.getItem(CACHE_KEY)
-        if (cached) {
-          const { data, timestamp } = JSON.parse(cached)
-          if (Date.now() - timestamp < CACHE_TTL) {
-            const config = createDownloadConfig(data)
-            if (isMounted) {
-              setDownloadConfig(config)
-              setIsLoading(false)
-            }
-            return
-          }
-        }
-
-        const response = await fetch(
-          GITHUB.apiLatestRelease,
-          {
-            headers: {
-              Accept: 'application/vnd.github+json'
-            },
-            signal: controller.signal
-          }
-        )
-
-        if (!response.ok) {
-          throw new Error(`GitHub API responded with status ${response.status}`)
-        }
-
-        const data: GithubRelease = await response.json()
-        const tagName = data.tag_name ?? ''
-        if (!tagName) {
-          setIsLoading(false)
-          return
-        }
-
-        const version = stripVersionTag(tagName)
-        if (!version) {
-          setIsLoading(false)
-          return
-        }
-        const publishedAt = data.published_at
-          ? new Date(data.published_at).toLocaleDateString(undefined, {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric'
-            })
-          : undefined
-
-        const configData = {
-          version,
-          date: publishedAt,
-          notesUrl: data.html_url,
-          assets: data.assets ?? []
-        }
-
-        // Cache the parsed config data
-        try {
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: configData, timestamp: Date.now() }))
-        } catch {
-          // sessionStorage full or unavailable — no-op
-        }
-
-        const updatedConfig = createDownloadConfig(configData)
-
-        if (isMounted) {
-          setDownloadConfig(updatedConfig)
-          setIsLoading(false)
-        }
-      } catch (error) {
-        if ((error as Error).name === 'AbortError') {
-          return
-        }
-
-        console.error('Failed to fetch latest KaleidoSwap release', error)
-        if (isMounted) {
-          setIsLoading(false)
-        }
-      }
-    }
-
-    fetchLatestRelease()
-
-    return () => {
-      isMounted = false
-      controller.abort()
     }
   }, [])
 

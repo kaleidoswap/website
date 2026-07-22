@@ -1,7 +1,7 @@
 // src/pages/products/AITools.tsx
 import {
   Bot, Brain, Server, Sparkles, Download, ExternalLink, ArrowRight, ArrowUp, Check, Copy,
-  MessageSquare, Mic, Github, Zap, CalendarClock, Sliders,
+  MessageSquare, Mic, ArrowUpRight, Zap, CalendarClock, Sliders,
   UserCheck, Layers, Wallet, Coins, PieChart, Activity, ArrowLeftRight, FileText,
   Lock, Terminal, Repeat, ChevronDown,
 } from 'lucide-react'
@@ -220,6 +220,102 @@ const CodeBlock = ({ code, filename }: { code: string; filename: string }) => {
   )
 }
 
+const McpServerCard = ({
+  server,
+  active,
+  onSelect,
+}: {
+  server: (typeof mcpServers)[number]
+  active: boolean
+  onSelect: () => void
+}) => {
+  const { t } = useTranslation()
+
+  return (
+    <button
+      type="button"
+      role="tab"
+      id={`mcp-tab-${server.id}`}
+      aria-selected={active}
+      aria-controls="mcp-server-panel"
+      onClick={onSelect}
+      className={`h-full w-full text-left p-5 flex items-center gap-4 rounded-xl border min-w-0 transition-colors duration-200 ${
+        active
+          ? 'bg-green-500/[0.06] border-green-500/25'
+          : 'glass-card border-white/5 hover:border-white/15'
+      }`}
+    >
+      <span
+        className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors duration-200 ${
+          active ? 'bg-green-500/15 text-green-400' : 'bg-white/5 text-slate-400'
+        }`}
+      >
+        <server.icon className="w-5 h-5" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className={`block font-bold truncate mb-1 transition-colors duration-200 ${active ? 'text-green-400' : 'text-white'}`}>
+          {t(server.name)}
+        </span>
+        <span className="inline-block text-xs px-2 py-0.5 rounded-full bg-white/5 text-slate-400 border border-white/10">
+          {t(server.tag)}
+        </span>
+      </span>
+    </button>
+  )
+}
+
+const McpServerPanel = ({
+  server,
+  direction,
+}: {
+  server: (typeof mcpServers)[number]
+  direction: number
+}) => {
+  const { t } = useTranslation()
+
+  return (
+    <div
+      id="mcp-server-panel"
+      role="tabpanel"
+      aria-labelledby={`mcp-tab-${server.id}`}
+      className="relative rounded-xl border border-green-500/25 bg-green-500/[0.06] overflow-hidden"
+    >
+      <AnimatePresence initial={false} mode="popLayout" custom={direction}>
+        <motion.div
+          key={server.id}
+          custom={direction}
+          variants={{
+            enter: (d: number) => ({ x: d * 48, opacity: 0 }),
+            center: { x: 0, opacity: 1 },
+            exit: (d: number) => ({ x: d * -48, opacity: 0 }),
+          }}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="p-5 md:p-6 grid md:grid-cols-2 gap-6 items-start"
+        >
+          <div className="md:pt-1">
+            <p className="text-slate-400 leading-relaxed mb-5">{t(server.description)}</p>
+            <a
+              href={server.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-400 hover:text-green-300 inline-flex items-center gap-1"
+            >
+              {t('View source')}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+          <div className="min-w-0 overflow-hidden">
+            <CodeBlock code={server.config} filename="claude_desktop_config.json" />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </div>
+  )
+}
+
 const SkillCard = ({ skill }: { skill: (typeof skills)[number] }) => {
   const { t } = useTranslation()
   const [expanded, setExpanded] = useState(false)
@@ -235,7 +331,7 @@ const SkillCard = ({ skill }: { skill: (typeof skills)[number] }) => {
             type="button"
             onClick={() => setExpanded((e) => !e)}
             aria-expanded={expanded}
-            className="flex items-center gap-1.5 font-bold text-white hover:text-secondary-300 transition-colors"
+            className="flex items-center gap-1.5 text-left font-bold text-white hover:text-secondary-300 transition-colors"
           >
             {t(skill.name)}
             <motion.span animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.2 }} className="flex">
@@ -450,10 +546,17 @@ const SectionEyebrow = ({ label, color }: { label: string; color: 'green' | 'vio
 
 export const AITools = () => {
   const { t } = useTranslation()
-  const [activeServer, setActiveServer] = useState(0)
+  const [selectedServer, setSelectedServer] = useState(0)
+  const [serverDirection, setServerDirection] = useState(1)
+
+  const selectServer = (index: number) => {
+    if (index === selectedServer) return
+    setServerDirection(index > selectedServer ? 1 : -1)
+    setSelectedServer(index)
+  }
 
   return (
-    <div className="min-h-screen bg-background-dark text-white font-display overflow-x-hidden">
+    <div className="min-h-screen bg-transparent text-white font-display overflow-x-hidden">
       <SEO {...STATIC_PAGE_META['/products/ai-tools']} url="/products/ai-tools" />
       <Helmet>
         <script type="application/ld+json">
@@ -535,22 +638,37 @@ export const AITools = () => {
       </section>
 
       {/* KaleidoAgent */}
-      <section id="kaleido-agent" className="py-20 bg-gray-950/50 scroll-mt-24">
+      <section id="kaleido-agent" className="py-20 bg-gradient-to-b from-transparent via-gray-950/60 to-transparent scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimateIn variant="fade-up" className="text-center">
-            <SectionEyebrow label={t('Autonomous Agent')} color="green" />
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 shrink-0">
-                <Bot className="w-6 h-6" />
+          <AnimateIn variant="fade-up">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+              <div>
+                <SectionEyebrow label={t('Autonomous Agent')} color="green" />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 shrink-0">
+                    <Bot className="w-6 h-6" />
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-bold">{t('KaleidoAgent')}</h2>
+                </div>
+                <p className="text-slate-400 leading-relaxed max-w-2xl">
+                  {t("AI portfolio manager and wallet operator. Monitors allocations and manages assets, without ever taking custody.")}
+                </p>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold">{t('KaleidoAgent')}</h2>
+              <a
+                href={KALEIDO_AGENT_REPO}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/link flex items-center gap-1.5 text-slate-400 hover:text-white transition-colors text-sm shrink-0"
+              >
+                <span className="border-b border-slate-700 group-hover/link:border-primary-500 pb-0.5 transition-colors">
+                  {t('View on GitHub')}
+                </span>
+                <ArrowUpRight className="w-3.5 h-3.5 shrink-0 group-hover/link:text-primary-400 transition-colors" />
+              </a>
             </div>
-            <p className="text-slate-400 mb-12 leading-relaxed max-w-2xl mx-auto">
-              {t("AI portfolio manager and wallet operator. Monitors allocations and manages assets, acting on the user's behalf without ever taking custody.")}
-            </p>
           </AnimateIn>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {agentFeatures.map((feature, index) => (
               <AnimateIn key={feature.title} variant="fade-up" delay={index * 80}>
                 <div className="glass-card rounded-xl p-6 h-full flex flex-col items-center text-center">
@@ -563,18 +681,6 @@ export const AITools = () => {
               </AnimateIn>
             ))}
           </div>
-
-          <AnimateIn variant="fade-up" className="flex justify-center">
-            <Button
-              size="lg"
-              onClick={() => window.open(KALEIDO_AGENT_REPO, '_blank')}
-              className="bg-green-500 hover:bg-green-600 flex items-center justify-center gap-2 w-fit"
-            >
-              <Github className="w-4 h-4" />
-              {t('View on GitHub')}
-              <ExternalLink className="w-4 h-4" />
-            </Button>
-          </AnimateIn>
         </div>
       </section>
 
@@ -655,7 +761,7 @@ export const AITools = () => {
                 <h2 className="text-3xl md:text-4xl font-bold">{t('KaleidoMind')}</h2>
               </div>
               <p className="text-slate-400 mb-8 leading-relaxed">
-                {t('On-device AI assistant integrated into the Desktop App. Get a quote, build a payment, find a contact, or make a swap in plain language.')}
+                {t('On-device AI assistant. Get a quote, build a payment, find a contact, or make a swap in plain language.')}
               </p>
               <ul className="space-y-4 mb-8">
                 {mindPoints.map((point) => (
@@ -681,7 +787,7 @@ export const AITools = () => {
       </section>
 
       {/* MCP Servers */}
-      <section id="mcp-servers" className="py-20 bg-gray-950/50 scroll-mt-24">
+      <section id="mcp-servers" className="py-20 bg-gradient-to-b from-transparent via-gray-950/60 to-transparent scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionEyebrow label={t('Open Protocol')} color="green" />
@@ -696,69 +802,18 @@ export const AITools = () => {
             </p>
           </AnimateIn>
 
-          {/* Selectable sub-cards */}
-          <div className="grid md:grid-cols-3 gap-4 mb-10">
-            {mcpServers.map((server, index) => {
-              const isActive = activeServer === index
-              return (
-                <motion.button
-                  key={server.id}
-                  onClick={() => setActiveServer(index)}
-                  whileHover={{ y: -3 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                  className={`text-left p-5 rounded-xl border transition-colors duration-200 ${
-                    isActive
-                      ? 'bg-green-500/10 border-green-500/30'
-                      : 'glass-card border-white/5 hover:border-white/15'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`w-9 h-9 rounded-lg flex items-center justify-center ${
-                      isActive ? 'bg-green-500/15 text-green-400' : 'bg-white/5 text-slate-400'
-                    }`}>
-                      <server.icon className="w-5 h-5" />
-                    </span>
-                    {isActive && <Check className="w-4 h-4 text-green-400" />}
-                  </div>
-                  <h3 className={`font-bold mb-2 ${isActive ? 'text-green-400' : 'text-white'}`}>
-                    {t(server.name)}
-                  </h3>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-slate-400 border border-white/10">
-                    {t(server.tag)}
-                  </span>
-                </motion.button>
-              )
-            })}
+          {/* Server tabs + paged detail panel */}
+          <div role="tablist" aria-label={t('MCP Servers')} className="grid md:grid-cols-3 gap-4 mb-4">
+            {mcpServers.map((server, index) => (
+              <McpServerCard
+                key={server.id}
+                server={server}
+                active={selectedServer === index}
+                onSelect={() => selectServer(index)}
+              />
+            ))}
           </div>
-
-          {/* Active detail panel + config box */}
-          <div className="grid md:grid-cols-2 gap-12 items-start min-w-0">
-            <div className="relative h-[220px] md:h-[180px] min-w-0">
-              {mcpServers.map((server, index) => (
-                <div
-                  key={server.id}
-                  className={`absolute inset-0 flex flex-col justify-start transition-opacity duration-300 ${
-                    index === activeServer ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                  }`}
-                >
-                  <h3 className="text-2xl font-bold mb-3">{t(server.name)}</h3>
-                  <p className="text-slate-400 mb-5 leading-relaxed">{t(server.description)}</p>
-                  <a
-                    href={server.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-green-400 hover:text-green-300 flex items-center gap-1 w-fit"
-                  >
-                    {t('View source')}
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              ))}
-            </div>
-            <div className="min-w-0 overflow-hidden">
-              <CodeBlock code={mcpServers[activeServer].config} filename="claude_desktop_config.json" />
-            </div>
-          </div>
+          <McpServerPanel server={mcpServers[selectedServer]} direction={serverDirection} />
         </div>
       </section>
 
@@ -774,7 +829,7 @@ export const AITools = () => {
               <h2 className="text-3xl md:text-4xl font-bold">{t('Skills')}</h2>
             </div>
             <p className="text-slate-400 mb-10 md:max-w-[calc((100%-1rem)/2)] leading-relaxed">
-              {t('Self-contained SKILL.md file for specific behaviors loaded at runtime, editable and extendable without touching the runtime code.')}
+              {t('Self-contained SKILL.md file for specific behaviors loaded at runtime, editable without touching the runtime code.')}
             </p>
           </AnimateIn>
 

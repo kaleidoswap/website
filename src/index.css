@@ -8,7 +8,7 @@
   }
   
   body {
-    background: #0a1120;
+    background: #0d0e14;
     background-image:
       radial-gradient(75% 75% at 80% 10%, rgba(14, 157, 255, 0.06) 0%, rgba(14, 157, 255, 0) 100%),
       radial-gradient(75% 75% at 20% 90%, rgba(99, 102, 241, 0.05) 0%, rgba(99, 102, 241, 0) 100%);
@@ -70,7 +70,7 @@
   }
 
   .glass-panel {
-    background: rgba(22, 27, 34, 0.6);
+    background: rgba(21, 22, 30, 0.6);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -221,7 +221,7 @@ body::after {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a1120;
+  background: #0d0e14;
 }
 
 ::-webkit-scrollbar-thumb {

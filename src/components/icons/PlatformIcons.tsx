@@ -1,8 +1,10 @@
 // src/components/icons/PlatformIcons.tsx
 import { forwardRef } from 'react'
 import type { SVGProps } from 'react'
-import { siGitforwindows, siApple, siLinux } from 'simple-icons'
-// windows not available in simple-icons or lucide-react, use default windows icon
+import { siApple, siLinux } from 'simple-icons'
+// no plain Windows mark ships in simple-icons or lucide-react, so the
+// four-pane Windows logo is drawn directly instead of substituting an
+// unrelated mark (e.g. Git for Windows)
 
 export const WindowsIcon = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((props, ref) => {
   return (
@@ -14,7 +16,10 @@ export const WindowsIcon = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((p
       fill="currentColor"
       {...props}
     >
-      <path d={siGitforwindows.path} />
+      <rect x="2" y="2" width="9" height="9" />
+      <rect x="13" y="2" width="9" height="9" />
+      <rect x="2" y="13" width="9" height="9" />
+      <rect x="13" y="13" width="9" height="9" />
     </svg>
   )
 })

@@ -40,7 +40,13 @@ export const productItems = [
   },
 ]
 
-export const developerItems = [
+export const resourceItems = [
+  {
+    label: 'Blog',
+    href: '/blog',
+    external: false,
+    description: 'Insights & updates',
+  },
   {
     label: 'Documentation',
     href: PRODUCTS.docs,

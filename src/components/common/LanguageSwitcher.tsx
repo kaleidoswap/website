@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ChevronDown, Globe } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const languages = [
-  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'it', name: 'Italiano', flag: '🇮🇹' },
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
@@ -122,7 +122,7 @@ export const LanguageSwitcher = ({ variant = 'default', dropdownPosition = 'abov
       >
         {variant === 'default' ? (
           <>
-            <Globe className="w-4 h-4" />
+            <span className="text-lg">{currentLanguage.flag}</span>
             <span className="text-sm">{currentLanguage.name}</span>
             <ChevronDown className={cn('w-4 h-4 transition-transform', isOpen && 'rotate-180')} />
           </>
