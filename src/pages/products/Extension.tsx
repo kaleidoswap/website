@@ -33,7 +33,7 @@ const features = [
   {
     icon: Layers,
     title: 'Multi-Protocol',
-    description: 'Supports Liquid, Spark, Arkade, Nostr, and optional RGB Lightning Node accounts.',
+    description: 'Supports Lightning, Liquid, Spark, Arkade, Nostr, and optional RGB Lightning Node accounts.',
   },
   {
     icon: ArrowLeftRight,
@@ -237,6 +237,11 @@ export const Extension = () => {
       {/* Features */}
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{t('Non-Custodial Bitcoin Wallet Extension')}</h2>
+          <p className="text-slate-400 text-base sm:text-lg mb-8 sm:mb-12 max-w-2xl leading-relaxed">
+            {t('Interact with every Bitcoin layer using a single seed you fully control.')}
+          </p>
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {features.map((feature) => (
               <div key={feature.title} className="glass-card p-4 sm:p-6 rounded-xl">

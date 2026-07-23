@@ -111,10 +111,10 @@ export const Desktop = () => {
               <AnimateIn variant="fade-up" delay={100}>
                 <div className="space-y-4 mb-8">
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
-                    {t('Desktop App')}
+                    {t('Private Trading with Full Control')}
                   </h1>
                   <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
-                    {t('Full sovereignty. Run your own RGB Lightning node. Manage channels, control liquidity, and trade with maximum privacy.')}
+                    {t('Run your own RGB Lightning node. Manage channels, control liquidity, and trade with maximum privacy.')}
                   </p>
                 </div>
               </AnimateIn>
@@ -176,9 +176,9 @@ export const Desktop = () => {
       {/* Features */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <AnimateIn variant="fade-up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Built for Sovereignty')}</h2>
-            <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">{t('Everything you need to trade sovereignly, built into one application.')}</p>
+          <AnimateIn variant="fade-up" className="mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Self-Custodial Bitcoin Trading')}</h2>
+            <p className="text-base sm:text-lg text-slate-400 max-w-2xl">{t('Everything you need to trade sovereignly, built into one application.')}</p>
           </AnimateIn>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
