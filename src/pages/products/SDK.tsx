@@ -17,12 +17,12 @@ const features = [
   {
     icon: Package,
     title: 'TypeScript & Python',
-    description: 'Native SDKs for TypeScript and Python, auto-generated from OpenAPI specs with full type safety.',
+    description: 'Native SDKs for TypeScript and Python, auto-generated from OpenAPI specs.',
   },
   {
     icon: Code,
     title: 'Type Safe',
-    description: 'Auto-generated models from OpenAPI specs — full TypeScript types and Python Pydantic models.',
+    description: 'Full TypeScript types and Python Pydantic models from OpenAPI specs',
   },
   {
     icon: Terminal,
@@ -32,7 +32,7 @@ const features = [
   {
     icon: BookOpen,
     title: 'MIT Licensed',
-    description: 'Open source and free to use. Fork, modify, and contribute.',
+    description: 'Fully open source and free to use. Fork, modify, and contribute as you wish.',
   },
 ]
 
@@ -263,9 +263,9 @@ export const SDK = () => {
             <div className="min-w-0">
               <AnimateIn variant="fade-down" duration={500}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6 w-fit">
-                  <Code className="w-4 h-4 text-green-400" />
+                  <Terminal className="w-4 h-4 text-green-400" />
                   <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">
-                    {t('Developer Tools')}
+                    {t('KaleidoSDK')}
                   </span>
                 </div>
               </AnimateIn>
@@ -273,9 +273,9 @@ export const SDK = () => {
               <AnimateIn variant="fade-up" delay={100}>
                 <div className="space-y-4 mb-8">
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight tracking-tight">
-                    {t('KaleidoSDK')}
+                    {t('One SDK, every Bitcoin Layer')}
                   </h1>
-                  <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+                  <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-lg">
                     {t('Integrate atomic swaps into your wallet, exchange, or application. TypeScript and Python SDKs auto-generated from the OpenAPI spec.')}
                   </p>
                 </div>
@@ -304,7 +304,7 @@ export const SDK = () => {
               </AnimateIn>
 
               {/* Install commands */}
-              <AnimateIn variant="fade-up" delay={350}>
+              <AnimateIn variant="fade-up" delay={350} className="block max-w-lg">
                 <InstallTabs />
               </AnimateIn>
             </div>
@@ -425,10 +425,18 @@ export const SDK = () => {
       {/* Features */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-12 max-w-2xl">
+            <h2 className="text-4xl font-bold mb-4">{t('Bitcoin Swaps for Wallets and Agents')}</h2>
+            <p className="text-slate-400 text-lg leading-relaxed">
+              {t('Ship atomic swaps faster with fully typed SDKs, live quote streaming, and an open source core you can audit and extend.')}
+            </p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature) => (
               <div key={feature.title} className="glass-card p-6 rounded-xl">
-                <feature.icon className="w-10 h-10 text-green-400 mb-4" />
+                <div className="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center mb-4">
+                  <feature.icon className="w-6 h-6" />
+                </div>
                 <h3 className="text-lg font-bold mb-2">{t(feature.title)}</h3>
                 <p className="text-slate-400 text-sm">{t(feature.description)}</p>
               </div>
@@ -443,7 +451,7 @@ export const SDK = () => {
 
           {/* Header row: title left, tabs right */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-            <h2 className="text-4xl font-bold">{t('Use Cases')}</h2>
+            <h2 className="text-4xl font-bold">{t('KaleidoSDK Use Cases')}</h2>
             <div className="flex gap-2 shrink-0">
               {useCases.map((useCase, index) => (
                 <button

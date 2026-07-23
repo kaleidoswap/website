@@ -5,6 +5,8 @@ const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
 const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
 const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
 const taprootLogo = '/logos/protocol-logos/taproot-assets/tapass-logo.svg'
+const cashuLogo = '/logos/protocol-logos/cashu/cashu-logo.svg'
+const wavelengthLogo = '/logos/protocol-logos/wavelength/lightning-labs-logo-white.svg'
 
 export interface Protocol {
   name: string
@@ -21,7 +23,8 @@ export const protocols: Protocol[] = [
   { name: 'Arkade', icon: arkadeLogo, status: 'live', url: 'https://arkade.money' },
   { name: 'Liquid', icon: liquidLogo, status: 'live', url: 'https://liquid.net' },
   { name: 'Taproot Assets', icon: taprootLogo, status: 'coming-soon', url: 'https://docs.lightning.engineering/the-lightning-network/taproot-assets' },
-  { name: 'Ecash', icon: null, status: 'coming-soon', url: 'https://cashu.space' },
+  { name: 'Wavelength', icon: wavelengthLogo, status: 'coming-soon', url: 'https://lightning.engineering' },
+  { name: 'Cashu', icon: cashuLogo, status: 'coming-soon', url: 'https://cashu.space' },
 ]
 
 export const liveProtocols = protocols.filter(p => p.status === 'live')

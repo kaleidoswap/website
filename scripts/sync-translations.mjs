@@ -13,7 +13,7 @@ const ROOT = join(__dirname, '..')
 const LOCALES_DIR = join(ROOT, 'public/locales')
 const SRC_DIR = join(ROOT, 'src')
 
-const LANGUAGES = ['en', 'es', 'it', 'zh', 'de', 'fr', 'ja']
+const LANGUAGES = ['en', 'es', 'it', 'zh', 'de', 'fr', 'ja', 'ko']
 
 // Patterns to extract t('...') and {t('...')} calls
 const T_PATTERNS = [
