@@ -11,6 +11,12 @@
 		"binding": "ASSETS",
 		"not_found_handling": "single-page-application"
 	},
+	"r2_buckets": [
+		{
+			"binding": "AUDIO",
+			"bucket_name": "kaleidoswap-blog-audio"
+		}
+	],
 	"d1_databases": [
 		{
 			"binding": "DB",

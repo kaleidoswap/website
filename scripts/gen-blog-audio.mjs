@@ -27,7 +27,12 @@ import fm from 'front-matter'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = join(__dirname, '..')
 const POSTS_DIR = join(ROOT, 'src/blog/posts')
-const AUDIO_DIR = join(ROOT, 'public/blog/audio')
+// Gitignored local cache. The MP3s are far too large to commit and are NOT
+// part of the asset bundle — production streams them from R2 via the Worker
+// (see worker/index.ts). Keep this outside public/ so Vite cannot copy them
+// into dist/ and silently reintroduce them to the deploy.
+const AUDIO_DIR = join(ROOT, 'blog-audio')
+const R2_BUCKET = 'kaleidoswap-blog-audio'
 const MANIFEST_TS = join(ROOT, 'src/blog/lib/audio-manifest.ts')
 const ENV_FILE = join(ROOT, '..', '.env')
 
@@ -162,6 +167,34 @@ function loadManifest() {
   return {}
 }
 
+/** Upload one MP3 to R2. Wrangler resolves auth the usual way (CLOUDFLARE_API_TOKEN or `wrangler login`). */
+function uploadToR2(slug, filePath) {
+  try {
+    execFileSync(
+      'npx',
+      [
+        'wrangler',
+        'r2',
+        'object',
+        'put',
+        `${R2_BUCKET}/${slug}.mp3`,
+        '--file',
+        filePath,
+        '--content-type',
+        'audio/mpeg',
+        '--remote',
+      ],
+      { stdio: 'pipe' }
+    )
+    return true
+  } catch (err) {
+    const detail = (err.stderr?.toString() || err.message).trim().split('\n').slice(-3).join('\n')
+    console.warn(`  ⚠ R2 upload failed for ${slug}:\n    ${detail}`)
+    console.warn(`    Audio is cached locally; re-run \`npm run blog:audio:push\` once wrangler can authenticate.`)
+    return false
+  }
+}
+
 function writeManifest(manifest) {
   const sorted = Object.fromEntries(Object.keys(manifest).sort().map((k) => [k, manifest[k]]))
   const ts =
@@ -220,7 +253,9 @@ async function main() {
 
     const bytes = encodeMono(Buffer.concat(buffers), outPath)
     manifest[slug] = { src: `/blog/audio/${slug}.mp3`, hash, bytes }
-    console.log(`write  public/blog/audio/${slug}.mp3 (${(bytes / 1024).toFixed(0)} KB)\n`)
+    console.log(`write  blog-audio/${slug}.mp3 (${(bytes / 1024).toFixed(0)} KB)`)
+    if (uploadToR2(slug, outPath)) console.log(`upload r2://${R2_BUCKET}/${slug}.mp3`)
+    console.log()
   }
 
   writeManifest(manifest)

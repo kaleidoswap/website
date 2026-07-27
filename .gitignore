@@ -36,3 +36,7 @@ dist-ssr
 
 # Local worktrees
 .claude/worktrees/
+
+# Blog narration audio — lives in R2 (bucket: kaleidoswap-blog-audio), not in git.
+# Regenerate/download with `npm run blog:audio` / `npm run blog:audio:pull`.
+/blog-audio/
