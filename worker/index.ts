@@ -4,6 +4,7 @@ import { STATIC_PAGE_META } from '../src/constants/pageMeta'
 export interface Env {
   ASSETS: Fetcher
   DB: D1Database
+  AUDIO: R2Bucket
   TURNSTILE_SECRET: string
 }
 
@@ -216,12 +217,76 @@ async function handleStaticRoute(request: Request, env: Env, pathname: string): 
 // would get incorrectly downgraded to a 404.
 const KNOWN_SPA_ONLY_ROUTES = new Set(['/products/extension/beta'])
 
+// Blog narration MP3s live in R2, not in the asset bundle — they are far too
+// large to commit. Served from this origin so the manifest can keep using
+// relative /blog/audio/ URLs, with Range support so the player can seek.
+const AUDIO_PREFIX = '/blog/audio/'
+
+async function serveAudio(request: Request, env: Env): Promise<Response> {
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    return new Response('Method not allowed', { status: 405, headers: { allow: 'GET, HEAD' } })
+  }
+
+  const key = decodeURIComponent(new URL(request.url).pathname.slice(AUDIO_PREFIX.length))
+  if (!key || key.includes('/') || !key.endsWith('.mp3')) {
+    return new Response('Not found', { status: 404 })
+  }
+
+  const headers = new Headers({
+    'accept-ranges': 'bytes',
+    // Content-addressed by post slug; a re-narration overwrites the key, so
+    // keep this short enough that a refreshed episode is picked up same-day.
+    'cache-control': 'public, max-age=3600, stale-while-revalidate=86400',
+  })
+
+  if (request.method === 'HEAD') {
+    const head = await env.AUDIO.head(key)
+    if (!head) return new Response('Not found', { status: 404 })
+    head.writeHttpMetadata(headers)
+    headers.set('etag', head.httpEtag)
+    headers.set('content-type', head.httpMetadata?.contentType ?? 'audio/mpeg')
+    headers.set('content-length', String(head.size))
+    return new Response(null, { status: 200, headers })
+  }
+
+  const object = await env.AUDIO.get(key, {
+    range: request.headers,
+    onlyIf: request.headers,
+  })
+  if (!object) return new Response('Not found', { status: 404 })
+
+  object.writeHttpMetadata(headers)
+  headers.set('etag', object.httpEtag)
+  headers.set('content-type', object.httpMetadata?.contentType ?? 'audio/mpeg')
+
+  // onlyIf failed the precondition (If-None-Match hit) — no body was returned.
+  if (!('body' in object) || !object.body) {
+    return new Response(null, { status: 304, headers })
+  }
+
+  const range = object.range as { offset?: number; length?: number } | undefined
+  if (request.headers.has('range') && range) {
+    const offset = range.offset ?? 0
+    const length = range.length ?? object.size - offset
+    headers.set('content-range', `bytes ${offset}-${offset + length - 1}/${object.size}`)
+    headers.set('content-length', String(length))
+    return new Response(object.body, { status: 206, headers })
+  }
+
+  headers.set('content-length', String(object.size))
+  return new Response(object.body, { status: 200, headers })
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
 
     if (url.pathname === '/api/beta-signup') {
       return handleBetaSignup(request, env)
+    }
+
+    if (url.pathname.startsWith(AUDIO_PREFIX)) {
+      return serveAudio(request, env)
     }
 
     // NOTE: /products/web-app used to redirect to /products here. The page
