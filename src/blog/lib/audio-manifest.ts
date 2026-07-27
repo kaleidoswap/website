@@ -2,6 +2,16 @@
 // Run `npm run blog:audio` to (re)generate narration audio + this file.
 export type BlogAudioEntry = { src: string; hash: string; bytes: number }
 export const audioManifest = {
+  "bitcoin-agentic-payments": {
+    "src": "/blog/audio/bitcoin-agentic-payments.mp3",
+    "hash": "562675933936",
+    "bytes": 7014235
+  },
+  "bitcoin-l2-interoperability": {
+    "src": "/blog/audio/bitcoin-l2-interoperability.mp3",
+    "hash": "6dea1630ae6f",
+    "bytes": 4786512
+  },
   "first-rgb-swap-mainnet": {
     "src": "/blog/audio/first-rgb-swap-mainnet.mp3",
     "hash": "3052344afb85",
@@ -11,15 +21,5 @@ export const audioManifest = {
     "src": "/blog/audio/introducing-rate.mp3",
     "hash": "99158b415b23",
     "bytes": 5410943
-  },
-  "kaleidoagent-wdk-hackathon": {
-    "src": "/blog/audio/kaleidoagent-wdk-hackathon.mp3",
-    "hash": "562675933936",
-    "bytes": 7014235
-  },
-  "solving-bitcoin-l2-liquidity": {
-    "src": "/blog/audio/solving-bitcoin-l2-liquidity.mp3",
-    "hash": "6dea1630ae6f",
-    "bytes": 4786512
   }
 } as const satisfies Record<string, BlogAudioEntry>
