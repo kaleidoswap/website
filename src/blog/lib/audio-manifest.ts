@@ -21,5 +21,10 @@ export const audioManifest = {
     "src": "/blog/audio/introducing-rate.mp3",
     "hash": "99158b415b23",
     "bytes": 5410943
+  },
+  "rgb-on-liquid": {
+    "src": "/blog/audio/rgb-on-liquid.mp3",
+    "hash": "ac7b6fdfabba",
+    "bytes": 10750581
   }
 } as const satisfies Record<string, BlogAudioEntry>
