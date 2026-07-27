@@ -17,7 +17,7 @@ export const BuiltInPublic = () => {
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
                 {t('Backed By')}
               </p>
-              <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-3">
                 {backers.map((backer) => (
                   <a
                     key={backer.name}
@@ -48,7 +48,7 @@ export const BuiltInPublic = () => {
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-6">
                 {t('Accomplishments')}
               </p>
-              <div className="flex flex-col gap-5 w-full">
+              <div className="flex flex-col gap-3 w-full">
                 <a
                   href="https://kaleidoswap.medium.com/%EF%B8%8F-the-first-ever-rgb-asset-swap-on-lightning-mainnet-1b940dcd0efd"
                   target="_blank"

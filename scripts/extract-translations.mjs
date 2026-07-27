@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const projectRoot = join(__dirname, '..')
 
-const locales = ['en', 'es', 'it', 'zh', 'de', 'fr', 'ja']
+const locales = ['en', 'es', 'it', 'zh', 'de', 'fr', 'ja', 'ko']
 const resourcesPath = join(projectRoot, 'src/i18n/resources.ts')
 const outputDir = join(projectRoot, 'public/locales')
 

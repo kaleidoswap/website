@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import {
   Shield,
   Globe,
@@ -7,10 +8,12 @@ import {
   BookOpen,
   LockOpen,
   Server,
+  Puzzle,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.svg'
 const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
+const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
 const sparkLogo = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
 const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
 const nostrLogo = '/logos/protocol-logos/nostr/nostr-logo.svg'
@@ -30,7 +33,7 @@ const features = [
   {
     icon: Layers,
     title: 'Multi-Protocol',
-    description: 'Supports Spark, Arkade, Nostr, and optional RGB Lightning Node accounts.',
+    description: 'Supports Lightning, Liquid, Spark, Arkade, Nostr, and optional RGB Lightning Node accounts.',
   },
   {
     icon: ArrowLeftRight,
@@ -40,7 +43,7 @@ const features = [
   {
     icon: Globe,
     title: 'DApp Integration',
-    description: 'Exposes window.rgbwebln for trusted DApp wallet requests.',
+    description: 'Connect to dApps so they can request payments and signatures. Configure what needs approval.',
   },
   {
     icon: Shield,
@@ -54,6 +57,7 @@ type Protocol = {
   description: string
   color: string
   border: string
+  glow: string
   logo: string
 }
 
@@ -61,42 +65,61 @@ const protocols: Protocol[] = [
   {
     name: 'RGB',
     description: 'Smart contracts and token issuance on Bitcoin with client-side validation.',
-    color: 'text-red-400',
+    color: 'text-white',
     border: 'hover:border-red-500/30',
+    glow: 'rgba(239, 68, 68, 0.14)',
     logo: rgbLogo,
   },
   {
     name: 'Lightning',
-    description: 'Instant, low-fee Bitcoin payments over the Lightning Network.',
-    color: 'text-yellow-400',
+    description: 'Instant, low-fee bitcoin transactions settled off-chain through payment channels.',
+    color: 'text-white',
     border: 'hover:border-yellow-500/30',
+    glow: 'rgba(234, 179, 8, 0.14)',
     logo: lightningLogo,
+  },
+  {
+    name: 'Liquid',
+    description: 'Fast, confidential Bitcoin sidechain transactions with L-BTC and issued assets.',
+    color: 'text-white',
+    border: 'hover:border-cyan-500/30',
+    glow: 'rgba(34, 225, 201, 0.14)',
+    logo: liquidLogo,
   },
   {
     name: 'Spark',
     description: 'Bitcoin payments via the Spark protocol with Flashnet integration.',
     color: 'text-white',
     border: 'hover:border-white/20',
+    glow: 'rgba(255, 255, 255, 0.12)',
     logo: sparkLogo,
   },
   {
     name: 'Arkade',
     description: 'Virtual UTXO-based Bitcoin transactions with automatic boarding.',
-    color: 'text-violet-500',
+    color: 'text-white',
     border: 'hover:border-violet-500/30',
+    glow: 'rgba(139, 92, 246, 0.14)',
     logo: arkadeLogo,
   },
   {
     name: 'Nostr',
     description: 'Decentralized identity and event signing via NIP-07 compatible interface.',
-    color: 'text-[#7B50C2]',
+    color: 'text-white',
     border: 'hover:border-[#7B50C2]/30',
+    glow: 'rgba(123, 80, 194, 0.18)',
     logo: nostrLogo,
   },
 ]
 
 export const Extension = () => {
   const { t } = useTranslation()
+
+  const handleGlowMove = (e: MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    e.currentTarget.style.setProperty('--glow-x', `${e.clientX - rect.left}px`)
+    e.currentTarget.style.setProperty('--glow-y', `${e.clientY - rect.top}px`)
+  }
 
   return (
     <div className="min-h-screen bg-transparent text-white font-display overflow-x-hidden">
@@ -140,9 +163,9 @@ export const Extension = () => {
             <div className="min-w-0">
               <AnimateIn variant="fade-down" duration={500}>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-green-500/30 bg-green-500/10 mb-6 w-fit">
-                  <span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
+                  <Puzzle className="w-3.5 h-3.5 text-green-400 shrink-0" />
                   <span className="text-xs font-semibold text-green-400 uppercase tracking-wider">
-                    {t('Live on Mainnet')}
+                    {t('Extension')}
                   </span>
                 </div>
               </AnimateIn>
@@ -150,10 +173,10 @@ export const Extension = () => {
               <AnimateIn variant="fade-up" delay={100}>
                 <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                   <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
-                    {t('Extension')}
+                    {t('All Bitcoin L2s')}<br />{t('in the Browser')}
                   </h1>
                   <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
-                    {t('A multi-protocol Bitcoin wallet, right in your browser. Connect to dApps and manage assets across RGB, Lightning, Spark, Arkade, and Nostr from a single extension.')}
+                    {t('A multi-protocol Bitcoin wallet, right in your browser. Connect to dApps and manage assets from a single extension.')}
                   </p>
                 </div>
               </AnimateIn>
@@ -214,6 +237,11 @@ export const Extension = () => {
       {/* Features */}
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{t('Non-Custodial Bitcoin Wallet Extension')}</h2>
+          <p className="text-slate-400 text-base sm:text-lg mb-8 sm:mb-12 max-w-2xl leading-relaxed">
+            {t('Interact with every Bitcoin layer using a single seed you fully control.')}
+          </p>
+
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {features.map((feature) => (
               <div key={feature.title} className="glass-card p-4 sm:p-6 rounded-xl">
@@ -231,20 +259,30 @@ export const Extension = () => {
       {/* Supported Protocols */}
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">{t('Five Protocols, One Extension')}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">{t('Six Protocols, One Extension')}</h2>
           <p className="text-slate-400 text-base sm:text-lg text-center mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
-            {t('The KaleidoSwap Extension connects to RGB, Lightning, Spark, Arkade, and Nostr through a pluggable protocol adapter architecture. No switching between wallets.')}
+            {t('The KaleidoSwap Extension connects to Bitcoin layers through a pluggable protocol adapter architecture. No more switching between wallets.')}
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3 sm:gap-6 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 max-w-4xl mx-auto">
             {protocols.map((protocol) => (
               <div
                 key={protocol.name}
-                className={`glass-card p-4 sm:p-6 rounded-xl text-center transition-colors ${protocol.border} last:col-span-2 last:max-w-[calc(50%-6px)] last:mx-auto md:last:col-span-1 md:last:max-w-none md:last:mx-0`}
+                onMouseMove={handleGlowMove}
+                className={`group glass-card p-4 sm:p-6 rounded-xl text-center transition-colors relative overflow-hidden ${protocol.border}`}
               >
-                <img src={protocol.logo} alt={protocol.name} className="w-9 h-9 sm:w-10 sm:h-10 mx-auto mb-3 sm:mb-4 object-contain" />
-                <h3 className={`text-base sm:text-lg font-bold mb-1.5 sm:mb-2 ${protocol.color}`}>{protocol.name}</h3>
-                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">{t(protocol.description)}</p>
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: `radial-gradient(200px circle at var(--glow-x, 50%) var(--glow-y, 50%), ${protocol.glow}, transparent 70%)`,
+                  }}
+                />
+                <div className="relative">
+                  <img src={protocol.logo} alt={protocol.name} className="w-9 h-9 sm:w-10 sm:h-10 mx-auto mb-3 sm:mb-4 object-contain" />
+                  <h3 className={`text-base sm:text-lg font-bold mb-1.5 sm:mb-2 ${protocol.color}`}>{protocol.name}</h3>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">{t(protocol.description)}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -254,16 +292,14 @@ export const Extension = () => {
       {/* Sovereignty */}
       <section className="py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <div className="glass-card rounded-2xl p-6 sm:p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
               <div>
                 <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{t('Sovereignty First')}</h2>
                 <p className="text-slate-400 text-sm sm:text-base mb-5 sm:mb-6 leading-relaxed">
-                  {t('The KaleidoSwap Extension is self-custodial by design. Your seed never leaves the extension, your traffic never leaves your machine, and your funds never sit on our servers — because there are none.')}
+                  {t('Self-custodial by design. Your seed never leaves the extension, your traffic never leaves your machine. No accounts required.')}
                 </p>
                 <ul className="space-y-2.5 sm:space-y-3 mb-2 sm:mb-6">
                   {[
-                    'Self-custody by default — no accounts, no KYC',
                     'No tracking, no telemetry, no analytics',
                     'Connect to your own RGB Lightning Node',
                     'Open-source and independently auditable',
@@ -276,7 +312,7 @@ export const Extension = () => {
                   ))}
                 </ul>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 md:w-[calc(100%-50px)] md:ml-auto">
                 <div className="glass-card p-4 sm:p-5 rounded-xl">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center mb-2.5 sm:mb-3">
                     <Shield className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -292,7 +328,6 @@ export const Extension = () => {
                   <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{t('Point the extension at your own RGB Lightning Node for full sovereignty over routing, channels, and asset issuance.')}</p>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </section>
