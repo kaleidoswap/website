@@ -2,29 +2,74 @@
 // Run `npm run blog:audio` to (re)generate narration audio + this file.
 export type BlogAudioEntry = { src: string; hash: string; bytes: number }
 export const audioManifest = {
+  "april-2026-release-notes": {
+    "src": "/blog/audio/april-2026-release-notes.mp3",
+    "hash": "e85611d210c5",
+    "bytes": 2754395
+  },
   "bitcoin-agentic-payments": {
     "src": "/blog/audio/bitcoin-agentic-payments.mp3",
-    "hash": "562675933936",
-    "bytes": 7014235
+    "hash": "7e8c51f1e9e3",
+    "bytes": 8282950
   },
   "bitcoin-l2-interoperability": {
     "src": "/blog/audio/bitcoin-l2-interoperability.mp3",
-    "hash": "6dea1630ae6f",
-    "bytes": 4786512
+    "hash": "eacea89311f8",
+    "bytes": 4656109
   },
   "first-rgb-swap-mainnet": {
     "src": "/blog/audio/first-rgb-swap-mainnet.mp3",
-    "hash": "3052344afb85",
-    "bytes": 3516752
+    "hash": "18a7aeda8d89",
+    "bytes": 4326757
   },
   "introducing-rate": {
     "src": "/blog/audio/introducing-rate.mp3",
-    "hash": "99158b415b23",
-    "bytes": 5410943
+    "hash": "b280fbc2eb70",
+    "bytes": 5193813
+  },
+  "june-2026-release-notes": {
+    "src": "/blog/audio/june-2026-release-notes.mp3",
+    "hash": "81365e2e75ed",
+    "bytes": 3359808
+  },
+  "kaleidoswap-v020": {
+    "src": "/blog/audio/kaleidoswap-v020.mp3",
+    "hash": "1cfe098885f7",
+    "bytes": 3600553
+  },
+  "may-2026-release-notes": {
+    "src": "/blog/audio/may-2026-release-notes.mp3",
+    "hash": "784fb6e6a67b",
+    "bytes": 3129304
+  },
+  "nostr-relay-launch": {
+    "src": "/blog/audio/nostr-relay-launch.mp3",
+    "hash": "0ba154472c8d",
+    "bytes": 2231528
+  },
+  "pre-seed-investment": {
+    "src": "/blog/audio/pre-seed-investment.mp3",
+    "hash": "d01501bc2583",
+    "bytes": 2238006
   },
   "rgb-on-liquid": {
     "src": "/blog/audio/rgb-on-liquid.mp3",
-    "hash": "ac7b6fdfabba",
-    "bytes": 10750581
+    "hash": "2bc3f9e713f9",
+    "bytes": 11567482
+  },
+  "rgb-protocol": {
+    "src": "/blog/audio/rgb-protocol.mp3",
+    "hash": "f6e324ae27f4",
+    "bytes": 7867080
+  },
+  "rgb-taproot-atomic-swaps": {
+    "src": "/blog/audio/rgb-taproot-atomic-swaps.mp3",
+    "hash": "6b0bc6fea660",
+    "bytes": 2839449
+  },
+  "stablecoins-on-bitcoin": {
+    "src": "/blog/audio/stablecoins-on-bitcoin.mp3",
+    "hash": "de0d5b6cf1fa",
+    "bytes": 3347688
   }
 } as const satisfies Record<string, BlogAudioEntry>
