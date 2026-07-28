@@ -2,7 +2,24 @@
 
 > Trustless atomic swap protocol built natively on Bitcoin. Built for humans and AI agents alike.
 
-KaleidoSwap is an infrastructure layer enabling trustless atomic swaps across multiple Bitcoin Layer 2 protocols, including Lightning Network, RGB, Arkade, and Spark. The RFQ (Request for Quote) model lets market makers compete on spread, providing best-execution pricing for users and integrators. Non-custodial, open source, and private by design.
+KaleidoSwap is an infrastructure layer enabling trustless atomic swaps across multiple Bitcoin Layer 2 protocols, including Lightning Network, RGB, Arkade, Liquid, and Spark. The RFQ (Request for Quote) model lets market makers compete on spread, providing best-execution pricing for users and integrators. Non-custodial, open source, and private by design.
+
+---
+
+## Site Pages
+
+- [Home](https://kaleidoswap.com/): Non-custodial Bitcoin DEX for Bitcoin L2s — atomic swaps of bitcoin and stablecoins across Lightning, RGB, Arkade, Liquid, and Spark.
+- [Products](https://kaleidoswap.com/products): Overview of every KaleidoSwap client and developer product.
+- [Desktop App](https://kaleidoswap.com/products/desktop): Full-sovereignty desktop wallet bundling a complete RGB Lightning node.
+- [Browser Extension](https://kaleidoswap.com/products/extension): Multi-protocol Bitcoin wallet extension with dApp connectivity.
+- [KaleidoSDK](https://kaleidoswap.com/products/sdk): Atomic swap SDK for wallet, exchange, and AI agent developers.
+- [AI Tools](https://kaleidoswap.com/products/ai-tools): Autonomous agents, on-device AI assistance, and open source tools for agentic Bitcoin payments.
+- [Mobile App](https://kaleidoswap.com/products/mobile): Native iOS and Android wallet — coming soon.
+- [Web App](https://kaleidoswap.com/products/web-app): Browser-based swap interface — coming soon.
+- [Downloads](https://kaleidoswap.com/downloads): Desktop App builds for macOS, Linux, and Windows.
+- [Blog](https://kaleidoswap.com/blog): Announcements, deep dives, and builder resources.
+- [Privacy Policy](https://kaleidoswap.com/privacy)
+- [Terms of Service](https://kaleidoswap.com/terms)
 
 ---
 
@@ -11,22 +28,30 @@ KaleidoSwap is an infrastructure layer enabling trustless atomic swaps across mu
 - [KaleidoSDK](https://docs.kaleidoswap.com/sdk/introduction.md): Multi-language SDK (Rust core, TypeScript and Python bindings). MCP-compatible. For wallet builders, multi-L2 wallet builders, neobanks, and AI agent developers.
 - [Kaleido CLI](https://docs.kaleidoswap.com/cli/introduction.md): Command-line tool for managing local RGB Lightning nodes and executing swaps directly from the terminal. Ships with KaleidoSDK.
 - [Desktop App](https://docs.kaleidoswap.com/desktop-app/getting-started/introduction.md): Tauri-based (Rust + web frontend). Full self-hosted RGB Lightning node. Non-custodial. Available on macOS, Linux, and Windows.
-- [Browser Extension](https://docs.kaleidoswap.com/extensions/kaleidoswap-extension/introduction.md): Multi-network Multi-Protocol Bitcoin wallet extension. RGB Lightning Node and DApp connectivity.
+- [Browser Extension](https://docs.kaleidoswap.com/extensions/kaleidoswap-extension/introduction.md): Multi-network, multi-protocol Bitcoin wallet extension. Accounts for Lightning, Liquid, Spark, Arkade, Nostr, and an optional RGB Lightning Node. Closed beta.
+- Rate (Mobile): Self-sovereign RGB Lightning wallet for iOS and Android with an on-device AI assistant. In beta, not yet publicly released.
 - KaleidoAgent: Autonomous AI agent built on KaleidoSDK. Manages Lightning wallets, executes swaps, handles DCA and rebalancing autonomously.
-- KaleidoMaker: Production-grade market-maker infrastructure. RFQ engine, turnkey LP stack, FastAPI with Prometheus/Grafana/Loki observability. Launching Q4 2026.
+- KaleidoMind: On-device AI agent embedded in the Desktop App and mobile wallet — chat-driven swaps, balances, and wallet operations.
+- KaleidoMaker: Production-grade market-maker infrastructure. RFQ engine, turnkey LP stack, with Prometheus/Grafana/Loki observability. Operated by KaleidoSwap; not yet publicly available.
 
 ---
 
 ## Supported Protocols
 
+Live:
+
 - Bitcoin (onchain)
 - Lightning Network
-- RGB Protocol on Lightning (RGB20 assets: USDT, XAUT, and others)
-- Spark (statechains, USDB stablecoin)
+- RGB Protocol on Lightning (RGB20 assets)
+- Spark (statechains)
 - Arkade / Ark (virtual UTXOs)
-- Liquid Network (planned Q2 2026)
-- Taproot Assets (planned Q3 2026)
-- Fedimint (planned Q4 2026)
+- Liquid Network (L-BTC and Liquid assets)
+
+In development:
+
+- Taproot Assets
+- Wavelength
+- Cashu
 
 ---
 
@@ -44,11 +69,31 @@ KaleidoSwap is an infrastructure layer enabling trustless atomic swaps across mu
 
 ---
 
+## Blog
+
+- [RGB Meets Simplicity: Programmable Seals on Liquid](https://kaleidoswap.com/blog/rgb-on-liquid) (2026-07-13): Anchoring RGB assets on Liquid, swapping across Bitcoin and Liquid without a custodian, and enforcing RGB anchoring with a Simplicity covenant.
+- [June 2026 Release Notes: AI Agent, New Swaps Engine & Nostr Relay](https://kaleidoswap.com/blog/june-2026-release-notes) (2026-06-30)
+- [KaleidoSwap Now Runs Its Own Nostr Relay](https://kaleidoswap.com/blog/nostr-relay-launch) (2026-06-18): wss://relay.kaleidoswap.com powers wallet identity, app connections, and order discovery.
+- [RGB Protocol on Bitcoin: History, Architecture, and How KaleidoSwap Fits in the Ecosystem](https://kaleidoswap.com/blog/rgb-protocol) (2026-06-06)
+- [May 2026 Release Notes: Extension Mainnet Beta, Covenant DEX Rails, and Partner Admin Panel](https://kaleidoswap.com/blog/may-2026-release-notes) (2026-05-31)
+- [KaleidoAgent: An Autonomous AI Agent for Bitcoin L2](https://kaleidoswap.com/blog/bitcoin-agentic-payments) (2026-05-06): Autonomous agent executing trustless atomic swaps via MCP servers. 1st place at the WDK Hackathon.
+- [April 2026 Release Notes: Desktop v0.4.0, SDK Fixes & CLI Improvements](https://kaleidoswap.com/blog/april-2026-release-notes) (2026-04-30)
+- [Solving Bitcoin's L2 Liquidity Problem: KaleidoSwap's Multi-Protocol DEX Layer](https://kaleidoswap.com/blog/bitcoin-l2-interoperability) (2026-01-15)
+- [The First Ever RGB Asset Swap on Lightning Mainnet](https://kaleidoswap.com/blog/first-rgb-swap-mainnet) (2025-09-30)
+- [KaleidoSwap × UTEXO: Bringing RGB-native USDT Swaps to Lightning](https://kaleidoswap.com/blog/stablecoins-on-bitcoin) (2025-09-23)
+- [KaleidoSwap Raises Pre-Seed for the First RGB-powered Lightning DEX](https://kaleidoswap.com/blog/pre-seed-investment) (2025-09-08): Pre-seed from Bitfinex Ventures and Fulgur Ventures.
+- [Introducing Rate: AI-Powered Self-Sovereign RGB Lightning Wallet](https://kaleidoswap.com/blog/introducing-rate) (2025-07-30): Winner of the Plan B Hackathon in Lugano.
+- [KaleidoSwap v0.2.0 — RGB Is Now Live on Mainnet](https://kaleidoswap.com/blog/kaleidoswap-v020) (2025-07-23)
+- [RGB — Taproot Assets Lightning Atomic Swaps](https://kaleidoswap.com/blog/rgb-taproot-atomic-swaps) (2025-03-26): A protocol for trustless cross-protocol swaps between RGB20 and Taproot Assets over Lightning.
+
+---
+
 ## Links
 
 - Website: https://kaleidoswap.com
 - Documentation: https://docs.kaleidoswap.com
 - GitHub: https://github.com/kaleidoswap
+- Nostr relay: wss://relay.kaleidoswap.com
 - X/Twitter: https://x.com/kaleidoswap
 - LinkedIn: https://www.linkedin.com/company/kaleidoswap/
 - Telegram: https://t.me/kaleidoswap
