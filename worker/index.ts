@@ -5,7 +5,11 @@ export interface Env {
   ASSETS: Fetcher
   DB: D1Database
   AUDIO: R2Bucket
+  BETA_RELEASES?: R2Bucket
   TURNSTILE_SECRET: string
+  DOWNLOAD_SECRET?: string
+  FALLBACK_DOWNLOAD_URL?: string
+  BETA_RELEASE_KEY?: string
 }
 
 interface SignupBody {
@@ -162,6 +166,84 @@ async function handleBetaSignup(request: Request, env: Env): Promise<Response> {
   return json({ ok: true })
 }
 
+// Tokenized beta download: GET /dl?t=<signup_id>.<hmac>. The HMAC (hex
+// SHA-256 over the signup id string, keyed with DOWNLOAD_SECRET) is minted by
+// the beta-admin invite mailer with the same secret, so each hit is
+// attributable to a signup. Valid hits are logged to beta_downloads and served
+// the release zip from R2; while R2/the secret aren't provisioned yet we fall
+// back to FALLBACK_DOWNLOAD_URL (the legacy Proton Drive link).
+const DEFAULT_RELEASE_KEY = 'rate-extension-beta-latest.zip'
+
+async function verifyDownloadToken(token: string, secret: string): Promise<number | null> {
+  const dot = token.indexOf('.')
+  if (dot <= 0) return null
+  const idPart = token.slice(0, dot)
+  const mac = token.slice(dot + 1)
+  if (!/^\d{1,12}$/.test(idPart) || !/^[0-9a-f]{64}$/.test(mac)) return null
+  const key = await crypto.subtle.importKey(
+    'raw',
+    new TextEncoder().encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['verify']
+  )
+  const sig = new Uint8Array(mac.match(/../g)!.map((b) => parseInt(b, 16)))
+  const ok = await crypto.subtle.verify('HMAC', key, sig, new TextEncoder().encode(idPart))
+  return ok ? Number(idPart) : null
+}
+
+async function handleBetaDownload(request: Request, env: Env): Promise<Response> {
+  if (request.method !== 'GET') {
+    return new Response('Method not allowed', { status: 405, headers: { allow: 'GET' } })
+  }
+
+  const fallback = (): Response =>
+    env.FALLBACK_DOWNLOAD_URL
+      ? Response.redirect(env.FALLBACK_DOWNLOAD_URL, 302)
+      : new Response('Download unavailable', { status: 503 })
+
+  // No secret provisioned yet: tokens can't be verified, so degrade to the
+  // legacy hosted package rather than locking every recipient out.
+  if (!env.DOWNLOAD_SECRET) return fallback()
+
+  const token = new URL(request.url).searchParams.get('t') ?? ''
+  const signupId = await verifyDownloadToken(token, env.DOWNLOAD_SECRET)
+  if (signupId === null) return new Response('Forbidden', { status: 403 })
+
+  try {
+    const row = await env.DB.prepare('SELECT campaign_id FROM beta_signups WHERE id = ?1')
+      .bind(signupId)
+      .first<{ campaign_id: string | null }>()
+    await env.DB.prepare(
+      `INSERT INTO beta_downloads (signup_id, campaign_id, user_agent, ip)
+       VALUES (?1, ?2, ?3, ?4)`
+    )
+      .bind(
+        signupId,
+        row?.campaign_id ?? null,
+        request.headers.get('user-agent') ?? '',
+        request.headers.get('cf-connecting-ip')
+      )
+      .run()
+  } catch (err) {
+    // Tracking must never block the download itself.
+    console.error('[dl] failed to record download', err)
+  }
+
+  const key = env.BETA_RELEASE_KEY || DEFAULT_RELEASE_KEY
+  const object = env.BETA_RELEASES ? await env.BETA_RELEASES.get(key) : null
+  if (!object) return fallback()
+
+  const headers = new Headers()
+  object.writeHttpMetadata(headers)
+  headers.set('etag', object.httpEtag)
+  headers.set('content-type', object.httpMetadata?.contentType ?? 'application/zip')
+  headers.set('content-length', String(object.size))
+  headers.set('content-disposition', `attachment; filename="${key}"`)
+  headers.set('cache-control', 'no-store')
+  return new Response(object.body, { status: 200, headers })
+}
+
 async function fetchIndexHtml(request: Request, env: Env): Promise<string | null> {
   const indexRes = await env.ASSETS.fetch(new Request(new URL('/', request.url).toString()))
   if (!indexRes.ok) return null
@@ -283,6 +365,10 @@ export default {
 
     if (url.pathname === '/api/beta-signup') {
       return handleBetaSignup(request, env)
+    }
+
+    if (url.pathname === '/dl') {
+      return handleBetaDownload(request, env)
     }
 
     if (url.pathname.startsWith(AUDIO_PREFIX)) {
