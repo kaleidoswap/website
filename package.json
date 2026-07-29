@@ -9,8 +9,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "prebuild": "node scripts/generate-sitemap.mjs",
+    "prebuild": "node scripts/generate-sitemap.mjs && node scripts/generate-media-kit-zip.mjs",
     "sitemap": "node scripts/generate-sitemap.mjs",
+    "media-kit:zip": "node scripts/generate-media-kit-zip.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
@@ -52,6 +53,7 @@
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.7.0",
     "@vitest/coverage-v8": "^4.1.10",
+    "archiver": "^7.0.1",
     "autoprefixer": "^10.5.4",
     "class-variance-authority": "^0.7.1",
     "eslint": "^9.39.5",

@@ -9,6 +9,7 @@ const Products = lazy(() => import('@/pages/Products').then((m) => ({ default: m
 const Downloads = lazy(() => import('@/pages/Downloads').then((m) => ({ default: m.Downloads })))
 const Privacy = lazy(() => import('@/pages/Privacy').then((m) => ({ default: m.Privacy })))
 const Terms = lazy(() => import('@/pages/Terms').then((m) => ({ default: m.Terms })))
+const MediaKit = lazy(() => import('@/pages/MediaKit').then((m) => ({ default: m.MediaKit })))
 const NotFound = lazy(() => import('@/pages/NotFound').then((m) => ({ default: m.NotFound })))
 
 // Blog pages
@@ -56,6 +57,7 @@ const AnimatedRoutes = () => {
           <Route path="/downloads" element={<Downloads />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/media-kit" element={<MediaKit />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
