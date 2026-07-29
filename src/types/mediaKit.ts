@@ -17,6 +17,9 @@ export interface LogoAsset {
 export interface ScreenshotAsset {
   id: string
   name: string
+  /** Lightweight WebP shown on the page — see scripts/generate-image-previews.mjs */
+  preview: string
+  /** Full-resolution original, offered for download */
   path: string
 }
 
@@ -24,6 +27,9 @@ export interface TeamMember {
   id: string
   name: string
   role: string
+  /** Lightweight WebP shown on the page — see scripts/generate-image-previews.mjs */
+  photoPreview: string
+  /** Full-resolution original, offered for download and bundled in the media-kit zip */
   photo: string
   bio: string
   bioDoc: string
@@ -49,4 +55,5 @@ export interface ConferenceTalk {
 export interface FactSheetEntry {
   label: string
   value: string
+  url?: string
 }

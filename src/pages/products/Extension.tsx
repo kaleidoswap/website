@@ -11,13 +11,14 @@ import {
   Puzzle,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
-const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.svg'
+const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.webp'
 const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
 const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
 const sparkLogo = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
 const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
 const nostrLogo = '/logos/protocol-logos/nostr/nostr-logo.svg'
 import { Helmet } from 'react-helmet-async'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -235,9 +236,11 @@ export const Extension = () => {
       </section>
 
       {/* Features */}
-      <section className="py-14 sm:py-20">
+      <section id="features" className="py-14 sm:py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{t('Non-Custodial Bitcoin Wallet Extension')}</h2>
+          <AnchorHeading id="features" className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
+            {t('Non-Custodial Bitcoin Wallet Extension')}
+          </AnchorHeading>
           <p className="text-slate-400 text-base sm:text-lg mb-8 sm:mb-12 max-w-2xl leading-relaxed">
             {t('Interact with every Bitcoin layer using a single seed you fully control.')}
           </p>
@@ -257,9 +260,11 @@ export const Extension = () => {
       </section>
 
       {/* Supported Protocols */}
-      <section className="py-14 sm:py-20">
+      <section id="protocols" className="py-14 sm:py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">{t('Six Protocols, One Extension')}</h2>
+          <AnchorHeading id="protocols" className="text-2xl sm:text-3xl font-bold text-center mb-3 sm:mb-4">
+            {t('Six Protocols, One Extension')}
+          </AnchorHeading>
           <p className="text-slate-400 text-base sm:text-lg text-center mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
             {t('The KaleidoSwap Extension connects to Bitcoin layers through a pluggable protocol adapter architecture. No more switching between wallets.')}
           </p>
@@ -290,11 +295,13 @@ export const Extension = () => {
       </section>
 
       {/* Sovereignty */}
-      <section className="py-14 sm:py-20">
+      <section id="sovereignty" className="py-14 sm:py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
           <div className="grid md:grid-cols-2 gap-6 md:gap-8 items-center">
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{t('Sovereignty First')}</h2>
+                <AnchorHeading id="sovereignty" className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
+                  {t('Sovereignty First')}
+                </AnchorHeading>
                 <p className="text-slate-400 text-sm sm:text-base mb-5 sm:mb-6 leading-relaxed">
                   {t('Self-custodial by design. Your seed never leaves the extension, your traffic never leaves your machine. No accounts required.')}
                 </p>
@@ -333,9 +340,11 @@ export const Extension = () => {
       </section>
 
       {/* Get Started */}
-      <section className="py-14 sm:py-20">
+      <section id="get-started" className="py-14 sm:py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-5 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">{t('Get Started')}</h2>
+          <AnchorHeading id="get-started" className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">
+            {t('Get Started')}
+          </AnchorHeading>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 max-w-4xl mx-auto">
             {[

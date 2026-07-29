@@ -16,7 +16,9 @@ import {
   Users,
 } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -52,12 +54,16 @@ const useCopy = () => {
   return { copiedId, copy }
 }
 
+// `id` is passed explicitly rather than slugified from `title`: titles go through
+// t(), so deriving the anchor would change it per locale and break shared links.
 const SectionHeading = ({
   icon: Icon,
+  id,
   title,
   subtitle,
 }: {
   icon: typeof Palette
+  id: string
   title: string
   subtitle: string
 }) => {
@@ -68,7 +74,9 @@ const SectionHeading = ({
         <div className="p-3 rounded-xl bg-primary-500/10 text-primary-400">
           <Icon className="w-6 h-6" />
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold">{t(title)}</h2>
+        <AnchorHeading id={id} className="text-3xl md:text-4xl font-bold">
+          {t(title)}
+        </AnchorHeading>
       </div>
       <p className="text-slate-400 max-w-2xl">{t(subtitle)}</p>
     </div>
@@ -77,8 +85,10 @@ const SectionHeading = ({
 
 const iconActionClass =
   'h-8 px-3 gap-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-colors flex items-center justify-center text-sm'
-const iconActionActiveClass =
-  'h-8 px-3 gap-2 rounded-lg bg-white/5 border border-primary-400/50 text-primary-400 transition-colors flex items-center justify-center text-sm'
+const iconOnlyActionClass =
+  'w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-colors flex items-center justify-center shrink-0'
+const iconOnlyActionActiveClass =
+  'w-8 h-8 rounded-lg bg-white/5 border border-primary-400/50 text-primary-400 transition-colors flex items-center justify-center shrink-0'
 
 export const MediaKit = () => {
   const { t } = useTranslation()
@@ -136,69 +146,90 @@ export const MediaKit = () => {
       </section>
 
       {/* About / Boilerplate */}
-      <section className="py-16">
+      <section id="about" className="py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionHeading
               icon={Newspaper}
+              id="about"
               title="About KaleidoSwap"
               subtitle="Official boilerplate copy, ready to paste into your article."
             />
           </AnimateIn>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-            {[
-              { id: 'short', label: 'Short version', text: BOILERPLATE_SHORT },
-              { id: 'full', label: 'Extended version', text: BOILERPLATE_FULL },
-            ].map((block, i) => (
-              <AnimateIn key={block.id} variant="fade-up" delay={i * 120}>
-                <div className="glass-card rounded-2xl p-8 h-full flex flex-col">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{t(block.label)}</span>
-                    <button
-                      onClick={() => copy(block.id, block.text)}
-                      className={copiedId === block.id ? iconActionActiveClass : iconActionClass}
-                    >
-                      {copiedId === block.id ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 shrink-0" />
-                          <span>{t('Copied')}</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5 shrink-0" />
-                          <span>{t('Copy')}</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  <p className="text-slate-300 leading-relaxed">{block.text}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6 items-start">
+            <AnimateIn variant="fade-up" className="flex flex-col gap-6">
+              <div className="glass-card rounded-2xl p-8">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('Short version')}</span>
+                  <button
+                    onClick={() => copy('short', BOILERPLATE_SHORT)}
+                    aria-label={copiedId === 'short' ? t('Copied') : t('Copy')}
+                    title={copiedId === 'short' ? t('Copied') : t('Copy')}
+                    className={copiedId === 'short' ? iconOnlyActionActiveClass : iconOnlyActionClass}
+                  >
+                    {copiedId === 'short' ? (
+                      <Check className="w-3.5 h-3.5" />
+                    ) : (
+                      <Copy className="w-3.5 h-3.5" />
+                    )}
+                  </button>
                 </div>
-              </AnimateIn>
-            ))}
-          </div>
-          <AnimateIn variant="fade-up" delay={200}>
-            <div className="glass-card rounded-2xl p-8">
-              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-6">{t('Fact Sheet')}</span>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 divide-y divide-white/5 md:divide-y-0">
-                {factSheet.map((entry) => (
-                  <div key={entry.label} className="flex gap-4 py-3 border-b border-white/5">
-                    <span className="w-32 shrink-0 text-sm font-medium text-slate-500">{t(entry.label)}</span>
-                    <span className="text-sm text-slate-300">{entry.value}</span>
-                  </div>
-                ))}
+                <p className="text-slate-300 leading-relaxed">{BOILERPLATE_SHORT}</p>
               </div>
-            </div>
-          </AnimateIn>
+              <div className="glass-card rounded-2xl p-8">
+                <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-6">{t('Fact Sheet')}</span>
+                <div className="divide-y divide-white/5">
+                  {factSheet.map((entry) => (
+                    <div key={entry.label} className="flex items-center gap-4 py-3">
+                      <span className="w-32 shrink-0 text-sm font-medium text-slate-500">{t(entry.label)}</span>
+                      <span className="flex-1 text-sm text-slate-300">{entry.value}</span>
+                      {entry.url && (
+                        <Link
+                          to={entry.url}
+                          aria-label={t('Read article')}
+                          title={t('Read article')}
+                          className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:border-white/20 transition-colors flex items-center justify-center shrink-0"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </Link>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </AnimateIn>
+            <AnimateIn variant="fade-up" delay={120}>
+              <div className="glass-card rounded-2xl p-8 h-full flex flex-col">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{t('Extended version')}</span>
+                  <button
+                    onClick={() => copy('full', BOILERPLATE_FULL)}
+                    aria-label={copiedId === 'full' ? t('Copied') : t('Copy')}
+                    title={copiedId === 'full' ? t('Copied') : t('Copy')}
+                    className={copiedId === 'full' ? iconOnlyActionActiveClass : iconOnlyActionClass}
+                  >
+                    {copiedId === 'full' ? (
+                      <Check className="w-3.5 h-3.5" />
+                    ) : (
+                      <Copy className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                </div>
+                <p className="text-slate-300 leading-relaxed">{BOILERPLATE_FULL}</p>
+              </div>
+            </AnimateIn>
+          </div>
         </div>
       </section>
 
       {/* Logos */}
-      <section className="py-16 relative overflow-hidden">
+      <section id="logos" className="py-16 relative overflow-hidden scroll-mt-24">
         <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-secondary-500/10 rounded-full blur-[120px] -z-10" />
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionHeading
               icon={ImageIcon}
+              id="logos"
               title="Logos"
               subtitle="All lockups are designed for dark backgrounds. Download the version that fits your layout."
             />
@@ -241,11 +272,12 @@ export const MediaKit = () => {
       </section>
 
       {/* Colors & Typography */}
-      <section className="py-16">
+      <section id="colors-typography" className="py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionHeading
               icon={Palette}
+              id="colors-typography"
               title="Colors & Typography"
               subtitle="The official palette and typeface. Click any swatch to copy its hex value."
             />
@@ -270,16 +302,22 @@ export const MediaKit = () => {
                   />
                   <h3 className="text-sm font-bold mb-0.5">{color.name}</h3>
                   <p className="text-xs text-slate-500 mb-2 min-h-[2rem] line-clamp-2">{t(color.usage)}</p>
-                  <span className="flex items-center gap-1.5 text-xs font-mono text-slate-400 group-hover:text-white transition-colors">
+                  <span
+                    className={
+                      copiedId === color.hex
+                        ? 'inline-flex items-center gap-2 h-8 px-3 rounded-lg bg-white/5 border border-primary-400/50 text-primary-400 text-xs font-mono transition-colors'
+                        : 'inline-flex items-center gap-2 h-8 px-3 rounded-lg bg-white/5 border border-white/10 text-slate-400 text-xs font-mono transition-colors group-hover:text-white group-hover:border-white/20'
+                    }
+                  >
                     {copiedId === color.hex ? (
                       <>
-                        <Check className="w-3 h-3 text-primary-400" />
-                        <span className="text-primary-400">{t('Copied')}</span>
+                        <Check className="w-3.5 h-3.5 shrink-0" />
+                        <span>{t('Copied')}</span>
                       </>
                     ) : (
                       <>
-                        <Copy className="w-3 h-3" />
-                        {color.hex}
+                        <Copy className="w-3.5 h-3.5 shrink-0" />
+                        <span>{color.hex}</span>
                       </>
                     )}
                   </span>
@@ -294,7 +332,7 @@ export const MediaKit = () => {
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-bold mb-1">Satoshi</h3>
-                <p className="text-slate-400 text-sm">
+                <p className="text-slate-400 text-sm max-w-[78ch] text-pretty">
                   {t('Brand typeface across all platforms. Bold for headlines, Medium for UI labels, Regular for body copy. Free for commercial use under the SIL OFL 1.1 license.')}
                 </p>
               </div>
@@ -310,12 +348,13 @@ export const MediaKit = () => {
       </section>
 
       {/* Screenshots */}
-      <section className="py-16 relative overflow-hidden">
+      <section id="screenshots" className="py-16 relative overflow-hidden scroll-mt-24">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary-500/10 rounded-full blur-[120px] -z-10" />
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionHeading
               icon={ImageIcon}
+              id="screenshots"
               title="Product Screenshots"
               subtitle="High-resolution screenshots of the KaleidoSwap products, free to use in coverage."
             />
@@ -326,13 +365,12 @@ export const MediaKit = () => {
                 <div className="glass-card rounded-2xl p-4 h-full flex flex-col">
                   <div className="flex items-center justify-between px-1 mb-4">
                     <h3 className="font-bold">{t(shot.name)}</h3>
-                    <a href={shot.path} download className={iconActionClass}>
-                      <Download className="w-3.5 h-3.5 shrink-0" />
-                      <span>PNG</span>
+                    <a href={shot.path} download aria-label="PNG" title="PNG" className={iconOnlyActionClass}>
+                      <Download className="w-3.5 h-3.5" />
                     </a>
                   </div>
                   <div className="rounded-xl overflow-hidden border border-white/5 h-64 sm:h-80">
-                    <img src={shot.path} alt={`${shot.name} screenshot`} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={shot.preview} alt={`${shot.name} screenshot`} className="w-full h-full object-cover" loading="lazy" />
                   </div>
                 </div>
               </AnimateIn>
@@ -342,11 +380,12 @@ export const MediaKit = () => {
       </section>
 
       {/* Team */}
-      <section className="py-16">
+      <section id="team" className="py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionHeading
               icon={Users}
+              id="team"
               title="Team"
               subtitle="Official bios and press photos of the KaleidoSwap team."
             />
@@ -357,7 +396,7 @@ export const MediaKit = () => {
                 <div className="glass-card rounded-2xl p-8 h-full">
                   <div className="flex items-start gap-5 mb-5">
                     <img
-                      src={member.photo}
+                      src={member.photoPreview}
                       alt={member.name}
                       className="w-24 h-24 rounded-2xl object-cover border border-white/10 shrink-0"
                       loading="lazy"
@@ -406,18 +445,14 @@ export const MediaKit = () => {
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <button
                       onClick={() => copy(member.id, member.bio)}
-                      className={copiedId === member.id ? iconActionActiveClass : iconActionClass}
+                      aria-label={t('Copy Short Bio')}
+                      title={t('Copy Short Bio')}
+                      className={copiedId === member.id ? iconOnlyActionActiveClass : iconOnlyActionClass}
                     >
                       {copiedId === member.id ? (
-                        <>
-                          <Check className="w-3.5 h-3.5 shrink-0" />
-                          <span>{t('Copied')}</span>
-                        </>
+                        <Check className="w-3.5 h-3.5" />
                       ) : (
-                        <>
-                          <Copy className="w-3.5 h-3.5 shrink-0" />
-                          <span>{t('Copy Short Bio')}</span>
-                        </>
+                        <Copy className="w-3.5 h-3.5" />
                       )}
                     </button>
                     <div className="flex flex-wrap items-center gap-2">
@@ -439,11 +474,12 @@ export const MediaKit = () => {
       </section>
 
       {/* Press Coverage */}
-      <section className="py-16">
+      <section id="press-coverage" className="py-16 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionHeading
               icon={Newspaper}
+              id="press-coverage"
               title="Press Coverage"
               subtitle="Selected articles and features about KaleidoSwap."
             />
@@ -478,12 +514,13 @@ export const MediaKit = () => {
       </section>
 
       {/* Conference Talks */}
-      <section className="py-16 relative overflow-hidden">
+      <section id="conference-talks" className="py-16 relative overflow-hidden scroll-mt-24">
         <div className="absolute top-0 right-1/4 w-[500px] h-[400px] bg-secondary-500/10 rounded-full blur-[120px] -z-10" />
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <SectionHeading
               icon={Mic}
+              id="conference-talks"
               title="Conference Talks"
               subtitle="Where the team has presented KaleidoSwap and sovereign trading on Bitcoin L2s."
             />
@@ -519,7 +556,7 @@ export const MediaKit = () => {
       </section>
 
       {/* Press Contact CTA */}
-      <section className="py-20 bg-gradient-to-br from-secondary-500/5 to-primary-500/5">
+      <section id="press-contact" className="py-20 bg-gradient-to-br from-secondary-500/5 to-primary-500/5 scroll-mt-24">
         <AnimateIn variant="scale" className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Write about KaleidoSwap')}</h2>
           <p className="text-slate-400 mb-8 text-base sm:text-lg">

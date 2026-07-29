@@ -3,6 +3,7 @@ import { ChevronDown } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet-async'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 
 // Static translation keys — defined outside any component so the array is
 // never recreated. `t()` is applied once inside the component via useMemo.
@@ -93,7 +94,7 @@ export const FAQ = () => {
   const mid = Math.ceil(faqItems.length / 2)
 
   return (
-    <section className="pt-16 pb-32 relative">
+    <section id="faq" className="pt-16 pb-32 relative scroll-mt-24">
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify(faqJsonLd)}
@@ -101,9 +102,9 @@ export const FAQ = () => {
       </Helmet>
       <div className="max-w-7xl mx-auto px-6">
         <AnimateIn variant="fade-up" className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <AnchorHeading id="faq" className="text-3xl md:text-4xl font-bold mb-4">
             {t('Frequently Asked Questions')}
-          </h2>
+          </AnchorHeading>
 
         </AnimateIn>
 

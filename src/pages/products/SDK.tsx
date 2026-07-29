@@ -1,6 +1,7 @@
 // src/pages/products/SDK.tsx
 import { Code, Package, BookOpen, Terminal, ArrowRight, ExternalLink, Check, Copy } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -423,10 +424,12 @@ export const SDK = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20">
+      <section id="features" className="py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12 max-w-2xl">
-            <h2 className="text-4xl font-bold mb-4">{t('Bitcoin Swaps for Wallets and Agents')}</h2>
+            <AnchorHeading id="features" className="text-4xl font-bold mb-4">
+              {t('Bitcoin Swaps for Wallets and Agents')}
+            </AnchorHeading>
             <p className="text-slate-400 text-lg leading-relaxed">
               {t('Ship atomic swaps faster with fully typed SDKs, live quote streaming, and an open source core you can audit and extend.')}
             </p>
@@ -446,12 +449,14 @@ export const SDK = () => {
       </section>
 
       {/* Use Cases with Code Examples */}
-      <section className="py-20">
+      <section id="use-cases" className="py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
 
           {/* Header row: title left, tabs right */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-            <h2 className="text-4xl font-bold">{t('KaleidoSDK Use Cases')}</h2>
+            <AnchorHeading id="use-cases" className="text-4xl font-bold">
+              {t('KaleidoSDK Use Cases')}
+            </AnchorHeading>
             <div className="flex gap-2 shrink-0">
               {useCases.map((useCase, index) => (
                 <button
@@ -505,12 +510,14 @@ export const SDK = () => {
       </section>
 
       {/* API Reference */}
-      <section className="py-32">
+      <section id="api-reference" className="py-32 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <div className="glass-card rounded-2xl p-8 md:p-12 overflow-hidden">
             <div className="grid md:grid-cols-2 gap-8 items-center min-w-0">
               <div className="min-w-0">
-                <h2 className="text-3xl font-bold mb-4">{t('API Reference')}</h2>
+                <AnchorHeading id="api-reference" className="text-3xl font-bold mb-4">
+                  {t('API Reference')}
+                </AnchorHeading>
                 <p className="text-slate-400 mb-6">
                   {t('Complete API documentation with typed models auto-generated from OpenAPI specs for TypeScript and Python.')}
                 </p>

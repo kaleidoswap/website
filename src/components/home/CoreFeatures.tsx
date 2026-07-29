@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { coreFeatures } from '@/constants/home'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 
 const glowColors: Record<string, string> = {
   primary: 'rgba(34, 197, 94, 0.08)',
@@ -21,10 +22,12 @@ export const CoreFeatures = () => {
   }
 
   return (
-    <section className="py-28 relative overflow-hidden">
+    <section id="features" className="py-28 relative overflow-hidden scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6">
         <AnimateIn variant="fade-up" className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Trade Bitcoin Assets Privately')}</h2>
+          <AnchorHeading id="features" className="text-3xl md:text-4xl font-bold mb-4">
+            {t('Trade Bitcoin Assets Privately')}
+          </AnchorHeading>
           <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto">{t('Built for sovereigns who demand security, speed, and privacy.')}</p>
         </AnimateIn>
 

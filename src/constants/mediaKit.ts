@@ -15,18 +15,23 @@ export const MEDIA_KIT_ZIP = '/media-kit/kaleidoswap-media-kit.zip'
 
 // Boilerplate texts are meant to be copied verbatim by journalists — kept in English only.
 export const BOILERPLATE_SHORT =
-  'KaleidoSwap is a non-custodial trading platform for Bitcoin Layer 2s. It enables trustless atomic swaps of bitcoin, stablecoins, and RGB assets across Lightning, RGB, Spark, and Arkade — no intermediaries, no custody, no bridges.'
+  'KaleidoSwap is a full-stack decentralized exchange. It enables trustless atomic swaps of bitcoin, stablecoins, and RGB assets across all Bitcoin layers.'
 
 export const BOILERPLATE_FULL =
-  'KaleidoSwap is building the integration and liquidity layer for Bitcoin-native atomic swaps. Its vertically integrated stack — a multi-language SDK, a desktop app bundling a full RGB Lightning node, a browser extension, and market-maker software — enables anyone to exchange Bitcoin-based assets freely, privately, and without intermediaries. Trades use an RFQ (Request for Quote) model where market makers compete on spread, and settle atomically via Lightning HTLCs. In September 2025 the team executed the first-ever atomic swap of RGB assets on Lightning mainnet. Everything KaleidoSwap ships is open source. The project won CypherTank, the Bitcoin-native accelerator in the Plan ₿ Lugano ecosystem, securing a CHF 250K pre-seed investment from Bitfinex Ventures.'
+  'KaleidoSwap is building the liquidity layer for Bitcoin-native atomic swaps, enabling anyone to exchange Bitcoin-based assets freely, privately, and without intermediaries. Its vertically integrated stack spans end-user applications such as the Desktop App and the Browser Extension, a multi-language SDK, AI tools for autonomous AI agents and local AI brains, and market-maker software. Trades use different engines: RFQ (Request for Quote) model where market makers compete on spread, P2P via Nostr, or intent-based using covenants. Everything KaleidoSwap ships is open source. The team is made up of pioneers in the Bitcoin L2 ecosystem, with previous contributions in other Bitcoin open source projects and educational initiatives. The company raised a $200K pre-seed investment from Fulgur Ventures and Bitfinex Ventures, and won several hackathons, including the first CypherTank edition, which guaranteed $300K in extra funding.'
 
 export const factSheet: FactSheetEntry[] = [
   { label: 'One-liner', value: 'Trustless Swaps on Bitcoin Layers' },
-  { label: 'Industry first', value: 'First-ever atomic swap of RGB assets on Lightning mainnet (Sep 2025)' },
-  { label: 'Funding', value: 'CHF 250K pre-seed from Bitfinex Ventures (CypherTank winner, Oct 2025)' },
-  { label: 'Protocols', value: 'Bitcoin, Lightning, RGB, Spark, Arkade — Liquid & Taproot Assets planned' },
-  { label: 'Products', value: 'Desktop App, Browser Extension, KaleidoSDK, KaleidoCLI, KaleidoAgent' },
-  { label: 'Open source', value: 'github.com/kaleidoswap' },
+  {
+    label: 'Industry first',
+    value: 'First-ever atomic swap of RGB assets on Lightning mainnet (Sep 2025)',
+    url: '/blog/first-rgb-swap-mainnet',
+  },
+  {
+    label: 'Funding',
+    value: '$200K pre-seed round from Fulgur Ventures and Bitfinex Ventures; $300K extra funding for winning the first CypherTank edition, October 2025.',
+    url: '/blog/pre-seed-investment',
+  },
 ]
 
 export const brandColors: BrandColor[] = [
@@ -91,8 +96,18 @@ export const logoRules: string[] = [
 ]
 
 export const screenshots: ScreenshotAsset[] = [
-  { id: 'desktop', name: 'Desktop App', path: '/images/desktop-app-screenshot-v2.png' },
-  { id: 'extension', name: 'Browser Extension', path: '/images/extension-screenshot.png' },
+  {
+    id: 'desktop',
+    name: 'Desktop App',
+    preview: '/images/desktop-app-screenshot-v2-preview.webp',
+    path: '/images/desktop-app-screenshot-v2.png',
+  },
+  {
+    id: 'extension',
+    name: 'Browser Extension',
+    preview: '/images/extension-screenshot-preview.webp',
+    path: '/images/extension-screenshot.png',
+  },
 ]
 
 // Bios are official press copy — kept in English only.
@@ -101,6 +116,7 @@ export const team: TeamMember[] = [
     id: 'walter-maffione',
     name: 'Walter Maffione',
     role: 'Co-Founder & CEO',
+    photoPreview: '/images/team/walter-maffione-preview.webp',
     photo: '/images/team/walter-maffione.jpg',
     bio: 'Founder and CEO with 6+ years in software engineering. RGB Lightning Node core contributor, professor of Lightning Network and Layer 2 technologies at Politecnico di Torino, scaled AI infrastructure at Addfor and Intesa, and former R&D lead at BitPolito. Leads KaleidoSwap’s vision, product strategy, and technical architecture.',
     bioDoc: '/media-kit/bios/walter-maffione-bio.pdf',
@@ -112,6 +128,7 @@ export const team: TeamMember[] = [
     id: 'manuel-cumerlato',
     name: 'Manuel Cumerlato',
     role: 'Chief Operation Officer',
+    photoPreview: '/images/team/manuel-cumerlato-preview.webp',
     photo: '/images/team/manuel-cumerlato.jpg',
     bio: 'Italian-Hungarian sales and BD leader, combining enterprise-grade commercial experience with bitcoin-native execution. Managed major enterprise and public-sector accounts at Sophos. Bitcoiner since 2015 and a regular presence at international conferences. Leads sales and BD at KaleidoSwap while supporting operational execution as the company scale.',
     bioDoc: '/media-kit/bios/manuel-cumerlato-bio.pdf',
@@ -122,6 +139,7 @@ export const team: TeamMember[] = [
     id: 'emile-jellinek',
     name: 'Emile Jellinek',
     role: 'Chief Growth Officer',
+    photoPreview: '/images/team/emile-jellinek-preview.webp',
     photo: '/images/team/emile-jellinek.jpg',
     bio: 'Italian-Dutch founder based in Turin, with a background spanning product design and digital marketing. Co-founded multiple ventures across Bitcoin and AI. Actively involved in Bitcoin educational projects like BitPolito and Bitcoin Torino, speaking in many international Bitcoin conferences. At KaleidoSwap, responsible for strategy, growth, and design.',
     bioDoc: '/media-kit/bios/emile-jellinek-bio.pdf',
@@ -133,6 +151,7 @@ export const team: TeamMember[] = [
     id: 'mo-harchegani',
     name: 'Mo Harchegani',
     role: 'Software Engineer',
+    photoPreview: '/images/team/mo-harchegani-preview.webp',
     photo: '/images/team/mo-harchegani.jpg',
     bio: 'Iranian engineer spanning full-stack development, infrastructure engineering, and Bitcoin tech stack. Lightning Network team lead at BitPolito and Bitcoin open source projects contributor. At KaleidoSwap, leads development of the frontend and TypeScript SDK, builds CI/CD pipelines, and manages production infrastructure.',
     bioDoc: '/media-kit/bios/mo-harchegani-bio.pdf',
@@ -144,6 +163,7 @@ export const team: TeamMember[] = [
     id: 'arshia-ramezan',
     name: 'Arshia Ramezan',
     role: 'Software Engineer',
+    photoPreview: '/images/team/arshia-ramezan-preview.webp',
     photo: '/images/team/arshia-ramezan.jpg',
     bio: 'Iranian software engineer focused on Bitcoin protocol, backend architecture, and the services layer. Active open-source contributor to Lightning Network and other Layer 2 technologies. Winner of multiple hackathons, including the AI + Bitcoin Plan ₿ Hackathon. At KaleidoSwap, owns the backend and services layer end-to-end.',
     bioDoc: '/media-kit/bios/arshia-ramezan-bio.pdf',
