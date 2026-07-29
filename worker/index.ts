@@ -168,10 +168,9 @@ async function handleBetaSignup(request: Request, env: Env): Promise<Response> {
 
 // Tokenized beta download: GET /dl?t=<signup_id>.<hmac>. The HMAC (hex
 // SHA-256 over the signup id string, keyed with DOWNLOAD_SECRET) is minted by
-// the beta-admin invite mailer with the same secret, so each hit is
-// attributable to a signup. Valid hits are logged to beta_downloads and served
-// the release zip from R2; while R2/the secret aren't provisioned yet we fall
-// back to FALLBACK_DOWNLOAD_URL (the legacy Proton Drive link).
+// the invite mailer with the same secret, so each hit is attributable to a
+// signup. Valid hits are logged to beta_downloads and served the release zip
+// from R2, with FALLBACK_DOWNLOAD_URL as the legacy fallback.
 const DEFAULT_RELEASE_KEY = 'rate-extension-beta-latest.zip'
 
 async function verifyDownloadToken(token: string, secret: string): Promise<number | null> {
