@@ -1,5 +1,6 @@
 import postsMeta from './posts-meta.json'
 import { STATIC_PAGE_META } from '../src/constants/pageMeta'
+import { handleEmailWebhook, handleUnsubscribe } from './email'
 
 export interface Env {
   ASSETS: Fetcher
@@ -10,6 +11,8 @@ export interface Env {
   DOWNLOAD_SECRET?: string
   FALLBACK_DOWNLOAD_URL?: string
   BETA_RELEASE_KEY?: string
+  UNSUBSCRIBE_SECRET?: string
+  RESEND_WEBHOOK_SECRET?: string
 }
 
 interface SignupBody {
@@ -369,6 +372,16 @@ export default {
     // accept /dl and /dl/ — mail clients and link rewriters append the slash
     if (url.pathname === '/dl' || url.pathname === '/dl/') {
       return handleBetaDownload(request, env)
+    }
+
+    // Public, unauthenticated email plumbing (see worker/email.ts). Same
+    // trailing-slash tolerance as /dl, for the same reason.
+    if (url.pathname === '/unsubscribe' || url.pathname === '/unsubscribe/') {
+      return handleUnsubscribe(request, env)
+    }
+
+    if (url.pathname === '/api/resend-webhook') {
+      return handleEmailWebhook(request, env)
     }
 
     if (url.pathname.startsWith(AUDIO_PREFIX)) {
