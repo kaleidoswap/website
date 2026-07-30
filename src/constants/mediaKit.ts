@@ -99,14 +99,21 @@ export const screenshots: ScreenshotAsset[] = [
   {
     id: 'desktop',
     name: 'Desktop App',
-    preview: '/images/desktop-app-screenshot-v2-preview.webp',
-    path: '/images/desktop-app-screenshot-v2.png',
+    preview: '/images/desktop-app-screenshot-v3-preview.webp',
+    path: '/images/desktop-app-screenshot-v3.png',
+  },
+  {
+    id: 'kaleidomind',
+    name: 'KaleidoMind',
+    preview: '/images/kaleidomind-screenshot-preview.webp',
+    path: '/images/kaleidomind-screenshot.png',
   },
   {
     id: 'extension',
     name: 'Browser Extension',
-    preview: '/images/extension-screenshot-preview.webp',
-    path: '/images/extension-screenshot.png',
+    preview: '/images/extension-screenshot-v2-preview.webp',
+    path: '/images/extension-screenshot-v2.png',
+    portrait: true,
   },
 ]
 

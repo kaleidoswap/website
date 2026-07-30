@@ -359,9 +359,23 @@ export const MediaKit = () => {
               subtitle="High-resolution screenshots of the KaleidoSwap products, free to use in coverage."
             />
           </AnimateIn>
+          {/*
+            The portrait screenshot takes the right column outright, so its height
+            matches the two landscape cards stacked in the left column.
+
+            Every frame is filled edge to edge — no letterboxing. The landscape shots
+            sit just wide of a 3:2 frame, so they keep their full height and lose a
+            sliver off each side; the portrait shot is anchored to the top and loses
+            its empty lower half.
+          */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {screenshots.map((shot, i) => (
-              <AnimateIn key={shot.id} variant="fade-up" delay={i * 120}>
+              <AnimateIn
+                key={shot.id}
+                variant="fade-up"
+                delay={i * 120}
+                className={shot.portrait ? 'md:col-start-2 md:row-start-1 md:row-span-2' : undefined}
+              >
                 <div className="glass-card rounded-2xl p-4 h-full flex flex-col">
                   <div className="flex items-center justify-between px-1 mb-4">
                     <h3 className="font-bold">{t(shot.name)}</h3>
@@ -369,8 +383,24 @@ export const MediaKit = () => {
                       <Download className="w-3.5 h-3.5" />
                     </a>
                   </div>
-                  <div className="rounded-xl overflow-hidden border border-white/5 h-64 sm:h-80">
-                    <img src={shot.preview} alt={`${shot.name} screenshot`} className="w-full h-full object-cover" loading="lazy" />
+                  {/*
+                    The image is absolutely positioned so it never contributes intrinsic
+                    height: the portrait frame stretches to the two rows it spans instead
+                    of pushing them taller.
+                  */}
+                  <div
+                    className={
+                      shot.portrait
+                        ? 'relative rounded-xl overflow-hidden border border-white/5 aspect-[3/4] md:aspect-auto md:flex-1 md:min-h-0'
+                        : 'relative rounded-xl overflow-hidden border border-white/5 aspect-[3/2]'
+                    }
+                  >
+                    <img
+                      src={shot.preview}
+                      alt={`${shot.name} screenshot`}
+                      className={`absolute inset-0 w-full h-full object-cover ${shot.portrait ? 'object-top' : 'object-center'}`}
+                      loading="lazy"
+                    />
                   </div>
                 </div>
               </AnimateIn>

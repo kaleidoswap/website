@@ -23,16 +23,19 @@ const QUALITY = 82
 
 // Mirrors src/constants/mediaKit.ts — kept in sync manually, same as generate-media-kit-zip.mjs.
 // maxSize is the longest side of the preview, sized for the largest render on the page:
-//   team photos  -> 96x96 CSS px slot, 3x for high-DPI  = 288
-//   screenshots  -> ~572x320 CSS px slot, 2x            = 1200
+//   team photos          -> 96x96 CSS px slot, 3x for high-DPI  = 288
+//   landscape screenshots -> 566x378 CSS px slot, 2x            = 1400 (long side)
+//   portrait screenshot   -> 566x861 CSS px slot; 2x would need 1132px of width,
+//                            more than the 738px source has, so it stays native.
 const ENTRIES = [
   { src: 'images/team/walter-maffione.jpg', maxSize: 288 },
   { src: 'images/team/manuel-cumerlato.jpg', maxSize: 288 },
   { src: 'images/team/emile-jellinek.jpg', maxSize: 288 },
   { src: 'images/team/mo-harchegani.jpg', maxSize: 288 },
   { src: 'images/team/arshia-ramezan.jpg', maxSize: 288 },
-  { src: 'images/desktop-app-screenshot-v2.png', maxSize: 1200 },
-  { src: 'images/extension-screenshot.png', maxSize: 1200 },
+  { src: 'images/desktop-app-screenshot-v3.png', maxSize: 1400 },
+  { src: 'images/kaleidomind-screenshot.png', maxSize: 1400 },
+  { src: 'images/extension-screenshot-v2.png', maxSize: 1430 },
 ]
 
 const previewPathFor = (src) =>

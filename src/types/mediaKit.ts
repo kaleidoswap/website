@@ -21,6 +21,11 @@ export interface ScreenshotAsset {
   preview: string
   /** Full-resolution original, offered for download */
   path: string
+  /**
+   * Tall, phone-shaped screenshot: gets its own full-height column on /media-kit
+   * and is cropped from the bottom instead of the sides.
+   */
+  portrait?: boolean
 }
 
 export interface TeamMember {
