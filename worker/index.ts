@@ -366,7 +366,8 @@ export default {
       return handleBetaSignup(request, env)
     }
 
-    if (url.pathname === '/dl') {
+    // accept /dl and /dl/ — mail clients and link rewriters append the slash
+    if (url.pathname === '/dl' || url.pathname === '/dl/') {
       return handleBetaDownload(request, env)
     }
 
