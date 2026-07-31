@@ -2,7 +2,7 @@
 import { Button } from '@/components/common/Button'
 import { Link } from 'react-router-dom'
 import type { FooterProps } from '@/types/footer'
-const kaleidoFullLogo = '/logos/kaleidoswap-logos/kaleidoswap-full-logo.svg'
+const kaleidoFullLogo = '/logos/kaleidoswap-logos/kaleidoswap-full-logo-horizontal.svg'
 const kaleidoPictogram = '/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg'
 import { useTranslation } from 'react-i18next'
 

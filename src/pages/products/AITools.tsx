@@ -11,6 +11,7 @@ import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
 import { Button } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { footerConfig } from '@/constants/footer'
 import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { FinalCTA } from '@/components/home/FinalCTA'
@@ -648,7 +649,9 @@ export const AITools = () => {
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 shrink-0">
                     <Bot className="w-6 h-6" />
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold">{t('KaleidoAgent')}</h2>
+                  <AnchorHeading id="kaleido-agent" className="text-3xl md:text-4xl font-bold">
+                    {t('KaleidoAgent')}
+                  </AnchorHeading>
                 </div>
                 <p className="text-slate-400 leading-relaxed max-w-2xl">
                   {t("AI portfolio manager and wallet operator. Monitors allocations and manages assets, without ever taking custody.")}
@@ -758,7 +761,9 @@ export const AITools = () => {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary-400 to-secondary-600 flex items-center justify-center text-white shadow-lg shadow-secondary-500/30 shrink-0">
                   <Brain className="w-6 h-6" />
                 </div>
-                <h2 className="text-3xl md:text-4xl font-bold">{t('KaleidoMind')}</h2>
+                <AnchorHeading id="kaleido-mind" className="text-3xl md:text-4xl font-bold">
+                  {t('KaleidoMind')}
+                </AnchorHeading>
               </div>
               <p className="text-slate-400 mb-8 leading-relaxed">
                 {t('On-device AI assistant. Get a quote, build a payment, find a contact, or make a swap in plain language.')}
@@ -795,7 +800,9 @@ export const AITools = () => {
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-lg shadow-green-500/30 shrink-0">
                 <Server className="w-6 h-6" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold">{t('MCP Servers')}</h2>
+              <AnchorHeading id="mcp-servers" className="text-3xl md:text-4xl font-bold">
+                {t('MCP Servers')}
+              </AnchorHeading>
             </div>
             <p className="text-slate-400 mb-10 md:max-w-[calc((100%-1rem)/2)] leading-relaxed">
               {t('Three open source servers expose KaleidoSwap and WDK wallet operations as typed tools for any MCP-compatible client.')}
@@ -826,7 +833,9 @@ export const AITools = () => {
               <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary-400 to-secondary-600 flex items-center justify-center text-white shadow-lg shadow-secondary-500/30 shrink-0">
                 <Sparkles className="w-6 h-6" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold">{t('Skills')}</h2>
+              <AnchorHeading id="skills" className="text-3xl md:text-4xl font-bold">
+                {t('Skills')}
+              </AnchorHeading>
             </div>
             <p className="text-slate-400 mb-10 md:max-w-[calc((100%-1rem)/2)] leading-relaxed">
               {t('Self-contained SKILL.md file for specific behaviors loaded at runtime, editable without touching the runtime code.')}

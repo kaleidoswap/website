@@ -96,7 +96,7 @@ export function BlogList() {
           publisher: {
             '@type': 'Organization',
             name: 'KaleidoSwap',
-            logo: { '@type': 'ImageObject', url: 'https://kaleidoswap.com/kaleidoswap-pictogram.svg' },
+            logo: { '@type': 'ImageObject', url: 'https://kaleidoswap.com/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg' },
           },
         })}</script>
         <script type="application/ld+json">{JSON.stringify({

@@ -5,11 +5,11 @@ const kaleidoPictogram = '/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg'
 
 // Protocol logos
 const bitcoinLogo = '/logos/protocol-logos/bitcoin/bitcoin-logo-orange.svg'
-const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.svg'
+const rgbLogo = '/logos/protocol-logos/rgb/rgb-logo.webp'
 const sparkAsterisk = '/logos/protocol-logos/spark/Asterisk/Spark Asterisk White.svg'
 const arkadeLogo = '/logos/protocol-logos/arkade/arkade-logo.svg'
 const liquidLogo = '/logos/protocol-logos/liquid/logo-liquid.svg'
-const taprootLogo = '/logos/protocol-logos/taproot-assets/tapass-logo.svg'
+const taprootLogo = '/logos/protocol-logos/taproot-assets/tapass-logo.webp'
 const lightningLogo = '/logos/protocol-logos/lightning/lightning-logo.svg'
 
 interface KaleidoScopeHeroAnimationProps {

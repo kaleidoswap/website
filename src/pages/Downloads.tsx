@@ -2,6 +2,7 @@ import { useLayoutEffect, useMemo } from 'react'
 import { Download, ExternalLink, Shield, Terminal, Loader2, Key } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { Helmet } from 'react-helmet-async'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { SEO } from '@/components/common/SEO'
 import { Button } from '@/components/common/Button'
 import { Navbar } from '@/components/nav/Navbar'
@@ -243,10 +244,12 @@ export const Downloads = () => {
       </section>
 
       {/* Verification Section */}
-      <section className="pt-8 pb-16 relative overflow-hidden">
+      <section id="verify" className="pt-8 pb-16 relative overflow-hidden scroll-mt-24">
         <div className="max-w-4xl mx-auto px-6">
           <AnimateIn variant="fade-up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Verify Your Download')}</h2>
+            <AnchorHeading id="verify" className="text-3xl md:text-4xl font-bold mb-4">
+              {t('Verify Your Download')}
+            </AnchorHeading>
             <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
               {t('Every release binary is individually GPG-signed. Verify before installing.')}
             </p>
