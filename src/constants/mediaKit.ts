@@ -15,7 +15,7 @@ export const MEDIA_KIT_ZIP = '/media-kit/kaleidoswap-media-kit.zip'
 
 // Boilerplate texts are meant to be copied verbatim by journalists — kept in English only.
 export const BOILERPLATE_SHORT =
-  'KaleidoSwap is a full-stack decentralized exchange. It enables trustless atomic swaps of bitcoin, stablecoins, and RGB assets across all Bitcoin layers.'
+  'KaleidoSwap is a full-stack decentralized exchange. It enables trustless atomic swaps of bitcoin, stablecoins, and other assets across all Bitcoin layers.'
 
 export const BOILERPLATE_FULL =
   'KaleidoSwap is building the liquidity layer for Bitcoin-native atomic swaps, enabling anyone to exchange Bitcoin-based assets freely, privately, and without intermediaries. Its vertically integrated stack spans end-user applications such as the Desktop App and the Browser Extension, a multi-language SDK, AI tools for autonomous AI agents and local AI brains, and market-maker software. Trades use different engines: RFQ (Request for Quote) model where market makers compete on spread, P2P via Nostr, or intent-based using covenants. Everything KaleidoSwap ships is open source. The team is made up of pioneers in the Bitcoin L2 ecosystem, with previous contributions in other Bitcoin open source projects and educational initiatives. The company raised a $200K pre-seed investment from Fulgur Ventures and Bitfinex Ventures, and won several hackathons, including the first CypherTank edition, which guaranteed $300K in extra funding.'
