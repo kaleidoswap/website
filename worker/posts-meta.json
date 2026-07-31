@@ -1,4 +1,11 @@
 {
+  "july-2026-release-notes": {
+    "title": "July 2026: Liquid Swaps, KaleidoMind on Desktop & New Extension Beta",
+    "description": "KaleidoMind came to the Desktop App, swap engine started moving Liquid dollars, and the Browser Extension entered its second closed beta.",
+    "image": "/blog/july-2026-release-notes/july-2026-release-notes-cover-preview.jpg",
+    "imageX": "/blog/july-2026-release-notes/july-2026-release-notes-cover-preview-x.jpg",
+    "date": "2026-07-31"
+  },
   "rgb-on-liquid": {
     "title": "RGB Meets Simplicity: Programmable Seals on Liquid",
     "description": "We anchored RGB assets on Liquid, swapped across Bitcoin and Liquid with no custodian, and made the chain enforce RGB anchoring with a Simplicity covenant",
