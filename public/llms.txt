@@ -71,6 +71,7 @@ In development:
 
 ## Blog
 
+- [July 2026 Release Notes: Liquid Swaps, KaleidoMind on Desktop & New Extension Beta](https://kaleidoswap.com/blog/july-2026-release-notes) (2026-07-31): KaleidoMind shipped in Desktop App v0.5.0, the swap engine started moving L-USDT over Lightning, and the Browser Extension reached its second closed beta.
 - [RGB Meets Simplicity: Programmable Seals on Liquid](https://kaleidoswap.com/blog/rgb-on-liquid) (2026-07-13): Anchoring RGB assets on Liquid, swapping across Bitcoin and Liquid without a custodian, and enforcing RGB anchoring with a Simplicity covenant.
 - [June 2026 Release Notes: AI Agent, New Swaps Engine & Nostr Relay](https://kaleidoswap.com/blog/june-2026-release-notes) (2026-06-30)
 - [KaleidoSwap Now Runs Its Own Nostr Relay](https://kaleidoswap.com/blog/nostr-relay-launch) (2026-06-18): wss://relay.kaleidoswap.com powers wallet identity, app connections, and order discovery.
