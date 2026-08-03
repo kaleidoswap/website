@@ -1,6 +1,7 @@
 // src/pages/products/Mobile.tsx
 import { Smartphone, Fingerprint, Bell, Shield, ArrowRight, Check } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -141,9 +142,11 @@ export const Mobile = () => {
       {MOBILE_APP_LIVE && (
         <>
           {/* Features */}
-          <section className="py-20">
+          <section id="features" className="py-20 scroll-mt-24">
             <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-3xl font-bold text-center mb-12">{t('Key Features')}</h2>
+              <AnchorHeading id="features" className="text-3xl font-bold text-center mb-12">
+                {t('Key Features')}
+              </AnchorHeading>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {features.map((feature) => (
                   <div key={feature.title} className="glass-card p-6 rounded-xl">
@@ -157,9 +160,11 @@ export const Mobile = () => {
           </section>
 
           {/* How It Works */}
-          <section className="py-20">
+          <section id="how-it-works" className="py-20 scroll-mt-24">
             <div className="max-w-7xl mx-auto px-6">
-              <h2 className="text-3xl font-bold text-center mb-4">{t('How It Works')}</h2>
+              <AnchorHeading id="how-it-works" className="text-3xl font-bold text-center mb-4">
+                {t('How It Works')}
+              </AnchorHeading>
               <p className="text-base sm:text-lg text-slate-400 text-center mb-12 max-w-2xl mx-auto">
                 {t('Three simple steps to start trading')}
               </p>
@@ -183,9 +188,11 @@ export const Mobile = () => {
           </section>
 
           {/* CTA */}
-          <section className="py-20">
+          <section id="get-the-app" className="py-20 scroll-mt-24">
             <div className="max-w-4xl mx-auto px-6 text-center">
-              <h2 className="text-3xl font-bold mb-4">{t('Get the App')}</h2>
+              <AnchorHeading id="get-the-app" className="text-3xl font-bold mb-4">
+                {t('Get the App')}
+              </AnchorHeading>
               <p className="text-base sm:text-lg text-slate-400 mb-8">
                 {t('Available now for iOS and Android.')}
               </p>

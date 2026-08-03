@@ -5,6 +5,7 @@ import { PRODUCTS, DOCS, SOCIALS, GITHUB } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useAppNavigation } from '@/hooks/useNavigation'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 
 // ─── Shared token ────────────────────────────────────────────────────────────
 const CARD_BASE = 'glass-card rounded-2xl relative overflow-hidden group h-full'
@@ -45,14 +46,16 @@ export const ProductEcosystem = () => {
   const { handleNavigation } = useAppNavigation()
 
   return (
-    <section className="py-16">
+    <section id="platforms" className="py-16 scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
         <AnimateIn variant="fade-up">
           <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div className="text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">{t('Bitcoin Swaps on Every Platform')}</h2>
+              <AnchorHeading id="platforms" className="text-3xl md:text-4xl font-bold mb-2">
+                {t('Bitcoin Swaps on Every Platform')}
+              </AnchorHeading>
               <p className="text-base sm:text-lg text-slate-400 leading-relaxed">{t('One protocol, multiple ways to interact.')}</p>
             </div>
             <a

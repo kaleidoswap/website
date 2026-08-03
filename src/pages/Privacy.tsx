@@ -1,5 +1,6 @@
 // src/pages/privacy.tsx
 import { Link } from 'react-router-dom'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -11,20 +12,24 @@ import { useTranslation } from 'react-i18next'
 
 const Section = ({
   icon: Icon,
+  id,
   title,
   children,
   accent = 'border-primary-500',
 }: {
   icon: React.ElementType
+  id: string
   title: string
   children: React.ReactNode
   accent?: string
 }) => (
-  <section className={`glass-card rounded-2xl p-4 sm:p-6 border-l-4 ${accent}`}>
+  <section id={id} className={`glass-card rounded-2xl p-4 sm:p-6 border-l-4 ${accent} scroll-mt-24`}>
     <div className="flex items-start gap-3">
       <Icon className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
       <div className="min-w-0 flex-1">
-        <h2 className="text-lg font-bold text-white mb-3">{title}</h2>
+        <AnchorHeading id={id} className="text-lg font-bold text-white mb-3">
+          {title}
+        </AnchorHeading>
         {children}
       </div>
     </div>
@@ -70,7 +75,7 @@ export const Privacy = () => {
         </div>
 
         <div className="space-y-4">
-          <Section icon={Eye} title={t('1. Information We Collect')}>
+          <Section icon={Eye} id="information-we-collect" title={t('1. Information We Collect')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('KaleidoSwap is committed to protecting your privacy. Our application is designed to minimize data collection:')}
             </p>
@@ -91,7 +96,7 @@ export const Privacy = () => {
             </ul>
           </Section>
 
-          <Section icon={FileText} title={t('2. How We Use Information')}>
+          <Section icon={FileText} id="how-we-use-information" title={t('2. How We Use Information')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('If you choose to provide your email address for updates:')}
             </p>
@@ -113,7 +118,7 @@ export const Privacy = () => {
             </p>
           </Section>
 
-          <Section icon={Lock} title={t('3. Security')}>
+          <Section icon={Lock} id="security" title={t('3. Security')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('KaleidoSwap employs industry standard security measures:')}
             </p>
@@ -137,7 +142,7 @@ export const Privacy = () => {
             </p>
           </Section>
 
-          <Section icon={FileText} title={t('4. Changes to This Policy')}>
+          <Section icon={FileText} id="policy-changes" title={t('4. Changes to This Policy')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page and updating the date at the top of this policy.')}
             </p>
@@ -146,7 +151,7 @@ export const Privacy = () => {
             </p>
           </Section>
 
-          <Section icon={Mail} title={t('5. Contact Us')}>
+          <Section icon={Mail} id="contact" title={t('5. Contact Us')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('If you have any questions about this Privacy Policy, please contact us at:')}
             </p>

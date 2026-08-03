@@ -23,7 +23,7 @@ const organizationJsonLd = {
   '@type': 'Organization',
   name: 'KaleidoSwap',
   url: SITE_URL,
-  logo: `${SITE_URL}/kaleidoswap-pictogram.svg`,
+  logo: `${SITE_URL}/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg`,
   sameAs: [
     'https://x.com/kaleidoswap',
     'https://t.me/kaleidoswap',
@@ -110,7 +110,7 @@ export const SEO = ({
             publisher: {
               '@type': 'Organization',
               name: 'KaleidoSwap',
-              logo: { '@type': 'ImageObject', url: `${SITE_URL}/kaleidoswap-pictogram.svg` },
+              logo: { '@type': 'ImageObject', url: `${SITE_URL}/logos/kaleidoswap-logos/kaleidoswap-pictogram.svg` },
             },
           })}
         </script>

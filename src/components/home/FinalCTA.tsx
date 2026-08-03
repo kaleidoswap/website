@@ -4,15 +4,18 @@ import { DOCS, SOCIALS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { useAppNavigation } from '@/hooks/useNavigation'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 
 export const FinalCTA = () => {
   const { t } = useTranslation()
   const { handleNavigation } = useAppNavigation()
 
   return (
-    <section className="py-16 bg-gradient-to-br from-primary-500/5 to-secondary-500/5">
+    <section id="build" className="py-16 bg-gradient-to-br from-primary-500/5 to-secondary-500/5 scroll-mt-24">
       <AnimateIn variant="scale" className="max-w-4xl mx-auto px-6 text-center">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight mb-4">{t('Build on KaleidoSwap')}</h2>
+        <AnchorHeading id="build" className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight tracking-tight mb-4">
+          {t('Build on KaleidoSwap')}
+        </AnchorHeading>
         <p className="text-base sm:text-lg text-slate-400 leading-relaxed mb-10">
           {t('Join other builders shaping the future of Bitcoin-based finance. Live on Mutinynet and Regtest, Mainnet Q2 2026.')}
         </p>

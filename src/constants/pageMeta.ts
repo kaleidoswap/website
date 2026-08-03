@@ -61,6 +61,11 @@ export const STATIC_PAGE_META: Record<string, PageMeta> = {
     description:
       'Announcements, deep dives, and builder resources about KaleidoSwap products and Bitcoin L2s. Written for Bitcoin wallet and agentic payments builders.',
   },
+  '/media-kit': {
+    title: 'Media Kit',
+    description:
+      'KaleidoSwap press kit: official logos, brand colors, product screenshots, press coverage, and conference talks.',
+  },
   '/privacy': {
     title: 'Privacy Policy',
     description:

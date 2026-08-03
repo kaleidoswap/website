@@ -1,12 +1,13 @@
 import { useTranslation } from 'react-i18next'
 import { liveProtocols, comingProtocols } from '@/constants/protocols'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 
 export const ProblemSolution = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="py-16 relative">
+    <section id="private-swaps" className="py-16 relative scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Visual */}
@@ -71,9 +72,12 @@ export const ProblemSolution = () => {
           {/* Content */}
           <div className="order-1 lg:order-2 flex flex-col gap-6">
             <AnimateIn variant="fade-left">
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight text-primary-400">
+              <AnchorHeading
+                id="private-swaps"
+                className="text-3xl md:text-4xl font-bold leading-tight text-primary-400"
+              >
                 {t('Private Bitcoin Swaps.')}
-              </h2>
+              </AnchorHeading>
               <h2 className="text-3xl md:text-4xl font-bold leading-tight mt-1">
                 {t('As It Should Have Always Been.')}
               </h2>

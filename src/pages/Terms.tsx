@@ -1,5 +1,6 @@
 // src/pages/terms.tsx
 import { Link } from 'react-router-dom'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
@@ -11,22 +12,26 @@ import { useTranslation } from 'react-i18next'
 
 const Section = ({
   icon: Icon,
+  id,
   title,
   children,
   accent = 'border-primary-500',
   iconColor = 'text-primary-400',
 }: {
   icon: React.ElementType
+  id: string
   title: string
   children: React.ReactNode
   accent?: string
   iconColor?: string
 }) => (
-  <section className={`glass-card rounded-2xl p-4 sm:p-6 border-l-4 ${accent}`}>
+  <section id={id} className={`glass-card rounded-2xl p-4 sm:p-6 border-l-4 ${accent} scroll-mt-24`}>
     <div className="flex items-start gap-3">
       <Icon className={`w-5 h-5 ${iconColor} flex-shrink-0 mt-0.5`} />
       <div className="min-w-0 flex-1">
-        <h2 className="text-lg font-bold text-white mb-3">{title}</h2>
+        <AnchorHeading id={id} className="text-lg font-bold text-white mb-3">
+          {title}
+        </AnchorHeading>
         {children}
       </div>
     </div>
@@ -83,7 +88,7 @@ export const Terms = () => {
         </div>
 
         <div className="space-y-4">
-          <Section icon={FileText} title={t('1. Acceptance of Terms')}>
+          <Section icon={FileText} id="acceptance" title={t('1. Acceptance of Terms')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('By accessing and using KaleidoSwap, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, please do not use our application.')}
             </p>
@@ -92,7 +97,7 @@ export const Terms = () => {
             </p>
           </Section>
 
-          <Section icon={Server} title={t('2. Description of Service')}>
+          <Section icon={Server} id="service" title={t('2. Description of Service')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('KaleidoSwap is a decentralized trading application that leverages:')}
             </p>
@@ -108,6 +113,7 @@ export const Terms = () => {
 
           <Section
             icon={AlertTriangle}
+            id="alpha-warning"
             title={t('3. Alpha Software Warning')}
             accent="border-bitcoin-500"
             iconColor="text-bitcoin-500"
@@ -127,7 +133,7 @@ export const Terms = () => {
             </p>
           </Section>
 
-          <Section icon={Shield} title={t('4. User Responsibilities')}>
+          <Section icon={Shield} id="responsibilities" title={t('4. User Responsibilities')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('Users are responsible for:')}
             </p>
@@ -144,7 +150,7 @@ export const Terms = () => {
             </p>
           </Section>
 
-          <Section icon={Code} title={t('5. Open Source License')}>
+          <Section icon={Code} id="license" title={t('5. Open Source License')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('KaleidoSwap is open-source software released under the MIT License. This means:')}
             </p>
@@ -159,7 +165,7 @@ export const Terms = () => {
             </p>
           </Section>
 
-          <Section icon={AlertTriangle} title={t('6. Disclaimer of Warranties')}>
+          <Section icon={AlertTriangle} id="warranties" title={t('6. Disclaimer of Warranties')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('KaleidoSwap is provided "as is" without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement.')}
             </p>
@@ -168,7 +174,7 @@ export const Terms = () => {
             </p>
           </Section>
 
-          <Section icon={AlertTriangle} title={t('7. Limitation of Liability')}>
+          <Section icon={AlertTriangle} id="liability" title={t('7. Limitation of Liability')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('In no event shall KaleidoSwap or its contributors be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the application.')}
             </p>
@@ -177,7 +183,7 @@ export const Terms = () => {
             </p>
           </Section>
 
-          <Section icon={FileText} title={t('8. Changes to Terms')}>
+          <Section icon={FileText} id="terms-changes" title={t('8. Changes to Terms')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('We reserve the right to modify these terms at any time. We will notify users of any changes by updating the date at the top of this page.')}
             </p>
@@ -186,7 +192,7 @@ export const Terms = () => {
             </p>
           </Section>
 
-          <Section icon={Mail} title={t('9. Contact')}>
+          <Section icon={Mail} id="contact" title={t('9. Contact')}>
             <p className="text-slate-300 text-sm leading-relaxed mb-3">
               {t('For any questions regarding these terms, please contact us via:')}
             </p>

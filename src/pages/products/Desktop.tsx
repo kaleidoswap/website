@@ -10,6 +10,7 @@ import { STATIC_PAGE_META } from '@/constants/pageMeta'
 import { DOCS } from '@/constants/urls'
 import { useTranslation } from 'react-i18next'
 import { AnimateIn } from '@/components/animations/AnimateIn'
+import { AnchorHeading } from '@/components/common/AnchorHeading'
 import { MacbookMockup } from '@/components/common/MacbookMockup'
 import { motion } from 'framer-motion'
 import { AppleIcon, WindowsIcon, LinuxIcon } from '@/components/icons/PlatformIcons'
@@ -164,7 +165,7 @@ export const Desktop = () => {
             {/* Desktop App — MacBook mockup */}
             <AnimateIn variant="fade-up" delay={150} duration={800} className="flex justify-center">
               <MacbookMockup
-                src="/images/desktop-app-screenshot-v2.png"
+                src="/images/desktop-app-screenshot-v3.png"
                 alt={t('Desktop App Screenshot')}
                 className="w-full max-w-[520px]"
               />
@@ -174,10 +175,12 @@ export const Desktop = () => {
       </section>
 
       {/* Features */}
-      <section className="py-20">
+      <section id="features" className="py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up" className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Self-Custodial Bitcoin Trading')}</h2>
+            <AnchorHeading id="features" className="text-3xl md:text-4xl font-bold mb-4">
+              {t('Self-Custodial Bitcoin Trading')}
+            </AnchorHeading>
             <p className="text-base sm:text-lg text-slate-400 max-w-2xl">{t('Everything you need to trade sovereignly, built into one application.')}</p>
           </AnimateIn>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -201,10 +204,12 @@ export const Desktop = () => {
       </section>
 
       {/* Platforms */}
-      <section className="py-20">
+      <section id="platforms" className="py-20 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up" className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Available Platforms')}</h2>
+            <AnchorHeading id="platforms" className="text-3xl md:text-4xl font-bold mb-4">
+              {t('Available Platforms')}
+            </AnchorHeading>
             <p className="text-slate-400">{t('Download for your operating system')}</p>
           </AnimateIn>
 
@@ -248,13 +253,15 @@ export const Desktop = () => {
       </section>
 
       {/* RGB Lightning Node */}
-      <section className="pt-20 pb-32">
+      <section id="rgb-lightning-node" className="pt-20 pb-32 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-6">
           <AnimateIn variant="fade-up">
             <div className="glass-card glass-card-static rounded-2xl p-8 md:p-12">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                  <h2 className="text-3xl font-bold mb-4">{t('Powered by RGB Lightning Node')}</h2>
+                  <AnchorHeading id="rgb-lightning-node" className="text-3xl font-bold mb-4">
+                    {t('Powered by RGB Lightning Node')}
+                  </AnchorHeading>
                   <p className="text-slate-400 mb-6 leading-relaxed">
                     {t('The desktop app bundles rgb-lightning-node, an open-source implementation we actively contribute to. Run a full node without the complexity.')}
                   </p>
@@ -294,9 +301,11 @@ export const Desktop = () => {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-gradient-to-br from-secondary-500/5 to-primary-500/5">
+      <section id="take-control" className="py-20 bg-gradient-to-br from-secondary-500/5 to-primary-500/5 scroll-mt-24">
         <AnimateIn variant="scale" className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t('Take Full Control')}</h2>
+          <AnchorHeading id="take-control" className="text-3xl md:text-4xl font-bold mb-4">
+            {t('Take Full Control')}
+          </AnchorHeading>
           <p className="text-slate-400 mb-8 text-base sm:text-lg">
             {t('Download the desktop app and run your own sovereign trading infrastructure.')}
           </p>
