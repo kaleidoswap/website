@@ -15,6 +15,10 @@
 		{
 			"binding": "AUDIO",
 			"bucket_name": "kaleidoswap-blog-audio"
+		},
+		{
+			"binding": "BETA_RELEASES",
+			"bucket_name": "kaleidoswap-beta-releases"
 		}
 	],
 	"d1_databases": [
