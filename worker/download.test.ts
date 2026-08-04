@@ -1,6 +1,6 @@
 import { createHmac } from 'node:crypto'
 import { describe, expect, it } from 'vitest'
-import { companionKeys, DEFAULT_RELEASE_KEY, handleBetaDownload, type Env } from './index'
+import { companionKeys, DEFAULT_RELEASE_KEY, handleBetaDownload, type DownloadEnv as Env } from './download'
 
 const SECRET = 'test-download-secret'
 
