@@ -9,7 +9,17 @@
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS",
-		"not_found_handling": "single-page-application"
+		"not_found_handling": "single-page-application",
+		// Without this, the asset router answers browser navigations itself: a
+		// request carrying Sec-Fetch-Mode: navigate matches no file, so
+		// not_found_handling serves index.html and the Worker never runs. That
+		// silently breaks every Worker route a user reaches by clicking a link
+		// — /dl, /unsubscribe — and strips the pre-rendered <title>/og: tags
+		// from real page loads (crawlers, which send no Sec-Fetch headers, still
+		// got them, so it looks fine from a curl or an SEO check).
+		// The Worker delegates to env.ASSETS.fetch for anything it doesn't
+		// handle, so running it first costs a hop and changes nothing else.
+		"run_worker_first": true
 	},
 	"r2_buckets": [
 		{
