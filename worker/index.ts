@@ -174,7 +174,19 @@ async function handleBetaSignup(request: Request, env: Env): Promise<Response> {
 // the invite mailer with the same secret, so each hit is attributable to a
 // signup. Valid hits are logged to beta_downloads and served the release zip
 // from R2, with FALLBACK_DOWNLOAD_URL as the legacy fallback.
-const DEFAULT_RELEASE_KEY = 'rate-extension-beta-latest.zip'
+//
+// `&file=sha256|asc` serves the checksum or the maintainer's detached signature
+// for the same build, so a recipient can verify the zip they just pulled. Both
+// sit beside the zip in R2, written by the release:r2 / release:signature jobs.
+export const DEFAULT_RELEASE_KEY = 'kaleidoswap-extension-beta-latest.zip'
+
+// Derived from the zip key so a BETA_RELEASE_KEY override moves all three
+// together. Matches the naming in .gitlab-ci-release.yml: the checksum replaces
+// the .zip suffix, the signature appends to it.
+export const companionKeys = (zipKey: string): { sha256: string; asc: string } => ({
+  sha256: `${zipKey.replace(/\.zip$/, '')}.sha256`,
+  asc: `${zipKey}.asc`,
+})
 
 async function verifyDownloadToken(token: string, secret: string): Promise<number | null> {
   const dot = token.indexOf('.')
@@ -194,7 +206,7 @@ async function verifyDownloadToken(token: string, secret: string): Promise<numbe
   return ok ? Number(idPart) : null
 }
 
-async function handleBetaDownload(request: Request, env: Env): Promise<Response> {
+export async function handleBetaDownload(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'GET') {
     return new Response('Method not allowed', { status: 405, headers: { allow: 'GET' } })
   }
@@ -208,9 +220,15 @@ async function handleBetaDownload(request: Request, env: Env): Promise<Response>
   // legacy hosted package rather than locking every recipient out.
   if (!env.DOWNLOAD_SECRET) return fallback()
 
-  const token = new URL(request.url).searchParams.get('t') ?? ''
+  const params = new URL(request.url).searchParams
+  const token = params.get('t') ?? ''
   const signupId = await verifyDownloadToken(token, env.DOWNLOAD_SECRET)
   if (signupId === null) return new Response('Forbidden', { status: 403 })
+
+  const file = params.get('file') ?? ''
+  if (file && file !== 'sha256' && file !== 'asc') {
+    return new Response('Unknown file', { status: 400 })
+  }
 
   try {
     const row = await env.DB.prepare('SELECT campaign_id FROM beta_signups WHERE id = ?1')
@@ -232,16 +250,25 @@ async function handleBetaDownload(request: Request, env: Env): Promise<Response>
     console.error('[dl] failed to record download', err)
   }
 
-  const key = env.BETA_RELEASE_KEY || DEFAULT_RELEASE_KEY
+  const zipKey = env.BETA_RELEASE_KEY || DEFAULT_RELEASE_KEY
+  const companions = companionKeys(zipKey)
+  const key = file === 'sha256' ? companions.sha256 : file === 'asc' ? companions.asc : zipKey
+
   const object = env.BETA_RELEASES ? await env.BETA_RELEASES.get(key) : null
-  if (!object) return fallback()
+  // A missing companion is a 404, not a redirect: falling back to the legacy
+  // zip when someone asked for a checksum would hand them the wrong bytes.
+  if (!object) return file ? new Response('Not found', { status: 404 }) : fallback()
 
   const headers = new Headers()
   object.writeHttpMetadata(headers)
   headers.set('etag', object.httpEtag)
-  headers.set('content-type', object.httpMetadata?.contentType ?? 'application/zip')
+  headers.set(
+    'content-type',
+    file ? 'text/plain;charset=UTF-8' : (object.httpMetadata?.contentType ?? 'application/zip')
+  )
   headers.set('content-length', String(object.size))
-  headers.set('content-disposition', `attachment; filename="${key}"`)
+  // Checksums and signatures are read in the browser; only the zip is a save.
+  if (!file) headers.set('content-disposition', `attachment; filename="${key}"`)
   headers.set('cache-control', 'no-store')
   return new Response(object.body, { status: 200, headers })
 }
