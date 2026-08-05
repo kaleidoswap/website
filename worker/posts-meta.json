@@ -1,11 +1,4 @@
 {
-  "extension-v020-multi-layer-wallet": {
-    "title": "One Wallet, Every Bitcoin Layer: The Extension Enters Its Second Beta",
-    "description": "Extension v0.2.0 brings Liquid, RGB on mainnet, Spark and Arkade into one browser wallet, with a full Nostr identity and a Lightning address of your own. It is a closed beta, and testing it is the whole point.",
-    "image": "/blog/extension-v020-multi-layer-wallet/extension-v020-multi-layer-wallet-cover-preview.jpg",
-    "imageX": "/blog/extension-v020-multi-layer-wallet/extension-v020-multi-layer-wallet-cover-preview-x.jpg",
-    "date": "2026-08-04"
-  },
   "july-2026-release-notes": {
     "title": "July 2026: Liquid Swaps, KaleidoMind on Desktop & New Extension Beta",
     "description": "KaleidoMind came to the Desktop App, swap engine started moving Liquid dollars, and the Browser Extension entered its second closed beta.",
