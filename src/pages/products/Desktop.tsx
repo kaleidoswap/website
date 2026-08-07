@@ -165,7 +165,7 @@ export const Desktop = () => {
             {/* Desktop App — MacBook mockup */}
             <AnimateIn variant="fade-up" delay={150} duration={800} className="flex justify-center">
               <MacbookMockup
-                src="/images/desktop-app-screenshot-v3.png"
+                src="/images/product/desktop-app-screenshot-v3.png"
                 alt={t('Desktop App Screenshot')}
                 className="w-full max-w-[520px]"
               />
