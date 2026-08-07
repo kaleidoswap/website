@@ -85,9 +85,9 @@ Drop the full-resolution image in `public/images/contact/`, add it to `ENTRIES` 
 npm run images:previews
 ```
 
-Point `photo` at the generated `-preview.webp`, **not** the original. The avatar renders in a 96 px circle, and these pages get opened on mobile data from a printed QR code — the originals run 1-2.6 MB each, the previews 4-15 KB. Omit `photo` entirely to fall back to the KaleidoSwap logo.
+Point `photo` at the generated `-preview.webp`, **not** the original. The avatar renders in a 128 px circle, and these pages get opened on mobile data from a printed QR code — the originals run 1-2.6 MB each, the previews 8-25 KB. Omit `photo` entirely to fall back to the KaleidoSwap logo.
 
-> The three existing avatars were produced this way, but their originals are **not** in the repo — only the generated `.webp` files are. They therefore have no `ENTRIES` line (a missing source makes the whole script exit 1). To change one, put the original back in `public/images/contact/` and re-add its entry.
+Use a square source with the face already centred: the page masks the avatar into a circle, so an off-centre subject gets clipped.
 
 `worker/vcard.test.ts` guards this: it fails if a `photo` doesn't end in `-preview.webp`, if a phone isn't valid E.164, or if `phoneDisplay` doesn't match `phone` digit-for-digit.
 

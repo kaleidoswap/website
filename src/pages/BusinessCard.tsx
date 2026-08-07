@@ -5,11 +5,11 @@
 import { useState } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Check, Contact, Download, Globe, Mail, Phone } from 'lucide-react'
+import { Check, Copy, Download, Mail, Phone } from 'lucide-react'
 import { SEO } from '@/components/common/SEO'
 import { Navbar } from '@/components/nav/Navbar'
 import { Footer } from '@/components/footer/Footer'
-import { Button, buttonVariants } from '@/components/common/Button'
+import { buttonVariants } from '@/components/common/Button'
 import { AnimateIn } from '@/components/animations/AnimateIn'
 import { GitHubIcon, XIcon, LinkedInIcon } from '@/components/icons/SocialIcons'
 import { footerConfig } from '@/constants/footer'
@@ -69,10 +69,11 @@ export function BusinessCard() {
 
   if (!card) return <Navigate to="/" replace />
 
+  // Order is deliberate: LinkedIn, X, GitHub.
   const socials = [
     card.linkedin && { key: 'linkedin', href: card.linkedin, label: 'LinkedIn', Icon: LinkedInIcon },
-    card.github && { key: 'github', href: card.github, label: 'GitHub', Icon: GitHubIcon },
     card.x && { key: 'x', href: card.x, label: 'X', Icon: XIcon },
+    card.github && { key: 'github', href: card.github, label: 'GitHub', Icon: GitHubIcon },
   ].filter((s): s is { key: string; href: string; label: string; Icon: typeof GitHubIcon } => Boolean(s))
 
   return (
@@ -94,20 +95,12 @@ export function BusinessCard() {
         <div className="max-w-md mx-auto px-6">
           <AnimateIn variant="fade-up">
             <div className="glass-card glass-card-static rounded-2xl p-8 text-center">
-              {/* Status badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary-500/30 bg-primary-500/10 mb-6">
-                <Contact className="w-3.5 h-3.5 text-primary-400" />
-                <span className="text-xs font-semibold text-primary-400 uppercase tracking-wider">
-                  {t('Digital Business Card')}
-                </span>
-              </div>
-
               <img
                 src={card.photo ?? FALLBACK_PHOTO}
                 alt={card.fullName}
                 className={cn(
-                  'w-24 h-24 mx-auto mb-5 rounded-full ring-2 ring-primary-500/30',
-                  card.photo ? 'object-cover' : 'object-contain bg-white/5 p-4'
+                  'w-32 h-32 mx-auto mb-5 rounded-full ring-2 ring-primary-500/30',
+                  card.photo ? 'object-cover' : 'object-contain bg-white/5 p-5'
                 )}
               />
 
@@ -115,7 +108,6 @@ export function BusinessCard() {
                 {card.fullName}
               </h1>
               <p className="text-primary-400 text-sm font-medium mt-1.5">{card.role}</p>
-              <p className="text-slate-400 text-sm mt-0.5">{card.company}</p>
 
               {/* Primary CTA: a plain link (no `download` attribute) so mobile
                   Safari/Chrome recognize the text/vcard response and offer the
@@ -131,52 +123,48 @@ export function BusinessCard() {
                 {t('Save Contact')}
               </a>
 
-              {/* Fallback for browsers that mishandle the vCard download */}
+              {/* Act on the contact: dial / open the mail client. */}
               <div className="flex gap-3 mt-3">
-                <Button
-                  variant="outline"
-                  className="flex-1 gap-2"
-                  onClick={() => copy(card.phone, 'phone')}
-                >
-                  {copiedKey === 'phone' ? <Check className="w-4 h-4" /> : <Phone className="w-4 h-4" />}
-                  {copiedKey === 'phone' ? t('Copied') : t('Phone')}
-                </Button>
-                <Button
-                  variant="outline"
-                  className="flex-1 gap-2"
-                  onClick={() => copy(card.email, 'email')}
-                >
-                  {copiedKey === 'email' ? <Check className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
-                  {copiedKey === 'email' ? t('Copied') : t('Email')}
-                </Button>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-white/10 space-y-3 text-sm text-left">
                 <a
                   href={`tel:${card.phone}`}
-                  className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors"
+                  className={cn(buttonVariants({ variant: 'outline' }), 'flex-1 gap-2')}
                 >
-                  <Phone className="w-4 h-4 text-primary-400 shrink-0" />
-                  {card.phoneDisplay}
+                  <Phone className="w-4 h-4" />
+                  {t('Call')}
                 </a>
                 <a
                   href={`mailto:${card.email}`}
-                  className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors"
+                  className={cn(buttonVariants({ variant: 'outline' }), 'flex-1 gap-2')}
                 >
-                  <Mail className="w-4 h-4 text-primary-400 shrink-0" />
-                  {card.email}
+                  <Mail className="w-4 h-4" />
+                  {t('Email')}
                 </a>
-                {card.website && (
-                  <a
-                    href={card.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-slate-400 hover:text-white transition-colors"
+              </div>
+
+              {/* The written-out values copy on tap, so the number/address can
+                  be pasted anywhere — mono keeps digits evenly spaced and makes
+                  a misread character (0/O, 1/l) much less likely. */}
+              <div className="mt-8 pt-6 border-t border-white/10 space-y-2">
+                {([
+                  { key: 'phone', value: card.phone, display: card.phoneDisplay, Icon: Phone },
+                  { key: 'email', value: card.email, display: card.email, Icon: Mail },
+                ] as const).map(({ key, value, display, Icon }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => copy(value, key)}
+                    aria-label={`${t('Copy')} ${display}`}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors text-left"
                   >
-                    <Globe className="w-4 h-4 text-primary-400 shrink-0" />
-                    {card.website.replace(/^https?:\/\//, '')}
-                  </a>
-                )}
+                    <Icon className="w-4 h-4 text-primary-400 shrink-0" />
+                    <span className="font-mono text-sm text-slate-300 truncate flex-1">{display}</span>
+                    {copiedKey === key ? (
+                      <Check className="w-4 h-4 text-primary-400 shrink-0" />
+                    ) : (
+                      <Copy className="w-4 h-4 text-slate-500 shrink-0" />
+                    )}
+                  </button>
+                ))}
               </div>
 
               {socials.length > 0 && (
