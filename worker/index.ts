@@ -1,7 +1,9 @@
 import postsMeta from './posts-meta.json'
 import { STATIC_PAGE_META } from '../src/constants/pageMeta'
+import { getBusinessCard } from '../src/constants/businessCards'
 import { handleBetaDownload, type DownloadEnv } from './download'
 import { handleEmailWebhook, handleUnsubscribe } from './email'
+import { handleVCardRequest } from './vcard'
 
 export interface Env extends DownloadEnv {
   ASSETS: Fetcher
@@ -199,6 +201,30 @@ async function handleBlogPost(request: Request, env: Env, slug: string): Promise
   }))
 }
 
+async function handleBusinessCard(request: Request, env: Env, slug: string): Promise<Response | null> {
+  const card = getBusinessCard(slug)
+  if (!card) return null
+
+  const html = await fetchIndexHtml(request, env)
+  if (!html) return null
+
+  const image = resolveImage(card.photo ?? null)
+  const withMeta = injectMeta(html, {
+    title: `${card.fullName} | KaleidoSwap`,
+    desc: `${card.role} at ${card.company}. Save my contact details.`,
+    fullUrl: `${SITE_URL}/contact/${slug}`,
+    image,
+    imageX: image,
+  })
+
+  // Personal contact pages are for whoever scans the printed QR, not for
+  // search. BusinessCard.tsx sets the same tag client-side, but a crawler that
+  // doesn't run JS would only ever see the pre-rendered HTML.
+  return htmlResponse(
+    withMeta.replace('</head>', '  <meta name="robots" content="noindex, nofollow" />\n</head>')
+  )
+}
+
 async function handleStaticRoute(request: Request, env: Env, pathname: string): Promise<Response | null> {
   const meta = staticRoutes[pathname]
   if (!meta) return null
@@ -308,6 +334,13 @@ export default {
       return serveAudio(request, env)
     }
 
+    // Digital business cards: GET /contact/:slug.vcf downloads the vCard,
+    // GET /contact/:slug renders the React page (pre-rendered below).
+    const vcardMatch = url.pathname.match(/^\/contact\/([a-z0-9-]+)\.vcf$/)
+    if (vcardMatch) {
+      return handleVCardRequest(request, vcardMatch[1], SITE_URL)
+    }
+
     // NOTE: /products/web-app used to redirect to /products here. The page
     // is back (see STATIC_PAGE_META, App.tsx, robots.txt) and is now handled
     // like any other static route below — no special-case needed.
@@ -341,6 +374,13 @@ export default {
       // Shape matches /blog/:slug but the slug doesn't exist: serve the SPA
       // shell (BlogPost.tsx redirects unknown slugs to /blog) with a real
       // 404 status instead of the soft-200 the asset binding would give it.
+      return notFound(request, env)
+    }
+
+    const contactMatch = url.pathname.match(/^\/contact\/([a-z0-9-]+)\/?$/)
+    if (contactMatch) {
+      const prerendered = await handleBusinessCard(request, env, contactMatch[1])
+      if (prerendered) return prerendered
       return notFound(request, env)
     }
 

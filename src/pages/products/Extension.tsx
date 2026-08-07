@@ -226,7 +226,7 @@ export const Extension = () => {
             {/* Right — extension screenshot with 3D tilt */}
             <AnimateIn variant="scale" delay={200} duration={800} className="min-w-0 mt-4 lg:mt-0 flex justify-center">
               <TiltCard
-                src="/images/extension-screenshot-v2.png"
+                src="/images/product/extension-screenshot-v2.png"
                 alt="KaleidoSwap Extension"
                 className="w-full max-w-[300px] sm:max-w-[380px]"
               />

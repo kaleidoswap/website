@@ -19,6 +19,7 @@
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
     "i18n:sync": "node scripts/sync-translations.mjs",
+    "qr": "node scripts/generate-qr.mjs",
     "blog:audio": "node scripts/gen-blog-audio.mjs",
     "blog:audio:pull": "node scripts/sync-blog-audio.mjs pull",
     "blog:audio:push": "node scripts/sync-blog-audio.mjs push"
@@ -63,6 +64,7 @@
     "globals": "^15.15.0",
     "jsdom": "^27.4.0",
     "postcss": "^8.5.20",
+    "qrcode": "^1.5.4",
     "sharp": "^0.35.3",
     "tailwindcss": "^3.4.19",
     "typescript": "~5.6.3",

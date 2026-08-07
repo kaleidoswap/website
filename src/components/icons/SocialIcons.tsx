@@ -77,8 +77,12 @@ export const RumbleIcon = forwardRef<SVGSVGElement, SVGProps<SVGSVGElement>>((pr
   )
 })
 
+// simple-icons doesn't ship a LinkedIn mark (removed upstream), so this one
+// comes straight from lucide-react instead of the simple-icons library.
+export { Linkedin as LinkedInIcon } from 'lucide-react'
+
 GitHubIcon.displayName = 'GitHubIcon'
 TelegramIcon.displayName = 'TelegramIcon'
 XIcon.displayName = 'XIcon'
 MediumIcon.displayName = 'MediumIcon'
-RumbleIcon.displayName = 'RumbleIcon' 
+RumbleIcon.displayName = 'RumbleIcon'

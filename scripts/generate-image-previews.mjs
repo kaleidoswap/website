@@ -26,10 +26,18 @@ const QUALITY = 82
 //   landscape screenshots -> 566x378 CSS px slot, 2x            = 1400 (long side)
 //   portrait screenshot   -> 566x861 CSS px slot; 2x would need 1132px of width,
 //                            more than the 738px source has, so it stays native.
+//
+// Business-card avatars (src/constants/businessCards.ts) render in a 128 CSS px
+// circle, so 384 covers 3x displays. Their sources must be square with the face
+// already centred — the page masks them into a circle, which clips anything
+// off-centre.
 const ENTRIES = [
-  { src: 'images/desktop-app-screenshot-v3.png', maxSize: 1400 },
-  { src: 'images/kaleidomind-screenshot.png', maxSize: 1400 },
-  { src: 'images/extension-screenshot-v2.png', maxSize: 1430 },
+  { src: 'images/product/desktop-app-screenshot-v3.png', maxSize: 1400 },
+  { src: 'images/product/kaleidomind-screenshot.png', maxSize: 1400 },
+  { src: 'images/product/extension-screenshot-v2.png', maxSize: 1430 },
+  { src: 'images/contact/walter-maffione-pfp.jpg', maxSize: 384 },
+  { src: 'images/contact/emile-jellinek-pfp.jpg', maxSize: 384 },
+  { src: 'images/contact/manuel-cumerlato-pfp.png', maxSize: 384 },
 ]
 
 const previewPathFor = (src) =>

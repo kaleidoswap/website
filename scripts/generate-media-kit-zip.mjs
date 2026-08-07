@@ -25,9 +25,9 @@ const ENTRIES = [
   { src: 'logos/kaleidoswap-logos/kaleidoswap-pictogram.png', dest: 'logos/kaleidoswap-pictogram.png' },
   { src: 'logos/kaleidoswap-logos/kaleidoswap-logotype.svg', dest: 'logos/kaleidoswap-logotype.svg' },
   { src: 'logos/kaleidoswap-logos/kaleidoswap-logotype.png', dest: 'logos/kaleidoswap-logotype.png' },
-  { src: 'images/desktop-app-screenshot-v3.png', dest: 'screenshots/desktop-app-screenshot.png' },
-  { src: 'images/kaleidomind-screenshot.png', dest: 'screenshots/kaleidomind-screenshot.png' },
-  { src: 'images/extension-screenshot-v2.png', dest: 'screenshots/extension-screenshot.png' },
+  { src: 'images/product/desktop-app-screenshot-v3.png', dest: 'screenshots/desktop-app-screenshot.png' },
+  { src: 'images/product/kaleidomind-screenshot.png', dest: 'screenshots/kaleidomind-screenshot.png' },
+  { src: 'images/product/extension-screenshot-v2.png', dest: 'screenshots/extension-screenshot.png' },
 ]
 
 const missing = ENTRIES.filter((e) => !existsSync(join(PUBLIC, e.src)))
